@@ -1,0 +1,418 @@
+{
+    "server_balance": {
+        "girl1": {
+            "index": 1,
+            "shuffle_case": 2,
+            "card_count": 3,
+            "shuffle_speed_0": 0.4,
+            "shuffle_speed_1": 0.4,
+            "shuffle_speed_2": 0.35,
+            "shuffle_speed_3": 0.3,
+            "play_count_0": 10,
+            "play_count_1": 10,
+            "play_count_2": 10,
+            "play_count_3": 10
+        },
+        "girl2": {
+            "index": 2,
+            "shuffle_case": 2,
+            "card_count": 3,
+            "shuffle_speed_0": 0.35,
+            "shuffle_speed_1": 0.33,
+            "shuffle_speed_2": 0.25,
+            "shuffle_speed_3": 0.25,
+            "play_count_0": 10,
+            "play_count_1": 11,
+            "play_count_2": 10,
+            "play_count_3": 12
+        },
+        "girl3": {
+            "index": 3,
+            "shuffle_case": 2,
+            "card_count": 3,
+            "shuffle_speed_0": 0.3,
+            "shuffle_speed_1": 0.25,
+            "shuffle_speed_2": 0.2,
+            "shuffle_speed_3": 0.2,
+            "play_count_0": 12,
+            "play_count_1": 12,
+            "play_count_2": 12,
+            "play_count_3": 12
+        },
+        "girl4": {
+            "index": 4,
+            "shuffle_case": 3,
+            "card_count": 4,
+            "shuffle_speed_0": 0.3,
+            "shuffle_speed_1": 0.3,
+            "shuffle_speed_2": 0.3,
+            "shuffle_speed_3": 0.25,
+            "play_count_0": 12,
+            "play_count_1": 12,
+            "play_count_2": 12,
+            "play_count_3": 12
+        },
+        "girl5": {
+            "index": 5,
+            "shuffle_case": 4,
+            "card_count": 4,
+            "shuffle_speed_0": 0.3,
+            "shuffle_speed_1": 0.3,
+            "shuffle_speed_2": 0.25,
+            "shuffle_speed_3": 0.2,
+            "play_count_0": 12,
+            "play_count_1": 13,
+            "play_count_2": 12,
+            "play_count_3": 13
+        },
+        "girl6": {
+            "index": 6,
+            "shuffle_case": 4,
+            "card_count": 4,
+            "shuffle_speed_0": 0.3,
+            "shuffle_speed_1": 0.25,
+            "shuffle_speed_2": 0.25,
+            "shuffle_speed_3": 0.2,
+            "play_count_0": 12,
+            "play_count_1": 13,
+            "play_count_2": 13,
+            "play_count_3": 13
+        }
+    },
+    "girls": {
+        "girl1": {
+            "stage": 1,
+            "kor_name": "앰버",
+            "betting_heart_count": 1,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "369, 51",
+                    "end_pos": "326, 254",
+                    "rect": "288, 6, 133, 278"
+                },
+                "2": {
+                    "start_pos": "528, 63",
+                    "end_pos": "471, 257",
+                    "rect": "443, 22, 126, 259"
+                },
+                "3": {
+                    "start_pos": "326, 254",
+                    "end_pos": "471, 257",
+                    "rect": "276, 205, 269, 99"
+                },
+                "4": {
+                    "start_pos": "406, 179",
+                    "end_pos": "384, 354",
+                    "rect": "330, 127, 135, 278"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "418,357",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "356,70",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "514,88",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "404,264",
+                    "z_order": 1
+                }
+            ]
+        },
+        "girl2": {
+            "stage": 2,
+            "kor_name": "앰버",
+            "betting_heart_count": 2,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "590, 55",
+                    "end_pos": "476, 200",
+                    "rect": "425, 20, 210, 224"
+                },
+                "2": {
+                    "start_pos": "344, 58",
+                    "end_pos": "370, 194",
+                    "rect": "294, 15, 124, 217"
+                },
+                "3": {
+                    "start_pos": "284, 280",
+                    "end_pos": "432, 316",
+                    "rect": "240, 231, 245, 125"
+                },
+                "4": {
+                    "start_pos": "390, 181",
+                    "end_pos": "338, 376",
+                    "rect": "280, 133, 158, 289"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "361,390",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "362,120",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "528,119",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "369,299",
+                    "z_order": 1
+                }
+            ]
+        },
+        "girl3": {
+            "stage": 3,
+            "kor_name": "앰버",
+            "betting_heart_count": 3,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "560, 82",
+                    "end_pos": "461, 324",
+                    "rect": "402, 36, 210, 340"
+                },
+                "2": {
+                    "start_pos": "283, 233",
+                    "end_pos": "401, 53",
+                    "rect": "224, 13, 228, 265"
+                },
+                "3": {
+                    "start_pos": "283, 233",
+                    "end_pos": "461, 324",
+                    "rect": "201, 187, 311, 176"
+                },
+                "4": {
+                    "start_pos": "303, 384",
+                    "end_pos": "418, 181",
+                    "rect": "242, 130, 231, 303"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "395,287",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "392,84",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "529,125",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "334,294",
+                    "z_order": 1
+                }
+            ]
+        },
+        "girl4": {
+            "stage": 4,
+            "kor_name": "앰버",
+            "betting_heart_count": 4,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "242, 129",
+                    "end_pos": "503, 89",
+                    "rect": "189, 40, 363, 144"
+                },
+                "2": {
+                    "start_pos": "194, 203",
+                    "end_pos": "405, 201",
+                    "rect": "133, 148, 324, 114"
+                },
+                "3": {
+                    "start_pos": "377, 390",
+                    "end_pos": "518, 224",
+                    "rect": "331, 173, 229, 251"
+                },
+                "4": {
+                    "start_pos": "405, 201",
+                    "end_pos": "593, 253",
+                    "rect": "361, 159, 278, 147"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "400,376",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "506,212",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "328,160",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "493,250",
+                    "z_order": 1
+                }
+            ]
+        },
+        "girl5": {
+            "stage": 5,
+            "kor_name": "앰버",
+            "betting_heart_count": 5,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "370, 373",
+                    "end_pos": "275, 168",
+                    "rect": "226, 114, 188, 305"
+                },
+                "2": {
+                    "start_pos": "444, 369",
+                    "end_pos": "463, 152",
+                    "rect": "385, 100, 137, 321"
+                },
+                "3": {
+                    "start_pos": "275, 168",
+                    "end_pos": "463, 152",
+                    "rect": "216, 105, 295, 117"
+                },
+                "4": {
+                    "start_pos": "379, 262",
+                    "end_pos": "353, 77",
+                    "rect": "311, 24, 124, 281"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "391,296",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "151,100",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "631,106",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "391,141",
+                    "z_order": 1
+                }
+            ]
+        },
+        "girl6": {
+            "stage": 6,
+            "kor_name": "앰버",
+            "betting_heart_count": 6,
+            "pos": "240,400",
+            "events": {
+                "1": {
+                    "start_pos": "258, 56",
+                    "end_pos": "352, 268",
+                    "rect": "217, 14, 186, 297"
+                },
+                "2": {
+                    "start_pos": "492, 55",
+                    "end_pos": "492, 278",
+                    "rect": "433, 10, 114, 315"
+                },
+                "3": {
+                    "start_pos": "352, 268",
+                    "end_pos": "492, 278",
+                    "rect": "280, 207, 257, 117"
+                },
+                "4": {
+                    "start_pos": "431, 162",
+                    "end_pos": "405, 382",
+                    "rect": "342, 118, 133, 309"
+                }
+            },
+            "images": [
+                {
+                    "index": 0,
+                    "frame_name": "shirt.png",
+                    "pos": "346,405",
+                    "z_order": 4
+                },
+                {
+                    "index": 1,
+                    "frame_name": "stocking_01.png",
+                    "pos": "287,100",
+                    "z_order": 3
+                },
+                {
+                    "index": 2,
+                    "frame_name": "stocking_02.png",
+                    "pos": "480,82",
+                    "z_order": 2
+                },
+                {
+                    "index": 3,
+                    "frame_name": "panty.png",
+                    "pos": "406,263",
+                    "z_order": 1
+                }
+            ]
+        }
+    },
+    "tips": [
+        "Please select\nthe correct answer card\nin the card mixed\nwith fast speed.",
+        "3 card play\nfrom 1 to 3 stage,\n4 card play from\n4 to 6 stage.",
+        "You have a chance\nto rip her clothes off\n whenever you win.",
+        "When you spend all\npeaches, automatically\nyou will get 10 peaches\nin 6 hours.",
+        "Whenever you try\nthe next stage, you need\npeaches more&more.",
+        "Auto-charging will\nbe completed in 6 hours.",
+        "If you purchase\nthe special item,\nyou can freely\nenjoy the game.",
+        "You can touch her\nhip at the gallery\nwhen you defeat her."
+    ]
+}
