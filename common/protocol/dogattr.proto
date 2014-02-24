@@ -1,0 +1,66 @@
+package dogrun2cs;
+
+message DogLevelConfig {
+	required uint32 lv = 1;
+	required uint32 exp = 2;
+};
+
+message DogLevelConfigArray {
+	repeated DogLevelConfig cfg = 1;
+};
+
+message FoodConfig {
+	required uint32 type = 1;
+	required uint32 cd = 2;
+	required uint32 consume_heart = 3;
+	required uint32 consume_gold = 4;
+	optional uint32 strong = 5;
+	optional uint32 speed = 6;
+	optional uint32 exp = 7;
+	optional uint32 intimacy = 8;
+};
+
+message FoodConfigArray {
+	repeated FoodConfig cfg = 1;
+};
+
+message TrainConfig {
+	required uint32 type = 1;
+	required uint32 cd = 2;
+	required uint32 consume_heart = 3;
+	required uint32 consume_gold = 4;
+	optional uint32 strong = 5;
+	optional uint32 speed = 6;
+	optional uint32 exp = 7;
+	optional uint32 intimacy = 8;
+};
+
+message TrainConfigArray {
+	repeated TrainConfig cfg = 1;
+};
+
+message PlayConfig {
+	required uint32 type = 1;
+	required uint32 cd = 2;
+	required uint32 consume_heart = 3;
+	required uint32 consume_gold = 4;
+	optional uint32 strong = 5;
+	optional uint32 speed = 6;
+	optional uint32 exp = 7;
+	optional uint32 intimacy = 8;
+};
+
+message PlayConfigArray {
+	repeated PlayConfig cfg = 1;
+};
+
+message DogAttr {
+	required string name = 1;
+	required uint32 lv = 2 [default = 1];
+	required uint32 exp = 3;
+	required uint32 star = 4;
+	required uint32 strong = 5;
+	required uint32 speed = 6;
+	required uint32 intimacy = 7;
+	required uint32 id = 8;
+};

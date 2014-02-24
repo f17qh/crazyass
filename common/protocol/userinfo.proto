@@ -1,0 +1,11 @@
+package dogrun2cs;
+
+message UserAttr {
+	required uint32 gold = 1;
+	required uint32 heart = 2;
+}
+
+message UserInfo {
+	required string name = 1;
+	required UserAttr attr = 2;
+};

@@ -1,0 +1,61 @@
+//import "dogattr.proto";
+package dogrun2cs;
+
+enum Command {
+     kCmdUserLoginReq = 1;
+     kCmdUserLoginRsp = 2;
+     kCmdUserLogoutReq = 3;
+     kCmdUserLogoutRsp = 4;
+     kCmdDogFeedReq = 5;
+     kCmdDogFeedRsp = 6;
+     kCmdDogTrainReq = 7;
+     kCmdDogTrainRsp = 8;
+     kCmdDogPlayReq = 9;
+     kCmdDogPlayRsp = 10;
+     kCmdSvrErrNtf = 11;
+     kCmdUserInfoNtf = 12;
+};
+
+message UserLoginReq {
+	required string userid = 1;
+};
+
+message UserLoginRsp {
+};
+
+message UserInfoNtf {
+};
+
+message UserLogoutReq {
+};
+
+message UserLogoutRsp {
+};
+
+message DogFeedReq {
+     required uint32 dogid = 1;
+     required uint32 type = 2;
+};
+
+message DogFeedRsp {
+};
+
+message DogTrainReq {
+     required uint32 dogid = 1;
+     required uint32 type = 2;
+};
+
+message DogTrainRsp {
+};
+
+message DogPlayReq {
+     required uint32 dogid = 1;
+     required uint32 type = 2;
+};
+
+message DogPlayRsp {
+};
+
+message SvrErrNtf {
+	required string message = 1;
+}
