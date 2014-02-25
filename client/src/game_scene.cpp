@@ -1,5 +1,8 @@
+#include <string>
 #include "game_scene.h"
 #include "event_mgr.h"
+
+using namespace std;
 
 #ifdef LINUX
 #include "unistd.h"
@@ -69,7 +72,7 @@ bool GameScene::init() {
 
   CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
   // init plist
-  CCSpriteFrameCache *c = CCSpriteFrameCache::sharedSpriteFrameCache();
+  // CCSpriteFrameCache *c = CCSpriteFrameCache::sharedSpriteFrameCache();
   // CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
   // CCFileUtils::sharedFileUtils()->addSearchPath("..\cocostudio\\MainScene\\Export\\MainScene_1\\Resources");
   AddSearchPath();

@@ -57,7 +57,7 @@ check_make_result
 
 # for protobuf
 make -C ../common/dep/protobuf-2.5.0 -f protobuf.mk
-make -C ../common/dep/libevent-2.0.21-stable -f libevent.mk
+#make -C ../common/dep/libevent-2.0.21-stable -f libevent.mk
 
 # for dogrun
 make DEBUG=1

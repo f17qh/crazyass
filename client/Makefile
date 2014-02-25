@@ -1,4 +1,4 @@
-EXECUTABLE = DogRun2
+EXECUTABLE = crazyass
 
 INCLUDES = -I./ -I../common/dep/protobuf-2.5.0/src -I../common
 
