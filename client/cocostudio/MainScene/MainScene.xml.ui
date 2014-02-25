@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <filePath>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\MainScene.xml.ui</filePath>
+  <Version>1.2.0.1</Version>
+  <Name>MainScene</Name>
+  <ProjectDir>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene</ProjectDir>
+  <JsonFileName>MainScene.json</JsonFileName>
+  <Resources>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\Resources</Resources>
+  <JsonFolder>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\Json</JsonFolder>
+  <JsonList>
+    <string>MainScene_1.json</string>
+    <string>PlayScene.json</string>
+  </JsonList>
+  <imageFileList />
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>PlayScene.json</CurrentUIJson>
+  <CanvasSize>
+    <Width>800</Width>
+    <Height>480</Height>
+  </CanvasSize>
+</UIProject>

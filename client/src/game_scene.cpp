@@ -21,7 +21,9 @@ static void AddSearchPath() {
   CCFileUtils::sharedFileUtils()->addSearchPath(path.c_str());
 #endif
 #ifdef WIN32
-  CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
+  //CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
+  // CCFileUtils::sharedFileUtils()->addSearchPath("..\\cocostudio\\MainScene\\Export\\MainScene_1\\Resources");
+  CCFileUtils::sharedFileUtils()->addSearchPath("cocostudio/MainScene/Export/MainScene_1/Resources");
 #endif
 }
 
@@ -68,7 +70,8 @@ bool GameScene::init() {
   CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
   // init plist
   CCSpriteFrameCache *c = CCSpriteFrameCache::sharedSpriteFrameCache();
-  CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
+  // CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
+  // CCFileUtils::sharedFileUtils()->addSearchPath("..\cocostudio\\MainScene\\Export\\MainScene_1\\Resources");
   AddSearchPath();
 
   const std::vector<std::string>& v = CCFileUtils::sharedFileUtils()->getSearchPaths();
@@ -78,7 +81,7 @@ bool GameScene::init() {
 
   // c->addSpriteFramesWithFile("dogrun2.plist", "dogrun2.png");
 
-#if 1
+#if 0
   CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
   CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
@@ -100,10 +103,23 @@ bool GameScene::init() {
 #if 0
   TestNetwork();
 #endif
-#if 1
-  //tcpc_test();
-#endif
+
+  UILayer *uil = UILayer::create();
+  //Layout *layout = ::GUIReader::shareReader()->widgetFromJsonFile("..\cocostudio\MainScene\Export\MainScene_1\MainScene_1.json");
+  Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("cocostudio/MainScene/Export/MainScene_1/MainScene_1.json"));
+  uil->addWidget(layout);
+  this->addChild(uil, 0, 100);
+
+  // UIImageView * lifeBar = (UIImageView *)ul->getWidgetByName("lifeBar");
+  UIButton *btn = (UIButton *)uil->getWidgetByName("BtnPlay");
+  btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnPlay));
   return true;
+}
+
+void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
+{
+  if (e == TOUCH_EVENT_BEGAN)
+    CCLOG("%s\n", __FUNCTION__);
 }
 
 void GameScene::menuCloseCallback(CCObject* pSender) {
