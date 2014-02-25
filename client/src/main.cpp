@@ -8,7 +8,7 @@ static int AppRun() {
   // create the application instance
   AppDelegate app;
   CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-  eglView->setViewName("DogRun2");
+  eglView->setViewName("CrazyAss");
   eglView->setFrameSize(800, 480);
   return CCApplication::sharedApplication()->run();
 }

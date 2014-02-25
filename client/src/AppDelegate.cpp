@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
 #include "game_scene.h"
 #include "ui_config_init.h"
-#include "dog.h"
 
 USING_NS_CC;
 
@@ -14,11 +13,6 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-  DogRunInit();
-  UIConfigInit();
-  // init user
-  User::InitCurrent();
-
   // initialize director
   CCDirector* pDirector = CCDirector::sharedDirector();
   CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
@@ -36,8 +30,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
   // run
   pDirector->runWithScene(pScene);
-
-  CCLOG("%s\n", User::current()->id().c_str());
   return true;
 }
 

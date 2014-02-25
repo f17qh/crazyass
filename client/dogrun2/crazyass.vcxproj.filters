@@ -16,19 +16,7 @@
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\dog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\layers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\game_scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\menu_items.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\sprites.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ui_config_init.cpp">
@@ -43,9 +31,6 @@
     <ClCompile Include="..\protocol\uiconfig.pb.cc">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\dog_action.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\AppDelegate.h">
@@ -54,19 +39,7 @@
     <ClInclude Include="..\src\main.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\dog.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\layers.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\game_scene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\menu_items.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\sprites.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\event_mgr.h">
@@ -83,9 +56,6 @@
     </ClInclude>
     <ClInclude Include="..\protocol\uiconfig.pb.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\dog_action.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

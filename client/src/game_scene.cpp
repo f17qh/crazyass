@@ -1,7 +1,4 @@
 #include "game_scene.h"
-#include "dog.h"
-#include "layers.h"
-#include "sprites.h"
 #include "event_mgr.h"
 
 #ifdef LINUX
@@ -78,9 +75,10 @@ bool GameScene::init() {
   for (size_t i = 0; i < v.size(); i++) {
     printf("search path %s\n", v[i].c_str());
   }
-  c->addSpriteFramesWithFile("dogrun2.plist", "dogrun2.png");
 
-#if 0
+  // c->addSpriteFramesWithFile("dogrun2.plist", "dogrun2.png");
+
+#if 1
   CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
   CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
@@ -99,31 +97,6 @@ bool GameScene::init() {
   // add the label as a child to this layer
   this->addChild(pLabel, 1);
 #endif
-  doglayer_ = DogLayer::create();
-  this->addChild(doglayer_, kLayerDog);
-
-  user_layer_ = UserLayer::create();
-  this->addChild(user_layer_, kLayerUser);
-
-  MainMenuLayer* main_menu_layer = MainMenuLayer::create();
-  DogMenuLayer* dog_menu_layer = DogMenuLayer::create();
-  FeedMenuLayer* feed_menu_layer = FeedMenuLayer::create();
-  TrainMenuLayer* train_menu_layer = TrainMenuLayer::create();
-  PlayMenuLayer* play_menu_layer = PlayMenuLayer::create();
-  menu_layer_ = CCLayerMultiplex::create(main_menu_layer, dog_menu_layer,
-        feed_menu_layer, train_menu_layer, play_menu_layer, NULL);
-
-  this->addChild(menu_layer_, kLayerMenu);
-
-  menu_flag_ = 0;
-  menu_layer_->switchTo(menu_flag_);
-
-  EventMgr::Instance().Register(kEventClickDogMenu, this, callfuncO_selector(GameScene::DogMenuClickCallback));
-  EventMgr::Instance().Register(kEventClickFeedItem, this, callfuncO_selector(GameScene::FeedItemClickCallback));
-  EventMgr::Instance().Register(kEventClickTrainItem, this, callfuncO_selector(GameScene::TrainItemClickCallback));
-  EventMgr::Instance().Register(kEventClickPlayItem, this, callfuncO_selector(GameScene::PlayItemClickCallback));
-  EventMgr::Instance().Register(kEventClickBackItem, this, callfuncO_selector(GameScene::BackItemClickCallback));
-
 #if 0
   TestNetwork();
 #endif
@@ -131,27 +104,6 @@ bool GameScene::init() {
   //tcpc_test();
 #endif
   return true;
-}
-
-void GameScene::DogMenuClickCallback(CCObject* sender) {
-  menu_flag_ = (menu_flag_ + 1) % 2;
-  menu_layer_->switchTo(menu_flag_);
-}
-
-void GameScene::FeedItemClickCallback(CCObject* sender) {
-  menu_layer_->switchTo(2);
-}
-
-void GameScene::TrainItemClickCallback(CCObject* sender) {
-  menu_layer_->switchTo(3);
-}
-
-void GameScene::PlayItemClickCallback(CCObject* sender) {
-  menu_layer_->switchTo(4);
-}
-
-void GameScene::BackItemClickCallback(CCObject* sender) {
-  menu_layer_->switchTo(1);
 }
 
 void GameScene::menuCloseCallback(CCObject* pSender) {

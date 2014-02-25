@@ -20,23 +20,10 @@ public:
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
 
-  // a selector callback
   void menuCloseCallback(CCObject* pSender);
-
-  // implement the "static node()" method manually
-
-  void DogMenuClickCallback(CCObject* sender);
-  void FeedItemClickCallback(CCObject* sender);
-  void TrainItemClickCallback(CCObject* sender);
-  void PlayItemClickCallback(CCObject* sender);
-  void BackItemClickCallback(CCObject* sender);
 
   CREATE_FUNC(GameScene);
 
 protected:
-  DogLayer *doglayer_;
-  UserLayer *user_layer_;
-  CCLayerMultiplex *menu_layer_;
-  int menu_flag_;
 };
 
