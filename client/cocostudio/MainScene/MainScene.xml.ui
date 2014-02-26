@@ -10,10 +10,13 @@
   <JsonList>
     <string>MainScene_1.json</string>
     <string>PlayScene.json</string>
+    <string>GirlScene1.json</string>
   </JsonList>
-  <imageFileList />
+  <imageFileList>
+    <string>Resources/images/stage_select_images.plist</string>
+  </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PlayScene.json</CurrentUIJson>
+  <CurrentUIJson>MainScene_1.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

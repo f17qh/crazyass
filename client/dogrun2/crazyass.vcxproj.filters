@@ -31,6 +31,9 @@
     <ClCompile Include="..\protocol\uiconfig.pb.cc">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\PlayScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\AppDelegate.h">
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="..\protocol\uiconfig.pb.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlayScene.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

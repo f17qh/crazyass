@@ -1,5 +1,6 @@
 #include <string>
 #include "game_scene.h"
+#include "PlayScene.h"
 #include "event_mgr.h"
 
 using namespace std;
@@ -70,6 +71,7 @@ bool GameScene::init() {
   if (!CCScene::init())
     return false;
 
+  select_stage_ = 1;
   CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
   // init plist
   // CCSpriteFrameCache *c = CCSpriteFrameCache::sharedSpriteFrameCache();
@@ -107,23 +109,72 @@ bool GameScene::init() {
   TestNetwork();
 #endif
 
-  UILayer *uil = UILayer::create();
+  ui_layer_ = UILayer::create();
   //Layout *layout = ::GUIReader::shareReader()->widgetFromJsonFile("..\cocostudio\MainScene\Export\MainScene_1\MainScene_1.json");
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("cocostudio/MainScene/Export/MainScene_1/MainScene_1.json"));
-  uil->addWidget(layout);
-  this->addChild(uil, 0, 100);
+  ui_layer_->addWidget(layout);
+  this->addChild(ui_layer_, 0, 100);
 
   // UIImageView * lifeBar = (UIImageView *)ul->getWidgetByName("lifeBar");
-  UIButton *btn = (UIButton *)uil->getWidgetByName("BtnPlay");
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnPlay));
+  btn->setPressedActionEnabled(true);
+
+  btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent");
+  btn->setPressedActionEnabled(true);
+
+#define ADD_GIRLBTN(i) do { \
+  snprintf(btn_name, 32, "BtnGirl%d", i); \
+  UIButton *btn##i = (UIButton *)ui_layer_->getWidgetByName(btn_name); \
+  if (btn##i) \
+  btn##i->addTouchEventListener(this, toucheventselector(GameScene::onBtnGirl##i)); \
+  btn##i->setPressedActionEnabled(true);\
+  } while (0)
+
+  char btn_name[32];
+  ADD_GIRLBTN(1);
+  ADD_GIRLBTN(2);
+  ADD_GIRLBTN(3);
+  ADD_GIRLBTN(4);
+  ADD_GIRLBTN(5);
+  ADD_GIRLBTN(6);
+#undef ADD_GIRLBTN
   return true;
 }
 
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
 {
-  if (e == TOUCH_EVENT_BEGAN)
-    CCLOG("%s\n", __FUNCTION__);
+  if (e != TOUCH_EVENT_BEGAN)
+    return;
+
+  CCLOG("%s\n", __FUNCTION__);
+  PlayScene *sc = PlayScene::create();
+  sc->set_stageid(select_stage_);
+  CCDirector::sharedDirector()->replaceScene(sc);
+  // CCDirector::sharedDirector()->pushScene(sc);
 }
+
+#define BUILD_BTNGIRLFUNC(i) \
+  void GameScene::onBtnGirl##i(CCObject *target, TouchEventType e) { \
+  CCLOG("%s", __FUNCTION__); \
+  if (e != TOUCH_EVENT_BEGAN) \
+  return; \
+  UIImageView *preview = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlPreview"); \
+  if (!preview) \
+  return; \
+  char name[32];\
+  snprintf(name, 32, "stage_select_preview_girl%d.png", i); \
+  preview->loadTexture(name, UI_TEX_TYPE_PLIST); \
+  select_stage_ = i;\
+}
+
+BUILD_BTNGIRLFUNC(1);
+BUILD_BTNGIRLFUNC(2);
+BUILD_BTNGIRLFUNC(3);
+BUILD_BTNGIRLFUNC(4);
+BUILD_BTNGIRLFUNC(5);
+BUILD_BTNGIRLFUNC(6);
+#undef BUILD_BTNGIRLFUNC
 
 void GameScene::menuCloseCallback(CCObject* pSender) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
