@@ -11,12 +11,17 @@
     <string>MainScene_1.json</string>
     <string>PlayScene.json</string>
     <string>GirlScene1.json</string>
+    <string>GirlScene3.json</string>
+    <string>GirlScene2.json</string>
+    <string>GirlScene4.json</string>
+    <string>GirlScene5.json</string>
+    <string>GirlScene6.json</string>
   </JsonList>
   <imageFileList>
-    <string>Resources/images/stage_select_images.plist</string>
+    <string>Resources/images/play_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MainScene_1.json</CurrentUIJson>
+  <CurrentUIJson>GirlScene2.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

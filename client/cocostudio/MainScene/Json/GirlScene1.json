@@ -10,8 +10,7 @@
   "designHeight": 480,
   "designWidth": 800,
   "textures": [
-    "Resources/images/play_images.plist",
-    "Resources/images/girl1_images.plist"
+    "Resources/images/stage_select_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -56,7 +55,7 @@
               "tag": 25,
               "touchAble": true,
               "useMergedTexture": false,
-              "visible": false,
+              "visible": true,
               "width": 236,
               "x": 390,
               "y": 210,

@@ -12,4 +12,24 @@
     <Project>GirlScene1</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene3</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene2</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene4</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene5</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene6</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
