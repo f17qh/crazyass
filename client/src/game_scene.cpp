@@ -139,12 +139,16 @@ bool GameScene::init() {
   ADD_GIRLBTN(5);
   ADD_GIRLBTN(6);
 #undef ADD_GIRLBTN
+
+  UILabelAtlas *l = (UILabelAtlas *)ui_layer_->getWidgetByName("LabelHeart");
+  if (l)
+    l->setStringValue("99");
   return true;
 }
 
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
 {
-  if (e != TOUCH_EVENT_BEGAN)
+  if (e == TOUCH_EVENT_BEGAN)
     return;
 
   CCLOG("%s\n", __FUNCTION__);

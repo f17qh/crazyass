@@ -10,7 +10,7 @@
   "designHeight": 480,
   "designWidth": 800,
   "textures": [
-    "Resources/images/stage_select_images.plist"
+    "Resources/images/play_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -73,6 +73,52 @@
               "scale9Height": 64,
               "scale9Width": 85
             }
+          },
+          {
+            "classname": "LabelBMFont",
+            "name": null,
+            "children": [],
+            "options": {
+              "__type": "ComGUILabelBMFontSurrogate:#EditorCommon.JsonModel.Component.GUI",
+              "classname": "LabelBMFont",
+              "name": "LabelBMFont_111",
+              "ZOrder": 0,
+              "actiontag": 111,
+              "anchorPointX": 0.5,
+              "anchorPointY": 0.5,
+              "classType": null,
+              "colorB": 255,
+              "colorG": 255,
+              "colorR": 255,
+              "flipX": false,
+              "flipY": false,
+              "height": 40,
+              "ignoreSize": true,
+              "layoutParameter": null,
+              "opacity": 255,
+              "positionPercentX": 0.4575,
+              "positionPercentY": 0.499319464,
+              "positionType": 0,
+              "rotation": 0,
+              "scaleX": 1,
+              "scaleY": 1,
+              "sizePercentX": 0,
+              "sizePercentY": 0,
+              "sizeType": 0,
+              "tag": 64,
+              "touchAble": false,
+              "useMergedTexture": false,
+              "visible": true,
+              "width": 247,
+              "x": 366,
+              "y": 239,
+              "fileNameData": {
+                "path": "Resources/fonts/font_play_heart.fnt",
+                "plistFile": null,
+                "resourceType": 0
+              },
+              "text": "3945839405"
+            }
           }
         ],
         "options": {
@@ -93,8 +139,8 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0,
-          "positionPercentY": 0,
+          "positionPercentX": 0.0025,
+          "positionPercentY": 0.00208333344,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -107,8 +153,8 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 800,
-          "x": 0,
-          "y": 0,
+          "x": 2,
+          "y": 1,
           "backGroundImage": null,
           "backGroundImageData": null,
           "backGroundScale9Enable": false,
