@@ -10,9 +10,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\AppDelegate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -23,13 +20,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\user.cpp">
+    <ClCompile Include="..\src\card_action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\play_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\app_delegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\AppDelegate.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\main.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -43,6 +44,13 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\user.h">
+    <ClInclude Include="..\src\card_action.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\play_scene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\app_delegate.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -121,18 +121,18 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\libwebsockets\win32
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\AppDelegate.cpp" />
+    <ClCompile Include="..\src\app_delegate.cpp" />
     <ClCompile Include="..\src\game_scene.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\PlayScene.cpp" />
+    <ClCompile Include="..\src\play_scene.cpp" />
     <ClCompile Include="..\src\user.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\AppDelegate.h" />
+    <ClInclude Include="..\src\app_delegate.h" />
     <ClInclude Include="..\src\event_mgr.h" />
     <ClInclude Include="..\src\game_scene.h" />
     <ClInclude Include="..\src\main.h" />
-    <ClInclude Include="..\src\PlayScene.h" />
+    <ClInclude Include="..\src\play_scene.h" />
     <ClInclude Include="..\src\user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

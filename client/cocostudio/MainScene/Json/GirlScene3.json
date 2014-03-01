@@ -10,7 +10,8 @@
   "designHeight": 480,
   "designWidth": 800,
   "textures": [
-    "Resources/images/play_images.plist"
+    "Resources/images/play_images.plist",
+    "Resources/images/girl3_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -381,7 +382,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.49125,
-          "positionPercentY": 0.177083343,
+          "positionPercentY": 0.177083328,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -508,7 +509,7 @@
       "classname": "Panel",
       "name": "Panel",
       "ZOrder": 0,
-      "actiontag": 70,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": null,

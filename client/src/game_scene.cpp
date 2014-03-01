@@ -1,6 +1,6 @@
 #include <string>
 #include "game_scene.h"
-#include "PlayScene.h"
+#include "play_scene.h"
 #include "event_mgr.h"
 #include "user.h"
 
@@ -193,8 +193,7 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
   }
 }
 
-void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
-{
+void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
@@ -205,27 +204,12 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
   // CCDirector::sharedDirector()->pushScene(sc);
 }
 
-#define BUILD_BTNGIRLFUNC(i) \
-  void GameScene::onBtnGirl##i(CCObject *target, TouchEventType e) { \
-  CCLOG("%s", __FUNCTION__); \
-  if (e != TOUCH_EVENT_BEGAN) \
-  return; \
-  UIImageView *preview = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlPreview"); \
-  if (!preview) \
-  return; \
-  char name[32];\
-  snprintf(name, 32, "stage_select_preview_girl%d.png", i); \
-  preview->loadTexture(name, UI_TEX_TYPE_PLIST); \
-  select_stage_ = i;\
-}
-
 BUILD_BTNGIRLFUNC(1);
 BUILD_BTNGIRLFUNC(2);
 BUILD_BTNGIRLFUNC(3);
 BUILD_BTNGIRLFUNC(4);
 BUILD_BTNGIRLFUNC(5);
 BUILD_BTNGIRLFUNC(6);
-#undef BUILD_BTNGIRLFUNC
 
 void GameScene::menuCloseCallback(CCObject* pSender) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)

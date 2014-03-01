@@ -1,5 +1,5 @@
 #include "main.h"
-#include "AppDelegate.h"
+#include "app_delegate.h"
 #include "CCEGLView.h"
 
 USING_NS_CC;
