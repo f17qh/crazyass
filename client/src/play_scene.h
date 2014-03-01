@@ -27,6 +27,7 @@ protected:
   UILayer *ui_layer_;
   CCScene *back_scene_;
   CCLayer *card_layer_;
+  CCSprite * test_;
   int stageid_;
   void onBtnBack(CCObject *target, TouchEventType e);
   void onBtnStartPlay(CCObject *target, TouchEventType e);

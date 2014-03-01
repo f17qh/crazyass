@@ -1,5 +1,6 @@
 #include "play_scene.h"
 #include "game_scene.h"
+#include "card_action.h"
 
 bool PlayScene::init() {
   //////////////////////////////
@@ -29,6 +30,9 @@ void PlayScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
   this->addChild(card_layer_, 1, 101);
 
+  test_ = CCSprite::create();
+  card_layer_->addChild(test_);
+
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnBack");
   if (btn) {
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnBack));
@@ -43,7 +47,13 @@ void PlayScene::onEnter() {
 }
 
 void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
+  if (e != TOUCH_EVENT_ENDED)
+    return;
+
   CCLOG("%s\n", __FUNCTION__);
+  CardAction card_action;
+  card_action.init(test_);
+  card_action.moveWithParabola(CCPoint(62,93), CCPoint(300,0), 1.0f);
 }
 
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
