@@ -20,7 +20,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libchipmunk", "..\..\..\coc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libBox2D", "..\..\..\cocos2d-x-2.2\external\Box2D\proj.win32\Box2D.vcxproj", "{929480E7-23C0-4DF6-8456-096D71547116}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrazyAss", "dogrun2\crazyass.vcxproj", "{A4D54AF1-AEBA-4B18-80FD-A3014C95ABFB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrazyAss", "crazyass\crazyass.vcxproj", "{A4D54AF1-AEBA-4B18-80FD-A3014C95ABFB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AE2C4701-8F4C-4870-8F0C-1097144358B1} = {AE2C4701-8F4C-4870-8F0C-1097144358B1}
 	EndProjectSection

@@ -20,6 +20,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\user.cpp">
+          <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\card_action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,6 +46,8 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\user.h">
+          <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\card_action.h">
       <Filter>Source Files</Filter>
     </ClInclude>
