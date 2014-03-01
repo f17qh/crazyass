@@ -19,18 +19,6 @@
     <ClCompile Include="..\src\game_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ui_config_init.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\common.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\common\protocol\dogattr.pb.cc">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\protocol\uiconfig.pb.cc">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\PlayScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -47,18 +35,6 @@
     </ClInclude>
     <ClInclude Include="..\src\event_mgr.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ui_config_init.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\protocol\dogattr.pb.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\protocol\uiconfig.pb.h">
-      <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\src\PlayScene.h">
       <Filter>Source Files</Filter>
