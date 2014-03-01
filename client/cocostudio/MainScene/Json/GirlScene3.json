@@ -11,7 +11,7 @@
   "designWidth": 800,
   "textures": [
     "Resources/images/play_images.plist",
-    "Resources/images/girl3_images.plist"
+    "Resources/images/girl4_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -113,7 +113,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.50375,
-          "positionPercentY": 0.4,
+          "positionPercentY": 0.308333337,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -127,7 +127,7 @@
           "visible": true,
           "width": 236,
           "x": 403,
-          "y": 192,
+          "y": 148,
           "capInsetsHeight": 0,
           "capInsetsWidth": 0,
           "capInsetsX": 0,

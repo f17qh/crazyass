@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <filePath>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\MainScene.xml.ui</filePath>
+  <filePath>D:\Game\开发\cocos2d-x-2.2\sssss\crazyass\client\cocostudio\MainScene\MainScene.xml.ui</filePath>
   <Version>1.2.0.1</Version>
   <Name>MainScene</Name>
-  <ProjectDir>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene</ProjectDir>
+  <ProjectDir>D:\Game\开发\cocos2d-x-2.2\sssss\crazyass\client\cocostudio\MainScene</ProjectDir>
   <JsonFileName>MainScene.json</JsonFileName>
-  <Resources>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\Resources</Resources>
-  <JsonFolder>E:\cocos2d-x-2.2\test\crazyass\client\cocostudio\MainScene\Json</JsonFolder>
+  <Resources>D:\Game\开发\cocos2d-x-2.2\sssss\crazyass\client\cocostudio\MainScene\Resources</Resources>
+  <JsonFolder>D:\Game\开发\cocos2d-x-2.2\sssss\crazyass\client\cocostudio\MainScene\Json</JsonFolder>
   <JsonList>
     <string>MainScene_1.json</string>
     <string>PlayScene.json</string>
@@ -19,11 +19,10 @@
   </JsonList>
   <imageFileList>
     <string>Resources/images/play_images.plist</string>
-    <string>Resources/images/gallery_images.plist</string>
-    <string>Resources/images/girl1_images.plist</string>
+    <string>Resources/images/girl4_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GirlScene1.json</CurrentUIJson>
+  <CurrentUIJson>GirlScene3.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>
