@@ -27,6 +27,7 @@ protected:
   void onBtnGirl4(CCObject *target, TouchEventType e);
   void onBtnGirl5(CCObject *target, TouchEventType e);
   void onBtnGirl6(CCObject *target, TouchEventType e);
+  void AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector);
 
   int select_stage_;
   UILayer *ui_layer_;

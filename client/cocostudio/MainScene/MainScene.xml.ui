@@ -19,9 +19,11 @@
   </JsonList>
   <imageFileList>
     <string>Resources/images/play_images.plist</string>
+    <string>Resources/images/gallery_images.plist</string>
+    <string>Resources/images/girl1_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GirlScene2.json</CurrentUIJson>
+  <CurrentUIJson>GirlScene1.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

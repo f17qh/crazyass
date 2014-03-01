@@ -58,14 +58,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\common;$(ProjectDir)..\;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\third_party\win32;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\CocosDenshion\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\extensions;..\Classes;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\common;$(ProjectDir)..\;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\third_party\win32;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\CocosDenshion\include;$(ProjectDir)..\..\..\..\cocos2d-x-2.2\extensions;..\Classes;..;$(ProjectDir)..\..\common\dep\jsoncpp-src-0.6.0-rc2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libExtensions.lib;libcocos2d.lib;libCocosDenshion.lib;opengl32.lib;glew32.lib;libBox2d.lib;libchipmunk.lib;libcurl_imp.lib;pthreadVCE2.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libExtensions.lib;libcocos2d.lib;libCocosDenshion.lib;opengl32.lib;glew32.lib;libBox2d.lib;libchipmunk.lib;libcurl_imp.lib;pthreadVCE2.lib;websockets.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
@@ -116,12 +116,16 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\libwebsockets\win32
     <ProjectReference Include="..\..\..\..\cocos2d-x-2.2\external\chipmunk\proj.win32\chipmunk.vcxproj">
       <Project>{207bc7a9-ccf1-4f2f-a04d-45f72242ae25}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\jsoncpp\jsoncpp.vcxproj">
+      <Project>{ae2c4701-8f4c-4870-8f0c-1097144358b1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\AppDelegate.cpp" />
     <ClCompile Include="..\src\game_scene.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\PlayScene.cpp" />
+    <ClCompile Include="..\src\user.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\AppDelegate.h" />
@@ -129,6 +133,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\libwebsockets\win32
     <ClInclude Include="..\src\game_scene.h" />
     <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\PlayScene.h" />
+    <ClInclude Include="..\src\user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

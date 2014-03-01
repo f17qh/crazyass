@@ -2,6 +2,7 @@
 #include "game_scene.h"
 #include "PlayScene.h"
 #include "event_mgr.h"
+#include "user.h"
 
 using namespace std;
 
@@ -71,6 +72,8 @@ bool GameScene::init() {
   if (!CCScene::init())
     return false;
 
+  User *u = User::CurrentUser();
+
   select_stage_ = 1;
   CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
   // init plist
@@ -123,12 +126,23 @@ bool GameScene::init() {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent");
   btn->setPressedActionEnabled(true);
 
+  int nextstage = User::CurrentUser()->stageid();
+
+#if 0
 #define ADD_GIRLBTN(i) do { \
   snprintf(btn_name, 32, "BtnGirl%d", i); \
   UIButton *btn##i = (UIButton *)ui_layer_->getWidgetByName(btn_name); \
-  if (btn##i) \
+  if (btn##i) {\
   btn##i->addTouchEventListener(this, toucheventselector(GameScene::onBtnGirl##i)); \
   btn##i->setPressedActionEnabled(true);\
+  }\
+  snprintf(btn_name, 32, "ImageLock%d", i); \
+  UIImageView *lock##i = (UIImageView *)ui_layer_->getWidgetByName(btn_name); \
+  if (lock##i) {\
+  if (i <= nextstage) {\
+  lock##i->setVisible(false);\
+  }\
+  }\
   } while (0)
 
   char btn_name[32];
@@ -138,12 +152,45 @@ bool GameScene::init() {
   ADD_GIRLBTN(4);
   ADD_GIRLBTN(5);
   ADD_GIRLBTN(6);
-#undef ADD_GIRLBTN
+#endif
+  AddGirlBtn(1, nextstage, toucheventselector(GameScene::onBtnGirl1));
+  AddGirlBtn(2, nextstage, toucheventselector(GameScene::onBtnGirl2));
+  AddGirlBtn(3, nextstage, toucheventselector(GameScene::onBtnGirl3));
+  AddGirlBtn(4, nextstage, toucheventselector(GameScene::onBtnGirl4));
+  AddGirlBtn(5, nextstage, toucheventselector(GameScene::onBtnGirl5));
+  AddGirlBtn(6, nextstage, toucheventselector(GameScene::onBtnGirl6));
 
+  // show heart
   UILabelAtlas *l = (UILabelAtlas *)ui_layer_->getWidgetByName("LabelHeart");
-  if (l)
-    l->setStringValue("99");
+  if (l) {
+    char b[8];
+    snprintf(b, 8, "%d", User::CurrentUser()->heart());
+    l->setStringValue(b);
+  }
   return true;
+}
+
+void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
+  char name[64];
+  snprintf(name, 64, "BtnGirl%d", idx); 
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name); 
+  if (btn) {
+    if (idx < nextstage) {
+      snprintf(name, 64, "stage_select_preview_face_girl%d_open.png", idx);
+      btn->loadTextureNormal(name, UI_TEX_TYPE_PLIST);
+      btn->loadTexturePressed(name, UI_TEX_TYPE_PLIST);
+    }
+    // btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnGirl##i));
+    btn->addTouchEventListener(this, selector);
+    btn->setPressedActionEnabled(true);
+  }
+  snprintf(name, 64, "ImageLock%d", idx); 
+  UIImageView *lock = (UIImageView *)ui_layer_->getWidgetByName(name);;
+  if (lock) {
+    if (idx <= nextstage) {
+      lock->setVisible(false);
+    }
+  }
 }
 
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e)
