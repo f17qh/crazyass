@@ -50,5 +50,5 @@ void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
   // CCDirector::sharedDirector()->popScene();
 
   CCScene *sc = GameScene::create();
-  CCDirector::sharedDirector()->replaceScene(sc);
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(1, sc));
 }

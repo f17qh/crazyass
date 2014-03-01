@@ -200,7 +200,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   CCLOG("%s\n", __FUNCTION__);
   PlayScene *sc = PlayScene::create();
   sc->set_stageid(select_stage_);
-  CCDirector::sharedDirector()->replaceScene(sc);
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(1, sc));
   // CCDirector::sharedDirector()->pushScene(sc);
 }
 
