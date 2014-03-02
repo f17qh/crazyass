@@ -55,8 +55,13 @@ void LocalUser::Flush() {
   int fd = open(path_.c_str(), O_RDWR);
 #endif
 
+#ifdef WIN32
   _write(fd, content.c_str(), content.size());
   _close(fd);
+#else
+    write(fd, content.c_str(), content.size());
+    close(fd);
+#endif
 }
 
 static User * current_user_ = NULL;
