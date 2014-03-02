@@ -1,5 +1,6 @@
 #pragma once
-#include "json\json.h"
+#include <string>
+
 class User
 {
 public:
@@ -11,10 +12,16 @@ public:
   void set_heart(int heart) { heart_ = heart; }
 
   // save user data to disk
-  void Flush();
-  int Load(const char *path);
-protected:
+  virtual void Flush() = 0;
+  virtual int Load(const char *path) = 0;
 
+  int UseHeart(int count) {
+    if (heart_ < count)
+      return -1;
+    heart_ -= count;
+    return 0;
+  }
+protected:
   int stageid_;
   int heart_;
 };

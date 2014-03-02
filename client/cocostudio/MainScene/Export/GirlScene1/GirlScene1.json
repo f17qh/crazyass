@@ -139,9 +139,9 @@
               "capInsetsY": 0,
               "disabled": null,
               "disabledData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "play_btn_back.png",
+                "plistFile": "Resources/images/play_images.plist",
+                "resourceType": 1
               },
               "fontName": "微软雅黑",
               "fontSize": 14,
@@ -154,9 +154,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "play_btn_back.png",
+                "plistFile": "Resources/images/play_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 64,

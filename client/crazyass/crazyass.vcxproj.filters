@@ -16,13 +16,7 @@
     <ClCompile Include="..\src\game_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\PlayScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\user.cpp">
-          <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\card_action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\play_scene.cpp">
@@ -42,19 +36,16 @@
     <ClInclude Include="..\src\event_mgr.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\PlayScene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\user.h">
-          <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\card_action.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\play_scene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\app_delegate.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="event_scene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,7 +11,7 @@
   "designWidth": 800,
   "textures": [
     "Resources/images/play_images.plist",
-    "Resources/images/girl6_images.plist"
+    "Resources/images/girl4_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -138,9 +138,9 @@
               "capInsetsY": 0,
               "disabled": null,
               "disabledData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "play_btn_back.png",
+                "plistFile": "Resources/images/play_images.plist",
+                "resourceType": 1
               },
               "fontName": "微软雅黑",
               "fontSize": 14,
@@ -153,9 +153,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "play_btn_back.png",
+                "plistFile": "Resources/images/play_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 64,

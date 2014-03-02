@@ -10,6 +10,8 @@ using namespace std;
 #include "unistd.h"
 #endif
 
+#define RES_MAX_NAME  64
+
 static void AddSearchPath() {
 #ifdef LINUX
   char fullpath[256] = {0};
@@ -171,12 +173,12 @@ bool GameScene::init() {
 }
 
 void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
-  char name[64];
-  snprintf(name, 64, "BtnGirl%d", idx); 
-  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name); 
+  char name[RES_MAX_NAME];
+  snprintf(name, RES_MAX_NAME, "BtnGirl%d", idx); 
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name);
   if (btn) {
     if (idx < nextstage) {
-      snprintf(name, 64, "stage_select_preview_face_girl%d_open.png", idx);
+      snprintf(name, RES_MAX_NAME, "stage_select_preview_face_girl%d_open.png", idx);
       btn->loadTextureNormal(name, UI_TEX_TYPE_PLIST);
       btn->loadTexturePressed(name, UI_TEX_TYPE_PLIST);
     }
@@ -184,7 +186,7 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
     btn->addTouchEventListener(this, selector);
     btn->setPressedActionEnabled(true);
   }
-  snprintf(name, 64, "ImageLock%d", idx); 
+  snprintf(name, RES_MAX_NAME, "ImageLock%d", idx); 
   UIImageView *lock = (UIImageView *)ui_layer_->getWidgetByName(name);;
   if (lock) {
     if (idx <= nextstage) {
@@ -198,10 +200,48 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
 
   CCLOG("%s\n", __FUNCTION__);
+  if (User::CurrentUser()->UseHeart(select_stage_))
+    return;
+  User::CurrentUser()->Flush();
   PlayScene *sc = PlayScene::create();
   sc->set_stageid(select_stage_);
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(1, sc));
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   // CCDirector::sharedDirector()->pushScene(sc);
+}
+
+void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
+  CCLOG("%s", __FUNCTION__); 
+  if (e != TOUCH_EVENT_BEGAN) 
+    return; 
+  UIImageView *preview = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlPreview"); 
+  if (!preview) 
+    return; 
+  char name[RES_MAX_NAME];
+  snprintf(name, RES_MAX_NAME, "stage_select_preview_girl%d.png", i); 
+  preview->loadTexture(name, UI_TEX_TYPE_PLIST); 
+  select_stage_ = i;
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent"); 
+  if (btn) {
+    if (i >= User::CurrentUser()->stageid()) {
+      btn->setVisible(false);
+    } else {
+      btn->setVisible(true);
+    }
+  }
+  btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
+  if (btn) {
+    if(i > User::CurrentUser()->stageid()) {
+      btn->disable();
+    } else {
+      btn->setBright(true);
+      btn->setTouchEnabled(true);
+    }
+  }
+}
+
+#define BUILD_BTNGIRLFUNC(i) \
+  void GameScene::onBtnGirl##i(CCObject *target, TouchEventType e) { \
+  OnBtnGirl(target, e, i);\
 }
 
 BUILD_BTNGIRLFUNC(1);

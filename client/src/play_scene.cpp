@@ -30,12 +30,16 @@ void PlayScene::onEnter() {
   this->addChild(card_layer_, 1, 101);
 
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnBack");
-  if (btn)
+  if (btn) {
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnBack));
+    btn->setPressedActionEnabled(true);
+  }
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
-  if (btn)
+  if (btn) {
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnStartPlay));
+    btn->setPressedActionEnabled(true);
+  }
 }
 
 void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
@@ -43,12 +47,12 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
 }
 
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
-  if (e != TOUCH_EVENT_BEGAN)
+  if (e == TOUCH_EVENT_BEGAN)
     return;
 
   CCLOG("%s\n", __FUNCTION__);
   // CCDirector::sharedDirector()->popScene();
 
   CCScene *sc = GameScene::create();
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(1, sc));
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
 }
