@@ -1,6 +1,7 @@
 #include <string>
 #include "game_scene.h"
 #include "play_scene.h"
+#include "event_scene.h"
 #include "event_mgr.h"
 #include "user.h"
 
@@ -126,6 +127,7 @@ bool GameScene::init() {
   btn->setPressedActionEnabled(true);
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent");
+  btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnEvent));
   btn->setPressedActionEnabled(true);
 
   int nextstage = User::CurrentUser()->stageid();
@@ -163,11 +165,11 @@ bool GameScene::init() {
   AddGirlBtn(6, nextstage, toucheventselector(GameScene::onBtnGirl6));
 
   // show heart
-  UILabelAtlas *l = (UILabelAtlas *)ui_layer_->getWidgetByName("LabelHeart");
+  UILabelBMFont *l = (UILabelBMFont *)ui_layer_->getWidgetByName("LabelHeart");
   if (l) {
     char b[8];
     snprintf(b, 8, "%d", User::CurrentUser()->heart());
-    l->setStringValue(b);
+    l->setText(b);
   }
   return true;
 }
@@ -185,6 +187,12 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
     // btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnGirl##i));
     btn->addTouchEventListener(this, selector);
     btn->setPressedActionEnabled(true);
+
+#if 0
+    // disable anti alias
+    CCSprite *s = dynamic_cast<CCSprite*>(btn->getVirtualRenderer());
+    s->getTexture()->setAliasTexParameters();
+#endif
   }
   snprintf(name, RES_MAX_NAME, "ImageLock%d", idx); 
   UIImageView *lock = (UIImageView *)ui_layer_->getWidgetByName(name);;
@@ -204,6 +212,17 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
   User::CurrentUser()->Flush();
   PlayScene *sc = PlayScene::create();
+  sc->set_stageid(select_stage_);
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
+  // CCDirector::sharedDirector()->pushScene(sc);
+}
+
+void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+
+  CCLOG("%s\n", __FUNCTION__);
+  EventScene *sc = EventScene::create();
   sc->set_stageid(select_stage_);
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   // CCDirector::sharedDirector()->pushScene(sc);
@@ -230,7 +249,8 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
   }
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   if (btn) {
-    if(i > User::CurrentUser()->stageid()) {
+    if (i > User::CurrentUser()->stageid() ||
+        i > User::CurrentUser()->heart()) {
       btn->disable();
     } else {
       btn->setBright(true);

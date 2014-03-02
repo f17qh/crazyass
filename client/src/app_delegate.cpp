@@ -1,5 +1,5 @@
 #include "app_delegate.h"
-#include "game_scene.h"
+#include "start_scene.h"
 #include "ui_config_init.h"
 
 USING_NS_CC;
@@ -25,8 +25,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
   // set FPS. the default value is 1.0/60 if you don't call this
   pDirector->setAnimationInterval(1.0 / 60);
 
+  CCEGLView::sharedOpenGLView()->setDesignResolutionSize(800, 480, kResolutionShowAll);
+
   // create a scene. it's an autorelease object
-  CCScene *pScene = GameScene::create();
+  CCScene *pScene = StartScene::create();
 
   // run
   pDirector->runWithScene(pScene);

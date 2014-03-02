@@ -25,6 +25,12 @@
     <ClCompile Include="..\src\app_delegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\start_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\event_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\main.h">
@@ -45,7 +51,10 @@
     <ClInclude Include="..\src\app_delegate.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="event_scene.h">
+    <ClInclude Include="..\src\start_scene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\event_scene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

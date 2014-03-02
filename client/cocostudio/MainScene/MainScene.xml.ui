@@ -16,10 +16,10 @@
     <string>GirlScene4.json</string>
     <string>GirlScene5.json</string>
     <string>GirlScene6.json</string>
+    <string>StartScene.json</string>
   </JsonList>
   <imageFileList>
-    <string>Resources/images/play_images.plist</string>
-    <string>Resources/images/girl4_images.plist</string>
+    <string>Resources/images/main_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>GirlScene1.json</CurrentUIJson>

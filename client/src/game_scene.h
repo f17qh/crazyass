@@ -21,6 +21,7 @@ public:
 
 protected:
   void onBtnPlay(CCObject *target, TouchEventType e);
+  void onBtnEvent(CCObject *target, TouchEventType e);
   void onBtnGirl1(CCObject *target, TouchEventType e);
   void onBtnGirl2(CCObject *target, TouchEventType e);
   void onBtnGirl3(CCObject *target, TouchEventType e);

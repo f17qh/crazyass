@@ -32,4 +32,8 @@
     <Project>GirlScene6</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>StartScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -116,25 +116,25 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\libwebsockets\win32
     <ProjectReference Include="..\..\..\..\cocos2d-x-2.2\external\chipmunk\proj.win32\chipmunk.vcxproj">
       <Project>{207bc7a9-ccf1-4f2f-a04d-45f72242ae25}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\jsoncpp\jsoncpp.vcxproj">
-      <Project>{ae2c4701-8f4c-4870-8f0c-1097144358b1}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\app_delegate.cpp" />
+    <ClCompile Include="..\src\event_scene.cpp" />
     <ClCompile Include="..\src\game_scene.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\play_scene.cpp" />
+    <ClCompile Include="..\src\start_scene.cpp" />
     <ClCompile Include="..\src\user.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\app_delegate.h" />
     <ClInclude Include="..\src\event_mgr.h" />
+    <ClInclude Include="..\src\event_scene.h" />
     <ClInclude Include="..\src\game_scene.h" />
     <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\play_scene.h" />
+    <ClInclude Include="..\src\start_scene.h" />
     <ClInclude Include="..\src\user.h" />
-    <ClInclude Include="event_scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

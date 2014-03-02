@@ -9,7 +9,8 @@ static int AppRun() {
   AppDelegate app;
   CCEGLView* eglView = CCEGLView::sharedOpenGLView();
   eglView->setViewName("CrazyAss");
-  eglView->setFrameSize(800, 480);
+  eglView->setFrameSize(900, 580);
+
   return CCApplication::sharedApplication()->run();
 }
 
