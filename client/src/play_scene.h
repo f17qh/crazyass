@@ -1,6 +1,7 @@
 #pragma once
 #include <cocos2d.h>
 #include <cocos-ext.h>
+#include "card_manager.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -24,10 +25,9 @@ public:
   CREATE_FUNC(PlayScene);
 
 protected:
+  CardMgr card_mgr_;
   UILayer *ui_layer_;
   CCScene *back_scene_;
-  CCLayer *card_layer_;
-  CCSprite * test_;
   int stageid_;
   void onBtnBack(CCObject *target, TouchEventType e);
   void onBtnStartPlay(CCObject *target, TouchEventType e);

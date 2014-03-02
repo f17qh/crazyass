@@ -25,16 +25,16 @@
     <ClCompile Include="..\src\app_delegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\src\start_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\event_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-=======
->>>>>>> add action
     <ClCompile Include="..\src\card_action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\card_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\card_action.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\card_manager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

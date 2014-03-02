@@ -120,7 +120,6 @@ bool GameScene::init() {
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("cocostudio/MainScene/Export/MainScene_1/MainScene_1.json"));
   ui_layer_->addWidget(layout);
   this->addChild(ui_layer_, 0, 100);
-
   // UIImageView * lifeBar = (UIImageView *)ul->getWidgetByName("lifeBar");
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnPlay));
