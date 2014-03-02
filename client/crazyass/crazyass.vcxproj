@@ -120,7 +120,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\cocos2d-x-2.2\external\libwebsockets\win32
   <ItemGroup>
     <ClCompile Include="..\src\app_delegate.cpp" />
     <ClCompile Include="..\src\event_scene.cpp" />
-    <ClCompile Include="..\src\card_action.cpp" />
     <ClCompile Include="..\src\card_manager.cpp" />
     <ClCompile Include="..\src\game_scene.cpp" />
     <ClCompile Include="..\src\main.cpp" />
