@@ -36,4 +36,28 @@
     <Project>StartScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene1</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene2</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene3</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene4</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene5</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>EventScene6</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

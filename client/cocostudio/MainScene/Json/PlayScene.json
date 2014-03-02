@@ -10,9 +10,7 @@
   "designHeight": 480,
   "designWidth": 800,
   "textures": [
-    "Resources/images/play_images.plist",
-    "Resources/images/gallery_images.plist",
-    "Resources/images/girl1_images.plist"
+    "Resources/images/main_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
