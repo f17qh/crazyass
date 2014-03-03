@@ -28,9 +28,9 @@ static void AddSearchPath() {
   CCFileUtils::sharedFileUtils()->addSearchPath(path.c_str());
 #endif
 #ifdef WIN32
-  //CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
+  CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
   // CCFileUtils::sharedFileUtils()->addSearchPath("..\\cocostudio\\MainScene\\Export\\MainScene_1\\Resources");
-  CCFileUtils::sharedFileUtils()->addSearchPath("cocostudio/MainScene/Export/MainScene_1/Resources");
+  // CCFileUtils::sharedFileUtils()->addSearchPath("cocostudio/MainScene/Export/MainScene_1/Resources");
 #endif
 }
 

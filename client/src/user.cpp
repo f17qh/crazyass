@@ -21,11 +21,25 @@ public:
 protected:
   std::string path_;
   CSJson::Value root_;
+
+  int AddUser();
 };
+
+int LocalUser::AddUser() {
+  heart_ = 10;
+  stageid_ = 1;
+  root_["heart"] = heart_;
+  root_["stage"] = stageid_;
+  return 0;
+}
 
 int LocalUser::Load(const char *path) {
   CSJson::Reader reader;
   path_ = path;
+
+  if (!CCFileUtils::sharedFileUtils()->isFileExist(std::string(path))) {
+    return AddUser();
+  }
 
   unsigned long size = 4096;
   unsigned char *buf = CCFileUtils::sharedFileUtils()->getFileData(path, "rb", &size);
@@ -50,9 +64,9 @@ void LocalUser::Flush() {
   std::string content = writer.write(root_);
   CCLOG("Flush %s to %s\n", content.c_str(), path_.c_str());
 #ifdef WIN32
-  int fd = _open(path_.c_str(), _O_RDWR);
+  int fd = _open(path_.c_str(), _O_RDWR | _O_CREAT);
 #else
-  int fd = open(path_.c_str(), O_RDWR);
+  int fd = open(path_.c_str(), O_RDWR | O_CREAT);
 #endif
 
 #ifdef WIN32
@@ -68,7 +82,7 @@ static User * current_user_ = NULL;
 User * User::CurrentUser() {
   if (current_user_ == NULL) {
     current_user_ = new LocalUser();
-    current_user_->Load("etc/user.json");
+    current_user_->Load("user.json");
   }
   return current_user_;
 }
