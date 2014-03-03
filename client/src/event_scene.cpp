@@ -22,7 +22,7 @@ void EventScene::onEnter() {
   // load ui
   ui_layer_ = UILayer::create();
   char path[1024];
-  snprintf(path, 1024, "cocostudio/MainScene/Export/MainScene/EventScene%d.json",
+  snprintf(path, 1024, "MainScene/EventScene%d.json",
            stageid_);
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile(path));
   ui_layer_->addWidget(layout);
