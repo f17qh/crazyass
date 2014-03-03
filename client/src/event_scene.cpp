@@ -1,5 +1,6 @@
 #include "event_scene.h"
 #include "game_scene.h"
+#include "common.h"
 
 bool EventScene::init() {
   //////////////////////////////
@@ -12,6 +13,7 @@ bool EventScene::init() {
   panty_state_ = 0;
   stock1_state_ = 0;
   stock2_state_ = 0;
+  memset(event_state_, 0, sizeof(event_state_));
   return true;
 }
 
@@ -34,24 +36,23 @@ void EventScene::onEnter() {
     btn->setPressedActionEnabled(true);
   }
 
-  btn = (UIButton *)ui_layer_->getWidgetByName("BtnShirt");
-  if (btn) {
-    CCLOG("add button BtnEventShirt\n");
-    btn->addTouchEventListener(this, toucheventselector(EventScene::onBtnShirt));
-  }
-  btn = (UIButton *)ui_layer_->getWidgetByName("BtnPanty");
-  if (btn) {
-    btn->addTouchEventListener(this, toucheventselector(EventScene::onBtnPanty));
-  }
-  btn = (UIButton *)ui_layer_->getWidgetByName("BtnStock1");
-  if (btn) {
-    btn->addTouchEventListener(this, toucheventselector(EventScene::onBtnStock1));
-  }
-  btn = (UIButton *)ui_layer_->getWidgetByName("BtnStock2");
-  if (btn) {
-    btn->addTouchEventListener(this, toucheventselector(EventScene::onBtnStock2));
-  }
+  struct ButtonListener bl[] = {
+      {"BtnEvent1", toucheventselector(EventScene::onBtnEvent1)},
+      {"BtnEvent2", toucheventselector(EventScene::onBtnEvent2)},
+      {"BtnEvent3", toucheventselector(EventScene::onBtnEvent3)},
+      {"BtnEvent4", toucheventselector(EventScene::onBtnEvent4)},
+      {"BtnShirt", toucheventselector(EventScene::onBtnShirt)},
+      {"BtnPanty", toucheventselector(EventScene::onBtnPanty)},
+      {"BtnStock1", toucheventselector(EventScene::onBtnStock1)},
+      {"BtnStock2", toucheventselector(EventScene::onBtnStock2)},
+  };
 
+  for (size_t i = 0; i < sizeof(bl) / sizeof(bl[0]); i++) {
+      btn = (UIButton *)ui_layer_->getWidgetByName(bl[i].name);
+      if (btn) {
+	  btn->addTouchEventListener(this, bl[i].selector);
+      }
+  }
 }
 
 void EventScene::onBtnBack(CCObject *target, TouchEventType e) {
@@ -70,14 +71,19 @@ void EventScene::onBtnShirt(CCObject *target, TouchEventType e) {
     return;
 
   CCLOG("%s\n", __FUNCTION__);
+  const char *res1 = "gallery_button_shirt_01.png";
+  const char *res2 = "gallery_button_shirt_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgShirt");
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnShirt");
   if (img) {
     if (shirt_state_ == 0) {
       img->setVisible(false);
       shirt_state_ = 1;
+      btn->loadTextures(res2, res2, NULL, UI_TEX_TYPE_PLIST);
     } else {
       img->setVisible(true);
       shirt_state_ = 0;
+      btn->loadTextures(res1, res1, NULL, UI_TEX_TYPE_PLIST);
     }
   }
 }
@@ -86,14 +92,19 @@ void EventScene::onBtnPanty(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  const char *res1 = "gallery_button_panty_01.png";
+  const char *res2 = "gallery_button_panty_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgPanty");
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnPanty");
   if (img) {
     if (panty_state_ == 0) {
       img->setVisible(false);
       panty_state_ = 1;
+      btn->loadTextures(res2, res2, NULL, UI_TEX_TYPE_PLIST);
     } else {
       img->setVisible(true);
       panty_state_ = 0;
+      btn->loadTextures(res1, res1, NULL, UI_TEX_TYPE_PLIST);
     }
   }
 }
@@ -102,14 +113,19 @@ void EventScene::onBtnStock1(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  const char *res1 = "gallery_button_stocking_01_01.png";
+  const char *res2 = "gallery_button_stocking_01_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgStock1");
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnStock1");
   if (img) {
     if (stock1_state_== 0) {
       img->setVisible(false);
       stock1_state_ = 1;
+      btn->loadTextures(res2, res2, NULL, UI_TEX_TYPE_PLIST);
     } else {
       img->setVisible(true);
       stock1_state_ = 0;
+      btn->loadTextures(res1, res1, NULL, UI_TEX_TYPE_PLIST);
     }
   }
 }
@@ -118,14 +134,19 @@ void EventScene::onBtnStock2(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  const char *res1 = "gallery_button_stocking_02_01.png";
+  const char *res2 = "gallery_button_stocking_02_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgStock2");
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnStock2");
   if (img) {
     if (stock2_state_ == 0) {
       img->setVisible(false);
       stock2_state_ = 1;
+      btn->loadTextures(res2, res2, NULL, UI_TEX_TYPE_PLIST);
     } else {
       img->setVisible(true);
       stock2_state_ = 0;
+      btn->loadTextures(res1, res1, NULL, UI_TEX_TYPE_PLIST);
     }
   }
 }
@@ -141,5 +162,17 @@ BUILD_BTNEVENT(3)
 BUILD_BTNEVENT(4)
 
 void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+
+  char name[RES_MAX_NAME];
+  const char *resfmt = "gallery_button_gallery_0%d_0%d.png";
   CCLOG("%s\n", __FUNCTION__);
+
+  snprintf(name, RES_MAX_NAME, "BtnEvent%d", i);
+  UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name);
+  event_state_[i] = !event_state_[i];
+  int resid = event_state_[i] ? 1 : 2;
+  snprintf(name, RES_MAX_NAME, resfmt, i, resid);
+  btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
 }

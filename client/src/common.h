@@ -1,15 +1,17 @@
 #ifndef  __DOGRUN2_COMMON__
 #define  __DOGRUN2_COMMON__
 
-#include <string>
-using std::string;
-namespace google {
-  namespace protobuf {
-    class Message;
-  }
-}
+#include <cocos2d.h>
+#include <cocos-ext.h>
 
-int ParseFromFile(const string& filepath,
-                  google::protobuf::Message *output);
+USING_NS_CC;
+USING_NS_CC_EXT;
+
+#define RES_MAX_NAME  64
+
+struct ButtonListener {
+    const char *name;
+    SEL_TouchEvent selector;
+};
 
 #endif

@@ -4,14 +4,13 @@
 #include "event_scene.h"
 #include "event_mgr.h"
 #include "user.h"
+#include "common.h"
 
 using namespace std;
 
 #ifdef LINUX
 #include "unistd.h"
 #endif
-
-#define RES_MAX_NAME  64
 
 static void AddSearchPath() {
 #ifdef LINUX
