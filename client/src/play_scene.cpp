@@ -21,8 +21,8 @@ void PlayScene::onEnter() {
   // load ui
   ui_layer_ = UILayer::create();
   char path[1024];
-  snprintf(path, 1024, "cocostudio/MainScene/Export/GirlScene%d/GirlScene%d.json",
-           stageid_, stageid_);
+  snprintf(path, 1024, "cocostudio/MainScene/Export/MainScene/GirlScene%d.json",
+           stageid_);
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile(path));
   ui_layer_->addWidget(layout);
   

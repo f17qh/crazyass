@@ -16,7 +16,7 @@ void StartScene::onEnter() {
   CCLOG("%s", __FUNCTION__);
   // load ui
   ui_layer_ = UILayer::create();
-  Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("cocostudio/MainScene/Export/StartScene/StartScene.json"));
+  Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("cocostudio/MainScene/Export/MainScene/StartScene.json"));
   ui_layer_->addWidget(layout);
 
   this->addChild(ui_layer_, 0, 100);

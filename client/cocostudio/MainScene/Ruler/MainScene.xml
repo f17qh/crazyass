@@ -42,7 +42,12 @@
   </GuidesProject>
   <GuidesProject>
     <Project>EventScene2</Project>
-    <GuidesList />
+    <GuidesList>
+      <GuidesInfo>
+        <GuidesName>VThumb</GuidesName>
+        <GuidesPosition>95.5</GuidesPosition>
+      </GuidesInfo>
+    </GuidesList>
   </GuidesProject>
   <GuidesProject>
     <Project>EventScene3</Project>

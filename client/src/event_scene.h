@@ -25,7 +25,19 @@ protected:
   UILayer *ui_layer_;
   CCScene *back_scene_;
   int stageid_;
+  int shirt_state_;
+  int panty_state_;
+  int stock1_state_;
+  int stock2_state_;
   void onBtnBack(CCObject *target, TouchEventType e);
-  // void onBtnStartPlay(CCObject *target, TouchEventType e);
+  void onBtnShirt(CCObject *target, TouchEventType e);
+  void onBtnPanty(CCObject *target, TouchEventType e);
+  void onBtnStock1(CCObject *target, TouchEventType e);
+  void onBtnStock2(CCObject *target, TouchEventType e);
+  void onBtnEvent1(CCObject *target, TouchEventType e);
+  void onBtnEvent2(CCObject *target, TouchEventType e);
+  void onBtnEvent3(CCObject *target, TouchEventType e);
+  void onBtnEvent4(CCObject *target, TouchEventType e);
+  void onBtnEvent(CCObject *target, TouchEventType e, int i);
 };
 
