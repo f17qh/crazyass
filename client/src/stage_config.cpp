@@ -65,7 +65,7 @@ static StageConfig* stage_config = NULL;
 StageConfig& StageConfig::Instence() {
   if (stage_config == NULL) {
     stage_config = new LocalStageConfig();
-    stage_config->Load("etc/stage.json");
+    stage_config->Load("stage_data.json");
   }
   return *stage_config;
 }
