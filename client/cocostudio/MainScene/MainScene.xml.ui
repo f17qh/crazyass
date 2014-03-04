@@ -24,13 +24,14 @@
     <string>EventScene5.json</string>
     <string>EventScene6.json</string>
     <string>ShopScene.json</string>
+    <string>LoadScene.json</string>
   </JsonList>
   <imageFileList>
     <string>Resources/images/play_images.plist</string>
     <string>Resources/images/girl4_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ShopScene.json</CurrentUIJson>
+  <CurrentUIJson>LoadScene.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

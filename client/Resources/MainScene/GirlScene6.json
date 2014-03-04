@@ -20,7 +20,8 @@
     "Resources/images/girl5_images.plist",
     "Resources/images/girl6_images.plist",
     "Resources/images/main_images.plist",
-    "Resources/images/shop_images.plist"
+    "Resources/images/shop_images.plist",
+    "Resources/images/loading_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
