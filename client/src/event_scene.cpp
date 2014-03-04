@@ -1,6 +1,7 @@
 #include "event_scene.h"
 #include "game_scene.h"
 #include "common.h"
+#include "SimpleAudioEngine.h"
 
 bool EventScene::init() {
   //////////////////////////////
@@ -175,4 +176,16 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   int resid = event_state_[i] ? 1 : 2;
   snprintf(name, RES_MAX_NAME, resfmt, i, resid);
   btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
+
+  const char *soundfiles[]= {
+    "",
+    "sound/sfx_girl_event_start.wav",
+    "sound/sfx_girl_event_climax1.wav",
+    "sound/sfx_girl_event_climax2.wav",
+    "sound/sfx_girl_event_climax3.wav",
+  };
+
+  // play
+  if (event_state_[i])
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[i]);
 }

@@ -65,4 +65,8 @@
     <Project>EventScene6</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ShopScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

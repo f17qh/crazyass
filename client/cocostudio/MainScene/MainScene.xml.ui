@@ -23,21 +23,14 @@
     <string>EventScene4.json</string>
     <string>EventScene5.json</string>
     <string>EventScene6.json</string>
+    <string>ShopScene.json</string>
   </JsonList>
   <imageFileList>
-    <string>Resources/images/stage_select_images.plist</string>
     <string>Resources/images/play_images.plist</string>
-    <string>Resources/images/gallery_images.plist</string>
-    <string>Resources/images/girl1_images.plist</string>
-    <string>Resources/images/girl3_images.plist</string>
-    <string>Resources/images/girl2_images.plist</string>
     <string>Resources/images/girl4_images.plist</string>
-    <string>Resources/images/girl5_images.plist</string>
-    <string>Resources/images/girl6_images.plist</string>
-    <string>Resources/images/main_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>EventScene6.json</CurrentUIJson>
+  <CurrentUIJson>ShopScene.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>
