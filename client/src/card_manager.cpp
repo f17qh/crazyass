@@ -1,4 +1,5 @@
 #include "card_manager.h"
+#include "stage_config.h"
 #include <algorithm>
 
 CCRect TouchableSprite::rect() {
@@ -41,11 +42,13 @@ void TouchableSprite::onExit() {
 
 void CardMgr::Init(int stage_id) {
   card_layer_ = CCLayer::create();
+  std::srand(time(0));
+  stage_id_ = stage_id;
   bingo_index_ = 2;
-  //TODO:get cardname with stage_id
+  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
   char name[32] = {};
   sprintf(name, "card_front_0%d.png", 1);
-  int size = 3;
+  int size = config.card_count_;
   for(int i = 1; i <= size; i++) {
     if(i == 3)
       sprintf(name, "card_back_0%d.png", 1);
@@ -54,31 +57,38 @@ void CardMgr::Init(int stage_id) {
     card_layer_->addChild(sprite, 0, i-1);
     all_card_index_.push_back(i-1);
   }
-  std::srand(time(0));
   CCNode::onEnter();
-  InitData();
+  play_count_ = 0;
+  action_nums_ = 0;
+  run_times_ = 3;
+  //Ò»¹²Íæ4´Î
 }
 
-void CardMgr::InitData() {
+void CardMgr::MakeLinesData(int run_times) {
+  card_lines_.clear();
   card_lines_.push_back(all_card_index_);
-  for(int times = 0; times < 10; ++times) {
+  for(int times = 0; times < run_times; ++times) {
     do {
       std::random_shuffle(all_card_index_.begin(), all_card_index_.end());
     } while (card_lines_[card_lines_.size() -1] == all_card_index_);
     card_lines_.push_back(all_card_index_);
   }
-  run_time_ = 0;
-  action_nums_ = 0;
 }
 
 void CardMgr::StartAction() {
-  if(run_time_ >= int(card_lines_.size() - 1)) {
+  if(run_times_ < 0)
+    return;
+
+  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  MakeLinesData(config.play_count_[run_times_]);
+  run_times_--;
+  if(play_count_ >= int(card_lines_.size() - 1)) {
     return;
   }
   for(int sprite_num = 0; sprite_num < (int)all_card_index_.size(); sprite_num++) {
-    MovePosBy(card_lines_[run_time_][sprite_num], card_lines_[run_time_+1][sprite_num], 186, 0.5f);
+    MovePosBy(card_lines_[play_count_][sprite_num], card_lines_[play_count_+1][sprite_num], 186, 0.5f);
   }
-  run_time_++;
+  play_count_++;
 }
 
 CCLayer* CardMgr::card_layer() {

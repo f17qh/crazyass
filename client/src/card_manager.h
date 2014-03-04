@@ -31,12 +31,14 @@ protected:
   void MoveWithLine(CCSprite* src, CCPoint end_point, float time);
   void MoveEnd(CCNode* sender);
   void OnTime(float);
-  void InitData();
+  void MakeLinesData(int play_count);
 protected:
   CCLayer *card_layer_;
   int bingo_index_;
-  int run_time_;
+  int run_times_;
+  int play_count_;
   int action_nums_;
+  int stage_id_;
   std::vector<int> all_card_index_;
   std::vector<std::vector<int> > card_lines_;
 };
