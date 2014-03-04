@@ -1,6 +1,43 @@
 #include "card_manager.h"
 #include <algorithm>
-//using std::random_shuffle;
+
+CCRect TouchableSprite::rect() {
+  CCSize s = this->getTexture()->getContentSize();
+  CCPoint pos = getPosition();
+  return CCRectMake(pos.x-s.width/2, pos.y-s.height/2, s.width, s.height);
+}
+
+bool TouchableSprite::containsTouchLocation(CCTouch* touch) {
+  return rect().containsPoint(convertTouchToNodeSpaceAR(touch));
+}
+
+void TouchableSprite::onEnter() {
+  CCDirector* pDirector = CCDirector::sharedDirector();
+  pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+  CCSprite::onEnter();
+}
+
+bool TouchableSprite::ccTouchBegan(CCTouch* touch, CCEvent* event) {
+  if (!containsTouchLocation(touch))
+    return false;
+  ((CardMgr*)getParent())->OnTouch(getTag());
+  return true;
+}
+
+void TouchableSprite::touchDelegateRetain() {
+  this->retain();
+}
+
+void TouchableSprite::touchDelegateRelease() {
+  this->release();
+}
+
+void TouchableSprite::onExit() {
+  CCDirector* pDirector = CCDirector::sharedDirector();
+  pDirector->getTouchDispatcher()->removeDelegate(this);
+  CCSprite::onExit();
+}
+
 
 void CardMgr::Init(int stage_id) {
   card_layer_ = CCLayer::create();
@@ -12,7 +49,7 @@ void CardMgr::Init(int stage_id) {
   for(int i = 1; i <= size; i++) {
     if(i == 3)
       sprintf(name, "card_back_0%d.png", 1);
-    CCSprite* sprite = CCSprite::createWithSpriteFrameName(name);
+    TouchableSprite* sprite = (TouchableSprite*)TouchableSprite::createWithSpriteFrameName(name);
     sprite->setPosition(ccp(152 + 243*(i-1), 229));
     card_layer_->addChild(sprite, 0, i-1);
     all_card_index_.push_back(i-1);
@@ -49,6 +86,14 @@ CCLayer* CardMgr::card_layer() {
   return card_layer_;
 }
 
+void CardMgr::OnTouch(int child_tag) {
+  if(child_tag == bingo_index_) {
+    //TODO succ
+  } else {
+    //TODO fail
+  }
+
+}
 void CardMgr::MovePosBy(int source_index, int target_index, int high, float time) {
   CCSprite* src = (CCSprite*)card_layer_->getChildByTag(source_index);
   CCPoint start_pos = card_layer_->getChildByTag(source_index)->getPosition();

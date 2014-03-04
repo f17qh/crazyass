@@ -3,6 +3,20 @@
 #include <vector>
 
 USING_NS_CC;
+class TouchableSprite: public CCSprite, public CCTargetedTouchDelegate {
+
+public:
+  TouchableSprite();
+  virtual ~TouchableSprite();
+  virtual void onEnter();
+  virtual void onExit();
+  CREATE_FUNC(TouchableSprite);
+  CCRect rect();
+  bool containsTouchLocation(CCTouch *touch);
+  void touchDelegateRetain();
+  void touchDelegateRelease();
+  virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
+};
 
 class CardMgr : public CCNode {
 
@@ -10,6 +24,7 @@ public:
   void Init(int stage_id);
   void StartAction();
   CCLayer* card_layer();
+  void OnTouch(int child_tag);
 protected:
   void MovePosBy(int source_index, int target_index, int high, float time);
   void MoveWithBezier(CCSprite* src, CCPoint start_point, CCPoint end_point, int high, float time);
