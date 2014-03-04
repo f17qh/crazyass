@@ -32,7 +32,7 @@ LocalUser::LocalUser() {
   heart_ = 10;
   stageid_ = 1;
 
-  for (size_t i = 0; i < 6; i++) {
+  for (int i = 0; i < 6; i++) {
     eventlock_[i] = 1;
   }
 }
