@@ -727,7 +727,7 @@
               "sizePercentY": 0.2,
               "sizeType": 0,
               "tag": 19,
-              "touchAble": false,
+              "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
               "width": 125,
@@ -754,9 +754,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "stage_select_btn_shop.png",
+                "plistFile": "Resources/images/stage_select_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 75,

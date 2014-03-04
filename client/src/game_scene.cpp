@@ -2,6 +2,7 @@
 #include "game_scene.h"
 #include "play_scene.h"
 #include "event_scene.h"
+#include "shop_scene.h"
 #include "event_mgr.h"
 #include "user.h"
 #include "common.h"
@@ -73,6 +74,13 @@ bool GameScene::init() {
   // 1. super init first
   if (!CCScene::init())
     return false;
+  return true;
+}
+
+void GameScene::onEnter() {
+  //////////////////////////////
+  // 1. super init first
+  CCScene::onEnter();
 
   User *u = User::CurrentUser();
 
@@ -172,7 +180,6 @@ bool GameScene::init() {
     snprintf(b, 8, "%d", User::CurrentUser()->heart());
     l->setText(b);
   }
-  return true;
 }
 
 void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
@@ -205,6 +212,11 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
 }
 
 void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+
+  ShopScene *sc = ShopScene::create();
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
 }
 
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
@@ -247,8 +259,10 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
   if (btn) {
     if (i >= User::CurrentUser()->stageid()) {
       btn->setVisible(false);
+      btn->setTouchEnabled(false);
     } else {
       btn->setVisible(true);
+      btn->setTouchEnabled(true);
     }
   }
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");

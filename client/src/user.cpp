@@ -16,20 +16,35 @@ USING_NS_CC;
 
 class LocalUser : public User {
 public:
+  LocalUser();
   int Load(const char *path);
   void Flush();
+  int EventLock(int stageid);
 protected:
   std::string path_;
   CSJson::Value root_;
+  CSJson::Value eventlock_;
 
   int AddUser();
 };
 
-int LocalUser::AddUser() {
+LocalUser::LocalUser() {
   heart_ = 10;
   stageid_ = 1;
+
+  for (size_t i = 0; i < 6; i++) {
+    eventlock_[i] = 1;
+  }
+}
+
+int LocalUser::EventLock(int stageid) {
+  return eventlock_[stageid - 1].asInt();
+}
+
+int LocalUser::AddUser() {
   root_["heart"] = heart_;
   root_["stage"] = stageid_;
+  root_["eventlock"] = eventlock_;
   return 0;
 }
 
@@ -51,6 +66,7 @@ int LocalUser::Load(const char *path) {
 
   stageid_ = root_.get("stage", 0).asInt();
   heart_ = root_.get("heart", 0).asInt();
+  eventlock_ = root_["eventlock"];
   CCLOG("Tset %d %d", stageid_, heart_);
   delete buf;
   return 0;
@@ -64,7 +80,7 @@ void LocalUser::Flush() {
   std::string content = writer.write(root_);
   CCLOG("Flush %s to %s\n", content.c_str(), path_.c_str());
 #ifdef WIN32
-  int fd = _open(path_.c_str(), _O_RDWR | _O_CREAT);
+  int fd = _open(path_.c_str(), _O_RDWR | _O_CREAT, _S_IREAD | _S_IWRITE);
 #else
   int fd = open(path_.c_str(), O_RDWR | O_CREAT);
 #endif

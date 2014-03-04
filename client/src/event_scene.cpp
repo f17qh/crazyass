@@ -1,6 +1,7 @@
 #include "event_scene.h"
 #include "game_scene.h"
 #include "common.h"
+#include "user.h"
 #include "SimpleAudioEngine.h"
 
 bool EventScene::init() {
@@ -53,6 +54,17 @@ void EventScene::onEnter() {
       if (btn) {
 	  btn->addTouchEventListener(this, bl[i].selector);
       }
+  }
+
+  int lock = User::CurrentUser()->EventLock(stageid_);
+  char name[RES_MAX_NAME];
+  UIImageView *img;
+  for (int i = 2; i <= lock; i++) {
+    snprintf(name, RES_MAX_NAME, "ImgLock%d", i);
+    img = (UIImageView *)ui_layer_->getWidgetByName(name);
+    if (img) {
+      img->setVisible(false);
+    }
   }
 }
 
@@ -166,19 +178,21 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  if (i > User::CurrentUser()->EventLock(stageid_))
+    return;
+
   char name[RES_MAX_NAME];
   const char *resfmt = "gallery_button_gallery_0%d_0%d.png";
   CCLOG("%s\n", __FUNCTION__);
 
   snprintf(name, RES_MAX_NAME, "BtnEvent%d", i);
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name);
-  event_state_[i] = !event_state_[i];
-  int resid = event_state_[i] ? 1 : 2;
+  event_state_[i - 1] = !event_state_[i - 1];
+  int resid = event_state_[i - 1] ? 1 : 2;
   snprintf(name, RES_MAX_NAME, resfmt, i, resid);
   btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
 
   const char *soundfiles[]= {
-    "",
     "sound/sfx_girl_event_start.wav",
     "sound/sfx_girl_event_climax1.wav",
     "sound/sfx_girl_event_climax2.wav",
@@ -186,6 +200,6 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   };
 
   // play
-  if (event_state_[i])
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[i]);
+  if (event_state_[i - 1])
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[i - 1]);
 }

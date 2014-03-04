@@ -10,6 +10,7 @@ public:
   void set_stageid(int id) { stageid_ = id;}
   int heart() { return heart_; }
   void set_heart(int heart) { heart_ = heart; }
+  virtual int EventLock(int stageid) = 0;
 
   // save user data to disk
   virtual void Flush() = 0;

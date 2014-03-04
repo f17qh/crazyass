@@ -10,7 +10,8 @@ class GameScene :
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-  virtual bool init();  
+  virtual bool init();
+  virtual void onEnter();
 
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
@@ -28,6 +29,7 @@ protected:
   void onBtnGirl4(CCObject *target, TouchEventType e);
   void onBtnGirl5(CCObject *target, TouchEventType e);
   void onBtnGirl6(CCObject *target, TouchEventType e);
+  void onBtnShop(CCObject *target, TouchEventType e);
   void OnBtnGirl(CCObject *target, TouchEventType e, int i);
   void AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector);
 

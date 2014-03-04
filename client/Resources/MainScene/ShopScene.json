@@ -512,6 +512,78 @@
           "textColorG": 255,
           "textColorR": 255
         }
+      },
+      {
+        "classname": "Button",
+        "name": null,
+        "children": [],
+        "options": {
+          "__type": "ComGUIButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "Button",
+          "name": "BtnBack",
+          "ZOrder": 2,
+          "actiontag": 746,
+          "anchorPointX": 0.5,
+          "anchorPointY": 0.5,
+          "classType": null,
+          "colorB": 255,
+          "colorG": 255,
+          "colorR": 255,
+          "flipX": false,
+          "flipY": false,
+          "height": 64,
+          "ignoreSize": true,
+          "layoutParameter": null,
+          "opacity": 255,
+          "positionPercentX": 0.08,
+          "positionPercentY": 0.904166639,
+          "positionType": 0,
+          "rotation": 0,
+          "scaleX": 1,
+          "scaleY": 1,
+          "sizePercentX": 0.12875,
+          "sizePercentY": 0.0833333358,
+          "sizeType": 0,
+          "tag": 24,
+          "touchAble": true,
+          "useMergedTexture": false,
+          "visible": true,
+          "width": 85,
+          "x": 64,
+          "y": 434,
+          "capInsetsHeight": 0,
+          "capInsetsWidth": 0,
+          "capInsetsX": 0,
+          "capInsetsY": 0,
+          "disabled": null,
+          "disabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "fontName": "微软雅黑",
+          "fontSize": 14,
+          "fontType": 0,
+          "normal": null,
+          "normalData": {
+            "path": "play_btn_back.png",
+            "plistFile": "Resources/images/play_images.plist",
+            "resourceType": 1
+          },
+          "pressed": null,
+          "pressedData": {
+            "path": "play_btn_back.png",
+            "plistFile": "Resources/images/play_images.plist",
+            "resourceType": 1
+          },
+          "scale9Enable": false,
+          "scale9Height": 64,
+          "scale9Width": 85,
+          "text": "",
+          "textColorB": 255,
+          "textColorG": 255,
+          "textColorR": 255
+        }
       }
     ],
     "options": {
