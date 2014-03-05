@@ -238,6 +238,8 @@
 		6A5A770B18C3AB6F00E914D8 /* play_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770218C3AB6F00E914D8 /* play_scene.cpp */; };
 		6A5A770C18C3AB6F00E914D8 /* start_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770418C3AB6F00E914D8 /* start_scene.cpp */; };
 		6A5A770D18C3AB6F00E914D8 /* user.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770618C3AB6F00E914D8 /* user.cpp */; };
+		6A8602D918C73123006B377D /* stage_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A8602D718C73123006B377D /* stage_config.cpp */; };
+		6A8602DB18C73165006B377D /* stage_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A8602DA18C73165006B377D /* stage_data.json */; };
 		6A960E1A18C60A1E00C4B857 /* MainScene in Resources */ = {isa = PBXBuildFile; fileRef = 6A960E1918C60A1E00C4B857 /* MainScene */; };
 		6A960E2418C60BE000C4B857 /* shop_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A960E2218C60BE000C4B857 /* shop_scene.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
@@ -738,6 +740,9 @@
 		6A5A770518C3AB6F00E914D8 /* start_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = start_scene.h; path = ../../src/start_scene.h; sourceTree = "<group>"; };
 		6A5A770618C3AB6F00E914D8 /* user.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = user.cpp; path = ../../src/user.cpp; sourceTree = "<group>"; };
 		6A5A770718C3AB6F00E914D8 /* user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user.h; path = ../../src/user.h; sourceTree = "<group>"; };
+		6A8602D718C73123006B377D /* stage_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stage_config.cpp; path = ../../src/stage_config.cpp; sourceTree = "<group>"; };
+		6A8602D818C73123006B377D /* stage_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stage_config.h; path = ../../src/stage_config.h; sourceTree = "<group>"; };
+		6A8602DA18C73165006B377D /* stage_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stage_data.json; path = ../../Resources/stage_data.json; sourceTree = "<group>"; };
 		6A960E1918C60A1E00C4B857 /* MainScene */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MainScene; path = ../../Resources/MainScene; sourceTree = "<group>"; };
 		6A960E2118C60BE000C4B857 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../../src/common.h; sourceTree = "<group>"; };
 		6A960E2218C60BE000C4B857 /* shop_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shop_scene.cpp; path = ../../src/shop_scene.cpp; sourceTree = "<group>"; };
@@ -1267,6 +1272,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6A8602D718C73123006B377D /* stage_config.cpp */,
+				6A8602D818C73123006B377D /* stage_config.h */,
 				6A960E2118C60BE000C4B857 /* common.h */,
 				6A960E2218C60BE000C4B857 /* shop_scene.cpp */,
 				6A960E2318C60BE000C4B857 /* shop_scene.h */,
@@ -1736,6 +1743,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A8602DA18C73165006B377D /* stage_data.json */,
 				6A960E1918C60A1E00C4B857 /* MainScene */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
@@ -1832,6 +1840,7 @@
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
+				6A8602DB18C73165006B377D /* stage_data.json in Resources */,
 				6A960E1A18C60A1E00C4B857 /* MainScene in Resources */,
 				379BB9CD17F03F3700829B88 /* json_internalmap.inl in Resources */,
 				379BB9D017F03F3700829B88 /* json_valueiterator.inl in Resources */,
@@ -1973,6 +1982,7 @@
 				15A3DA5E1682F826002FB0C5 /* CCPhysicsDebugNode.cpp in Sources */,
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
+				6A8602D918C73123006B377D /* stage_config.cpp in Sources */,
 				15A3DAEC1682F8A6002FB0C5 /* CDOpenALSupport.m in Sources */,
 				15A3DAED1682F8A6002FB0C5 /* CocosDenshion.m in Sources */,
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
