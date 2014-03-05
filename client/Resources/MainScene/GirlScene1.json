@@ -12,16 +12,15 @@
   "textures": [
     "Resources/images/stage_select_images.plist",
     "Resources/images/play_images.plist",
-    "Resources/images/gallery_images.plist",
     "Resources/images/girl1_images.plist",
     "Resources/images/girl3_images.plist",
     "Resources/images/girl2_images.plist",
     "Resources/images/girl4_images.plist",
     "Resources/images/girl5_images.plist",
+    "Resources/images/gallery_images.plist",
     "Resources/images/girl6_images.plist",
     "Resources/images/main_images.plist",
-    "Resources/images/shop_images.plist",
-    "Resources/images/loading_images.plist"
+    "Resources/images/shop_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {
@@ -91,8 +90,8 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": "hearts_need_btn_no.png",
-                "plistFile": "Resources/images/gallery_images.plist",
+                "path": "play_btn_play.png",
+                "plistFile": "Resources/images/play_images.plist",
                 "resourceType": 1
               },
               "scale9Enable": false,
@@ -208,7 +207,7 @@
               "sizePercentY": 0.0833333358,
               "sizeType": 0,
               "tag": 26,
-              "touchAble": false,
+              "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
               "width": 255,
@@ -235,9 +234,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "girl1_panty.png",
+                "plistFile": "Resources/images/girl1_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 162,
@@ -333,7 +332,7 @@
               "sizePercentY": 0.0833333358,
               "sizeType": 0,
               "tag": 29,
-              "touchAble": false,
+              "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
               "width": 296,
@@ -360,9 +359,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "girl1_shirt.png",
+                "plistFile": "Resources/images/girl1_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 246,
@@ -405,7 +404,7 @@
               "sizePercentY": 0.0833333358,
               "sizeType": 0,
               "tag": 30,
-              "touchAble": false,
+              "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
               "width": 148,
@@ -432,9 +431,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "girl1_stocking_01.png",
+                "plistFile": "Resources/images/girl1_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 140,
@@ -477,7 +476,7 @@
               "sizePercentY": 0.0833333358,
               "sizeType": 0,
               "tag": 31,
-              "touchAble": false,
+              "touchAble": true,
               "useMergedTexture": false,
               "visible": true,
               "width": 153,
@@ -504,9 +503,9 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
-                "plistFile": null,
-                "resourceType": 0
+                "path": "girl1_stocking_02.png",
+                "plistFile": "Resources/images/girl1_images.plist",
+                "resourceType": 1
               },
               "scale9Enable": false,
               "scale9Height": 175,

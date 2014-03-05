@@ -1,15 +1,18 @@
 #include "card_manager.h"
 #include "stage_config.h"
+#include "play_scene.h"
 #include <algorithm>
 
 CCRect TouchableSprite::rect() {
-  CCSize s = this->getTexture()->getContentSize();
+  CCSize s = this->getContentSize();//getTexture()->get();
   CCPoint pos = getPosition();
-  return CCRectMake(pos.x-s.width/2, pos.y-s.height/2, s.width, s.height);
+  return CCRectMake(-s.width*getAnchorPoint().x, -s.height*getAnchorPoint().y, s.width, s.height);
+  //return CCRectMake(pos.x, pos.y, s.width, s.height);
 }
 
 bool TouchableSprite::containsTouchLocation(CCTouch* touch) {
-  return rect().containsPoint(convertTouchToNodeSpaceAR(touch));
+  CCPoint pos = convertTouchToNodeSpaceAR(touch);
+  return rect().containsPoint(pos);
 }
 
 void TouchableSprite::onEnter() {
@@ -21,7 +24,9 @@ void TouchableSprite::onEnter() {
 bool TouchableSprite::ccTouchBegan(CCTouch* touch, CCEvent* event) {
   if (!containsTouchLocation(touch))
     return false;
-  ((CardMgr*)getParent())->OnTouch(getTag());
+  card_mgr_->OnTouch(getTag());
+  CCPoint pos = getPosition();
+  CCLOG("%s, this:%p %d, x%f, y%f\n", __FUNCTION__, this, getTag(), pos.x, pos.y);
   return true;
 }
 
@@ -39,9 +44,29 @@ void TouchableSprite::onExit() {
   CCSprite::onExit();
 }
 
+void CardMgr::SetTouchable(bool b) {
+  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  int size = config.card_count_;
+  for(int i = 0; i < size; i++) {
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    if(b) {
+      pDirector->getTouchDispatcher()->addTargetedDelegate((TouchableSprite*)card_layer_->getChildByTag(i), 0, true);
+    } else {
+      pDirector->getTouchDispatcher()->removeDelegate((TouchableSprite*)card_layer_->getChildByTag(i));
+    }
+  }
+}
+void CardMgr::SetEnable(bool b) {
+  card_layer_->setVisible(b);
+  SetTouchable(b);
+}
+
+void CardMgr::CreateLayer(PlayScene* play_scene) {
+  play_scene_ = play_scene;
+  card_layer_ = CCLayer::create();
+}
 
 void CardMgr::Init(int stage_id) {
-  card_layer_ = CCLayer::create();
   std::srand(time(0));
   stage_id_ = stage_id;
   bingo_index_ = 2;
@@ -52,16 +77,21 @@ void CardMgr::Init(int stage_id) {
   for(int i = 1; i <= size; i++) {
     if(i == 3)
       sprintf(name, "card_back_0%d.png", 1);
-    TouchableSprite* sprite = (TouchableSprite*)TouchableSprite::createWithSpriteFrameName(name);
+    TouchableSprite* sprite = TouchableSprite::create();
+    sprite->initWithSpriteFrameName(name);
+    sprite->card_mgr_ = this;
     sprite->setPosition(ccp(152 + 243*(i-1), 229));
     card_layer_->addChild(sprite, 0, i-1);
     all_card_index_.push_back(i-1);
+    CCPoint pos = sprite->getPosition();
+    CCLOG("%s, sprite:%p %d x%f, y%f\n", __FUNCTION__, sprite, i-1, pos.x, pos.y);
   }
   CCNode::onEnter();
   play_count_ = 0;
   action_nums_ = 0;
-  run_times_ = 3;
-  //一共玩4次
+  sub_stage_ = 0;
+  //为第一次生成路径
+  MakeLinesData(config.play_count_[sub_stage_]);
 }
 
 void CardMgr::MakeLinesData(int run_times) {
@@ -76,17 +106,17 @@ void CardMgr::MakeLinesData(int run_times) {
 }
 
 void CardMgr::StartAction() {
-  if(run_times_ < 0)
-    return;
-
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
-  MakeLinesData(config.play_count_[run_times_]);
-  run_times_--;
   if(play_count_ >= int(card_lines_.size() - 1)) {
+    SetTouchable(true);
     return;
   }
+  SetTouchable(false);
+  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+
   for(int sprite_num = 0; sprite_num < (int)all_card_index_.size(); sprite_num++) {
-    MovePosBy(card_lines_[play_count_][sprite_num], card_lines_[play_count_+1][sprite_num], 186, 0.5f);
+    MovePosBy(card_lines_[play_count_][sprite_num], 
+              card_lines_[play_count_+1][sprite_num], 186, 
+              config.shuffle_speed_[sub_stage_]);
   }
   play_count_++;
 }
@@ -97,10 +127,19 @@ CCLayer* CardMgr::card_layer() {
 }
 
 void CardMgr::OnTouch(int child_tag) {
+  if(sub_stage_ > 3)
+    return;
+  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  MakeLinesData(config.play_count_[sub_stage_]);
+  sub_stage_++;
+  play_count_ = 0;
+
   if(child_tag == bingo_index_) {
-    //TODO succ
+    //猜对了
+    SetEnable(false);
+    play_scene_->TakeOff(sub_stage_);
   } else {
-    //TODO fail
+    //TODO 猜错了
   }
 
 }
@@ -134,7 +173,8 @@ void CardMgr::MoveWithBezier(CCSprite* src, CCPoint start_point, CCPoint end_poi
   bezier.endPosition = ccp(ex, ey); // 结束位置
   CCBezierTo* cur_action = CCBezierTo::create(time, bezier);
   CCCallFuncN* end = CCCallFuncN::create(this, callfuncN_selector(CardMgr::MoveEnd));
-  CCSequence* res = CCSequence::createWithTwoActions(cur_action, end);
+  CCSequence* tmp = CCSequence::createWithTwoActions(cur_action, end);
+  CCSequence* res = CCSequence::createWithTwoActions(CCDelayTime::create(0.3f), tmp);
   action_nums_++;
   src->runAction(res);
 }
@@ -142,17 +182,16 @@ void CardMgr::MoveWithBezier(CCSprite* src, CCPoint start_point, CCPoint end_poi
 void CardMgr::MoveWithLine(CCSprite* src, CCPoint end_point, float time) {
   CCMoveTo* cur_action = CCMoveTo::create(time, end_point);
   CCCallFuncN* end = CCCallFuncN::create(this, callfuncN_selector(CardMgr::MoveEnd));
-  CCSequence* res = CCSequence::createWithTwoActions(cur_action, end);
+  CCSequence* tmp = CCSequence::createWithTwoActions(cur_action, end);
+  CCSequence* res = CCSequence::createWithTwoActions(CCDelayTime::create(0.3f), tmp);
   action_nums_++;
   src->runAction(res);
 }
 
-void CardMgr::OnTime(float f) {
-   StartAction();
-}
 void CardMgr::MoveEnd(CCNode* sender) {
   action_nums_--;
   if(action_nums_ == 0)
-    scheduleOnce(schedule_selector(CardMgr::OnTime), 0.3f);
+    StartAction();
+    //scheduleOnce(schedule_selector(CardMgr::OnTime), 0.3f);
 }
 

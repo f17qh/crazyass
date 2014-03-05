@@ -22,6 +22,7 @@ public:
 
   void set_back_scene(CCScene *sc) { back_scene_ = sc; }
   void set_stageid(int id) { stageid_ = id; }
+  void TakeOff(int step);
   CREATE_FUNC(PlayScene);
 
 protected:
@@ -31,5 +32,9 @@ protected:
   int stageid_;
   void onBtnBack(CCObject *target, TouchEventType e);
   void onBtnStartPlay(CCObject *target, TouchEventType e);
+  void onBtnClothes(CCObject *target, TouchEventType e);
+  void onBtnMoveClothes(CCObject *target);
+  CCPoint btn_start_pos_;
+  int step_;
 };
 
