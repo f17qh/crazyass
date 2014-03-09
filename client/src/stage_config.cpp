@@ -32,7 +32,7 @@ int LocalStageConfig::Load(const char *path) {
   CSJson::Reader reader;
   path_ = path;
 
-  unsigned long size = 4096;
+  unsigned long size = 40960;
   unsigned char *buf = CCFileUtils::sharedFileUtils()->getFileData(path, "rb", &size);
 
   if (!reader.parse(std::string((char *)buf), root_, false)) {
