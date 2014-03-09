@@ -24,16 +24,19 @@ public:
   void set_stageid(int id) { stageid_ = id; }
   void TakeOff(int step);
   CREATE_FUNC(PlayScene);
-
+protected:
+  void TakeOffAction(UIButton* btn);
+  void RunAction(CCPoint pos, const char* name);
+  void onBtnBack(CCObject *target, TouchEventType e);
+  void onBtnStartPlay(CCObject *target, TouchEventType e);
+  void onBtnClothes(CCObject *target, TouchEventType e);
+  void onBtnMoveClothes(CCObject *target);
+  void ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name);
 protected:
   CardMgr card_mgr_;
   UILayer *ui_layer_;
   CCScene *back_scene_;
   int stageid_;
-  void onBtnBack(CCObject *target, TouchEventType e);
-  void onBtnStartPlay(CCObject *target, TouchEventType e);
-  void onBtnClothes(CCObject *target, TouchEventType e);
-  void onBtnMoveClothes(CCObject *target);
   CCPoint btn_start_pos_;
   int step_;
 };

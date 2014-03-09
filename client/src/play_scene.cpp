@@ -57,43 +57,34 @@ static const char* btn_name [] = {
       "BtnPanty",
   };
 
+void PlayScene::RunAction(CCPoint pos, const char* name) {
+  CCArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Action/Action.ExportJson");
+  CCArmature *armature = CCArmature::create("Action");
+  armature->getAnimation()->play(name);
+  armature->setPosition(pos);
+  this->addChild(armature, 2, 102);
+  armature->getAnimation()->setMovementEventCallFunc(this,movementEvent_selector(PlayScene::ArmatureCallBack));
+}
+
+void PlayScene::TakeOffAction(UIButton* btn) {
+  RunAction(btn->getPosition(), "HandTouchAnimation");
+  btn->getVirtualRenderer()->runAction(CCBlink::create(1.0f,3));
+}
+
 void PlayScene::TakeOff(int step) {
   step_ = step;
-  switch(step) {
-    case 1: {
-        UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step-1]);
-        if (btn) {
-          btn->setTouchEnable(true);
-          btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
-          btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
-        }
-    }
-    case 2: {
-        UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step-1]);
-        if (btn) {
-          btn->setTouchEnable(true);
-          btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
-          btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
-        }
-    }
-    case 3: {
-        UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step-1]);
-        if (btn) {
-          btn->setTouchEnable(true);
-          btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
-          btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
-        }
-    }
-    case 4: {
-        UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step-1]);
-        if (btn) {
-          btn->setTouchEnable(true);
-          btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
-          btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
-        }
-    }
+  UIButton* btn = NULL;
+  if(step_ >= 1 && step_ <= 4)
+    btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_-1]);
+  else 
+    return;
+  if (btn) {
+    btn->setTouchEnable(true);
+    btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
+    btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
+    TakeOffAction(btn);
   }
-
+  return;
 }
 
 void PlayScene::onBtnMoveClothes(CCObject *target) {
@@ -139,8 +130,7 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
     btn->setEnabled(false);
   }
   CCLOG("%s\n", __FUNCTION__);
-  card_mgr_.SetEnable(true);
-  card_mgr_.StartAction();
+  card_mgr_.StartSubStage();
 }
 
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
@@ -151,4 +141,10 @@ void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
   // CCDirector::sharedDirector()->popScene();
   CCScene *sc = GameScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+}
+
+void PlayScene::ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name) {
+  if(e == COMPLETE)
+    removeChild(armature);
+  return;
 }

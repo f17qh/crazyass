@@ -25,15 +25,25 @@ public:
 class CardMgr : public CCNode {
 
 public:
+  CardMgr();
+  ~CardMgr(){};
   void CreateLayer(PlayScene* play_scene_);
   void Init(int stage_id);
-  void StartAction();
+  void StartSubStage();
   CCLayer* card_layer();
   void OnTouch(int child_tag);
   void SetEnable(bool b);
   void SetTouchable(bool b);
 protected:
-  void MovePosBy(int source_index, int target_index, int high, float time);
+  void FinishSubStage();
+  bool TryFinishStage();
+  void SetCardSprite();
+  void RunActionByPlayCount();
+  void RunBeginAction();
+  void BeginActionEnd(CCNode* sender);
+  void ChangeCardToSpriteFront(CCNode* sender);
+  void ChangeCardToSpriteBack(CCNode* sender);
+  void MovePosBy(int source_index, int target_index, int high, float time, float interval);
   void MoveWithBezier(CCSprite* src, CCPoint start_point, CCPoint end_point, int high, float time);
   void MoveWithLine(CCSprite* src, CCPoint end_point, float time);
   void MoveEnd(CCNode* sender);
@@ -44,9 +54,8 @@ protected:
   int bingo_index_;
   int sub_stage_;
   int play_count_;
-  int action_nums_;
+  int moved_card_nums_;
   int stage_id_;
-  bool enable_;
   std::vector<int> all_card_index_;
   std::vector<std::vector<int> > card_lines_;
 };
