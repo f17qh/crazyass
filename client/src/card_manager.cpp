@@ -84,7 +84,7 @@ void CardMgr::Init(int stage_id) {
 void CardMgr::SetCardSprite() {
   StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
   char name[32] = {};
-  sprintf(name, "card_front_0%d.png", sub_stage_);
+  sprintf(name, "card_front_0%d.png", sub_stage_+1);
   int size = config.card_count_;
   bingo_index_ = std::rand() % size;
   for(int i = 1; i <= size; i++) {
@@ -101,14 +101,12 @@ void CardMgr::SetCardSprite() {
 void CardMgr::StartSubStage() {
   //获取主关卡的配置数据
   StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
-  //子stage的id++
-  sub_stage_++;
   //设置该substage的精灵纹理
   SetCardSprite();
   //设置cardmgr为有效
   SetEnable(true);
   //生成该sub_stage的card的移动路线
-  MakeLinesData(config.play_count_[sub_stage_-1]);
+  MakeLinesData(config.play_count_[sub_stage_]);
   //执行开始动画
   RunBeginAction();
 
@@ -117,6 +115,8 @@ void CardMgr::StartSubStage() {
 void CardMgr::FinishSubStage() {
   //结束了，要设置card可点击
   SetTouchable(true);
+  //子stage的id++
+  sub_stage_++;
   //数据重新设置
   play_count_ = 0;
 }
@@ -131,7 +131,7 @@ bool CardMgr::TryFinishStage() {
 void CardMgr::RunActionByPlayCount() {
   StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
   //判断该substage是否已经结束
-  if(play_count_ >= int(config.play_count_[sub_stage_-1] - 1)) {
+  if(play_count_ >= int(config.play_count_[sub_stage_] - 1)) {
     FinishSubStage();
     return;
   }
@@ -142,7 +142,7 @@ void CardMgr::RunActionByPlayCount() {
   for(int sprite_num = 0; sprite_num < (int)all_card_index_.size(); sprite_num++) {
     MovePosBy(card_lines_[play_count_][sprite_num], 
       card_lines_[play_count_+1][sprite_num], 186, 
-      config.shuffle_speed_[sub_stage_-1], config.interval_);
+      config.shuffle_speed_[sub_stage_], config.interval_);
   }
 
   play_count_++;
@@ -157,7 +157,8 @@ void CardMgr::OnTouch(int child_tag) {
   if(child_tag == bingo_index_) {
     //猜对了
     SetEnable(false);
-    play_scene_->TakeOff(sub_stage_);
+    //这个时候已经finishsubstage，所以sub_stage_要减1
+    play_scene_->TakeOff(sub_stage_-1);
   } else {
     //TODO 猜错了
   }
@@ -248,14 +249,14 @@ void CardMgr::RunBeginAction() {
 void CardMgr::ChangeCardToSpriteFront(CCNode* sender) {
   CCSprite* src = (CCSprite*)card_layer_->getChildByTag(bingo_index_);
   char name[32] = {};
-  sprintf(name, "card_front_0%d.png", sub_stage_);
+  sprintf(name, "card_front_0%d.png", sub_stage_+1);
   src->initWithSpriteFrameName(name);
 }
 
 void CardMgr::ChangeCardToSpriteBack(CCNode* sender) {
   CCSprite* src = (CCSprite*)card_layer_->getChildByTag(bingo_index_);
   char name[32] = {};
-  sprintf(name, "card_back_0%d.png", sub_stage_);
+  sprintf(name, "card_back_0%d.png", stage_id_);
   src->initWithSpriteFrameName(name);
 }
 

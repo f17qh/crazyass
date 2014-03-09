@@ -74,8 +74,8 @@ void PlayScene::TakeOffAction(UIButton* btn) {
 void PlayScene::TakeOff(int step) {
   step_ = step;
   UIButton* btn = NULL;
-  if(step_ >= 1 && step_ <= 4)
-    btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_-1]);
+  if(step_ >= 0 && step_ <= 3)
+    btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
   else 
     return;
   if (btn) {
@@ -88,7 +88,7 @@ void PlayScene::TakeOff(int step) {
 }
 
 void PlayScene::onBtnMoveClothes(CCObject *target) {
-  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_-1]);
+  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
   if (btn) {
     CCPoint move_pos = btn->getTouchMovePos();
     btn->setPosition(move_pos);
@@ -97,7 +97,7 @@ void PlayScene::onBtnMoveClothes(CCObject *target) {
 }
 
 void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
-  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_-1]);
+  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
   if (btn) {
     if(e == TOUCH_EVENT_BEGAN) {
       btn_start_pos_ = btn->getPosition();
@@ -106,7 +106,7 @@ void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
       if(btn_start_pos_.fuzzyEquals(pos, 100.0f)) {
         btn->setPosition(btn_start_pos_);
       } else {
-        if(step_ < 4) {
+        if(step_ < 3) {
           btn->setEnabled(false);
           btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
           btn->setEnabled(true); 
