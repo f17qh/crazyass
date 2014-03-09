@@ -46,6 +46,9 @@ int LocalStageConfig::Load(const char *path) {
   for(unsigned int i = 0; i < val_size; i++) {
     stageinfo.stage_id_ = val_arry[i]["stage_id"].asInt();
     stageinfo.card_count_ = val_arry[i]["card_count"].asInt();
+    stageinfo.start_pos_x_ = val_arry[i]["start_pos_x"].asInt();
+    stageinfo.start_pos_y_ = val_arry[i]["start_pos_y"].asInt();
+    stageinfo.interval_ = val_arry[i]["interval"].asInt();
     stageinfo.shuffle_speed_[0] = val_arry[i]["shuffle_speed_0"].asFloat();
     stageinfo.shuffle_speed_[1] = val_arry[i]["shuffle_speed_1"].asFloat();
     stageinfo.shuffle_speed_[2] = val_arry[i]["shuffle_speed_2"].asFloat();

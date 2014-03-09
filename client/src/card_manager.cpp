@@ -80,7 +80,7 @@ void CardMgr::Init(int stage_id) {
     TouchableSprite* sprite = TouchableSprite::create();
     sprite->initWithSpriteFrameName(name);
     sprite->card_mgr_ = this;
-    sprite->setPosition(ccp(152 + 243*(i-1), 229));
+    sprite->setPosition(ccp(config.start_pos_x_ + config.interval_*(i-1), config.start_pos_y_));
     card_layer_->addChild(sprite, 0, i-1);
     all_card_index_.push_back(i-1);
     CCPoint pos = sprite->getPosition();
@@ -192,6 +192,5 @@ void CardMgr::MoveEnd(CCNode* sender) {
   action_nums_--;
   if(action_nums_ == 0)
     StartAction();
-    //scheduleOnce(schedule_selector(CardMgr::OnTime), 0.3f);
 }
 

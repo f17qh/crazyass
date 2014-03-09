@@ -11,6 +11,9 @@ struct StageInfo {
   int card_count_;
   float shuffle_speed_[4];
   float play_count_[4];
+  int start_pos_x_;
+  int start_pos_y_;
+  int interval_;
 };
 
 class StageConfig

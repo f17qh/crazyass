@@ -3,6 +3,9 @@
         {
             "stage_id": 1,
             "card_count": 3,
+            "start_pos_x":152,
+            "start_pos_y":229,
+            "interval":243,
             "shuffle_speed_0": 0.4,
             "shuffle_speed_1": 0.4,
             "shuffle_speed_2": 0.35,
@@ -15,6 +18,9 @@
         {
             "stage_id": 2,
             "card_count": 3,
+            "start_pos_x":152,
+            "start_pos_y":229,
+            "interval":243,
             "shuffle_speed_0": 0.35,
             "shuffle_speed_1": 0.33,
             "shuffle_speed_2": 0.25,
@@ -27,6 +33,9 @@
         {
             "stage_id": 3,
             "card_count": 3,
+            "start_pos_x":152,
+            "start_pos_y":229,
+            "interval":243,
             "shuffle_speed_0": 0.3,
             "shuffle_speed_1": 0.25,
             "shuffle_speed_2": 0.2,
@@ -39,6 +48,9 @@
         {
             "stage_id": 4,
             "card_count": 4,
+            "start_pos_x":102,
+            "start_pos_y":229,
+            "interval":194,
             "shuffle_speed_0": 0.3,
             "shuffle_speed_1": 0.3,
             "shuffle_speed_2": 0.3,
@@ -51,6 +63,9 @@
         {
             "stage_id": 5,
             "card_count": 4,
+            "start_pos_x":102,
+            "start_pos_y":229,
+            "interval":194,
             "shuffle_speed_0": 0.3,
             "shuffle_speed_1": 0.3,
             "shuffle_speed_2": 0.25,
@@ -63,6 +78,9 @@
         {
             "stage_id": 6,
             "card_count": 4,
+            "start_pos_x":102,
+            "start_pos_y":229,
+            "interval":194,
             "shuffle_speed_0": 0.3,
             "shuffle_speed_1": 0.25,
             "shuffle_speed_2": 0.25,
@@ -72,5 +90,5 @@
             "play_count_2": 13,
             "play_count_3": 13
         }
-    ]
+    ],
 }
