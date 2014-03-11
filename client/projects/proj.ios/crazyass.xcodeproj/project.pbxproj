@@ -230,6 +230,7 @@
 		379BB9D217F03F3700829B88 /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = 379BB98D17F03F3700829B88 /* sconscript */; };
 		379BB9D317F03F3700829B88 /* CCSGUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99117F03F3700829B88 /* CCSGUIReader.cpp */; };
 		379BB9D417F03F3700829B88 /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* CCSSceneReader.cpp */; };
+		6A5853A918CEF1F800817A56 /* Action in Resources */ = {isa = PBXBuildFile; fileRef = 6A5853A818CEF1F800817A56 /* Action */; };
 		6A5A76F818C3AAE900E914D8 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABDC71118C3A7750099D079 /* libcocos2dx.a */; };
 		6A5A76FB18C3AB3D00E914D8 /* app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */; };
 		6A5A770818C3AB6F00E914D8 /* card_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A76FC18C3AB6F00E914D8 /* card_manager.cpp */; };
@@ -726,6 +727,7 @@
 		379BB99217F03F3700829B88 /* CCSGUIReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGUIReader.h; sourceTree = "<group>"; };
 		379BB99317F03F3700829B88 /* CCSSceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSSceneReader.cpp; sourceTree = "<group>"; };
 		379BB99417F03F3700829B88 /* CCSSceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSceneReader.h; sourceTree = "<group>"; };
+		6A5853A818CEF1F800817A56 /* Action */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Action; path = ../../Resources/Action; sourceTree = "<group>"; };
 		6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = app_delegate.cpp; path = ../../src/app_delegate.cpp; sourceTree = "<group>"; };
 		6A5A76FA18C3AB3D00E914D8 /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = ../../src/app_delegate.h; sourceTree = "<group>"; };
 		6A5A76FC18C3AB6F00E914D8 /* card_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = card_manager.cpp; path = ../../src/card_manager.cpp; sourceTree = "<group>"; };
@@ -1743,6 +1745,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A5853A818CEF1F800817A56 /* Action */,
 				6A8602DA18C73165006B377D /* stage_data.json */,
 				6A960E1918C60A1E00C4B857 /* MainScene */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -1830,6 +1833,7 @@
 			files = (
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
+				6A5853A918CEF1F800817A56 /* Action in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
