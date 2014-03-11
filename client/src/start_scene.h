@@ -13,7 +13,7 @@ public:
   virtual bool init();  
 
   virtual void onEnter();
-
+  void EnableBtnPlay();
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
 
