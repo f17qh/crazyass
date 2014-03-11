@@ -2,6 +2,7 @@
 #include "start_scene.h"
 #include "cocos-ext.h"
 #include "network/WebSocket.h"
+#include "lib_json/json_lib.h"
 
 USING_NS_CC_EXT;
 
@@ -9,7 +10,7 @@ class MyDelegate : public WebSocket::Delegate {
 public:
   virtual void onOpen(WebSocket* ws) {
     CCLOG("%s", __FUNCTION__);
-    sc_->EnableBtnPlay();
+    SendLogin(ws);
   }
 
   virtual void onClose(WebSocket* ws) {
@@ -25,6 +26,16 @@ public:
   }
 
 private:
+  void SendLogin(WebSocket *ws) {
+    CSJson::Value value;
+    value["userid"] = "TestUser";
+    value["cmd"] = 1;
+
+    CSJson::FastWriter writer;
+    std::string content = writer.write(value);
+    ws->send(content);
+  }
+
   StartScene *sc_;
 };
 
@@ -34,12 +45,8 @@ bool StartScene::init() {
   if (!CCScene::init())
     return false;
 
+  login_state_ = 0;
   return true;
-}
-
-static void ServerConnected(void *arg) {
-  StartScene *sc = (StartScene *)arg;
-  sc->EnableBtnPlay();
 }
 
 void StartScene::EnableBtnPlay() {
@@ -60,15 +67,27 @@ void StartScene::onEnter() {
   ui_layer_->addWidget(layout);
 
   this->addChild(ui_layer_, 0, 100);
-#if 0
+
   // static WebSocket websocket;
   static MyDelegate mydelegate;
   // mydelegate = new MyDelegate;
   WebSocket *ws = new WebSocket();
-  ws->init(mydelegate, "ws://echo.websocket.org");
-#else
-  EnableBtnPlay();
-#endif
+  ws->init(mydelegate, "ws://127.0.0.1:12345/ca");
+
+  schedule(schedule_selector(StartScene::CheckLogin), 1, 2, 1);
+}
+
+void StartScene::CheckLogin() {
+  // succ
+  if (login_state_ == 1) {
+    EnableBtnPlay();
+  } else if (login_state_ == 2) {
+    // show error
+  }
+}
+
+void StartScene::SetLoginState(int s) {
+  login_state_ = s;
 }
 
 void StartScene::onBtnPlay(CCObject *target, TouchEventType e) {

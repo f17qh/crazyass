@@ -24,6 +24,7 @@ func echo(ws *websocket.Conn) {
 }
 
 func clientProc(ws *websocket.Conn) {
+	fmt.Printf("recv client %v\n", *ws);
 	client := crazyass.NewClient(ws)
 	client.Proc()
 }
@@ -31,8 +32,12 @@ func clientProc(ws *websocket.Conn) {
 func main() {
 	fmt.Printf("Starting crazyassd...\n");
 	http.Handle("/echo", websocket.Handler(echo));
-	http.Handle("/ca", websocket.Handler(clientProc));
-	if err := http.ListenAndServe(":1234", nil); err != nil {
+	myproto := websocket.Server{
+		Handshake: nil,
+		Handler: websocket.Handler(clientProc),
+	}
+	http.Handle("/ca", myproto)
+	if err := http.ListenAndServe(":12345", nil); err != nil {
 		log.Fatal("ListenAndServe err %v", err)
 	}
 	fmt.Printf("Stoping crazyassd...\n");

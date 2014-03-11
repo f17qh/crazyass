@@ -6,8 +6,8 @@ import "errors"
 // cmd
 const (
 	kCmdUserLogin = 1
-	kCmdStartPlay = 3
-	kCmdEndPlay = 5
+	kCmdStartPlay = 2
+	kCmdEndPlay = 3
 )
 
 // error

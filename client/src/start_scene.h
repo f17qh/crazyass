@@ -19,10 +19,14 @@ public:
 
   void menuCloseCallback(CCObject* pSender);
 
+  void SetLoginState(int s);
+  void CheckLogin();
+
   CREATE_FUNC(StartScene);
 
 protected:
   void onBtnPlay(CCObject *target, TouchEventType e);
   UILayer *ui_layer_;
+  int login_state_;
 };
 

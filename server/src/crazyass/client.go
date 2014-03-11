@@ -139,6 +139,8 @@ func (c *Client) procMsg(msg *Msg) {
 		return
 	}
 
+	fmt.Printf("Proc msg %v\n", *msg)
+
 	// init reply msg
 	c.replyMsg.Userid = msg.Userid
 	c.replyMsg.Cmd = msg.Cmd
