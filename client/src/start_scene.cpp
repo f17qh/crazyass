@@ -1,16 +1,45 @@
 #include "game_scene.h"
 #include "start_scene.h"
 #include "cocos-ext.h"
+#include "user.h"
 #include "network/WebSocket.h"
 #include "lib_json/json_lib.h"
+#include "common.h"
 
 USING_NS_CC_EXT;
 
-class MyDelegate : public WebSocket::Delegate {
+#if 0
+class MyDelegate;
+class CAObject : public CCNode {
 public:
+  CREATE_FUNC(CAObject);
+
+  bool init() {
+    CCNode::init();
+    return true;
+  }
+
+  void CheckRecv(float dt);
+  void StartCheck();
+  void set_delegate(MyDelegate *d);
+   
+private:
+  MyDelegate *delegate_;
+};
+#endif
+
+class MyDelegate : public WebSocket::Delegate, public CADelegate {
+public:
+  void Init(WebSocket *ws, CATarget *target) {
+    ws_ = ws;
+    target_ = target;
+  }
+
   virtual void onOpen(WebSocket* ws) {
     CCLOG("%s", __FUNCTION__);
-    SendLogin(ws);
+    if (target_) {
+      target_->CAOpen();
+    }
   }
 
   virtual void onClose(WebSocket* ws) {
@@ -23,21 +52,64 @@ public:
 
   virtual void onMessage(WebSocket* ws, const WebSocket::Data& data) {
     CCLOG("%s", __FUNCTION__);
+    CCLOG("%s", data.bytes);
+
+    if (target_) {
+      target_->CARecv(data.bytes, data.len);
+      recvflag_ = true;
+    }
+
+    return;
   }
 
+  bool CheckRecv() {
+    CCLOG("%s", __FUNCTION__);
+    if (recvflag_) {
+      if (target_)
+        target_->CARecvDone();
+      return true;
+    } else {
+      if (++recvcount_ >= 5) {
+        target_->CARecvTimeout();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void SendServer(const std::string& content, CATarget *target) {
+    recvflag_ = false;
+    recvcount_ = 0;
+    target_ = target;
+    ws_->send(content);
+  }
 private:
-  void SendLogin(WebSocket *ws) {
-    CSJson::Value value;
-    value["userid"] = "TestUser";
-    value["cmd"] = 1;
-
-    CSJson::FastWriter writer;
-    std::string content = writer.write(value);
-    ws->send(content);
-  }
-
-  StartScene *sc_;
+  WebSocket *ws_;
+  CATarget *target_;
+  bool recvflag_;
+  int recvcount_;
 };
+
+#if 0
+void CAObject::CheckRecv(float dt) {
+  if (delegate_->CheckRecv())
+    unscheduleUpdate();
+}
+
+void CAObject::StartCheck() {
+  // scheduleOnce(schedule_selector(CAObject::CheckRecv), 1);
+  scheduleUpdate();
+}
+
+void CAObject::set_delegate(MyDelegate *d) {
+  delegate_ = d;
+}
+#endif
+
+static MyDelegate *mydelegate;
+CADelegate * sharedDelegate() {
+  return mydelegate;
+}
 
 bool StartScene::init() {
   //////////////////////////////
@@ -69,21 +141,67 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // static WebSocket websocket;
-  static MyDelegate mydelegate;
-  // mydelegate = new MyDelegate;
+  // mydelegate = MyDelegate::create();
+  mydelegate = new MyDelegate;
   WebSocket *ws = new WebSocket();
-  ws->init(mydelegate, "ws://127.0.0.1:12345/ca");
-
-  schedule(schedule_selector(StartScene::CheckLogin), 1, 2, 1);
+  mydelegate->Init(ws, this);
+  ws->init(*mydelegate, "ws://127.0.0.1:12346/ca");
 }
 
-void StartScene::CheckLogin() {
+void StartScene::CAOpen() {
+  CSJson::Value value;
+  value["userid"] = "TestUser";
+  value["cmd"] = 1;
+
+  CSJson::FastWriter writer;
+  std::string content = writer.write(value);
+  sharedDelegate()->SendServer(content, this);
+  // scheduleUpdate();
+  schedule(schedule_selector(StartScene::update), 1, 10, 1);
+}
+
+void StartScene::update(float dt) {
+  if (sharedDelegate()->CheckRecv()) {
+    // unscheduleUpdate();
+    unschedule(schedule_selector(StartScene::update));
+  }
+}
+
+void StartScene::CARecv(char *data, size_t len) {
+  CSJson::Reader reader;
+  CSJson::Value result;
+  if (!reader.parse(std::string(data), result, false)) {
+    CCLOG("parse %s error", data);
+    // TODO: logout to start screen
+    SetLoginState(2);
+    return;
+  }
+  if (result.get("ErrCode", -1).asInt() == 0) {
+    User *u = User::CurrentUser();
+    CSJson::Value body = result["Body"];
+    u->set_heart(body.get("Heart", 0).asInt());
+    u->set_stageid(body.get("Stageid", 1).asInt());
+  } else {
+    // TODO: logout to start screen
+    SetLoginState(2);
+    return;
+  }
+
+  SetLoginState(1);
+  return;
+}
+
+void StartScene::CARecvDone() {
   // succ
   if (login_state_ == 1) {
     EnableBtnPlay();
   } else if (login_state_ == 2) {
     // show error
   }
+}
+
+void StartScene::CARecvTimeout() {
+  unschedule(schedule_selector(StartScene::update));
 }
 
 void StartScene::SetLoginState(int s) {

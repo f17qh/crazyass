@@ -2,12 +2,13 @@
 #include <cocos2d.h>
 #include <cocos-ext.h>
 #include "card_manager.h"
+#include "common.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
 class PlayScene :
-  public CCScene
+  public CCScene, public CATarget
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -23,6 +24,11 @@ public:
   void set_back_scene(CCScene *sc) { back_scene_ = sc; }
   void set_stageid(int id) { stageid_ = id; }
   void TakeOff(int step);
+  void CARecv(char *data, size_t len);
+  void CARecvDone();
+  void CARecvTimeout();
+  void update(float delta);
+
   CREATE_FUNC(PlayScene);
 protected:
   void TakeOffAction(UIButton* btn);
@@ -32,6 +38,7 @@ protected:
   void onBtnClothes(CCObject *target, TouchEventType e);
   void onBtnMoveClothes(CCObject *target);
   void ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name);
+  void SendEndPlay(bool);
 protected:
   CardMgr card_mgr_;
   UILayer *ui_layer_;

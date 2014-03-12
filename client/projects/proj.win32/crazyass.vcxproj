@@ -141,6 +141,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\..\cocos2d-x-2.2\external\libwebsockets\wi
   <ItemGroup>
     <ClInclude Include="..\..\src\app_delegate.h" />
     <ClInclude Include="..\..\src\card_manager.h" />
+    <ClInclude Include="..\..\src\common.h" />
     <ClInclude Include="..\..\src\event_mgr.h" />
     <ClInclude Include="..\..\src\event_scene.h" />
     <ClInclude Include="..\..\src\game_scene.h" />

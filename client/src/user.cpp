@@ -94,10 +94,26 @@ void LocalUser::Flush() {
 #endif
 }
 
+class RemoteUser : public User {
+public:
+  RemoteUser(){memset(event_lock_, 0, sizeof(event_lock_));};
+  int Load(const char *path) {return 0;};
+  void Flush() {};
+  int EventLock(int stageid) {
+    return event_lock_[stageid - 1];
+  }
+  void set_eventlock(int stageid, int lock) {
+    event_lock_[stageid - 1] = lock;
+  }
+protected:
+  int event_lock_[10];
+};
+
+
 static User * current_user_ = NULL;
 User * User::CurrentUser() {
   if (current_user_ == NULL) {
-    current_user_ = new LocalUser();
+    current_user_ = new RemoteUser();
     current_user_->Load("user.json");
   }
   return current_user_;

@@ -1,12 +1,13 @@
 #pragma once
 #include <cocos2d.h>
 #include <cocos-ext.h>
+#include "common.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
 class StartScene :
-  public CCScene
+  public CCScene, public CATarget
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -20,7 +21,12 @@ public:
   void menuCloseCallback(CCObject* pSender);
 
   void SetLoginState(int s);
-  void CheckLogin();
+  void update(float delta);
+
+  virtual void CARecv(char *data, size_t len);
+  virtual void CARecvDone();
+  virtual void CARecvTimeout();
+  virtual void CAOpen();
 
   CREATE_FUNC(StartScene);
 

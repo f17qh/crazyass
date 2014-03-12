@@ -219,11 +219,42 @@ void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
 }
 
+void GameScene::CARecvTimeout() {
+  unschedule(schedule_selector(GameScene::update));
+}
+
+void GameScene::CARecvDone() {
+  PlayScene *sc = PlayScene::create();
+  sc->set_stageid(select_stage_);
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
+  // CCDirector::sharedDirector()->pushScene(sc);
+}
+
+void GameScene::CARecv(char *data, size_t len) {
+  CSJson::Reader reader;
+  CSJson::Value result;
+  if (!reader.parse(std::string(data), result, false)) {
+    CCLOG("parse %s error", data);
+    // TODO logout to start scene
+    return;
+  }
+  if (result.get("ErrCode", -1).asInt() == 0) {
+    User *u = User::CurrentUser();
+    CSJson::Value body = result["Body"];
+    u->set_heart(body.get("Heart", 0).asInt());
+    u->set_stageid(body.get("Stageid", 1).asInt());
+  } else {
+    // TODO: logout to start screen
+    return;
+  }
+}
+
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
   CCLOG("%s\n", __FUNCTION__);
+#if 0
   if (User::CurrentUser()->UseHeart(select_stage_))
     return;
   User::CurrentUser()->Flush();
@@ -231,6 +262,26 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   sc->set_stageid(select_stage_);
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   // CCDirector::sharedDirector()->pushScene(sc);
+#endif
+  play_ = 0;
+  CSJson::Value value;
+  value["userid"] = "TestUser";
+  value["cmd"] = 2;
+  CSJson::Value body;
+  body["stageid"] = select_stage_;
+  value["Body"] = body;
+
+  CSJson::FastWriter writer;
+  std::string content = writer.write(value);
+
+  sharedDelegate()->SendServer(content, this);
+  schedule(schedule_selector(GameScene::update), 1, 10, 1);
+}
+
+void GameScene::update(float delta) {
+  if (sharedDelegate()->CheckRecv()) {
+    unschedule(schedule_selector(GameScene::update));
+  }
 }
 
 void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {

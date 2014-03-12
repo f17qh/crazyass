@@ -74,5 +74,8 @@
     <ClInclude Include="..\..\src\stage_config.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\common.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

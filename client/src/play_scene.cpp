@@ -57,6 +57,35 @@ static const char* btn_name [] = {
       "BtnPanty",
   };
 
+void PlayScene::CARecvDone() {
+  // CCDirector::sharedDirector()->popScene();
+  CCScene *sc = GameScene::create();
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+}
+
+void PlayScene::CARecv(char *data, size_t len) {
+  CSJson::Reader reader;
+  CSJson::Value result;
+  if (!reader.parse(std::string(data), result, false)) {
+    CCLOG("parse %s error", data);
+    // TODO logout to start scene
+    return;
+  }
+  if (result.get("ErrCode", -1).asInt() == 0) {
+    User *u = User::CurrentUser();
+    CSJson::Value body = result["Body"];
+    u->set_heart(body.get("Heart", 0).asInt());
+    u->set_stageid(body.get("Stageid", 1).asInt());
+  } else {
+    // TODO: logout to start screen
+    return;
+  }
+}
+
+void PlayScene::CARecvTimeout() {
+  unschedule(schedule_selector(PlayScene::update));
+}
+
 void PlayScene::RunAction(CCPoint pos, const char* name) {
   CCArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Action/Action.ExportJson");
   CCArmature *armature = CCArmature::create("Action");
@@ -133,14 +162,39 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
   card_mgr_.StartSubStage();
 }
 
+void PlayScene::SendEndPlay(bool pass) {
+  CSJson::Value value;
+  value["userid"] = "TestUser";
+  value["cmd"] = 3;
+  CSJson::Value body;
+  body["stageid"] = stageid_;
+  body["pass"] = pass;
+  value["Body"] = body;
+
+  CSJson::FastWriter writer;
+  std::string content = writer.write(value);
+
+  sharedDelegate()->SendServer(content, this);
+  schedule(schedule_selector(PlayScene::update), 1, 10, 1);
+}
+
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
   CCLOG("%s\n", __FUNCTION__);
+#if 0
   // CCDirector::sharedDirector()->popScene();
   CCScene *sc = GameScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+#endif
+  SendEndPlay(false);
+}
+
+void PlayScene::update(float delta) {
+  if (sharedDelegate()->CheckRecv()) {
+    unschedule(schedule_selector(PlayScene::update));
+  }
 }
 
 void PlayScene::ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name) {
