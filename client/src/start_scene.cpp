@@ -145,7 +145,7 @@ void StartScene::onEnter() {
   mydelegate = new MyDelegate;
   WebSocket *ws = new WebSocket();
   mydelegate->Init(ws, this);
-  ws->init(*mydelegate, "ws://127.0.0.1:12346/ca");
+  ws->init(*mydelegate, "ws://106.187.47.129:12345/ca");
 }
 
 void StartScene::CAOpen() {
