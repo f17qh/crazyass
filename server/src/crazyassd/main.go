@@ -1,6 +1,5 @@
 package main
 
-import "fmt"
 import "log"
 import "code.google.com/p/go.net/websocket"
 import "net/http"
@@ -24,13 +23,14 @@ func echo(ws *websocket.Conn) {
 }
 
 func clientProc(ws *websocket.Conn) {
-	fmt.Printf("recv client %v\n", *ws);
+	log.Printf("recv client %v\n", *ws);
 	client := crazyass.NewClient(ws)
 	client.Proc()
 }
 
 func main() {
-	fmt.Printf("Starting crazyassd...\n");
+	log.Printf("Starting crazyassd...\n");
+	crazyass.ConnectMongo("127.0.0.1");
 	http.Handle("/echo", websocket.Handler(echo));
 	myproto := websocket.Server{
 		Handshake: nil,
@@ -40,5 +40,5 @@ func main() {
 	if err := http.ListenAndServe(":12345", nil); err != nil {
 		log.Fatal("ListenAndServe err %v", err)
 	}
-	fmt.Printf("Stoping crazyassd...\n");
+	log.Printf("Stoping crazyassd...\n");
 }

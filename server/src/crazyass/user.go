@@ -58,6 +58,7 @@ func (u *User) Load(userid string) error {
 		log.Println(err)
 		return err
 	}
+	u.udb.Heart = 99
 	// u.ready = true
 	return nil
 }
@@ -142,7 +143,9 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	}
 
 	// send reply
-
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.u.udb.Heart
+	reply.Body["Stageid"] = c.u.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }
 
@@ -163,8 +166,13 @@ func ProcStartPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	c.u.UseHeart(int(StageHeartConfig[c.u.udb.NextStage]))
+	c.u.UseHeart(int(StageHeartConfig[c.u.udb.NextStage - 1]))
 	c.u.dirty = true
+
+	// reply
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.u.udb.Heart
+	reply.Body["Stageid"] = c.u.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }
 
@@ -190,5 +198,10 @@ func ProcEndPlay(c *Client, msg *Msg) int {
 		c.u.udb.NextStage++
 		c.u.dirty = true
 	}
+
+	// reply
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.u.udb.Heart
+	reply.Body["Stageid"] = c.u.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }

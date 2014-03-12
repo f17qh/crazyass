@@ -1,6 +1,5 @@
 package crazyass
 
-import "fmt"
 import "os"
 import "time"
 import "errors"
@@ -85,7 +84,7 @@ func ClientProcRegister(cmd int, proc ClientProc) error {
 
 func checkError(err error) {
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Fatal error: %s", err.Error())
+		log.Printf("Fatal error: %s", err.Error())
 		os.Exit(1)
 	}
 }
@@ -112,7 +111,7 @@ func (c *Client) Proc() {
 			if msg != nil {
 				c.procMsg(msg)
 			}
-		case <-time.After(2 * time.Second):
+		case <-time.After(1000 * time.Second):
 			c.procTimeout()
 		}
 	}
@@ -139,11 +138,14 @@ func (c *Client) procMsg(msg *Msg) {
 		return
 	}
 
-	fmt.Printf("Proc msg %v\n", *msg)
+	log.Printf("Proc msg %v\n", *msg)
 
 	// init reply msg
 	c.replyMsg.Userid = msg.Userid
 	c.replyMsg.Cmd = msg.Cmd
+	// alloc a new map
+	// old will be GC eventually
+	c.replyMsg.Body = make(map[string]interface{})
 
 	// proc msg
 	ret := CLI_PROC_RET_SUCC
@@ -166,6 +168,7 @@ func (c *Client) procMsg(msg *Msg) {
 		c.enable = false
 	}
 
+	log.Printf("Reply msg %v\n", c.replyMsg)
 	// send reply
 	websocket.JSON.Send(c.conn, c.replyMsg)
 }
@@ -198,7 +201,7 @@ func NewClient(conn *websocket.Conn) *Client {
 func (c *Client) readPacket(conn *websocket.Conn) (*Msg, error) {
 	var err error
 	if err = websocket.JSON.Receive(conn, &c.msg); err != nil {
-		log.Fatal("Receive err %v\n", err)
+		log.Printf("Receive err %s\n", err.Error())
 		return nil, err
 	}
 
