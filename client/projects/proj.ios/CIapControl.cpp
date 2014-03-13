@@ -12,19 +12,20 @@
 #include <string>
 #include <fstream>
 #include "CIapControl.h"
-#include "PopupGUI.h"
-#include "ConfigCenter.h"
-#include "TranslationConfig.h"
-#include "GameNetHandler.h"
-#include "Player.h"
-#include "CsvStream.h"
-#include "UI/PanelCenter.h"
-#include "UI/UIPages/BuyShopImpl.h"
-#include "ConfigCenter.h"
+//#include "PopupGUI.h"
+//#include "ConfigCenter.h"
+//#include "TranslationConfig.h"
+//#include "GameNetHandler.h"
+//#include "Player.h"
+//#include "CsvStream.h"
+//#include "UI/PanelCenter.h"
+//#include "UI/UIPages/BuyShopImpl.h"
+//#include "ConfigCenter.h"
 
 
 extern void ShowLoadingIndicator(bool bForceShow = false);
 extern void HideLoadingIndicator();
+#if 0
 void IAP_ShowLoadingIndicator(bool bForceShow = false)//出现loading圈的接口，根据不同的游戏项目表现不同的loading界面
 {
     std::string tmp = RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(100025) ;
@@ -34,6 +35,7 @@ void IAP_HideLoadingIndicator()//隐藏loading圈的接口，根据不同的游�
 {
     RedGame::PopupGUI::Instance()->HideNetworkLoad(77777);
 }
+#endif
 
 const char *savefilename = "allTransactionInfo.txt" ;  //保存交易信息的文件名
 
@@ -54,16 +56,16 @@ CIapControl* CIapControl::getInstance()
 	return singleIapControl ;
 }
 
-
-
 std::string CIapControl::getCurrentGameUserID()   //得到当前用户的登陆QQ号根据不同的项目实现不同
 {
-	std::string result = RedGame::GameNetHandler::GetInstance()->GetPlayer()->GetUin() ;
-	return result ;
+	// std::string result = RedGame::GameNetHandler::GetInstance()->GetPlayer()->GetUin() ;
+	// return result ;
+    return "";
 }
 
 void CIapControl::SetProductNameList()
 {
+#if 0
     m_GameServerProductList.clear();
     std::vector<RedGame::IapProductData> data = RedGame::ConfigCenter::Instance()->GetRedGameConfig()->GetIapProductList();
     for(int i = 0 ; i < data.size() ; i++)
@@ -73,6 +75,7 @@ void CIapControl::SetProductNameList()
 		tempProduct.productPrice = "0.0" ;
         m_GameServerProductList.push_back(tempProduct) ;
     }
+#endif
 }
 
 void CIapControl::processPaymentSuccess_forGame(const char* receiptdata, const char*transactionIndertifier , void* pTransaction )  //玩家付款成功后得到交易票据信息后的相应处理根据不同的项目实现不同
@@ -80,7 +83,7 @@ void CIapControl::processPaymentSuccess_forGame(const char* receiptdata, const c
 	//todo
 	printf("get receiptdata %s \n",receiptdata);
     
-    RedGame::GameNetHandler::GetInstance()->IapCheck(receiptdata, transactionIndertifier) ;
+    // RedGame::GameNetHandler::GetInstance()->IapCheck(receiptdata, transactionIndertifier) ;
 	//Json::Value json_temp;      // ¡Ÿ ±∂‘œÛ£¨π©»Áœ¬¥˙¬Î π”√
 //	
 //	std::string userid_string = getCurrentGameUserID() ;
@@ -208,7 +211,7 @@ void CIapControl::ReadTransactionInfoFromFile(const char* nousefilename) //读�
 
 void CIapControl::DynamicSetPrice() 
 {
-
+#if 0
 	for (int i = 0 ; i < m_GameServerProductList.size() ; i++)
 	{
         std::string id = m_GameServerProductList[i].productId ;
@@ -222,48 +225,58 @@ void CIapControl::DynamicSetPrice()
     {
         pBuyShop->RefreshAllShop() ;
     }
-
+#endif
 }
 
 void CIapControl::FailedMessage()
 {
+#if 0
     std::vector<std::string> messageContextVec;
     messageContextVec.push_back(RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(500001));
     RedGame::PopupGUI::Instance()->ShowMessage(RedGame::PopupGUI::MT_NORMAL, messageContextVec, RedGame::PopupGUI::BT_CONFIRM);
+#endif
 }
 
+#if 1
 void CIapControl::ComplietMessage()
 {
+#if 0
     std::vector<std::string> messageContextVec;
     messageContextVec.push_back(RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(500002));
     RedGame::PopupGUI::Instance()->ShowMessage(RedGame::PopupGUI::MT_NORMAL, messageContextVec, RedGame::PopupGUI::BT_CONFIRM);
+#endif
 }
 
 void CIapControl::ExceptionMessage()
 {
+#if 0
     std::vector<std::string> messageContextVec;
     messageContextVec.push_back(RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(500005));
     RedGame::PopupGUI::Instance()->ShowMessage(RedGame::PopupGUI::MT_NORMAL, messageContextVec, RedGame::PopupGUI::BT_CONFIRM);
+#endif
 }
 
 void CIapControl::GetListErrorMessage()
 {
+#if 0
     if (GetShowProductListError())
     {
         std::vector<std::string> messageContextVec;
         messageContextVec.push_back(RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(500003));
         RedGame::PopupGUI::Instance()->ShowMessage(RedGame::PopupGUI::MT_NORMAL, messageContextVec, RedGame::PopupGUI::BT_CONFIRM);
     }
-    
+#endif
 }
 
 void CIapControl::OpenIAPMessage()
 {
+#if 0
     std::vector<std::string> messageContextVec;
     messageContextVec.push_back(RedGame::ConfigCenter::Instance()->GetTranslationConfig()->GetTranslation(500004));
     RedGame::PopupGUI::Instance()->ShowMessage(RedGame::PopupGUI::MT_NORMAL, messageContextVec, RedGame::PopupGUI::BT_CONFIRM);
+#endif
 }
-
+#endif
 
 
 

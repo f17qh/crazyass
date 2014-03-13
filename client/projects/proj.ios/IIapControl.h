@@ -12,7 +12,8 @@
 
 #include <vector>
 #include <map>
-#include "tinyxml.h"
+#include <string>
+//#include "tinyxml.h"
 
 #ifdef WIN32
 //#define NEW new(__FILE__, __LINE__)

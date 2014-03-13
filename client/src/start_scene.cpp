@@ -5,6 +5,7 @@
 #include "network/WebSocket.h"
 #include "lib_json/json_lib.h"
 #include "common.h"
+#include "CIapControl.h"
 
 USING_NS_CC_EXT;
 
@@ -215,6 +216,7 @@ void StartScene::onBtnPlay(CCObject *target, TouchEventType e) {
   CCLOG("%s\n", __FUNCTION__);
   // CCDirector::sharedDirector()->popScene();
 
+  // CIapControl::getInstance()->RequesetProductList(true);
   CCScene *sc = GameScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionTurnOffTiles::create(1, sc));
 }

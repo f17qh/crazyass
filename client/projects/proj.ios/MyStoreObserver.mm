@@ -9,8 +9,8 @@
 
 
 
-extern void IAP_ShowLoadingIndicator(bool bForceShow = false);
-extern void IAP_HideLoadingIndicator();
+//extern void IAP_ShowLoadingIndicator(bool bForceShow = false);
+//extern void IAP_HideLoadingIndicator();
 
 void g_initIap()
 {
@@ -33,7 +33,7 @@ void getRequestProducts(bool haveloading)
 	}
     if (haveloading)
     {
-        IAP_ShowLoadingIndicator();
+ //       IAP_ShowLoadingIndicator();
     }
 	[[MyStoreObserver sGetInstance] requestProductData:idSet] ;
 }
@@ -60,7 +60,7 @@ IIapControl* getStoreObserverControl()
 void FinishOnTransaction(void *transaction)
 {
     SKPaymentTransaction* pPaymentTransaction = reinterpret_cast<SKPaymentTransaction*>(transaction) ;
-	IAP_HideLoadingIndicator();
+//	IAP_HideLoadingIndicator();
 	//printf("FinishOnTransaction transaction = %d \n",*transaction);
 	[[SKPaymentQueue defaultQueue] finishTransaction: pPaymentTransaction];
     
@@ -133,14 +133,14 @@ NSTimer* m_pTimerForPayMent ;
 		const char* transaction_id = [transaction.transactionIdentifier UTF8String] ;
 
 		getStoreObserverControl()->processPaymentSuccess(receipteData,transaction_id,transaction) ;
-		IAP_HideLoadingIndicator();
+//		IAP_HideLoadingIndicator();
 	}
 	[transactionReceipttese release];
 }
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
 {
-	IAP_HideLoadingIndicator();
+//	IAP_HideLoadingIndicator();
 	if (transaction.error.code != SKErrorPaymentCancelled) 
 	{
 //		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"交易失败，稍候再试谢谢！" delegate:self
@@ -158,7 +158,7 @@ NSTimer* m_pTimerForPayMent ;
 
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {
-	IAP_HideLoadingIndicator();
+//	IAP_HideLoadingIndicator();
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
 
@@ -237,7 +237,7 @@ NSTimer* m_pTimerForPayMent ;
 	if (isWaitingProductList)
 	{
 	//	m_pTimerForPayMent = NULL ;
-		IAP_HideLoadingIndicator();
+	//	IAP_HideLoadingIndicator();
 		isWaitingPaymentResult = false ;
 //		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"取商品列表出错，网络不好或机器破解后可能会造成这种问题！" delegate:self
 //                                               cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -254,7 +254,7 @@ NSTimer* m_pTimerForPayMent ;
 	
 	if (isWaitingPaymentResult)
 	{
-		IAP_HideLoadingIndicator();
+	//	IAP_HideLoadingIndicator();
 		isWaitingPaymentResult = false ;
 	}
 	
@@ -266,7 +266,7 @@ NSTimer* m_pTimerForPayMent ;
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
 	isWaitingProductList = false ;
-	IAP_HideLoadingIndicator();
+//	IAP_HideLoadingIndicator();
 	NSLog(@"ProductsRequest did receiveResponse");
 	NSArray *myProduct = response.products;
 	int ProductCount = [myProduct count] ;
@@ -380,7 +380,7 @@ NSTimer* m_pTimerForPayMent ;
 	}
 	if(prodouctId != NULL)
 	{
-		IAP_ShowLoadingIndicator();
+//		IAP_ShowLoadingIndicator();
 		NSString *tempProdouctId = [[NSString alloc] initWithUTF8String:prodouctId] ;
 		SKPayment *payment = [SKPayment paymentWithProductIdentifier:tempProdouctId];
 		[[SKPaymentQueue defaultQueue] addPayment:payment];

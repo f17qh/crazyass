@@ -230,6 +230,10 @@
 		379BB9D217F03F3700829B88 /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = 379BB98D17F03F3700829B88 /* sconscript */; };
 		379BB9D317F03F3700829B88 /* CCSGUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99117F03F3700829B88 /* CCSGUIReader.cpp */; };
 		379BB9D417F03F3700829B88 /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* CCSSceneReader.cpp */; };
+		6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A063D5B18D1F26800645C9A /* StoreKit.framework */; };
+		6A4711BD18D1BB3E001FBA9D /* CIapControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711B718D1BB3E001FBA9D /* CIapControl.cpp */; };
+		6A4711BE18D1BB3E001FBA9D /* IIapControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711B918D1BB3E001FBA9D /* IIapControl.cpp */; };
+		6A4711BF18D1BB3E001FBA9D /* MyStoreObserver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711BC18D1BB3E001FBA9D /* MyStoreObserver.mm */; };
 		6A5853A918CEF1F800817A56 /* Action in Resources */ = {isa = PBXBuildFile; fileRef = 6A5853A818CEF1F800817A56 /* Action */; };
 		6A5A76F818C3AAE900E914D8 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABDC71118C3A7750099D079 /* libcocos2dx.a */; };
 		6A5A76FB18C3AB3D00E914D8 /* app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */; };
@@ -727,6 +731,13 @@
 		379BB99217F03F3700829B88 /* CCSGUIReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGUIReader.h; sourceTree = "<group>"; };
 		379BB99317F03F3700829B88 /* CCSSceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSSceneReader.cpp; sourceTree = "<group>"; };
 		379BB99417F03F3700829B88 /* CCSSceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSceneReader.h; sourceTree = "<group>"; };
+		6A063D5B18D1F26800645C9A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6A4711B718D1BB3E001FBA9D /* CIapControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CIapControl.cpp; sourceTree = SOURCE_ROOT; };
+		6A4711B818D1BB3E001FBA9D /* CIapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIapControl.h; sourceTree = SOURCE_ROOT; };
+		6A4711B918D1BB3E001FBA9D /* IIapControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IIapControl.cpp; sourceTree = SOURCE_ROOT; };
+		6A4711BA18D1BB3E001FBA9D /* IIapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIapControl.h; sourceTree = SOURCE_ROOT; };
+		6A4711BB18D1BB3E001FBA9D /* MyStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStoreObserver.h; sourceTree = SOURCE_ROOT; };
+		6A4711BC18D1BB3E001FBA9D /* MyStoreObserver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyStoreObserver.mm; sourceTree = SOURCE_ROOT; };
 		6A5853A818CEF1F800817A56 /* Action */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Action; path = ../../Resources/Action; sourceTree = "<group>"; };
 		6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = app_delegate.cpp; path = ../../src/app_delegate.cpp; sourceTree = "<group>"; };
 		6A5A76FA18C3AB3D00E914D8 /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = ../../src/app_delegate.h; sourceTree = "<group>"; };
@@ -771,6 +782,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */,
 				6A5A76F818C3AAE900E914D8 /* libcocos2dx.a in Frameworks */,
 				1ACB3244164770DE00914215 /* libcurl.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -793,6 +805,12 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				6A4711B718D1BB3E001FBA9D /* CIapControl.cpp */,
+				6A4711B818D1BB3E001FBA9D /* CIapControl.h */,
+				6A4711B918D1BB3E001FBA9D /* IIapControl.cpp */,
+				6A4711BA18D1BB3E001FBA9D /* IIapControl.h */,
+				6A4711BB18D1BB3E001FBA9D /* MyStoreObserver.h */,
+				6A4711BC18D1BB3E001FBA9D /* MyStoreObserver.mm */,
 				1AC3624216D4A1E8000847F2 /* AppController.h */,
 				1AC3624316D4A1E8000847F2 /* AppController.mm */,
 				D4F9F37B12E54555005CA6D2 /* Info.plist */,
@@ -1420,6 +1438,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A063D5B18D1F26800645C9A /* StoreKit.framework */,
 				1ACB3243164770DE00914215 /* libcurl.a */,
 				BF170DB212928DE900B8313A /* libxml2.dylib */,
 				BF170DB412928DE900B8313A /* libz.dylib */,
@@ -1896,6 +1915,7 @@
 				15A3D91A1682F7D5002FB0C5 /* b2Contact.cpp in Sources */,
 				15A3D91B1682F7D5002FB0C5 /* b2ContactSolver.cpp in Sources */,
 				15A3D91C1682F7D5002FB0C5 /* b2EdgeAndCircleContact.cpp in Sources */,
+				6A4711BE18D1BB3E001FBA9D /* IIapControl.cpp in Sources */,
 				15A3D91D1682F7D5002FB0C5 /* b2EdgeAndPolygonContact.cpp in Sources */,
 				15A3D91E1682F7D5002FB0C5 /* b2PolygonAndCircleContact.cpp in Sources */,
 				15A3D91F1682F7D5002FB0C5 /* b2PolygonContact.cpp in Sources */,
@@ -1928,6 +1948,7 @@
 				15A3D9A31682F7F9002FB0C5 /* cpArray.c in Sources */,
 				15A3D9A41682F7F9002FB0C5 /* cpBB.c in Sources */,
 				15A3D9A51682F7F9002FB0C5 /* cpBBTree.c in Sources */,
+				6A4711BF18D1BB3E001FBA9D /* MyStoreObserver.mm in Sources */,
 				15A3D9A61682F7F9002FB0C5 /* cpBody.c in Sources */,
 				15A3D9A71682F7F9002FB0C5 /* cpCollision.c in Sources */,
 				15A3D9A81682F7F9002FB0C5 /* cpHashSet.c in Sources */,
@@ -2006,6 +2027,7 @@
 				1A8F3B71175E05DA00049216 /* Atlas.cpp in Sources */,
 				1A8F3B72175E05DA00049216 /* AtlasAttachmentLoader.cpp in Sources */,
 				1A8F3B73175E05DA00049216 /* Attachment.cpp in Sources */,
+				6A4711BD18D1BB3E001FBA9D /* CIapControl.cpp in Sources */,
 				1A8F3B74175E05DA00049216 /* AttachmentLoader.cpp in Sources */,
 				1A8F3B75175E05DA00049216 /* Bone.cpp in Sources */,
 				1A8F3B76175E05DA00049216 /* BoneData.cpp in Sources */,
