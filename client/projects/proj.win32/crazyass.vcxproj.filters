@@ -39,7 +39,7 @@
     <ClCompile Include="..\..\src\static_config.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\loading_scene.cpp">
+    <ClCompile Include="..\..\src\loading.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="..\..\src\common.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\loading_scene.h">
+    <ClInclude Include="..\..\src\loading.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

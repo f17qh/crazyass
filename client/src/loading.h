@@ -5,14 +5,11 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-class LoadingScene :
+class Loading
 {
 public:
-  bool init();
-  void onEnter();
-  CREATE_FUNC(LoadingScene);
-protected:
-  void ShowLoadScene();
+  void Init();
+  void ShowLoadScene(CCNode*, bool visible);
 protected:
   UILayer *load_layer_;
 };
