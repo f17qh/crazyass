@@ -131,6 +131,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\..\cocos2d-x-2.2\external\libwebsockets\wi
     <ClCompile Include="..\..\src\card_manager.cpp" />
     <ClCompile Include="..\..\src\event_scene.cpp" />
     <ClCompile Include="..\..\src\game_scene.cpp" />
+    <ClCompile Include="..\..\src\loading_scene.cpp" />
     <ClCompile Include="..\..\src\play_scene.cpp" />
     <ClCompile Include="..\..\src\shop_scene.cpp" />
     <ClCompile Include="..\..\src\start_scene.cpp" />
@@ -145,6 +146,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\..\..\cocos2d-x-2.2\external\libwebsockets\wi
     <ClInclude Include="..\..\src\event_mgr.h" />
     <ClInclude Include="..\..\src\event_scene.h" />
     <ClInclude Include="..\..\src\game_scene.h" />
+    <ClInclude Include="..\..\src\loading_scene.h" />
     <ClInclude Include="..\..\src\play_scene.h" />
     <ClInclude Include="..\..\src\shop_scene.h" />
     <ClInclude Include="..\..\src\start_scene.h" />

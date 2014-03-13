@@ -41,7 +41,7 @@
     <string>Resources/images/loading_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GirlScene6.json</CurrentUIJson>
+  <CurrentUIJson>PlayScene.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

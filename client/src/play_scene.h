@@ -37,6 +37,10 @@ public:
   void set_stageid(int id) { stageid_ = id; }
   void SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id);
   void ShowStartTips(bool visible);
+  void CARecv(char *data, size_t len);
+  void CARecvDone();
+  void CARecvTimeout();
+  void update(float delta);
   CREATE_FUNC(PlayScene);
 protected:
   void TakeOff();

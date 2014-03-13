@@ -86,10 +86,6 @@ void GameScene::onEnter() {
 
   select_stage_ = 1;
   CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
-  // init plist
-  // CCSpriteFrameCache *c = CCSpriteFrameCache::sharedSpriteFrameCache();
-  // CCFileUtils::sharedFileUtils()->addSearchPath("Resources");
-  // CCFileUtils::sharedFileUtils()->addSearchPath("..\cocostudio\\MainScene\\Export\\MainScene_1\\Resources");
   AddSearchPath();
 
   const std::vector<std::string>& v = CCFileUtils::sharedFileUtils()->getSearchPaths();

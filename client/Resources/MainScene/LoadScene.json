@@ -138,7 +138,7 @@
     "options": {
       "__type": "ComGUIPanelSurrogate:#EditorCommon.JsonModel.Component.GUI",
       "classname": "Panel",
-      "name": "Panel_741",
+      "name": "Panel",
       "ZOrder": 0,
       "actiontag": -1,
       "anchorPointX": 0,
