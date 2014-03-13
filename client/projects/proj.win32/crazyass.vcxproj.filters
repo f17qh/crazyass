@@ -36,7 +36,7 @@
     <ClCompile Include="..\..\src\shop_scene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\stage_config.cpp">
+    <ClCompile Include="..\..\src\static_config.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClInclude Include="..\..\src\shop_scene.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\stage_config.h">
+    <ClInclude Include="..\..\src\static_config.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\common.h">

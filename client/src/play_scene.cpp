@@ -1,6 +1,7 @@
 #include "play_scene.h"
 #include "game_scene.h"
 #include "card_manager.h"
+#include "static_config.h"
 #include "user.h"
 
 bool PlayScene::init() {
@@ -10,7 +11,6 @@ bool PlayScene::init() {
     return false;
 
   stageid_ = 1;
-  step_ = 0;
   return true;
 }
 
@@ -37,6 +37,13 @@ void PlayScene::onEnter() {
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnBack));
     btn->setPressedActionEnabled(true);
   }
+
+  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelSecond");
+  if(panel == NULL) {
+    return;
+  }
+  panel->setVisible(false);
+  panel->setTouchEnable(false);
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
   if (btn) {
@@ -100,13 +107,10 @@ void PlayScene::TakeOffAction(UIButton* btn) {
   btn->getVirtualRenderer()->runAction(CCBlink::create(1.0f,3));
 }
 
-void PlayScene::TakeOff(int step) {
-  step_ = step;
+void PlayScene::TakeOff() {
   UIButton* btn = NULL;
-  if(step_ >= 0 && step_ <= 3)
-    btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
-  else 
-    return;
+  btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[sub_stage_id_]);
+
   if (btn) {
     btn->setTouchEnable(true);
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnClothes));
@@ -117,7 +121,7 @@ void PlayScene::TakeOff(int step) {
 }
 
 void PlayScene::onBtnMoveClothes(CCObject *target) {
-  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
+  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[sub_stage_id_]);
   if (btn) {
     CCPoint move_pos = btn->getTouchMovePos();
     btn->setPosition(move_pos);
@@ -126,7 +130,7 @@ void PlayScene::onBtnMoveClothes(CCObject *target) {
 }
 
 void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
-  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[step_]);
+  UIButton* btn = (UIButton *)ui_layer_->getWidgetByName(btn_name[sub_stage_id_]);
   if (btn) {
     if(e == TOUCH_EVENT_BEGAN) {
       btn_start_pos_ = btn->getPosition();
@@ -135,7 +139,7 @@ void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
       if(btn_start_pos_.fuzzyEquals(pos, 100.0f)) {
         btn->setPosition(btn_start_pos_);
       } else {
-        if(step_ < 3) {
+        if(!all_finish_) {
           btn->setEnabled(false);
           btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
           btn->setEnabled(true); 
@@ -201,4 +205,131 @@ void PlayScene::ArmatureCallBack(CCArmature * armature, MovementEventType e, con
   if(e == COMPLETE)
     removeChild(armature);
   return;
+}
+
+void PlayScene::SetResultPanelState(int state) {
+  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelSecond");
+  if(panel == NULL) {
+    return;
+  }
+
+  switch(state) {
+  case RESULT_PANEL_NORMAL:
+    panel->setVisible(false);
+    panel->setTouchEnable(false);
+    break;
+  case RESULT_PANEL_WIN:
+    {
+      panel->setVisible(true);
+      panel->setTouchEnable(true);
+      SetIamgeView("WinOrLose", true, "play_banner_win.png");
+      char name[32] = {};
+      sprintf(name,"girl%d_face_0004.png",stageid_);
+      SetIamgeView("WinOrLoseGirl", true, name);
+      ShowTips(true, TIPS_TYPE_RESULT_END);
+      panel->addTouchEventListener(this, toucheventselector(PlayScene::onPanelSecond));
+      break;
+    }
+  case RESULT_PANEL_LOSE:
+    {
+      panel->setVisible(true);
+      panel->setTouchEnable(true);
+      SetIamgeView("WinOrLose", true, "play_banner_lose.png");
+      char name[32] = {};
+      sprintf(name,"girl%d_face_0005.png",stageid_);
+      SetIamgeView("WinOrLoseGirl", true, name);
+      ShowTips(true, TIPS_TYPE_RESULT_END);
+      panel->addTouchEventListener(this, toucheventselector(PlayScene::onPanelSecond));
+      break;
+    }
+  case RESULT_PANEL_START:
+    {
+      panel->setVisible(true);
+      panel->setTouchEnable(false);
+      SetIamgeView("WinOrLose", false);
+      SetIamgeView("WinOrLoseGirl", false);
+      ShowTips(true, TIPS_TYPE_ACTION_BEGIN);
+    }
+  default:
+    break;
+  }
+}
+
+void PlayScene::SetIamgeView(const char* name, bool b, const char* imgs_file) {
+  UIImageView *imgs = (UIImageView *)ui_layer_->getWidgetByName(name);
+    if(imgs == NULL)
+      return;
+    imgs->setVisible(b);
+    if(imgs_file != NULL) {
+      ((CCSprite*)imgs->getVirtualRenderer())->initWithSpriteFrameName(imgs_file);
+    }
+    return;
+}
+
+void PlayScene::ShowStartTips(bool visible) {
+  if(visible) {
+    SetResultPanelState(RESULT_PANEL_START);
+  } else {
+    SetResultPanelState(RESULT_PANEL_NORMAL);
+  }
+}
+
+void PlayScene::ShowTips(bool visible, int type) {
+  UILabelBMFont *tips = (UILabelBMFont *)ui_layer_->getWidgetByName("Tips");
+  if(tips == NULL)
+    return;
+  UIImageView *imgs = (UIImageView *)ui_layer_->getWidgetByName("ImgTips");
+  if(imgs == NULL)
+    return;
+  imgs->setVisible(visible);
+  TipsInfo& config = ConfigInfo::Instence().tips_info();
+  if(visible) {
+    switch(type) {
+    case TIPS_TYPE_ACTION_BEGIN:
+      {
+        char name[32];
+        snprintf(name, 32, "%s", config.sub_stage_begin_);
+        tips->setText(name);
+        break;
+      }
+    case TIPS_TYPE_RESULT_END:
+      {
+        char name[32];
+        snprintf(name, 32, "%s", config.sub_stage_end_);
+        tips->setText(name);
+        break;
+      }
+    default:
+      break;
+    }
+  }
+}
+
+void PlayScene::onPanelSecond(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+  SetResultPanelState(RESULT_PANEL_NORMAL);
+  if(sub_win_) {
+    TakeOff();
+  } else {
+    //ÊäÁË
+    CCScene *sc = GameScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+  }
+  //TODO other
+}
+
+void PlayScene::SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id) {
+  sub_win_ = sub_win;
+  sub_stage_id_ = sub_stage_id;
+  all_finish_ = all_finish;
+  /*if(all_finish) {
+    return;
+  }*/
+  
+  if(sub_win)
+    SetResultPanelState(RESULT_PANEL_WIN);
+  else
+    SetResultPanelState(RESULT_PANEL_LOSE);
+
 }

@@ -6,6 +6,18 @@
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+enum {
+  RESULT_PANEL_NORMAL = 0,
+  RESULT_PANEL_WIN = 1,
+  RESULT_PANEL_LOSE = 2,
+  RESULT_PANEL_START = 3,
+};
+
+enum {
+  TIPS_TYPE_ACTION_BEGIN = 1,
+  TIPS_TYPE_RESULT_END = 2,
+
+};
 
 class PlayScene :
   public CCScene, public CATarget
@@ -23,14 +35,11 @@ public:
 
   void set_back_scene(CCScene *sc) { back_scene_ = sc; }
   void set_stageid(int id) { stageid_ = id; }
-  void TakeOff(int step);
-  void CARecv(char *data, size_t len);
-  void CARecvDone();
-  void CARecvTimeout();
-  void update(float delta);
-
+  void SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id);
+  void ShowStartTips(bool visible);
   CREATE_FUNC(PlayScene);
 protected:
+  void TakeOff();
   void TakeOffAction(UIButton* btn);
   void RunAction(CCPoint pos, const char* name);
   void onBtnBack(CCObject *target, TouchEventType e);
@@ -39,12 +48,18 @@ protected:
   void onBtnMoveClothes(CCObject *target);
   void ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name);
   void SendEndPlay(bool);
+  void onPanelSecond(CCObject *target, TouchEventType e);
+  void SetResultPanelState(int state);
+  void SetIamgeView(const char* name, bool b, const char* imgs_file=NULL);
+  void ShowTips(bool visible, int type = 0);
 protected:
   CardMgr card_mgr_;
   UILayer *ui_layer_;
   CCScene *back_scene_;
   int stageid_;
   CCPoint btn_start_pos_;
-  int step_;
+  int sub_stage_id_;
+  bool sub_win_;
+  bool all_finish_;
 };
 

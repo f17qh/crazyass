@@ -90,5 +90,10 @@
             "play_count_2": 13,
             "play_count_3": 13
         }
-    ]
+    ],
+
+    "tips":{
+        "sub_stage_begin": "please find this card",
+        "sub_stage_end": "touch any where"
+    }
 }

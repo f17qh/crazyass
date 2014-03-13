@@ -8,19 +8,19 @@
 #include <sys/stat.h>
 #include <string>
 #include <cocos2d.h>
-#include "stage_config.h"
+#include "static_config.h"
 #include "cocos2d.h"
 #include "lib_json/json_lib.h"
 
 USING_NS_CC;
 
-StageInfo& StageConfig::GetStageInfo(int stage_id) {
+StageInfo& ConfigInfo::GetStageInfo(int stage_id) {
   if(stage_id <= 0)
     return stage_vec_[0];
   return stage_vec_[stage_id - 1];
 }
 
-class LocalStageConfig : public StageConfig {
+class LocalConfigInfo : public ConfigInfo {
 public:
   int Load(const char *path);
 protected:
@@ -28,7 +28,7 @@ protected:
   CSJson::Value root_;
 };
 
-int LocalStageConfig::Load(const char *path) {
+int LocalConfigInfo::Load(const char *path) {
   CSJson::Reader reader;
   path_ = path;
 
@@ -60,15 +60,19 @@ int LocalStageConfig::Load(const char *path) {
     stage_vec_.push_back(stageinfo);
   }
 
+  CSJson::Value tips = root_["tips"];
+  memcpy(tips_info_.sub_stage_begin_, tips["sub_stage_begin"].asString().c_str(), sizeof(tips_info_.sub_stage_begin_));
+  memcpy(tips_info_.sub_stage_end_, tips["sub_stage_end"].asString().c_str(), sizeof(tips_info_.sub_stage_end_));
+
   delete buf;
   return 0;
 }
 
-static StageConfig* stage_config = NULL;
-StageConfig& StageConfig::Instence() {
-  if (stage_config == NULL) {
-    stage_config = new LocalStageConfig();
-    stage_config->Load("stage_data.json");
+static ConfigInfo* config = NULL;
+ConfigInfo& ConfigInfo::Instence() {
+  if (config == NULL) {
+    config = new LocalConfigInfo();
+    config->Load("stage_data.json");
   }
-  return *stage_config;
+  return *config;
 }

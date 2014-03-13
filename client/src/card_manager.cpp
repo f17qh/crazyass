@@ -1,5 +1,5 @@
 #include "card_manager.h"
-#include "stage_config.h"
+#include "static_config.h"
 #include "play_scene.h"
 #include <algorithm>
 
@@ -47,7 +47,7 @@ CardMgr::CardMgr() {
   std::srand(time(0));
 }
 void CardMgr::SetTouchable(bool b) {
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   int size = config.card_count_;
   for(int i = 0; i < size; i++) {
     CCDirector* pDirector = CCDirector::sharedDirector();
@@ -70,7 +70,7 @@ void CardMgr::CreateLayer(PlayScene* play_scene) {
 
 void CardMgr::Init(int stage_id) {
   stage_id_ = stage_id;
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   int size = config.card_count_;
   for(int i = 0;  i < size; i++) {
     all_card_index_.push_back(i);
@@ -82,7 +82,7 @@ void CardMgr::Init(int stage_id) {
 }
 
 void CardMgr::SetCardSprite() {
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   char name[32] = {};
   sprintf(name, "card_front_0%d.png", sub_stage_+1);
   int size = config.card_count_;
@@ -100,7 +100,7 @@ void CardMgr::SetCardSprite() {
 }
 void CardMgr::StartSubStage() {
   //获取主关卡的配置数据
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   //设置该substage的精灵纹理
   SetCardSprite();
   //设置cardmgr为有效
@@ -122,14 +122,14 @@ void CardMgr::FinishSubStage() {
 }
 
 bool CardMgr::TryFinishStage() {
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   if(sub_stage_ >= (int)sizeof(config.play_count_))
     return true;
   return false;
 }
 
 void CardMgr::RunActionByPlayCount() {
-  StageInfo& config = StageConfig::Instence().GetStageInfo(stage_id_);
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   //判断该substage是否已经结束
   if(play_count_ >= int(config.play_count_[sub_stage_] - 1)) {
     FinishSubStage();
@@ -154,13 +154,17 @@ CCLayer* CardMgr::card_layer() {
 }
 
 void CardMgr::OnTouch(int child_tag) {
+  bool all_finish = false;
+  StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
+  if(sub_stage_ >= sizeof(config.play_count_)/sizeof(config.play_count_[0]))
+    all_finish = true;
+  SetEnable(false);
   if(child_tag == bingo_index_) {
     //猜对了
-    SetEnable(false);
     //这个时候已经finishsubstage，所以sub_stage_要减1
-    play_scene_->TakeOff(sub_stage_-1);
+    play_scene_->SubStageEnd(all_finish, true, sub_stage_-1);
   } else {
-    //TODO 猜错了
+    play_scene_->SubStageEnd(all_finish, false, sub_stage_-1);
   }
 
 }
@@ -231,7 +235,7 @@ void CardMgr::RunBeginAction() {
 
   //这个要设置为false，否则会宕机，原因未知。。。
   SetTouchable(false);
-
+  play_scene_->ShowStartTips(true);
   CCOrbitCamera * orbit1 = CCOrbitCamera::create(0.25, 0.5, 0, 0, 90, 0, 0);
   CCCallFuncN* change_card1 = CCCallFuncN::create(this, callfuncN_selector(CardMgr::ChangeCardToSpriteBack));
   CCOrbitCamera * orbit2 = CCOrbitCamera::create(0.25, 0, -0.5, 90, 90, 0, 0);
@@ -263,6 +267,7 @@ void CardMgr::ChangeCardToSpriteBack(CCNode* sender) {
 void CardMgr::BeginActionEnd(CCNode* sender) {
   //为每一个card执行移动动画，下面这个函数要执行action_times_次，有moveend函数触发非第一次的。
   RunActionByPlayCount();
+  play_scene_->ShowStartTips(false);
 }
 
 void CardMgr::MoveEnd(CCNode* sender) {
