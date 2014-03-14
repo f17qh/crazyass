@@ -193,7 +193,7 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
 
   const char *soundfiles[]= {
-    "sound/sfx_girl_event_start.wav",
+    "sound/sfx_girl_event_start.caf",
     "sound/sfx_girl_event_climax1.wav",
     "sound/sfx_girl_event_climax2.wav",
     "sound/sfx_girl_event_climax3.wav",
