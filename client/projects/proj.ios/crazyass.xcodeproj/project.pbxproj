@@ -231,6 +231,7 @@
 		379BB9D317F03F3700829B88 /* CCSGUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99117F03F3700829B88 /* CCSGUIReader.cpp */; };
 		379BB9D417F03F3700829B88 /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* CCSSceneReader.cpp */; };
 		6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A063D5B18D1F26800645C9A /* StoreKit.framework */; };
+		6A063D6818D1F79400645C9A /* static_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A063D6618D1F79400645C9A /* static_config.cpp */; };
 		6A4711BD18D1BB3E001FBA9D /* CIapControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711B718D1BB3E001FBA9D /* CIapControl.cpp */; };
 		6A4711BE18D1BB3E001FBA9D /* IIapControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711B918D1BB3E001FBA9D /* IIapControl.cpp */; };
 		6A4711BF18D1BB3E001FBA9D /* MyStoreObserver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A4711BC18D1BB3E001FBA9D /* MyStoreObserver.mm */; };
@@ -243,7 +244,6 @@
 		6A5A770B18C3AB6F00E914D8 /* play_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770218C3AB6F00E914D8 /* play_scene.cpp */; };
 		6A5A770C18C3AB6F00E914D8 /* start_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770418C3AB6F00E914D8 /* start_scene.cpp */; };
 		6A5A770D18C3AB6F00E914D8 /* user.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770618C3AB6F00E914D8 /* user.cpp */; };
-		6A8602D918C73123006B377D /* stage_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A8602D718C73123006B377D /* stage_config.cpp */; };
 		6A8602DB18C73165006B377D /* stage_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A8602DA18C73165006B377D /* stage_data.json */; };
 		6A960E1A18C60A1E00C4B857 /* MainScene in Resources */ = {isa = PBXBuildFile; fileRef = 6A960E1918C60A1E00C4B857 /* MainScene */; };
 		6A960E2418C60BE000C4B857 /* shop_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A960E2218C60BE000C4B857 /* shop_scene.cpp */; };
@@ -732,6 +732,8 @@
 		379BB99317F03F3700829B88 /* CCSSceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSSceneReader.cpp; sourceTree = "<group>"; };
 		379BB99417F03F3700829B88 /* CCSSceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSceneReader.h; sourceTree = "<group>"; };
 		6A063D5B18D1F26800645C9A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6A063D6618D1F79400645C9A /* static_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = static_config.cpp; path = ../../src/static_config.cpp; sourceTree = "<group>"; };
+		6A063D6718D1F79400645C9A /* static_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_config.h; path = ../../src/static_config.h; sourceTree = "<group>"; };
 		6A4711B718D1BB3E001FBA9D /* CIapControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CIapControl.cpp; sourceTree = SOURCE_ROOT; };
 		6A4711B818D1BB3E001FBA9D /* CIapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIapControl.h; sourceTree = SOURCE_ROOT; };
 		6A4711B918D1BB3E001FBA9D /* IIapControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IIapControl.cpp; sourceTree = SOURCE_ROOT; };
@@ -753,8 +755,6 @@
 		6A5A770518C3AB6F00E914D8 /* start_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = start_scene.h; path = ../../src/start_scene.h; sourceTree = "<group>"; };
 		6A5A770618C3AB6F00E914D8 /* user.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = user.cpp; path = ../../src/user.cpp; sourceTree = "<group>"; };
 		6A5A770718C3AB6F00E914D8 /* user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user.h; path = ../../src/user.h; sourceTree = "<group>"; };
-		6A8602D718C73123006B377D /* stage_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stage_config.cpp; path = ../../src/stage_config.cpp; sourceTree = "<group>"; };
-		6A8602D818C73123006B377D /* stage_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stage_config.h; path = ../../src/stage_config.h; sourceTree = "<group>"; };
 		6A8602DA18C73165006B377D /* stage_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stage_data.json; path = ../../Resources/stage_data.json; sourceTree = "<group>"; };
 		6A960E1918C60A1E00C4B857 /* MainScene */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MainScene; path = ../../Resources/MainScene; sourceTree = "<group>"; };
 		6A960E2118C60BE000C4B857 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../../src/common.h; sourceTree = "<group>"; };
@@ -1292,8 +1292,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6A8602D718C73123006B377D /* stage_config.cpp */,
-				6A8602D818C73123006B377D /* stage_config.h */,
+				6A063D6618D1F79400645C9A /* static_config.cpp */,
+				6A063D6718D1F79400645C9A /* static_config.h */,
 				6A960E2118C60BE000C4B857 /* common.h */,
 				6A960E2218C60BE000C4B857 /* shop_scene.cpp */,
 				6A960E2318C60BE000C4B857 /* shop_scene.h */,
@@ -1988,6 +1988,7 @@
 				15A3DA471682F826002FB0C5 /* CCScrollViewLoader.cpp in Sources */,
 				15A3DA481682F826002FB0C5 /* CCSpriteLoader.cpp in Sources */,
 				15A3DA491682F826002FB0C5 /* CCControl.cpp in Sources */,
+				6A063D6818D1F79400645C9A /* static_config.cpp in Sources */,
 				15A3DA4A1682F826002FB0C5 /* CCControlButton.cpp in Sources */,
 				6A960E2418C60BE000C4B857 /* shop_scene.cpp in Sources */,
 				15A3DA4B1682F826002FB0C5 /* CCControlColourPicker.cpp in Sources */,
@@ -2012,7 +2013,6 @@
 				15A3DA5E1682F826002FB0C5 /* CCPhysicsDebugNode.cpp in Sources */,
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
-				6A8602D918C73123006B377D /* stage_config.cpp in Sources */,
 				15A3DAEC1682F8A6002FB0C5 /* CDOpenALSupport.m in Sources */,
 				15A3DAED1682F8A6002FB0C5 /* CocosDenshion.m in Sources */,
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
@@ -2198,7 +2198,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/cocos2dx/platform/third_party/ios/libraries\"",
-					"\"$(SRCROOT)/../../../../cocos2d-x-2.2./external/libwebsockets/ios/lib\"",
+					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/external/libwebsockets/ios/lib\"",
 				);
 				PRODUCT_NAME = crazyass;
 				PROVISIONING_PROFILE = "";
