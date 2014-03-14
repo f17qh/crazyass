@@ -249,6 +249,7 @@
 		6A960E1A18C60A1E00C4B857 /* MainScene in Resources */ = {isa = PBXBuildFile; fileRef = 6A960E1918C60A1E00C4B857 /* MainScene */; };
 		6A960E2418C60BE000C4B857 /* shop_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A960E2218C60BE000C4B857 /* shop_scene.cpp */; };
 		6AA611B218D304C100C62390 /* test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AA611B118D304C100C62390 /* test.mm */; };
+		6AA611B618D33F0B00C62390 /* loading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AA611B418D33F0B00C62390 /* loading.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
@@ -764,6 +765,8 @@
 		6A960E2218C60BE000C4B857 /* shop_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shop_scene.cpp; path = ../../src/shop_scene.cpp; sourceTree = "<group>"; };
 		6A960E2318C60BE000C4B857 /* shop_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shop_scene.h; path = ../../src/shop_scene.h; sourceTree = "<group>"; };
 		6AA611B118D304C100C62390 /* test.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = test.mm; sourceTree = SOURCE_ROOT; };
+		6AA611B418D33F0B00C62390 /* loading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = loading.cpp; path = ../../src/loading.cpp; sourceTree = "<group>"; };
+		6AA611B518D33F0B00C62390 /* loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loading.h; path = ../../src/loading.h; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -1297,6 +1300,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6AA611B418D33F0B00C62390 /* loading.cpp */,
+				6AA611B518D33F0B00C62390 /* loading.h */,
 				6A063D6618D1F79400645C9A /* static_config.cpp */,
 				6A063D6718D1F79400645C9A /* static_config.h */,
 				6A960E2118C60BE000C4B857 /* common.h */,
@@ -1948,6 +1953,7 @@
 				15A3D99D1682F7F9002FB0C5 /* cpPivotJoint.c in Sources */,
 				15A3D99E1682F7F9002FB0C5 /* cpRatchetJoint.c in Sources */,
 				15A3D99F1682F7F9002FB0C5 /* cpRotaryLimitJoint.c in Sources */,
+				6AA611B618D33F0B00C62390 /* loading.cpp in Sources */,
 				15A3D9A01682F7F9002FB0C5 /* cpSimpleMotor.c in Sources */,
 				15A3D9A11682F7F9002FB0C5 /* cpSlideJoint.c in Sources */,
 				15A3D9A21682F7F9002FB0C5 /* cpArbiter.c in Sources */,
