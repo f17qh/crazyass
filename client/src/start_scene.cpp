@@ -5,7 +5,6 @@
 #include "network/WebSocket.h"
 #include "lib_json/json_lib.h"
 #include "common.h"
-#include "CIapControl.h"
 
 USING_NS_CC_EXT;
 
@@ -213,7 +212,8 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // connect server
-  ws->init(*mydelegate, "ws://10.32.91.155:12346/ca");
+  //ws->init(*mydelegate, "ws://10.32.91.155:12346/ca");
+  CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
 }
 
 void StartScene::CAOpen() {
