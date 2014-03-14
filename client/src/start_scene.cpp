@@ -187,6 +187,7 @@ void StartScene::CARecv(char *data, size_t len) {
     if (User::CurrentUser()->userid() == "") {
       User::CurrentUser()->set_userid(result.get("Userid", "").asString());
       User::CurrentUser()->Flush();
+      CCLOG("save new userid %s", User::CurrentUser()->userid().c_str());
     }
   } else {
     // TODO: logout to start screen

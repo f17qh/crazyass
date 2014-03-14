@@ -40,7 +40,7 @@ type UserDb struct {
 
 func userRegister(u *UserDb, id string) {
 	u.UserId = id
-	u.Heart = 9
+	u.Heart = 99
 	u.NextStage = 1
 	u.RegTime = uint32(time.Now().Unix())
 	// u.LastLogin = u.RegTime
@@ -59,7 +59,7 @@ func (u *User) Load(userid string) error {
 		log.Println(err)
 		return err
 	}
-	u.udb.Heart = 99
+	// u.udb.Heart = 99
 	// u.ready = true
 	return nil
 }
@@ -145,6 +145,7 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	// check if userid is empty
 	if msg.Userid == "" {
 		msg.Userid = GenerateUniqueUserid();
+		log.Printf("register new user %s\n", msg.Userid)
 	}
 
 	// TODO: check if user already login in other server

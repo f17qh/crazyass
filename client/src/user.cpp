@@ -121,7 +121,11 @@ void RemoteUser::Flush() {
   if (userid_.size() == 0)
     return;
 
-  CAWriteFile("userdata", (char *)userid_.c_str());
+  CSJson::FastWriter writer;
+  CSJson::Value value;
+  value["userid"] = userid_;
+  std::string content = writer.write(value);
+  CAWriteFile("userdata", (char *)content.c_str());
 }
 
 int RemoteUser::Load(const char *path) {
