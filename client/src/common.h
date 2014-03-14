@@ -32,6 +32,8 @@ public:
 };
 
 extern CADelegate * sharedDelegate();
+extern void ShouldGotoStart();
+extern bool GotoStartSceneIfError();
 
 #define PLAY_BTNSOUND \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_button_touched.caf");

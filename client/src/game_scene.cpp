@@ -251,6 +251,9 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
 
   PLAY_BTNSOUND;
+  if (GotoStartSceneIfError())
+    return;
+
   CCLOG("%s\n", __FUNCTION__);
 #if 0
   if (User::CurrentUser()->UseHeart(select_stage_))
@@ -263,7 +266,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
 #endif
   play_ = 0;
   CSJson::Value value;
-  value["userid"] = "TestUser";
+  value["userid"] = User::CurrentUser()->userid();
   value["cmd"] = 2;
   CSJson::Value body;
   body["stageid"] = select_stage_;

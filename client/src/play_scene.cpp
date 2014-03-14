@@ -159,6 +159,8 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
   if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
+  if (GotoStartSceneIfError())
+    return;
   UIButton* btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
   if (btn) {
     btn->setEnabled(false);
@@ -169,7 +171,7 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
 
 void PlayScene::SendEndPlay(bool pass) {
   CSJson::Value value;
-  value["userid"] = "TestUser";
+  value["userid"] = User::CurrentUser()->userid();
   value["cmd"] = 3;
   CSJson::Value body;
   body["stageid"] = stageid_;

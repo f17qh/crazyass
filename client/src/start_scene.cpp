@@ -45,10 +45,13 @@ public:
 
   virtual void onClose(WebSocket* ws) {
     CCLOG("%s", __FUNCTION__);
+    // if disconnect, goto start scene
+    ShouldGotoStart();
   }
 
   virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error) {
     CCLOG("%s", __FUNCTION__);
+    ShouldGotoStart();
   }
 
   virtual void onMessage(WebSocket* ws, const WebSocket::Data& data) {
@@ -91,6 +94,75 @@ private:
   int recvcount_;
 };
 
+class CAWS {
+ public:
+  static CAWS * Instance();
+  static void Release();
+  CAWS() {
+    delegate_ = new MyDelegate;
+    ws_ = new WebSocket;
+  }
+
+  ~CAWS() {
+    caws_ = NULL;
+    delete delegate_;
+    delete ws_;
+  }
+
+  void Init(const char *addr, CATarget *target) {
+    delegate_->Init(ws_, target);
+    // close if connect
+    if (ws_->getReadyState() == WebSocket::kStateOpen)
+      ws_->close();
+    bool t = ws_->init(*delegate_, addr);
+    if (!t) {
+      CCLOG("connec server faild");
+    }
+  }
+
+  MyDelegate *delegate() {
+    return delegate_;
+  }
+
+ private:
+  static CAWS *caws_;
+  MyDelegate *delegate_;
+  WebSocket *ws_;
+};
+
+CAWS * CAWS::caws_ = NULL;
+
+CAWS * CAWS::Instance() {
+  if (caws_)
+    return caws_;
+  caws_ = new CAWS;
+  return caws_;
+}
+
+void CAWS::Release() {
+  if (caws_) {
+    delete caws_;
+    caws_ = NULL;
+  }
+}
+
+static bool gotostartscene = false;
+void ShouldGotoStart() {
+  gotostartscene = true;
+}
+
+bool GotoStartSceneIfError() {
+  if (gotostartscene) {
+    CCLOG("Goto start scene");
+    gotostartscene = false;
+    CAWS::Release();
+    CCScene *sc = StartScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionTurnOffTiles::create(1, sc));
+    return true;
+  }
+  return false;
+}
+
 #if 0
 void CAObject::CheckRecv(float dt) {
   if (delegate_->CheckRecv())
@@ -107,9 +179,8 @@ void CAObject::set_delegate(MyDelegate *d) {
 }
 #endif
 
-static MyDelegate *mydelegate;
 CADelegate * sharedDelegate() {
-  return mydelegate;
+  return CAWS::Instance()->delegate();
 }
 
 bool StartScene::init() {
@@ -141,12 +212,8 @@ void StartScene::onEnter() {
 
   this->addChild(ui_layer_, 0, 100);
 
-  // static WebSocket websocket;
-  // mydelegate = MyDelegate::create();
-  mydelegate = new MyDelegate;
-  WebSocket *ws = new WebSocket();
-  mydelegate->Init(ws, this);
-  ws->init(*mydelegate, "ws://106.187.47.129:12345/ca");
+  // connect server
+  CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
 }
 
 void StartScene::CAOpen() {
@@ -221,6 +288,9 @@ void StartScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
 
   PLAY_BTNSOUND;
+  if (GotoStartSceneIfError())
+    return;
+
   CCLOG("%s\n", __FUNCTION__);
   // CCDirector::sharedDirector()->popScene();
 
