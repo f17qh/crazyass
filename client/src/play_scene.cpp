@@ -1,8 +1,10 @@
 #include "play_scene.h"
 #include "game_scene.h"
+#include "shop_scene.h"
 #include "card_manager.h"
 #include "static_config.h"
 #include "user.h"
+#include "loading.h"
 
 bool PlayScene::init() {
   //////////////////////////////
@@ -55,6 +57,8 @@ void PlayScene::onEnter() {
     btn->setTouchEnable(false);
   }
   card_mgr_.SetEnable(false);
+
+  be_back_ = false;
 }
 
 static const char* btn_name [] = {
@@ -66,8 +70,10 @@ static const char* btn_name [] = {
 
 void PlayScene::CARecvDone() {
   // CCDirector::sharedDirector()->popScene();
-  CCScene *sc = GameScene::create();
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+  //Loading::Instence().ShowLoadScene(this, false);
+  /*CCScene *sc = GameScene::create();
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));*/
+  be_back_ = true;
 }
 
 void PlayScene::CARecv(char *data, size_t len) {
@@ -144,14 +150,32 @@ void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
           btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
           btn->setEnabled(true); 
         } else {
+          btn->setEnabled(false);
           User::CurrentUser()->set_stageid(stageid_ + 1);
           User::CurrentUser()->Flush();
-          CCScene *sc = GameScene::create();
-          CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+          PopWin::Instence().ShowPopScene(this, true, toucheventselector(PlayScene::onPopBack));
         }
       }
     }
   }
+  CCLOG("%s\n", __FUNCTION__);
+}
+
+void PlayScene::onPopBack(CCObject *target, TouchEventType e) {
+  if (e != TOUCH_EVENT_ENDED)
+    return;
+  if(be_back_) {
+    CCScene *sc = GameScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+  }
+  CCLOG("%s\n", __FUNCTION__);
+}
+
+void PlayScene::onPopShop(CCObject *target, TouchEventType e) {
+  if (e != TOUCH_EVENT_ENDED)
+    return;
+  ShopScene *sc = ShopScene::create();
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   CCLOG("%s\n", __FUNCTION__);
 }
 
@@ -160,7 +184,7 @@ void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
     return;
   PLAY_BTNSOUND;
   if (GotoStartSceneIfError())
-    return;
+  	return;
   UIButton* btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
   if (btn) {
     btn->setEnabled(false);
@@ -190,12 +214,8 @@ void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
     return;
   PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
-#if 0
-  // CCDirector::sharedDirector()->popScene();
   CCScene *sc = GameScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
-#endif
-  SendEndPlay(false);
 }
 
 void PlayScene::update(float delta) {
@@ -315,11 +335,14 @@ void PlayScene::onPanelSecond(CCObject *target, TouchEventType e) {
   if(sub_win_) {
     TakeOff();
   } else {
-    //ÊäÁË
-    CCScene *sc = GameScene::create();
-    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
+    this->be_back_ = true;
+    PopLose::Instence().ShowPopScene(this, true, 
+      toucheventselector(PlayScene::onPopBack), 
+      toucheventselector(PlayScene::onPopShop));
+    //失败
+    /*CCScene *sc = GameScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));*/
   }
-  //TODO other
 }
 
 void PlayScene::SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id) {
@@ -337,4 +360,6 @@ void PlayScene::SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id) {
     PLAY_LOSE;
     SetResultPanelState(RESULT_PANEL_LOSE);
   }
+  if(all_finish_ && sub_win_)
+    SendEndPlay(true);
 }

@@ -50,6 +50,8 @@ protected:
   void onBtnStartPlay(CCObject *target, TouchEventType e);
   void onBtnClothes(CCObject *target, TouchEventType e);
   void onBtnMoveClothes(CCObject *target);
+  void onPopBack(CCObject *target, TouchEventType e);
+  void onPopShop(CCObject *target, TouchEventType e);
   void ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name);
   void SendEndPlay(bool);
   void onPanelSecond(CCObject *target, TouchEventType e);
@@ -65,5 +67,6 @@ protected:
   int sub_stage_id_;
   bool sub_win_;
   bool all_finish_;
+  bool be_back_;
 };
 

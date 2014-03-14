@@ -213,7 +213,7 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // connect server
-  CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
+  ws->init(*mydelegate, "ws://10.32.91.155:12346/ca");
 }
 
 void StartScene::CAOpen() {

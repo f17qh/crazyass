@@ -6,7 +6,7 @@
 #include "event_mgr.h"
 #include "user.h"
 #include "common.h"
-
+#include "loading.h"
 using namespace std;
 
 #ifdef LINUX
@@ -224,6 +224,7 @@ void GameScene::CARecvDone() {
   PlayScene *sc = PlayScene::create();
   sc->set_stageid(select_stage_);
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
+  Loading::Instence().ShowLoadScene(this, false);
   // CCDirector::sharedDirector()->pushScene(sc);
 }
 
@@ -277,6 +278,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
 
   sharedDelegate()->SendServer(content, this);
   schedule(schedule_selector(GameScene::update), 1, 10, 1);
+  Loading::Instence().ShowLoadScene(this, true);
 }
 
 void GameScene::update(float delta) {

@@ -73,4 +73,12 @@
     <Project>LoadScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PopWin</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PopLose</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
