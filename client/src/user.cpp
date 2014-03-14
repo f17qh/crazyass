@@ -96,7 +96,11 @@ void LocalUser::Flush() {
 
 class RemoteUser : public User {
 public:
-  RemoteUser(){memset(event_lock_, 0, sizeof(event_lock_));};
+  RemoteUser() {
+      for (size_t i = 0; i < sizeof(event_lock_) / sizeof(event_lock_[0]); i++) {
+          event_lock_[i] = 1;
+      }
+  };
   int Load(const char *path) {return 0;};
   void Flush() {};
   int EventLock(int stageid) {

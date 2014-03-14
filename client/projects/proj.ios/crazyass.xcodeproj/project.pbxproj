@@ -245,6 +245,7 @@
 		6A5A770C18C3AB6F00E914D8 /* start_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770418C3AB6F00E914D8 /* start_scene.cpp */; };
 		6A5A770D18C3AB6F00E914D8 /* user.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A770618C3AB6F00E914D8 /* user.cpp */; };
 		6A8602DB18C73165006B377D /* stage_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A8602DA18C73165006B377D /* stage_data.json */; };
+		6A898EDC18D2D8AD00C7A9CF /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 6A898EDB18D2D8AD00C7A9CF /* sound */; };
 		6A960E1A18C60A1E00C4B857 /* MainScene in Resources */ = {isa = PBXBuildFile; fileRef = 6A960E1918C60A1E00C4B857 /* MainScene */; };
 		6A960E2418C60BE000C4B857 /* shop_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A960E2218C60BE000C4B857 /* shop_scene.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
@@ -756,6 +757,7 @@
 		6A5A770618C3AB6F00E914D8 /* user.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = user.cpp; path = ../../src/user.cpp; sourceTree = "<group>"; };
 		6A5A770718C3AB6F00E914D8 /* user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user.h; path = ../../src/user.h; sourceTree = "<group>"; };
 		6A8602DA18C73165006B377D /* stage_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stage_data.json; path = ../../Resources/stage_data.json; sourceTree = "<group>"; };
+		6A898EDB18D2D8AD00C7A9CF /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sound; path = ../../Resources/sound; sourceTree = "<group>"; };
 		6A960E1918C60A1E00C4B857 /* MainScene */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MainScene; path = ../../Resources/MainScene; sourceTree = "<group>"; };
 		6A960E2118C60BE000C4B857 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../../src/common.h; sourceTree = "<group>"; };
 		6A960E2218C60BE000C4B857 /* shop_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shop_scene.cpp; path = ../../src/shop_scene.cpp; sourceTree = "<group>"; };
@@ -1764,6 +1766,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A898EDB18D2D8AD00C7A9CF /* sound */,
 				6A5853A818CEF1F800817A56 /* Action */,
 				6A8602DA18C73165006B377D /* stage_data.json */,
 				6A960E1918C60A1E00C4B857 /* MainScene */,
@@ -1858,6 +1861,7 @@
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
 				6A5853A918CEF1F800817A56 /* Action in Resources */,
+				6A898EDC18D2D8AD00C7A9CF /* sound in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
