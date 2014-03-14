@@ -3,6 +3,7 @@
 
 #include <cocos2d.h>
 #include <cocos-ext.h>
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -31,4 +32,12 @@ public:
 };
 
 extern CADelegate * sharedDelegate();
+
+#define PLAY_BTNSOUND \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_button_touched.caf");
+#define PLAY_WIN \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_girl_defeat.caf");
+#define PLAY_LOSE \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_player_lose.caf");
+
 #endif

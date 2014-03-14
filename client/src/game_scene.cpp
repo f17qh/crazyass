@@ -211,6 +211,7 @@ void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  PLAY_BTNSOUND;
   ShopScene *sc = ShopScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
 }
@@ -249,6 +250,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
 #if 0
   if (User::CurrentUser()->UseHeart(select_stage_))
@@ -284,6 +286,7 @@ void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
   EventScene *sc = EventScene::create();
   sc->set_stageid(select_stage_);
@@ -298,6 +301,7 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
   UIImageView *preview = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlPreview"); 
   if (!preview) 
     return; 
+  PLAY_BTNSOUND;
   char name[RES_MAX_NAME];
   snprintf(name, RES_MAX_NAME, "stage_select_preview_girl%d.png", i); 
   preview->loadTexture(name, UI_TEX_TYPE_PLIST); 

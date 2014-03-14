@@ -5,6 +5,7 @@ import "log"
 import "time"
 import "labix.org/v2/mgo"
 import "labix.org/v2/mgo/bson"
+import "strconv"
 
 var ErrInvalidParam = errors.New("Invalid paramters")
 
@@ -131,19 +132,30 @@ func (u *User) UseHeart(heart int) error {
 	return u.AddHeart(-heart)
 }
 
+func GenerateUniqueUserid() string {
+	timestamp := time.Now().UnixNano()
+	return strconv.FormatInt(timestamp, 10)
+}
+
 func ProcUserLogin(c *Client, msg *Msg) int {
 	if c.u.IsLogin() {
 		return CLI_PROC_RET_SUCC
 	}
 
-	// TODO: check if user already login in other server
+	// check if userid is empty
+	if msg.Userid == "" {
+		msg.Userid = GenerateUniqueUserid();
+	}
 
+	// TODO: check if user already login in other server
 	if err := c.u.Login(msg.Userid); err != nil {
 		return CLI_PROC_RET_KICK
 	}
 
 	// send reply
 	reply := c.GetReplyMsg()
+	// may changed
+	reply.Userid = msg.Userid
 	reply.Body["Heart"] = c.u.udb.Heart
 	reply.Body["Stageid"] = c.u.udb.NextStage
 	return CLI_PROC_RET_SUCC

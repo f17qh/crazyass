@@ -151,7 +151,7 @@ void StartScene::onEnter() {
 
 void StartScene::CAOpen() {
   CSJson::Value value;
-  value["userid"] = "TestUser";
+  value["userid"] = User::CurrentUser()->userid();
   value["cmd"] = 1;
 
   CSJson::FastWriter writer;
@@ -182,6 +182,12 @@ void StartScene::CARecv(char *data, size_t len) {
     CSJson::Value body = result["Body"];
     u->set_heart(body.get("Heart", 0).asInt());
     u->set_stageid(body.get("Stageid", 1).asInt());
+
+    // save new userid
+    if (User::CurrentUser()->userid() == "") {
+      User::CurrentUser()->set_userid(result.get("Userid", "").asString());
+      User::CurrentUser()->Flush();
+    }
   } else {
     // TODO: logout to start screen
     SetLoginState(2);
@@ -213,6 +219,7 @@ void StartScene::onBtnPlay(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
   // CCDirector::sharedDirector()->popScene();
 

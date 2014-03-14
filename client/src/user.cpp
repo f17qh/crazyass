@@ -100,9 +100,10 @@ public:
       for (size_t i = 0; i < sizeof(event_lock_) / sizeof(event_lock_[0]); i++) {
           event_lock_[i] = 1;
       }
+      userid_ = "";
   };
-  int Load(const char *path) {return 0;};
-  void Flush() {};
+  int Load(const char *path);
+  void Flush();
   int EventLock(int stageid) {
     return event_lock_[stageid - 1];
   }
@@ -113,6 +114,34 @@ protected:
   int event_lock_[10];
 };
 
+void CAWriteFile(char *file, char *content);
+void CAReadFile(char *file, char *content, size_t);
+
+void RemoteUser::Flush() {
+  if (userid_.size() == 0)
+    return;
+
+  CAWriteFile("userdata", (char *)userid_.c_str());
+}
+
+int RemoteUser::Load(const char *path) {
+  char buf[512];
+  memset(buf, 0, sizeof(buf));
+  CAReadFile("userdata", buf, 512);
+  if (strlen(buf) == 0) {
+    return -1;
+  }
+
+  CSJson::Reader reader;
+  CSJson::Value value;
+  if (!reader.parse(std::string((char *)buf), value, false)) {
+    CCLOG("parse %s error", path);
+    return -1;
+  }
+
+  userid_ = value.get("userid", "").asString();
+  return 0;
+}
 
 static User * current_user_ = NULL;
 User * User::CurrentUser() {

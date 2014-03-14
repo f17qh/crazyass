@@ -158,6 +158,7 @@ void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
 void PlayScene::onBtnStartPlay(CCObject *target, TouchEventType e) {
   if (e != TOUCH_EVENT_ENDED)
     return;
+  PLAY_BTNSOUND;
   UIButton* btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
   if (btn) {
     btn->setEnabled(false);
@@ -185,7 +186,7 @@ void PlayScene::SendEndPlay(bool pass) {
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
 #if 0
   // CCDirector::sharedDirector()->popScene();
@@ -327,9 +328,11 @@ void PlayScene::SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id) {
     return;
   }*/
   
-  if(sub_win)
+  if(sub_win) {
+    PLAY_WIN;
     SetResultPanelState(RESULT_PANEL_WIN);
-  else
+  } else {
+    PLAY_LOSE;
     SetResultPanelState(RESULT_PANEL_LOSE);
-
+  }
 }
