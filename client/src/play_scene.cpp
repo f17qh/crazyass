@@ -116,6 +116,7 @@ void PlayScene::TakeOff() {
     btn->addMoveEvent(this, coco_moveselector(PlayScene::onBtnMoveClothes));
     TakeOffAction(btn);
   }
+  CCLOG("%s error sub_stage_id_:%d\n", __FUNCTION__, sub_stage_id_);
   return;
 }
 

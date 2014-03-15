@@ -11,8 +11,8 @@
     <string>MainScene_1.json</string>
     <string>PlayScene.json</string>
     <string>GirlScene1.json</string>
-    <string>GirlScene3.json</string>
     <string>GirlScene2.json</string>
+    <string>GirlScene3.json</string>
     <string>GirlScene4.json</string>
     <string>GirlScene5.json</string>
     <string>GirlScene6.json</string>
@@ -32,18 +32,18 @@
     <string>Resources/images/stage_select_images.plist</string>
     <string>Resources/images/play_images.plist</string>
     <string>Resources/images/girl1_images.plist</string>
-    <string>Resources/images/girl3_images.plist</string>
     <string>Resources/images/girl2_images.plist</string>
+    <string>Resources/images/girl6_images.plist</string>
     <string>Resources/images/girl4_images.plist</string>
     <string>Resources/images/girl5_images.plist</string>
     <string>Resources/images/gallery_images.plist</string>
-    <string>Resources/images/girl6_images.plist</string>
+    <string>Resources/images/girl3_images.plist</string>
     <string>Resources/images/main_images.plist</string>
     <string>Resources/images/shop_images.plist</string>
     <string>Resources/images/loading_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PopLose.json</CurrentUIJson>
+  <CurrentUIJson>EventScene1.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

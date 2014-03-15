@@ -114,8 +114,8 @@ protected:
   int event_lock_[10];
 };
 
-void CAWriteFile(char *file, char *content);
-void CAReadFile(char *file, char *content, size_t);
+void CAWriteFile(char *file, char *content){};
+void CAReadFile(char *file, char *content, size_t){};
 
 void RemoteUser::Flush() {
   if (userid_.size() == 0)

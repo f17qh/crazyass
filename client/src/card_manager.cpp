@@ -52,8 +52,10 @@ void CardMgr::SetTouchable(bool b) {
   for(int i = 0; i < size; i++) {
     CCDirector* pDirector = CCDirector::sharedDirector();
     if(b) {
+      CCLOG("settouchable true");
       pDirector->getTouchDispatcher()->addTargetedDelegate((TouchableSprite*)card_layer_->getChildByTag(i), 0, true);
     } else {
+      CCLOG("settouchable false");
       pDirector->getTouchDispatcher()->removeDelegate((TouchableSprite*)card_layer_->getChildByTag(i));
     }
   }
@@ -104,7 +106,7 @@ void CardMgr::StartSubStage() {
   //设置该substage的精灵纹理
   SetCardSprite();
   //设置cardmgr为有效
-  SetEnable(true);
+  card_layer_->setVisible(true);
   //生成该sub_stage的card的移动路线
   MakeLinesData(config.play_count_[sub_stage_]);
   //执行开始动画
@@ -135,9 +137,6 @@ void CardMgr::RunActionByPlayCount() {
     FinishSubStage();
     return;
   }
-
-  SetTouchable(false);
-
   //如果没有结束要继续执行动画
   for(int sprite_num = 0; sprite_num < (int)all_card_index_.size(); sprite_num++) {
     MovePosBy(card_lines_[play_count_][sprite_num], 
@@ -232,7 +231,6 @@ void CardMgr::MoveWithLine(CCSprite* src, CCPoint end_point, float time) {
 }
 
 void CardMgr::RunBeginAction() {
-
   //这个要设置为false，否则会宕机，原因未知。。。
   SetTouchable(false);
   play_scene_->ShowStartTips(true);

@@ -13,7 +13,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>GirlScene3</Project>
+    <Project>GirlScene7</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -79,6 +79,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>PopLose</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GirlScene3</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

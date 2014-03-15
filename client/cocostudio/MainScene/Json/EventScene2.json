@@ -10,8 +10,18 @@
   "designHeight": 480,
   "designWidth": 800,
   "textures": [
+    "Resources/images/stage_select_images.plist",
     "Resources/images/play_images.plist",
-    "Resources/images/girl4_images.plist"
+    "Resources/images/girl1_images.plist",
+    "Resources/images/girl3_images.plist",
+    "Resources/images/girl2_images.plist",
+    "Resources/images/girl4_images.plist",
+    "Resources/images/girl5_images.plist",
+    "Resources/images/gallery_images.plist",
+    "Resources/images/girl6_images.plist",
+    "Resources/images/main_images.plist",
+    "Resources/images/shop_images.plist",
+    "Resources/images/loading_images.plist"
   ],
   "version": "1.2.0.1",
   "widgetTree": {

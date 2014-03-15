@@ -290,6 +290,12 @@ void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
+  int girl_id = i;
+  if(girl_id == 3) {
+    girl_id = 6;
+  } else if (girl_id == 6) {
+    girl_id = 3;
+  }
   CCLOG("%s", __FUNCTION__); 
   if (e != TOUCH_EVENT_BEGAN) 
     return; 
@@ -298,9 +304,10 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
     return; 
   PLAY_BTNSOUND;
   char name[RES_MAX_NAME];
-  snprintf(name, RES_MAX_NAME, "stage_select_preview_girl%d.png", i); 
+  snprintf(name, RES_MAX_NAME, "stage_select_preview_girl%d.png", girl_id); 
   preview->loadTexture(name, UI_TEX_TYPE_PLIST); 
   select_stage_ = i;
+
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent"); 
   if (btn) {
     if (i >= User::CurrentUser()->stageid()) {
