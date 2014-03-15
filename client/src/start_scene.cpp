@@ -234,8 +234,10 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // connect server
-  //CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
-  CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
+  CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
+
+  //下面是测试的
+  //CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
 }
 
 void StartScene::CAOpen() {
@@ -260,8 +262,8 @@ void StartScene::CARecv(const CSJson::Value& result) {
     User *u = User::CurrentUser();
     CSJson::Value body = result["Body"];
     u->set_heart(body.get("Heart", 0).asInt());
-    //u->set_stageid(body.get("Stageid", 1).asInt());
-    u->set_stageid(6);
+    u->set_stageid(body.get("Stageid", 1).asInt());
+    //u->set_stageid(6);
 
     // save new userid
     if (User::CurrentUser()->userid() == "") {
