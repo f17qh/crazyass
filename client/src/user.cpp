@@ -133,6 +133,7 @@ int RemoteUser::Load(const char *path) {
   memset(buf, 0, sizeof(buf));
   CAReadFile("userdata", buf, 512);
   if (strlen(buf) == 0) {
+    CCLOG("read userdata faild.");
     return -1;
   }
 
@@ -144,6 +145,7 @@ int RemoteUser::Load(const char *path) {
   }
 
   userid_ = value.get("userid", "").asString();
+  CCLOG("userid %s", userid_.c_str());
   return 0;
 }
 

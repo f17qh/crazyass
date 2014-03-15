@@ -2209,7 +2209,7 @@
 					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/external/libwebsockets/ios/lib\"",
 				);
 				PRODUCT_NAME = crazyass;
-				PROVISIONING_PROFILE = "A8F3541F-5A3C-46B3-9E1B-6EA619D2EDF6";
+				PROVISIONING_PROFILE = "76DCDB57-EA8C-44FB-A969-6603D4AA48A9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
