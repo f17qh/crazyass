@@ -228,14 +228,7 @@ void GameScene::CARecvDone() {
   // CCDirector::sharedDirector()->pushScene(sc);
 }
 
-void GameScene::CARecv(char *data, size_t len) {
-  CSJson::Reader reader;
-  CSJson::Value result;
-  if (!reader.parse(std::string(data), result, false)) {
-    CCLOG("parse %s error", data);
-    // TODO logout to start scene
-    return;
-  }
+void GameScene::CARecv(const CSJson::Value& result) {
   if (result.get("ErrCode", -1).asInt() == 0) {
     User *u = User::CurrentUser();
     CSJson::Value body = result["Body"];
@@ -273,10 +266,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   body["stageid"] = select_stage_;
   value["Body"] = body;
 
-  CSJson::FastWriter writer;
-  std::string content = writer.write(value);
-
-  sharedDelegate()->SendServer(content, this);
+  sharedDelegate()->SendServer(value, this);
   schedule(schedule_selector(GameScene::update), 1, 10, 1);
   Loading::Instence().ShowLoadScene(this, true);
 }

@@ -2,6 +2,7 @@
 #include <cocos2d.h>
 #include <cocos-ext.h>
 #include "common.h"
+#include "lib_json/json_lib.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -23,7 +24,7 @@ public:
   void SetLoginState(int s);
   void update(float delta);
 
-  virtual void CARecv(char *data, size_t len);
+  virtual void CARecv(const CSJson::Value& value);
   virtual void CARecvDone();
   virtual void CARecvTimeout();
   virtual void CAOpen();

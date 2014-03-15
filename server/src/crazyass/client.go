@@ -10,6 +10,7 @@ import _ "encoding/json"
 type Msg struct {
 	Cmd float64
 	ErrCode float64
+	Seq float64
 	Userid string
 	Body map[string]interface{}
 }
@@ -143,6 +144,7 @@ func (c *Client) procMsg(msg *Msg) {
 	// init reply msg
 	c.replyMsg.Userid = msg.Userid
 	c.replyMsg.Cmd = msg.Cmd
+	c.replyMsg.Seq = msg.Seq
 	// alloc a new map
 	// old will be GC eventually
 	c.replyMsg.Body = make(map[string]interface{})
@@ -153,7 +155,11 @@ func (c *Client) procMsg(msg *Msg) {
 		ret = CLI_PROC_RET_KICK
 	} else {
 		proc := procFuncArray[int(msg.Cmd)]
-		ret = proc(c, msg)
+		if proc == nil {
+			ret = CLI_PROC_RET_KICK
+		} else {
+			ret = proc(c, msg)
+		}
 	}
 
 	// flush data to db

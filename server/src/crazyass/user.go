@@ -14,6 +14,7 @@ func init() {
 	ClientProcRegister(kCmdUserLogin, ProcUserLogin)
 	ClientProcRegister(kCmdStartPlay, ProcStartPlay)
 	ClientProcRegister(kCmdEndPlay, ProcEndPlay)
+	ClientProcRegister(kCmdIAPAddHeart, ProcIAPAddHeart)
 }
 
 // user in memory
@@ -159,6 +160,21 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	reply.Userid = msg.Userid
 	reply.Body["Heart"] = c.u.udb.Heart
 	reply.Body["Stageid"] = c.u.udb.NextStage
+	return CLI_PROC_RET_SUCC
+}
+
+func ProcIAPAddHeart(c *Client, msg *Msg) int {
+	addheart, ok := msg.Body["addheart"]
+	if !ok {
+		c.SetErrCode(kErrInvalidProto)
+		return CLI_PROC_RET_ERR
+	}
+
+	c.u.AddHeart(int(addheart.(float64)))
+	c.u.dirty = true
+
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.u.udb.Heart
 	return CLI_PROC_RET_SUCC
 }
 

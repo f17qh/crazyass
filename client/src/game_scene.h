@@ -2,6 +2,7 @@
 #include <cocos2d.h>
 #include <cocos-ext.h>
 #include "common.h"
+#include "lib_json/json_lib.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -19,7 +20,7 @@ public:
 
   void menuCloseCallback(CCObject* pSender);
 
-  void CARecv(char *data, size_t len);
+  void CARecv(const CSJson::Value& result);
   void CARecvDone();
   void CARecvTimeout();
   void update(float delta);

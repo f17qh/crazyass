@@ -115,12 +115,23 @@ void CAProductByNotify(char *name) {
   if (name == NULL)
     return;
 
+  int addheart = 0;
   for (int i = 0; i < sizeof(productId)/sizeof(productId[0]); i++) {
     if (strcmp(name, productId[i]) == 0) {
+      addheart = productHeart[i];
       User::CurrentUser()->set_heart(
         User::CurrentUser()->heart() + productHeart[i]);
     }
   }
 
   // TODO: notify server
+  CSJson::Value value;
+  value["userid"] = User::CurrentUser()->userid();
+  value["cmd"] = 4;
+  CSJson::Value body;
+  body["addheart"] = addheart;
+  body["token"] = "";
+  value["Body"] = body;
+
+  sharedDelegate()->SendServer(value, NULL);
 }

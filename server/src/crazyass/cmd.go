@@ -8,6 +8,7 @@ const (
 	kCmdUserLogin = 1
 	kCmdStartPlay = 2
 	kCmdEndPlay = 3
+	kCmdIAPAddHeart = 4
 )
 
 // error

@@ -33,6 +33,8 @@ public:
   void Init(WebSocket *ws, CATarget *target) {
     ws_ = ws;
     target_ = target;
+    seq_ = 12345;
+    lastseq_ = 0;
   }
 
   virtual void onOpen(WebSocket* ws) {
@@ -57,8 +59,19 @@ public:
     CCLOG("%s", __FUNCTION__);
     CCLOG("%s", data.bytes);
 
+    CSJson::Reader reader;
+    CSJson::Value result;
+    if (!reader.parse(std::string(data.bytes), result, false)) {
+      CCLOG("parse %s error", data.bytes);
+      return;
+    }
+
+    int seq = result.get("seq", 0).asInt();
+    if (seq != lastseq_)
+      return;
+
     if (target_) {
-      target_->CARecv(data.bytes, data.len);
+      target_->CARecv(result);
       recvflag_ = true;
     }
 
@@ -80,17 +93,26 @@ public:
     return false;
   }
 
-  void SendServer(const std::string& content, CATarget *target) {
+  void SendServer(CSJson::Value& value, CATarget *target) {
+    value["seq"] = seq_;
+    lastseq_ = seq_;
+    seq_++;
+
+    CSJson::FastWriter writer;
+    std::string content = writer.write(value);
     recvflag_ = false;
     recvcount_ = 0;
     target_ = target;
     ws_->send(content);
   }
+
 private:
   WebSocket *ws_;
   CATarget *target_;
   bool recvflag_;
   int recvcount_;
+  int seq_;
+  int lastseq_;
 };
 
 class CAWS {
@@ -221,9 +243,7 @@ void StartScene::CAOpen() {
   value["userid"] = User::CurrentUser()->userid();
   value["cmd"] = 1;
 
-  CSJson::FastWriter writer;
-  std::string content = writer.write(value);
-  sharedDelegate()->SendServer(content, this);
+  sharedDelegate()->SendServer(value, this);
   // scheduleUpdate();
   schedule(schedule_selector(StartScene::update), 1, 10, 1);
 }
@@ -235,15 +255,7 @@ void StartScene::update(float dt) {
   }
 }
 
-void StartScene::CARecv(char *data, size_t len) {
-  CSJson::Reader reader;
-  CSJson::Value result;
-  if (!reader.parse(std::string(data), result, false)) {
-    CCLOG("parse %s error", data);
-    // TODO: logout to start screen
-    SetLoginState(2);
-    return;
-  }
+void StartScene::CARecv(const CSJson::Value& result) {
   if (result.get("ErrCode", -1).asInt() == 0) {
     User *u = User::CurrentUser();
     CSJson::Value body = result["Body"];

@@ -4,6 +4,7 @@
 #include <cocos2d.h>
 #include <cocos-ext.h>
 #include "SimpleAudioEngine.h"
+#include "lib_json/json_lib.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -15,11 +16,11 @@ struct ButtonListener {
     SEL_TouchEvent selector;
 };
 
-extern void SendServer(const std::string& content, void (*func)(void *, char *, size_t), void *arg);
+//extern void SendServer(const std::string& content, void (*func)(void *, char *, size_t), void *arg);
 
 class CATarget {
 public:
-  virtual void CARecv(char *data, size_t len) {}
+  virtual void CARecv(const CSJson::Value& value) {}
   virtual void CARecvDone() {}
   virtual void CARecvTimeout() {}
   virtual void CAOpen() {}
@@ -27,7 +28,7 @@ public:
 
 class CADelegate {
 public:
-  virtual void SendServer(const std::string& content, CATarget *target) {};
+  virtual void SendServer(CSJson::Value& value, CATarget *target) {};
   virtual bool CheckRecv() {return true;}
 };
 
