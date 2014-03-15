@@ -19,3 +19,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     eglView->setFrameSize(800, 480);
     return CCApplication::sharedApplication()->run();
 }
+
+void CAWriteFile(char *file, char *content){};
+void CAReadFile(char *file, char *content, size_t){};
