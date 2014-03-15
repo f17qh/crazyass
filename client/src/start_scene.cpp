@@ -66,9 +66,11 @@ public:
       return;
     }
 
-    int seq = result.get("seq", 0).asInt();
-    if (seq != lastseq_)
+    int seq = result.get("Seq", 0).asInt();
+    if (seq != lastseq_) {
+      CCLOG("invalid seq %d expect %d", seq, lastseq_);
       return;
+    }
 
     if (target_) {
       target_->CARecv(result);
