@@ -24,5 +24,12 @@ protected:
   UILayer *ui_layer_;
   CCScene *back_scene_;
   void onBtnBack(CCObject *target, TouchEventType e);
+
+  void onBtnSale1(CCObject *target, TouchEventType e);
+  void onBtnSale2(CCObject *target, TouchEventType e);
+  void onBtnSale3(CCObject *target, TouchEventType e);
+  void onBtnSale4(CCObject *target, TouchEventType e);
+  void onBtnSale5(CCObject *target, TouchEventType e);
+  void onBtnSale(CCObject *target, TouchEventType e, int i);
 };
 
