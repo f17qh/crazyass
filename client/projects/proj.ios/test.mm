@@ -39,6 +39,10 @@ extern void CAProductByNotify(char *, void *target);
     void *_target;
 }
 
+-(void) setTarget: (void *)target {
+    _target = target;
+}
+
 -(void) getProcustList {
     [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
 	    if (success) {
