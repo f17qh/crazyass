@@ -45,6 +45,7 @@ func userRegister(u *UserDb, id string) {
 	u.NextStage = 1
 	u.RegTime = uint32(time.Now().Unix())
 	// u.LastLogin = u.RegTime
+	log.Printf("New user %s\n", id)
 
 	// TODO: save device info
 }
