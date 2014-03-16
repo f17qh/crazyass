@@ -13,8 +13,6 @@ public:
   virtual bool init();  
 
   virtual void onEnter();
-  
-  void update(float delta);
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
 
@@ -50,7 +48,5 @@ protected:
   float distence_;
   CCSprite* star_sprite_;
   CCPoint start_point_;
-
-  int count_;
 };
 

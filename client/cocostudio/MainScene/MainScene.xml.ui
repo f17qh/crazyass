@@ -27,6 +27,7 @@
     <string>LoadScene.json</string>
     <string>PopWin.json</string>
     <string>PopLose.json</string>
+    <string>TextBox.json</string>
   </JsonList>
   <imageFileList>
     <string>Resources/images/stage_select_images.plist</string>
@@ -43,7 +44,7 @@
     <string>Resources/images/loading_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>EventScene1.json</CurrentUIJson>
+  <CurrentUIJson>TextBox.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>

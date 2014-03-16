@@ -31,3 +31,12 @@ public:
 protected:
   UILayer *pop_layer_;
 };
+
+class TextBox {
+public:
+  static TextBox& Instence();
+  void Init();
+  void Show(UILayer *layer, bool visible, const char *text=NULL, int z_order=100);
+protected:
+  Layout* layout_;
+};

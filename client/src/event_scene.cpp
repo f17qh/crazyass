@@ -3,7 +3,7 @@
 #include "common.h"
 #include "user.h"
 #include "SimpleAudioEngine.h"
-
+#include "loading.h"
 bool EventScene::init() {
   //////////////////////////////
   // 1. super init first
@@ -17,7 +17,6 @@ bool EventScene::init() {
   stock2_state_ = 0;
   distence_ = 0.0f;
   memset(event_state_, 0, sizeof(event_state_));
-  count_ = 0;
   return true;
 }
 
@@ -178,8 +177,6 @@ void EventScene::onBtnStarField(CCObject *target, TouchEventType e) {
   } else if (e == TOUCH_EVENT_ENDED) {
     img->setVisible(false);
   }
-
-
 }
 
 void EventScene::onBtnMoveStar(CCObject *target) {
@@ -240,7 +237,6 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     btn->setVisible(true);
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_2");
     btn->setVisible(true);
-    //schedule(schedule_selector(EventScene::update), 1, 1000, 1);
   } else {
     //UIImageView* img = (UIImageView *)ui_layer_->getWidgetByName("ImgStar");
     //img->setVisible(true);
@@ -268,20 +264,23 @@ void EventScene::ShowLoadingBar() {
   bool show = false;
   if(distence_ > 0.0f)
     show = true;
+
   UIImageView* img_bg = (UIImageView *)ui_layer_->getWidgetByName("ImageBarGround");
-  img_bg->setVisible(show);
   UIImageView* img_bar = (UIImageView *)ui_layer_->getWidgetByName("ImageBar");
-  img_bar->setVisible(show);
   UILoadingBar* loading_bar = (UILoadingBar *)ui_layer_->getWidgetByName("LoadingBar");
-  loading_bar->setVisible(show);
-  loading_bar->setPercent(distence_);
+
+  if(show && !img_bg->isVisible() && !img_bar->isVisible() && !loading_bar->isVisible()) {
+    img_bg->setVisible(true);
+    img_bar->setVisible(true);
+    loading_bar->setVisible(true);
+  }
+
+  if(!show) {
+    img_bg->setVisible(false);
+    img_bar->setVisible(false);
+    loading_bar->setVisible(false);
+    loading_bar->setPercent(0);
+  }
+  loading_bar->setPercent(distence_/10.0f);
 }
 
-void EventScene::update(float delta) {
-  count_++;
-  if(count_ > 100) {
-    count_ = 0;
-  }
- // UILoadingBar* loading_bar = (UILoadingBar *)ui_layer_->getWidgetByName("LoadingBar2");
-  //loading_bar->setPercent(count_);
-}

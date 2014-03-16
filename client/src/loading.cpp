@@ -94,3 +94,42 @@ void PopLose::ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector
   }
 }
 
+static TextBox* textbox = NULL;
+TextBox& TextBox::Instence() {
+  if (textbox == NULL) {
+    textbox = new TextBox();
+    textbox->Init();
+  }
+  return *textbox;
+}
+
+void TextBox::Init() {
+  CCLOG("%s", __FUNCTION__);
+  layout_ = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/TextBox.json"));
+}
+
+void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) {
+  if(visible) {
+    layer->addWidget(layout_);
+    UILabelBMFont *ui_text = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontText");
+    if(ui_text == NULL)
+      return;
+    ui_text->setVisible(true);
+    ui_text->setText(text);
+    ui_text->setZOrder(z_order+1);
+
+    UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImgTextField");
+    if(imgs == NULL)
+      return;
+    imgs->setVisible(true);
+    imgs->setZOrder(z_order);
+  } else {
+    layer->removeWidget(layout_);
+    UILabelBMFont *ui_text = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontText");
+    if(ui_text != NULL)
+      ui_text->setVisible(false);
+    UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImgTextField");
+    if(imgs != NULL)
+      imgs->setVisible(false);
+  }
+}

@@ -85,4 +85,8 @@
     <Project>GirlScene3</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TextBox</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

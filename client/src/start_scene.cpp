@@ -236,10 +236,12 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // connect server
+#ifndef WIN32
   CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
-
+#else
   //下面是测试的
-  //CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
+  CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
+#endif
 }
 
 void StartScene::CAOpen() {
