@@ -19,7 +19,8 @@ type Msg struct {
 // we can pre-alloc many Client objects for performance
 type Client struct {
 	// save current user data
-	u User
+	// u User
+	User
 
 	// current tcp connection
 	conn *websocket.Conn
@@ -151,7 +152,7 @@ func (c *Client) procMsg(msg *Msg) {
 
 	// proc msg
 	ret := CLI_PROC_RET_SUCC
-	if !c.u.IsLogin() && msg.Cmd != kCmdUserLogin {
+	if !c.IsLogin() && msg.Cmd != kCmdUserLogin {
 		ret = CLI_PROC_RET_KICK
 	} else {
 		proc := procFuncArray[int(msg.Cmd)]
@@ -163,7 +164,7 @@ func (c *Client) procMsg(msg *Msg) {
 	}
 
 	// flush data to db
-	if c.u.Store() != nil {
+	if c.Store() != nil {
 		// database error, kick off user
 		ret = CLI_PROC_RET_KICK
 		c.SetErrCode(kErrWriteDB)
@@ -200,7 +201,7 @@ func NewClient(conn *websocket.Conn) *Client {
 		conn: conn,
 		enable: true,
 	}
-	c.u.Init(c)
+	c.Init(c)
 	return c
 }
 

@@ -140,7 +140,7 @@ func GenerateUniqueUserid() string {
 }
 
 func ProcUserLogin(c *Client, msg *Msg) int {
-	if c.u.IsLogin() {
+	if c.IsLogin() {
 		return CLI_PROC_RET_SUCC
 	}
 
@@ -151,7 +151,7 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	}
 
 	// TODO: check if user already login in other server
-	if err := c.u.Login(msg.Userid); err != nil {
+	if err := c.Login(msg.Userid); err != nil {
 		return CLI_PROC_RET_KICK
 	}
 
@@ -159,8 +159,8 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	reply := c.GetReplyMsg()
 	// may changed
 	reply.Userid = msg.Userid
-	reply.Body["Heart"] = c.u.udb.Heart
-	reply.Body["Stageid"] = c.u.udb.NextStage
+	reply.Body["Heart"] = c.udb.Heart
+	reply.Body["Stageid"] = c.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }
 
@@ -171,11 +171,11 @@ func ProcIAPAddHeart(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	c.u.AddHeart(int(addheart.(float64)))
-	c.u.dirty = true
+	c.AddHeart(int(addheart.(float64)))
+	c.dirty = true
 
 	reply := c.GetReplyMsg()
-	reply.Body["Heart"] = c.u.udb.Heart
+	reply.Body["Heart"] = c.udb.Heart
 	return CLI_PROC_RET_SUCC
 }
 
@@ -186,23 +186,23 @@ func ProcStartPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if uint32(stageid.(float64)) != c.u.udb.NextStage {
+	if uint32(stageid.(float64)) != c.udb.NextStage {
 		c.SetErrCode(kErrInvalidParamters)
 		return CLI_PROC_RET_ERR
 	}
 
-	if c.u.udb.Heart < StageHeartConfig[c.u.udb.NextStage - 1] {
+	if c.udb.Heart < StageHeartConfig[c.udb.NextStage - 1] {
 		c.SetErrCode(kErrHeartNotEnough)
 		return CLI_PROC_RET_ERR
 	}
 
-	c.u.UseHeart(int(StageHeartConfig[c.u.udb.NextStage - 1]))
-	c.u.dirty = true
+	c.UseHeart(int(StageHeartConfig[c.udb.NextStage - 1]))
+	c.dirty = true
 
 	// reply
 	reply := c.GetReplyMsg()
-	reply.Body["Heart"] = c.u.udb.Heart
-	reply.Body["Stageid"] = c.u.udb.NextStage
+	reply.Body["Heart"] = c.udb.Heart
+	reply.Body["Stageid"] = c.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }
 
@@ -213,7 +213,7 @@ func ProcEndPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if uint32(stageid.(float64)) != c.u.udb.NextStage {
+	if uint32(stageid.(float64)) != c.udb.NextStage {
 		c.SetErrCode(kErrInvalidParamters)
 		return CLI_PROC_RET_ERR
 	}
@@ -225,13 +225,13 @@ func ProcEndPlay(c *Client, msg *Msg) int {
 	}
 	
 	if pass.(bool) {
-		c.u.udb.NextStage++
-		c.u.dirty = true
+		c.udb.NextStage++
+		c.dirty = true
 	}
 
 	// reply
 	reply := c.GetReplyMsg()
-	reply.Body["Heart"] = c.u.udb.Heart
-	reply.Body["Stageid"] = c.u.udb.NextStage
+	reply.Body["Heart"] = c.udb.Heart
+	reply.Body["Stageid"] = c.udb.NextStage
 	return CLI_PROC_RET_SUCC
 }
