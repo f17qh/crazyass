@@ -43,4 +43,6 @@ extern bool GotoStartSceneIfError();
 #define PLAY_LOSE \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_player_lose.caf");
 
+#define	NETWORK_TIMEOUT	10
+#define	SCHEDULE_TIMEOUT 15
 #endif

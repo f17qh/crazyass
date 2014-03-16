@@ -5,28 +5,9 @@
 #include "network/WebSocket.h"
 #include "lib_json/json_lib.h"
 #include "common.h"
+#include "loading.h"
 
 USING_NS_CC_EXT;
-
-#if 0
-class MyDelegate;
-class CAObject : public CCNode {
-public:
-  CREATE_FUNC(CAObject);
-
-  bool init() {
-    CCNode::init();
-    return true;
-  }
-
-  void CheckRecv(float dt);
-  void StartCheck();
-  void set_delegate(MyDelegate *d);
-   
-private:
-  MyDelegate *delegate_;
-};
-#endif
 
 class MyDelegate : public WebSocket::Delegate, public CADelegate {
 public:
@@ -35,12 +16,15 @@ public:
     target_ = target;
     seq_ = 12345;
     lastseq_ = 0;
+    recvcount_ = 0;
+    recvflag_ = false;
   }
 
   virtual void onOpen(WebSocket* ws) {
     CCLOG("%s", __FUNCTION__);
     if (target_) {
       target_->CAOpen();
+      recvflag_ = true;
     }
   }
 
@@ -48,11 +32,13 @@ public:
     CCLOG("%s", __FUNCTION__);
     // if disconnect, goto start scene
     ShouldGotoStart();
+    delete this;
   }
 
   virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error) {
     CCLOG("%s", __FUNCTION__);
     ShouldGotoStart();
+    delete this;
   }
 
   virtual void onMessage(WebSocket* ws, const WebSocket::Data& data) {
@@ -81,13 +67,13 @@ public:
   }
 
   bool CheckRecv() {
-    CCLOG("%s", __FUNCTION__);
+    CCLOG("%s %d", __FUNCTION__, recvcount_);
     if (recvflag_) {
       if (target_)
         target_->CARecvDone();
       return true;
     } else {
-      if (++recvcount_ >= 5) {
+      if (++recvcount_ >= NETWORK_TIMEOUT) {
         target_->CARecvTimeout();
         return true;
       }
@@ -128,7 +114,7 @@ class CAWS {
 
   ~CAWS() {
     caws_ = NULL;
-    delete delegate_;
+    // delete delegate_;
     delete ws_;
   }
 
@@ -139,7 +125,7 @@ class CAWS {
       ws_->close();
     bool t = ws_->init(*delegate_, addr);
     if (!t) {
-      CCLOG("connec server faild");
+      CCLOG("connect server faild");
     }
   }
 
@@ -186,22 +172,6 @@ bool GotoStartSceneIfError() {
   return false;
 }
 
-#if 0
-void CAObject::CheckRecv(float dt) {
-  if (delegate_->CheckRecv())
-    unscheduleUpdate();
-}
-
-void CAObject::StartCheck() {
-  // scheduleOnce(schedule_selector(CAObject::CheckRecv), 1);
-  scheduleUpdate();
-}
-
-void CAObject::set_delegate(MyDelegate *d) {
-  delegate_ = d;
-}
-#endif
-
 CADelegate * sharedDelegate() {
   return CAWS::Instance()->delegate();
 }
@@ -212,6 +182,10 @@ bool StartScene::init() {
   if (!CCScene::init())
     return false;
 
+  // 0: to open
+  // 1: to login
+  // 2: login ok
+  // 3: error
   login_state_ = 0;
   return true;
 }
@@ -226,7 +200,7 @@ void StartScene::EnableBtnPlay() {
 
 void StartScene::onEnter() {
   CCScene::onEnter();
-
+  gotostartscene = false;
   CCLOG("%s", __FUNCTION__);
   // load ui
   ui_layer_ = UILayer::create();
@@ -236,30 +210,25 @@ void StartScene::onEnter() {
   this->addChild(ui_layer_, 0, 100);
 
   // connect server
+  TextBox::Instance().Show(ui_layer_, true, "Connecting server...");
+  CCLOG("Connecting server...");
 #ifndef WIN32
   CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
 #else
   //下面是测试的
   CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
 #endif
+  schedule(schedule_selector(StartScene::update), 1, SCHEDULE_TIMEOUT, 1);
 }
 
 void StartScene::CAOpen() {
-  CSJson::Value value;
-  value["userid"] = User::CurrentUser()->userid();
-  value["cmd"] = 1;
-  value["version"] = 0x010000;
-
-  sharedDelegate()->SendServer(value, this);
-  // scheduleUpdate();
-  schedule(schedule_selector(StartScene::update), 1, 10, 1);
+  // connected
+  SetLoginState(1);
+  CCLOG("Connected");
 }
 
 void StartScene::update(float dt) {
-  if (sharedDelegate()->CheckRecv()) {
-    // unscheduleUpdate();
-    unschedule(schedule_selector(StartScene::update));
-  }
+  sharedDelegate()->CheckRecv();
 }
 
 void StartScene::CARecv(const CSJson::Value& result) {
@@ -276,27 +245,60 @@ void StartScene::CARecv(const CSJson::Value& result) {
       User::CurrentUser()->Flush();
       CCLOG("save new userid %s", User::CurrentUser()->userid().c_str());
     }
-  } else {
-    // TODO: logout to start screen
     SetLoginState(2);
     return;
   }
 
-  SetLoginState(1);
-  return;
+  SetLoginState(3);
 }
 
 void StartScene::CARecvDone() {
-  // succ
-  if (login_state_ == 1) {
-    EnableBtnPlay();
-  } else if (login_state_ == 2) {
-    // show error
+  TextBox::Instance().Show(ui_layer_, false);
+  if (GotoStartSceneIfError())
+    return;
+
+  switch (login_state_) {
+    case 1: {
+      // open, to login
+      CSJson::Value value;
+      value["userid"] = User::CurrentUser()->userid();
+      value["cmd"] = 1;
+      value["version"] = 0x010000;
+
+      sharedDelegate()->SendServer(value, this);
+      unschedule(schedule_selector(StartScene::update));
+      schedule(schedule_selector(StartScene::update), 1, SCHEDULE_TIMEOUT, 1);
+      CCLOG("Login...");
+      break;
+    }
+
+    case 2: // login, to start game
+      EnableBtnPlay();
+      unschedule(schedule_selector(StartScene::update));
+      CCLOG("Login...ok");
+      break;
+
+    default:
+      break;
   }
 }
 
 void StartScene::CARecvTimeout() {
-  unschedule(schedule_selector(StartScene::update));
+  // unschedule(schedule_selector(StartScene::update));
+  TextBox::Instance().Show(ui_layer_, false);
+  if (GotoStartSceneIfError())
+    return;
+
+  switch (login_state_) {
+    case 0: // connect, login timeout
+    case 1:
+      ShouldGotoStart();
+      GotoStartSceneIfError();
+      break;
+      
+    default:
+      break;
+  }
 }
 
 void StartScene::SetLoginState(int s) {

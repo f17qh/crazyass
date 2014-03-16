@@ -1,6 +1,8 @@
 #import "RageIAPHelper.h"
 #import <StoreKit/StoreKit.h>
 #import <UIKit/UIKit.h>
+#import "UMFeedback.h"
+#import "RootViewController.h"
 
 void CAWriteFile(char *filename, char *content) {
     NSString *nsfilename = [NSString stringWithUTF8String:filename];
@@ -103,59 +105,13 @@ bool ProductBuy(void *obj, char *name, void *target) {
     return false;
 }
 
+#define UMENG_APPKEY @"4eeb0c7b527015643b000003"
+void ShowFeedback() {
 #if 0
-#include <string>
-#include <vector>
-bool ProductList(std::vector<std::string> *productlist) {
-    [[RageIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
-	    if (success) {
-		_products = products;
-		NSLog(@"Product count %i\n", products.count);
-		for (SKProduct *product in products) {
-		    productlist->push_back(std::string([product.productIdentifier UTF8String])); 
-#if 0
-		    bool res = [nsname isEqualToString: product.productIdentifier];
-		    if (res) {
-			NSLog(@"Buying %@...", product.productIdentifier);
-			[[RageIAPHelper sharedInstance] buyProduct:product];
-			break;
-		    }
-#endif
-		}
-	    }
-	    // [self.refreshControl endRefreshing];
-	}];
-    return true;
-}
-
-#if 0
-- (void)buyButtonTapped:(id)sender {
-
-    UIButton *buyButton = (UIButton *)sender;
-    SKProduct *product = _products[buyButton.tag];
-
-    NSLog(@"Buying %@...", product.productIdentifier);
-    [[RageIAPHelper sharedInstance] buyProduct:product];
-
-}
+    UIViewController *view = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [UMFeedback showFeedback:view withAppkey:UMENG_APPKEY];
 #endif
 
-bool ProductBuy(char *name) {
-    NSString *nsname = [NSString stringWithUTF8String: name];
-    if (!nsname)
-	return false;
-
-    for (int i = 0; i < _products.count; i++) {
-	//for (SKProduct *product in _products) {
-	SKProduct *product = (SKProduct *)_products[i];
-	NSLog(@"buy %@ %@\n", nsname, product.productIdentifier);
-	bool res = [nsname isEqualToString: product.productIdentifier];
-	if (res) {
-	    NSLog(@"Buying %@...", product.productIdentifier);
-	    [[RageIAPHelper sharedInstance] buyProduct:product];
-	    return true;
-	}
-    }
-    return false;
+    RootViewController *view = (RootViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    [view showNativeFeedbackWithAppkey];
 }
-#endif

@@ -269,7 +269,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   value["Body"] = body;
 
   sharedDelegate()->SendServer(value, this);
-  schedule(schedule_selector(GameScene::update), 1, 10, 1);
+  schedule(schedule_selector(GameScene::update), 1, SCHEDULE_TIMEOUT, 1);
   Loading::Instence().ShowLoadScene(this, true);
 }
 

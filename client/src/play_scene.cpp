@@ -197,7 +197,7 @@ void PlayScene::SendEndPlay(bool pass) {
   value["Body"] = body;
 
   sharedDelegate()->SendServer(value, this);
-  schedule(schedule_selector(PlayScene::update), 1, 10, 1);
+  schedule(schedule_selector(PlayScene::update), 1, SCHEDULE_TIMEOUT, 1);
 }
 
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {

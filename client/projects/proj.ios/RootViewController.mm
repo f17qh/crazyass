@@ -1,5 +1,6 @@
 #import "RootViewController.h"
-
+#import "UMFeedback.h"
+#import "UMFeedbackViewController.h"
 
 @implementation RootViewController
 
@@ -19,13 +20,27 @@
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [UMFeedback setLogEnabled:YES];
+#if 0
+    _umFeedback = [UMFeedback sharedInstance];
+    [_umFeedback setAppkey:UMENG_APPKEY delegate:self];
+#endif
+}
+
+#define UMENG_APPKEY @"4eeb0c7b527015643b000003"
+- (void)showNativeFeedbackWithAppkey {
+    UMFeedbackViewController *feedbackViewController = [[UMFeedbackViewController alloc] initWithNibName:@"UMFeedbackViewController" bundle:nil];
+    feedbackViewController.appkey = UMENG_APPKEY;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedbackViewController];
+    navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    navigationController.navigationBar.translucent = NO;
+    [self presentModalViewController:navigationController animated:YES];
 }
  
-*/
 // Override to allow orientations other than the default portrait orientation.
 // This method is deprecated on ios6
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
