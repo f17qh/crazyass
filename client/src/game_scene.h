@@ -38,7 +38,7 @@ protected:
   void onBtnShop(CCObject *target, TouchEventType e);
   void OnBtnGirl(CCObject *target, TouchEventType e, int i);
   void AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector);
-
+  void onBtnFeedback(CCObject *target, TouchEventType e);
   int select_stage_;
   int play_;
   UILayer *ui_layer_;
