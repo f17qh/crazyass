@@ -116,20 +116,31 @@ void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) 
       return;
     ui_text->setVisible(true);
     ui_text->setText(text);
-    ui_text->setZOrder(z_order+1);
+    ui_text->setZOrder(z_order+2);
 
     UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImgTextField");
     if(imgs == NULL)
       return;
     imgs->setVisible(true);
-    imgs->setZOrder(z_order);
+    imgs->setZOrder(z_order+1);
+
+    UIImageView *imgs_bg = (UIImageView *)layer->getWidgetByName("ImgBG");
+    if(imgs_bg == NULL)
+      return;
+    imgs_bg->setVisible(true);
+    imgs_bg->setZOrder(z_order);
+
   } else {
-    layer->removeWidget(layout_);
     UILabelBMFont *ui_text = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontText");
     if(ui_text != NULL)
       ui_text->setVisible(false);
     UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImgTextField");
     if(imgs != NULL)
       imgs->setVisible(false);
+    UIImageView *imgs_bg = (UIImageView *)layer->getWidgetByName("ImgBG");
+    if(imgs_bg != NULL)
+      imgs_bg->setVisible(false);
+
+    layer->removeWidget(layout_);
   }
 }
