@@ -1,7 +1,6 @@
 package crazyass
 
 import "errors"
-import "log"
 import "time"
 import "labix.org/v2/mgo"
 import "labix.org/v2/mgo/bson"
@@ -45,7 +44,7 @@ func userRegister(u *UserDb, id string) {
 	u.NextStage = 1
 	u.RegTime = uint32(time.Now().Unix())
 	// u.LastLogin = u.RegTime
-	log.Printf("New user %s\n", id)
+	CALog.Info("New user %s\n", id)
 
 	// TODO: save device info
 }
@@ -58,7 +57,7 @@ func (u *User) Load(userid string) error {
 		userRegister(&u.udb, userid)
 		u.dirty = true;
 	} else if err != nil {
-		log.Println(err)
+		CALog.Error("user %s error %s", userid, err.Error())
 		return err
 	}
 	// u.udb.Heart = 99
@@ -74,7 +73,7 @@ func (u *User) Store() error {
 	c := SharedDBSession().DB(DatabaseName).C("user")
 	_, err := c.Upsert(bson.M{"_id": u.udb.UserId}, &u.udb)
 	if err != nil {
-		log.Printf("Store err %v\n", err)
+		CALog.Error("user %s Store err %v\n", u.udb.UserId, err)
 		return err
 	}
 
@@ -87,7 +86,7 @@ func (u *User) fastStore(id string, change interface{}) error {
 	c := SharedDBSession().DB(DatabaseName).C("user")
 	_, err := c.Upsert(bson.M{"_id": id}, change)
 	if err != nil {
-		log.Printf("fastStore err %v\n", err)
+		CALog.Error("fastStore err %v\n", err)
 		return err
 	}
 
@@ -110,7 +109,7 @@ func (u *User) Login(userid string) error {
 		return errors.New("DBError")
 	}
 
-	log.Printf("user %s last login %v\n",
+	CALog.Debug("user %s last login %v\n",
 		userid, time.Unix(int64(u.udb.LastLogin), 0))
 
 	u.udb.LastLogin = uint32(time.Now().Unix())
@@ -147,7 +146,7 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	// check if userid is empty
 	if msg.Userid == "" {
 		msg.Userid = GenerateUniqueUserid();
-		log.Printf("register new user %s\n", msg.Userid)
+		CALog.Info("register new user %s\n", msg.Userid)
 	}
 
 	// TODO: check if user already login in other server

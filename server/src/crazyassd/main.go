@@ -4,8 +4,6 @@ import "log"
 import "code.google.com/p/go.net/websocket"
 import "net/http"
 import "crazyass"
-import "os"
-import "fmt"
 
 func echo(ws *websocket.Conn) {
 	var err error
@@ -30,19 +28,8 @@ func clientProc(ws *websocket.Conn) {
 	client.Proc()
 }
 
-func initLog() {
-	log.SetFlags(log.Flags() | log.Lshortfile)
-	f, err := os.OpenFile("crazyass.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	if err != nil {
-		fmt.Printf("error opening file: %v", err)
-	}
-
-	log.SetOutput(f)
-}
-
 func main() {
-	initLog()
-	log.Printf("Starting crazyassd...\n");
+	log.Printf("Starting crazyassd...");
 	crazyass.ConnectMongo("127.0.0.1");
 	http.Handle("/echo", websocket.Handler(echo));
 	myproto := websocket.Server{
@@ -53,5 +40,5 @@ func main() {
 	if err := http.ListenAndServe(":12345", nil); err != nil {
 		log.Fatal("ListenAndServe err %v", err)
 	}
-	log.Printf("Stoping crazyassd...\n");
+	log.Printf("Stoping crazyassd...");
 }

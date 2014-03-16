@@ -3,8 +3,8 @@ package crazyass
 import "os"
 import "time"
 import "errors"
-import "log"
 import "code.google.com/p/go.net/websocket"
+import "code.google.com/p/log4go"
 import _ "encoding/json"
 
 type Msg struct {
@@ -53,10 +53,13 @@ type ClientProc func(*Client, *Msg) int
 
 // cmd proc func array
 var procFuncArray [128]ClientProc
+var CALog log4go.Logger
 
 func init() {
-	// init log
-	log.SetFlags(log.Flags() | log.Lshortfile)
+	CALog = make(log4go.Logger)
+	// log.AddFilter("stdout", log4go.DEBUG, log4go.NewConsoleLogWriter())
+	CALog.AddFilter("log", log4go.DEBUG, log4go.NewFileLogWriter("example.log", false).SetRotateDaily(true))
+	CALog.Info("The time is now: %s", time.Now().Format("15:04:05 MST 2006/01/02"))
 
 	for i := 0; i < 128; i++ {
 		procFuncArray[i] = nil
@@ -86,7 +89,7 @@ func ClientProcRegister(cmd int, proc ClientProc) error {
 
 func checkError(err error) {
 	if err != nil {
-		log.Printf("Fatal error: %s", err.Error())
+		CALog.Error("Fatal error: %s", err.Error())
 		os.Exit(1)
 	}
 }
@@ -136,11 +139,11 @@ func (c *Client) readMsg(req_chan chan *Msg) chan *Msg {
 // proc request by cmd
 func (c *Client) procMsg(msg *Msg) {
 	if msg.Cmd >= 128 {
-		log.Printf("Unknown cmd\n")
+		CALog.Error("Unknown cmd\n")
 		return
 	}
 
-	log.Printf("Proc msg %v\n", *msg)
+	CALog.Debug("Proc msg %v\n", *msg)
 
 	// init reply msg
 	c.replyMsg.Userid = msg.Userid
@@ -175,7 +178,7 @@ func (c *Client) procMsg(msg *Msg) {
 		c.enable = false
 	}
 
-	log.Printf("Reply msg %v\n", c.replyMsg)
+	CALog.Debug("Reply msg %v\n", c.replyMsg)
 	// send reply
 	websocket.JSON.Send(c.conn, c.replyMsg)
 }
@@ -208,7 +211,7 @@ func NewClient(conn *websocket.Conn) *Client {
 func (c *Client) readPacket(conn *websocket.Conn) (*Msg, error) {
 	var err error
 	if err = websocket.JSON.Receive(conn, &c.msg); err != nil {
-		log.Printf("Receive err %s\n", err.Error())
+		CALog.Error("Receive err %s\n", err.Error())
 		return nil, err
 	}
 

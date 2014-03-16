@@ -105,7 +105,7 @@ bool ProductBuy(void *obj, char *name, void *target) {
     return false;
 }
 
-#define UMENG_APPKEY @"4eeb0c7b527015643b000003"
+#define UMENG_APPKEY @"5325b88456240bbfee166236"
 void ShowFeedback() {
 #if 0
     UIViewController *view = [UIApplication sharedApplication].keyWindow.rootViewController;

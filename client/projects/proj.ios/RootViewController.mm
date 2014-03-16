@@ -31,7 +31,7 @@
 #endif
 }
 
-#define UMENG_APPKEY @"4eeb0c7b527015643b000003"
+#define UMENG_APPKEY @"5325b88456240bbfee166236"
 - (void)showNativeFeedbackWithAppkey {
     UMFeedbackViewController *feedbackViewController = [[UMFeedbackViewController alloc] initWithNibName:@"UMFeedbackViewController" bundle:nil];
     feedbackViewController.appkey = UMENG_APPKEY;

@@ -6,6 +6,7 @@ export PATH=$GOPATH/bin:$PATH
 #go install code.google.com/p/goprotobuf/protoc-gen-go
 #go install code.google.com/p/goprotobuf/proto
 go install code.google.com/p/go.net/websocket
+go install code.google.com/p/log4go
 #make -C ../common/protocol -f server.mk
 go install crazyass
 go install crazyassd
