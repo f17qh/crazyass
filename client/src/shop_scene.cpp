@@ -4,6 +4,7 @@
 #include "SimpleAudioEngine.h"
 #include "shop_scene.h"
 #include "user.h"
+#include "loading.h"
 #include <vector>
 #include <string>
 
@@ -17,7 +18,7 @@ bool ShopScene::init() {
 }
 
 void * ProductList();
-bool ProductBuy(void *iap, char *);
+bool ProductBuy(void *iap, char *, void *);
 
 static void *iap_;
 static bool in_iap_ = false;
@@ -92,7 +93,10 @@ void ShopScene::onBtnSale(CCObject *target, TouchEventType e, int i) {
   if (in_iap_)
     return;
 
-  in_iap_ = ProductBuy(iap_, (char *)productId[i - 1]);
+  in_iap_ = ProductBuy(iap_, (char *)productId[i - 1], (void *)this);
+  if (in_iap_) {
+    TextBox::Instance().Show(ui_layer_, true, "Please waiting...");
+  }
 }
 
 void ShopScene::onBtnBack(CCObject *target, TouchEventType e) {
@@ -109,9 +113,15 @@ void ShopScene::onBtnBack(CCObject *target, TouchEventType e) {
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
 }
 
-void CAProductByNotify(char *name) {
+void ShopScene::DisableTextBox() {
+  TextBox::Instance().Show(ui_layer_, false);
+}
+
+void CAProductByNotify(char *name, void *target) {
   CCLOG("%s: %s", __FUNCTION__, name);
   in_iap_ = false;
+  ShopScene *ss = (ShopScene *)target;
+  ss->DisableTextBox();
   if (name == NULL)
     return;
 
@@ -134,4 +144,7 @@ void CAProductByNotify(char *name) {
   value["Body"] = body;
 
   sharedDelegate()->SendServer(value, NULL);
+
+  CCScene *sc = GameScene::create();
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
 }

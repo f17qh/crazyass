@@ -95,7 +95,7 @@ void PopLose::ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector
 }
 
 static TextBox* textbox = NULL;
-TextBox& TextBox::Instence() {
+TextBox& TextBox::Instance() {
   if (textbox == NULL) {
     textbox = new TextBox();
     textbox->Init();

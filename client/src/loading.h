@@ -34,7 +34,7 @@ protected:
 
 class TextBox {
 public:
-  static TextBox& Instence();
+  static TextBox& Instance();
   void Init();
   void Show(UILayer *layer, bool visible, const char *text=NULL, int z_order=100);
 protected:

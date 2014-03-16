@@ -13,6 +13,7 @@ public:
   virtual bool init();  
 
   virtual void onEnter();
+  void DisableTextBox();
 
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
@@ -24,7 +25,6 @@ protected:
   UILayer *ui_layer_;
   CCScene *back_scene_;
   void onBtnBack(CCObject *target, TouchEventType e);
-
   void onBtnSale1(CCObject *target, TouchEventType e);
   void onBtnSale2(CCObject *target, TouchEventType e);
   void onBtnSale3(CCObject *target, TouchEventType e);

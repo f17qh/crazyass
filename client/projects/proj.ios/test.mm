@@ -24,17 +24,19 @@ void CAReadFile(char *filename, char *content, size_t len) {
 	strncpy(content, b, len);
 }
 
-extern void CAProductByNotify(char *);
+extern void CAProductByNotify(char *, void *target);
 
 @interface CAIAP: NSObject
 -(void) getProcustList;
 -(BOOL) buyProduct: (NSString *)name;
-- (void)productPurchased:(NSNotification *)notification;
+-(void) productPurchased:(NSNotification *)notification;
+-(void) setTarget: (void *)target;
 @end
 
 @implementation CAIAP {
     NSArray *_products;
     BOOL _isget;
+    void *_target;
 }
 
 -(void) getProcustList {
@@ -52,9 +54,9 @@ extern void CAProductByNotify(char *);
 - (void)productPurchased:(NSNotification *)notification {
     NSString * productIdentifier = notification.object;
     if (productIdentifier == nil) {
-	CAProductByNotify(NULL);
+	CAProductByNotify(NULL, _target);
     } else {
-	CAProductByNotify((char *)[productIdentifier UTF8String]);
+	CAProductByNotify((char *)[productIdentifier UTF8String], _target);
     }
     
 }
@@ -85,12 +87,13 @@ void *ProductList() {
     return (void *)obj;
 }
 
-bool ProductBuy(void *obj, char *name) {
+bool ProductBuy(void *obj, char *name, void *target) {
     NSString *nsname = [NSString stringWithUTF8String: name];
     if (!nsname)
 	return false;
 
     CAIAP *iap = (CAIAP *)obj;
+    [iap setTarget:target];
     if ([iap buyProduct:nsname])
 	return true;
     return false;
