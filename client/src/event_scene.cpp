@@ -192,7 +192,7 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     img->setPosition(move_pos);
     int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_);
     distence_ += add;
-    CCLOG("%s distence:%d, add:%d\n", __FUNCTION__, distence_, add);
+    //CCLOG("%s distence:%d, add:%d\n", __FUNCTION__, distence_, add);
   } else {
     img->setVisible(false);
   }
@@ -265,7 +265,7 @@ void EventScene::Update(float delta) {
   if(distence_ >= 0) {
     int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_);
     distence_ -= sub;
-    CCLOG("%s distence:%d, sub:%d\n", __FUNCTION__, distence_, sub);
+    //CCLOG("%s distence:%d, sub:%d\n", __FUNCTION__, distence_, sub);
     if(distence_ < 0) {
       distence_ = 0;
     }
@@ -305,7 +305,11 @@ void EventScene::ShowLoadingBar() {
     float time = ConfigInfo::Instence().GetEventST(GetEventStep());
     RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
     girl_action_runing_ = GetEventStep();
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_+1]);
+    if(girl_action_runing_ != 2){
+      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[event_state_ + 1]);
+    } else {
+      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_]);
+    }
   }
 }
 

@@ -99,19 +99,25 @@
 
     "event_step":[
         {
-            "duration_scale_time":0.5, //girlface缩放的时间
-            "progress_lessen":50, //没0.1秒减少XX
-            "progress_increase":30 //每次移动增加XX
+            "duration_scale_time":0.5,
+            "progress_lessen":50,
+                  //没0.1秒减少XX
+            "progress_increase":30
+                  //每次移动增加XX
         },
         {
             "duration_scale_time":0.3,
-            "progress_lessen":60, //没0.1秒减少XX
-            "progress_increase":30 //每次移动增加XX
+            "progress_lessen":60,
+                  //没0.1秒减少XX
+            "progress_increase":30
+                  //每次移动增加XX
         },
         {
             "duration_scale_time":0.2,
-            "progress_lessen":70, //没0.1秒减少XX
-            "progress_increase":30 //每次移动增加XX
+            "progress_lessen":70,
+                  //没0.1秒减少XX
+            "progress_increase":30
+                  //每次移动增加XX
         }
     ],
 

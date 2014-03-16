@@ -27,7 +27,7 @@ struct EventStepInfo {
   EventStepInfo() {
     memset(this, 0 ,sizeof(EventStepInfo));
   }
-  int duration_scale_time_;
+  float duration_scale_time_;
   int progress_lessen_;
   int progress_increase_;
 };

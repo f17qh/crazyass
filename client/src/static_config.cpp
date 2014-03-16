@@ -24,6 +24,7 @@ float ConfigInfo::GetEventST(int step_idx) {
     return 0.0f;
     CCLOG("%s error", __FUNCTION__);
   }
+    CCLOG("%s time%f", __FUNCTION__, event_step_vec_[step_idx].duration_scale_time_);
   return event_step_vec_[step_idx].duration_scale_time_;
 }
 
