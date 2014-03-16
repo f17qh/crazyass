@@ -13,6 +13,8 @@ public:
   virtual bool init();  
 
   virtual void onEnter();
+
+  void Update(float delta);
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
 
@@ -28,7 +30,7 @@ protected:
   int panty_state_;
   int stock1_state_;
   int stock2_state_;
-  int event_state_[4];
+  int event_state_;
   void onBtnBack(CCObject *target, TouchEventType e);
   void onBtnShirt(CCObject *target, TouchEventType e);
   void onBtnPanty(CCObject *target, TouchEventType e);
@@ -41,12 +43,12 @@ protected:
   void onBtnEvent(CCObject *target, TouchEventType e, int i);
   void onBtnStarField(CCObject *target, TouchEventType e);
   void onBtnMoveStar(CCObject *target);
-
+  void RunGirlAction(CCSprite* sprite, float time);
   void CreateStarSprite();
   void ShowLoadingBar();
+  int GetEventStep();
 protected:
-  float distence_;
+  int distence_;
   CCSprite* star_sprite_;
-  CCPoint start_point_;
 };
 

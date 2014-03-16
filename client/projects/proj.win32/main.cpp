@@ -37,4 +37,4 @@ void CAReadFile(char *file, char *content, size_t len) {
 }
 
 void * ProductList(){return NULL;};
-bool ProductBuy(void *iap, char *){return false;};
+bool ProductBuy(void *iap, char *, void *){return false;};

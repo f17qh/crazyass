@@ -19,6 +19,31 @@ StageInfo& ConfigInfo::GetStageInfo(int stage_id) {
     return stage_vec_[0];
   return stage_vec_[stage_id - 1];
 }
+float ConfigInfo::GetEventST(int step_idx) {
+  if(step_idx < 0 || step_idx > 2) {
+    return 0.0f;
+    CCLOG("%s error", __FUNCTION__);
+  }
+  return event_step_vec_[step_idx].duration_scale_time_;
+}
+
+int ConfigInfo::GetEventPL(int step_idx, int finger_idx) {
+  if(step_idx < 0 || step_idx > 2 || finger_idx < 0 || finger_idx > 3) {
+    return 0;
+    CCLOG("%s error", __FUNCTION__);
+  }
+  return event_finger_vec_[finger_idx].progress_lessen_ + 
+    event_step_vec_[step_idx].progress_lessen_;
+}
+
+int ConfigInfo::GetEventPI(int step_idx, int finger_idx) {
+  if(step_idx < 0 || step_idx > 2 || finger_idx < 0 || finger_idx > 3) {
+    return 0;
+    CCLOG("%s error", __FUNCTION__);
+  }
+  return event_finger_vec_[finger_idx].progress_increase_ + 
+    event_step_vec_[step_idx].progress_increase_;
+}
 
 class LocalConfigInfo : public ConfigInfo {
 public:
@@ -32,7 +57,7 @@ int LocalConfigInfo::Load(const char *path) {
   CSJson::Reader reader;
   path_ = path;
 
-  unsigned long size = 40960;
+  unsigned long size = 4096000;
   unsigned char *buf = CCFileUtils::sharedFileUtils()->getFileData(path, "rb", &size);
 
   if (!reader.parse(std::string((char *)buf), root_, false)) {
@@ -64,6 +89,25 @@ int LocalConfigInfo::Load(const char *path) {
   memcpy(tips_info_.sub_stage_begin_, tips["sub_stage_begin"].asString().c_str(), sizeof(tips_info_.sub_stage_begin_));
   memcpy(tips_info_.sub_stage_end_, tips["sub_stage_end"].asString().c_str(), sizeof(tips_info_.sub_stage_end_));
 
+  EventStepInfo event_step_info;
+  CSJson::Value val_arry_es = root_["event_step"];
+  unsigned int val_size_es = (unsigned int)val_arry_es.size();
+  for(unsigned int i = 0; i < val_size_es; i++) {
+    event_step_info.duration_scale_time_ = val_arry_es[i]["duration_scale_time"].asFloat();
+    event_step_info.progress_lessen_ = val_arry_es[i]["progress_lessen"].asInt();
+    event_step_info.progress_increase_ = val_arry_es[i]["progress_increase"].asInt();
+    event_step_vec_.push_back(event_step_info);
+  }
+
+  EventFingerInfo event_finger_info;
+  CSJson::Value val_arry_ef = root_["event_finger"];
+  unsigned int val_size_ef = (unsigned int)val_arry_ef.size();
+  for(unsigned int i = 0; i < val_size_ef; i++) {
+    event_finger_info.progress_lessen_ = val_arry_ef[i]["progress_lessen"].asInt();
+    event_finger_info.progress_increase_ = val_arry_ef[i]["progress_increase"].asInt();
+    event_finger_vec_.push_back(event_finger_info);
+  }
+
   delete buf;
   return 0;
 }
@@ -72,7 +116,8 @@ static ConfigInfo* config = NULL;
 ConfigInfo& ConfigInfo::Instence() {
   if (config == NULL) {
     config = new LocalConfigInfo();
-    config->Load("stage_data.json");
+    config->Load("static_data.json");
   }
   return *config;
 }
+
