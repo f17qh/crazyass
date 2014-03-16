@@ -137,6 +137,9 @@ void GameScene::onEnter() {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnShop");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnShop));
 
+  btn = (UIButton *)ui_layer_->getWidgetByName("BtnFeedBack");
+  btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFeedback));
+
   int nextstage = User::CurrentUser()->stageid();
 
 #if 0
@@ -207,6 +210,15 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
       lock->setVisible(false);
     }
   }
+}
+
+void ShowFeedback();
+void GameScene::onBtnFeedback(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+
+  PLAY_BTNSOUND;
+  ShowFeedback();
 }
 
 void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
