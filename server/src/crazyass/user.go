@@ -191,7 +191,7 @@ func ProcStartPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if c.u.udb.Heart < StageHeartConfig[c.u.udb.NextStage] {
+	if c.u.udb.Heart < StageHeartConfig[c.u.udb.NextStage - 1] {
 		c.SetErrCode(kErrHeartNotEnough)
 		return CLI_PROC_RET_ERR
 	}
