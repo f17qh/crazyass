@@ -114,14 +114,17 @@ void ShopScene::onBtnBack(CCObject *target, TouchEventType e) {
 }
 
 void ShopScene::DisableTextBox() {
-  TextBox::Instance().Show(ui_layer_, false);
+  TextBox& box = TextBox::Instance();
+  box.Show(ui_layer_, false);
 }
 
 void CAProductByNotify(char *name, void *target) {
   CCLOG("%s: %s", __FUNCTION__, name);
   in_iap_ = false;
   ShopScene *ss = (ShopScene *)target;
-  ss->DisableTextBox();
+  if (ss) {
+    ss->DisableTextBox();
+  }
   if (name == NULL)
     return;
 

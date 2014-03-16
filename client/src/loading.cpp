@@ -106,6 +106,7 @@ TextBox& TextBox::Instance() {
 void TextBox::Init() {
   CCLOG("%s", __FUNCTION__);
   layout_ = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/TextBox.json"));
+  layout_->retain();
 }
 
 void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) {
@@ -132,16 +133,6 @@ void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) 
     imgs_bg->setZOrder(z_order);
 
   } else {
-    UILabelBMFont *ui_text = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontText");
-    if(ui_text != NULL)
-      ui_text->setVisible(false);
-    UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImgTextField");
-    if(imgs != NULL)
-      imgs->setVisible(false);
-    UIImageView *imgs_bg = (UIImageView *)layer->getWidgetByName("ImgBG");
-    if(imgs_bg != NULL)
-      imgs_bg->setVisible(false);
-
     layer->removeWidget(layout_);
   }
 }
