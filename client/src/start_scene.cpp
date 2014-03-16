@@ -248,6 +248,7 @@ void StartScene::CAOpen() {
   CSJson::Value value;
   value["userid"] = User::CurrentUser()->userid();
   value["cmd"] = 1;
+  value["version"] = 0x010000;
 
   sharedDelegate()->SendServer(value, this);
   // scheduleUpdate();

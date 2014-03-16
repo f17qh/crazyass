@@ -63,6 +63,8 @@ extern void CAProductByNotify(char *);
     NSLog(@"try to buy %@\n", name);
     if (!_isget)
 	return NO;
+    if ([_products count] == 0)
+	return NO;
     for (SKProduct *product in _products) {
 	NSLog(@"buy %@ %@\n", name, product.productIdentifier);
 	BOOL res = [name isEqualToString: product.productIdentifier];
