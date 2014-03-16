@@ -110,6 +110,7 @@ void TextBox::Init() {
 
 void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) {
   if(visible) {
+    layout_->retain();
     layer->addWidget(layout_);
     UILabelBMFont *ui_text = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontText");
     if(ui_text == NULL)
