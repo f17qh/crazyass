@@ -17,6 +17,7 @@ bool EventScene::init() {
   stock2_state_ = 0;
   distence_ = 0.0f;
   event_state_ = -1;
+  girl_action_runing_ = -1;
   return true;
 }
 
@@ -248,17 +249,18 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     unschedule(schedule_selector(EventScene::Update));
   }
 
-  //const char *soundfiles[]= {
-  //  "sound/sfx_girl_event_start.caf",
-  //  "sound/sfx_girl_event_climax1.wav",
-  //  "sound/sfx_girl_event_climax2.wav",
-  //  "sound/sfx_girl_event_climax3.wav",
-  //};
-
   //// play
   //if (event_state_[i - 1])
   //  CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[i - 1]);
 }
+
+static const char *soundfiles[]= {
+  "sound/sfx_girl_event_start.caf",
+  "sound/sfx_girl_event_climax1.wav",
+  "sound/sfx_girl_event_climax2.wav",
+  "sound/sfx_girl_event_climax3.wav",
+};
+
 void EventScene::Update(float delta) {
   if(distence_ >= 0) {
     int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_);
@@ -295,10 +297,16 @@ void EventScene::ShowLoadingBar() {
     img_bar->setVisible(true);
     img_girl->setVisible(true);
     loading_bar->setVisible(true);
-    RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), 0.5f);
   }
 
   loading_bar->setPercent(distence_/100);
+
+  if(show && GetEventStep() != girl_action_runing_) {
+    float time = ConfigInfo::Instence().GetEventST(GetEventStep());
+    RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
+    girl_action_runing_ = GetEventStep();
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_+1]);
+  }
 }
 
 void EventScene::RunGirlAction(CCSprite* sprite, float time) {

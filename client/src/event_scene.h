@@ -50,5 +50,6 @@ protected:
 protected:
   int distence_;
   CCSprite* star_sprite_;
+  int girl_action_runing_;
 };
 
