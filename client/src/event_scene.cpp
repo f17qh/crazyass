@@ -192,9 +192,9 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     img->setPosition(move_pos);
     
     if(distence_ > 10000) {
-      distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_)*10*4;
+      distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_,stageid_)*10*4;
     } else {
-      int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_);
+      int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_,stageid_);
       distence_ += add;
       if(distence_ > 10000) {
         distence_ = 11000;
@@ -221,12 +221,12 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     return;
 
   if (i > User::CurrentUser()->EventLock(stageid_))
-    return;
+    User::CurrentUser()->set_eventlock(stageid_, i);
+    //return;
 
   char name[RES_MAX_NAME];
   const char *resfmt = "gallery_button_gallery_0%d_0%d.png";
   CCLOG("%s\n", __FUNCTION__);
-
   snprintf(name, RES_MAX_NAME, "BtnEvent%d", i);
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name);
   if(event_state_ == i-1) {
@@ -234,18 +234,63 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   } else {
     event_state_ = i-1;
   }
-  int resid = event_state_ >= 0 ? 1 : 2;
-  snprintf(name, RES_MAX_NAME, resfmt, i, resid);
-  btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
+
+  int res1id,res2id;
   if(event_state_ >= 0) {
+    res1id = 1;
+    res2id = 2;
+  } else {
+    res1id = 2;
+    res2id = 2;
+  }
+  snprintf(name, RES_MAX_NAME, resfmt, i, res1id);
+  btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
+
+  for(int idx = 1; idx <= 4; idx++) {
+    if(idx != i) {
+      snprintf(name, RES_MAX_NAME, "BtnEvent%d", idx);
+      UIButton *btn = (UIButton *)ui_layer_->getWidgetByName(name);
+      snprintf(name, RES_MAX_NAME, resfmt, idx, res2id);
+      btn->loadTextures(name, name, NULL, UI_TEX_TYPE_PLIST);
+    }
+  }
+  UIImageView* img_bg = (UIImageView *)ui_layer_->getWidgetByName("ImageBarGround");
+  img_bg->setVisible(false);
+  UIImageView* img_bar = (UIImageView *)ui_layer_->getWidgetByName("ImageBar");
+  img_bar->setVisible(false);
+  UIImageView* img_girl = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlFace");
+  img_girl->setVisible(false);
+  UILoadingBar* loading_bar = (UILoadingBar *)ui_layer_->getWidgetByName("LoadingBar");
+  loading_bar->setVisible(false);
+  ((CCSprite*)img_girl->getVirtualRenderer())->stopAllActions();
+  distence_ = 0;
+  loading_bar->setPercent(0);
+
+  if(event_state_ >= 0) {
+    int x,y,w,h;
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStarField");
     btn->setVisible(true);
+    x = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star_field_x_;
+    y = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star_field_y_;
+    w = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star_field_w_;
+    h = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star_field_h_;
+    btn->setPosition(ccp(x,y));
+    btn->setSize(CCSize(w,h));
     btn->addTouchEventListener(this, toucheventselector(EventScene::onBtnStarField));
     btn->addMoveEvent(this, coco_moveselector(EventScene::onBtnMoveStar));
+
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_1");
+    x = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star1_x_;
+    y = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star1_y_;
+    btn->setPosition(ccp(x,y));
     btn->setVisible(true);
+
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_2");
+    x = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star2_x_;
+    y = ConfigInfo::Instence().GetEventFingerInfo(event_state_,stageid_).btn_star2_y_;
     btn->setVisible(true);
+    btn->setPosition(ccp(x,y));
+
     schedule(schedule_selector(EventScene::Update), 0.1f, -1, 0.1f);
   } else {
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStarField");
@@ -254,17 +299,6 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     btn->setVisible(false);
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_2");
     btn->setVisible(false);
-    UIImageView* img_bg = (UIImageView *)ui_layer_->getWidgetByName("ImageBarGround");
-    img_bg->setVisible(false);
-    UIImageView* img_bar = (UIImageView *)ui_layer_->getWidgetByName("ImageBar");
-    img_bar->setVisible(false);
-    UIImageView* img_girl = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlFace");
-    img_girl->setVisible(false);
-    UILoadingBar* loading_bar = (UILoadingBar *)ui_layer_->getWidgetByName("LoadingBar");
-    loading_bar->setVisible(false);
-    ((CCSprite*)img_girl->getVirtualRenderer())->stopAllActions();
-    distence_ = 0;
-    loading_bar->setPercent(0);
 
     unschedule(schedule_selector(EventScene::Update));
   }
@@ -285,7 +319,7 @@ static const char *soundfiles[]= {
 void EventScene::Update(float delta) {
   if(distence_ >= 0) {
     ShowLoadingBar();
-    int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_);
+    int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_, stageid_);
     distence_ -= sub;
     //CCLOG("%s distence:%d, sub:%d\n", __FUNCTION__, distence_, sub);
     if(distence_ < 0) {

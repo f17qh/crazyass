@@ -121,22 +121,309 @@
         }
     ],
 
-    "event_finger":[
+    "event_1_finger":[
         {
             "progress_lessen":20, //没0.1秒减少XX
-            "progress_increase":10 //每次移动增加XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
-            "progress_increase":15 //每次移动增加XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
-            "progress_increase":20 //每次移动增加XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
-            "progress_increase":25 //每次移动增加XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
+        }
+    ],
+
+    "event_2_finger":[
+        {
+            "progress_lessen":20, //没0.1秒减少XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":15, //没0.1秒减少XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":10, //没0.1秒减少XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
+        },
+        {
+            "progress_lessen":5, //没0.1秒减少XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
+        }
+    ],
+
+    "event_3_finger":[
+        {
+            "progress_lessen":20, //没0.1秒减少XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":15, //没0.1秒减少XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":10, //没0.1秒减少XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
+        },
+        {
+            "progress_lessen":5, //没0.1秒减少XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
+        }
+    ],
+
+    "event_4_finger":[
+        {
+            "progress_lessen":20, //没0.1秒减少XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":15, //没0.1秒减少XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":10, //没0.1秒减少XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
+        },
+        {
+            "progress_lessen":5, //没0.1秒减少XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
+        }
+    ],
+
+    "event_5_finger":[
+        {
+            "progress_lessen":20, //没0.1秒减少XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":15, //没0.1秒减少XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":10, //没0.1秒减少XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
+        },
+        {
+            "progress_lessen":5, //没0.1秒减少XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
+        }
+    ],
+
+    "event_6_finger":[
+        {
+            "progress_lessen":20, //没0.1秒减少XX
+            "progress_increase":10, //每次移动增加XX
+            "btn_star1_x":324,
+            "btn_star1_y":209,
+            "btn_star2_x":371,
+            "btn_star2_y":50,
+            "btn_star_field_x":345,
+            "btn_star_field_y":125,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":15, //没0.1秒减少XX
+            "progress_increase":15, //每次移动增加XX
+            "btn_star1_x":491,
+            "btn_star1_y":215,
+            "btn_star2_x":525,
+            "btn_star2_y":53,
+            "btn_star_field_x":510,
+            "btn_star_field_y":135,
+            "btn_star_field_w":135,
+            "btn_star_field_h":230
+        },
+        {
+            "progress_lessen":10, //没0.1秒减少XX
+            "progress_increase":20, //每次移动增加XX
+            "btn_star1_x":473,
+            "btn_star1_y":382,
+            "btn_star2_x":350,
+            "btn_star2_y":353,
+            "btn_star_field_x":410,
+            "btn_star_field_y":365,
+            "btn_star_field_w":190,
+            "btn_star_field_h":120
+        },
+        {
+            "progress_lessen":5, //没0.1秒减少XX
+            "progress_increase":25, //每次移动增加XX
+            "btn_star1_x":388,
+            "btn_star1_y":310,
+            "btn_star2_x":407,
+            "btn_star2_y":177,
+            "btn_star_field_x":394,
+            "btn_star_field_y":246,
+            "btn_star_field_w":90,
+            "btn_star_field_h":200
         }
     ]
 }

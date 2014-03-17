@@ -14,6 +14,14 @@
 
 USING_NS_CC;
 
+EventFingerInfo& ConfigInfo::GetEventFingerInfo(int finger_idx, int stageid) {
+  if(finger_idx < 0 || finger_idx > 3) {
+    return event_finger_map_[stageid+1][0];
+  }
+  return event_finger_map_[stageid+1][finger_idx];
+  CCLOG("%s error", __FUNCTION__);
+}
+
 StageInfo& ConfigInfo::GetStageInfo(int stage_id) {
   if(stage_id <= 0)
     return stage_vec_[0];
@@ -28,21 +36,21 @@ float ConfigInfo::GetEventST(int step_idx) {
   return event_step_vec_[step_idx].duration_scale_time_;
 }
 
-int ConfigInfo::GetEventPL(int step_idx, int finger_idx) {
+int ConfigInfo::GetEventPL(int step_idx, int finger_idx, int stageid) {
   if(step_idx < 0 || step_idx > 2 || finger_idx < 0 || finger_idx > 3) {
     return 0;
     CCLOG("%s error", __FUNCTION__);
   }
-  return event_finger_vec_[finger_idx].progress_lessen_ + 
+  return event_finger_map_[stageid+1][finger_idx].progress_lessen_ + 
     event_step_vec_[step_idx].progress_lessen_;
 }
 
-int ConfigInfo::GetEventPI(int step_idx, int finger_idx) {
+int ConfigInfo::GetEventPI(int step_idx, int finger_idx, int stageid) {
   if(step_idx < 0 || step_idx > 2 || finger_idx < 0 || finger_idx > 3) {
     return 0;
     CCLOG("%s error", __FUNCTION__);
   }
-  return event_finger_vec_[finger_idx].progress_increase_ + 
+  return event_finger_map_[stageid+1][finger_idx].progress_increase_ + 
     event_step_vec_[step_idx].progress_increase_;
 }
 
@@ -100,17 +108,45 @@ int LocalConfigInfo::Load(const char *path) {
     event_step_vec_.push_back(event_step_info);
   }
 
-  EventFingerInfo event_finger_info;
-  CSJson::Value val_arry_ef = root_["event_finger"];
-  unsigned int val_size_ef = (unsigned int)val_arry_ef.size();
-  for(unsigned int i = 0; i < val_size_ef; i++) {
-    event_finger_info.progress_lessen_ = val_arry_ef[i]["progress_lessen"].asInt();
-    event_finger_info.progress_increase_ = val_arry_ef[i]["progress_increase"].asInt();
-    event_finger_vec_.push_back(event_finger_info);
-  }
+  CSJson::Value val_1 = root_["event_1_finger"];
+  SetEventFingerInfo(val_1, 1);
+
+  CSJson::Value val_2 = root_["event_2_finger"];
+  SetEventFingerInfo(val_2, 2);
+
+  CSJson::Value val_3 = root_["event_3_finger"];
+  SetEventFingerInfo(val_3, 3);
+
+  CSJson::Value val_4 = root_["event_4_finger"];
+  SetEventFingerInfo(val_4, 4);
+
+  CSJson::Value val_5 = root_["event_5_finger"];
+  SetEventFingerInfo(val_5, 5);
+
+  CSJson::Value val_6 = root_["event_6_finger"];
+  SetEventFingerInfo(val_6, 6);
 
   delete buf;
   return 0;
+}
+
+void ConfigInfo::SetEventFingerInfo( CSJson::Value& val, int stageid) {
+  EventFingerInfo info;
+  memset(&info, 0, sizeof(info));
+  unsigned int val_size_ef = (unsigned int)val.size();
+  for(unsigned int i = 0; i < val_size_ef; i++) {
+    info.progress_lessen_ = val[i]["progress_lessen"].asInt();
+    info.progress_increase_ = val[i]["progress_increase"].asInt();
+    info.btn_star1_x_ = val[i]["btn_star1_x"].asInt();
+    info.btn_star1_y_ = val[i]["btn_star1_y"].asInt();
+    info.btn_star2_x_ = val[i]["btn_star2_x"].asInt();
+    info.btn_star2_y_ = val[i]["btn_star2_y"].asInt();
+    info.btn_star_field_x_ = val[i]["btn_star_field_x"].asInt();
+    info.btn_star_field_y_ = val[i]["btn_star_field_y"].asInt();
+    info.btn_star_field_w_ = val[i]["btn_star_field_w"].asInt();
+    info.btn_star_field_h_ = val[i]["btn_star_field_h"].asInt();
+    event_finger_map_[stageid].push_back(info);
+  }
 }
 
 static ConfigInfo* config = NULL;

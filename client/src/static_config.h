@@ -38,7 +38,19 @@ struct EventFingerInfo {
   }
   int progress_lessen_;
   int progress_increase_;
+  int btn_star1_x_;
+  int btn_star1_y_;
+  int btn_star2_x_;
+  int btn_star2_y_;
+  int btn_star_field_x_;
+  int btn_star_field_y_;
+  int btn_star_field_w_;
+  int btn_star_field_h_;
 };
+
+namespace CSJson{
+  class Value;
+}
 
 class ConfigInfo
 {
@@ -48,13 +60,16 @@ public:
   StageInfo& GetStageInfo(int stage_id);
   TipsInfo& tips_info(){return tips_info_;};
   float GetEventST(int step_idx);
-  int GetEventPL(int step_idx, int finger_idx);
-  int GetEventPI(int step_idx, int finger_idx);
+  int GetEventPL(int step_idx, int finger_idx, int stageid);
+  int GetEventPI(int step_idx, int finger_idx, int stageid);
+  EventFingerInfo& GetEventFingerInfo(int finger_idx, int stageid);
   virtual int Load(const char *path) = 0;
+protected:
+  void SetEventFingerInfo( CSJson::Value& val, int stageid);
 protected:
   std::vector<StageInfo> stage_vec_;
   std::vector<EventStepInfo> event_step_vec_;
-  std::vector<EventFingerInfo> event_finger_vec_;
+  std::map<int, std::vector<EventFingerInfo> > event_finger_map_;
   TipsInfo tips_info_;
 };
 
