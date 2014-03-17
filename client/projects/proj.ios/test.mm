@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "UMFeedback.h"
 #import "RootViewController.h"
+#import <Tapjoy/Tapjoy.h>
 
 void CAWriteFile(char *filename, char *content) {
     NSString *nsfilename = [NSString stringWithUTF8String:filename];
@@ -27,6 +28,7 @@ void CAReadFile(char *filename, char *content, size_t len) {
 }
 
 extern void CAProductByNotify(char *, void *target);
+extern void CATapPointUse(int p);
 
 @interface CAIAP: NSObject
 -(void) getProcustList;
@@ -115,3 +117,70 @@ void ShowFeedback() {
     RootViewController *view = (RootViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     [view showNativeFeedbackWithAppkey];
 }
+
+@interface CATapjoy: NSObject
+-(void) enableTapjoy: (NSString *)userid;
+-(void) setTarget: (void *)target;
+-(void)tjcConnectSuccess:(NSNotification*)notifyObj;
+-(void)tjcConnectFail:(NSNotification*)notifyObj;
+-(void)updateTapPoint;
+@end
+
+@implementation CATapjoy {
+    void *_target;
+}
+
+-(void) enableTapjoy: (NSString *)userid {
+    // Tapjoy Connect Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tjcConnectSuccess:)
+                                                 name:TJC_CONNECT_SUCCESS
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tjcConnectFail:)
+                                                 name:TJC_CONNECT_FAILED
+                                               object:nil];
+
+    //NSString *nsuserid = [NSString stringWithUTF8String:userid];
+    [Tapjoy setUserID:userid];
+    [Tapjoy requestTapjoyConnect:@"62adf9de-8278-46d1-9271-ffb49c37d33f"
+		       secretKey:@"t0rcWkFw8YX9SFICXRVx"
+			 options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
+}
+
+-(void)tjcConnectSuccess:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Succeeded");
+	[self updateTapPoint];
+}
+
+-(void)updateTapPoint {
+    [Tapjoy getTapPointsWithCompletion:^(NSDictionary *parameters, NSError *error) {
+	    if (!error) {
+		NSLog(@"gettappoint %@: %d", parameters[@"currencyName"], [parameters[@"amount"] intValue]);
+		CATapPointUse((int)[parameters[@"amount"] intValue]);
+	    } else {
+		NSLog(@"gettappoint error");
+	    }
+	}];
+}
+
+-(void)tjcConnectFail:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Failed");
+}
+@end
+
+void *CATapjoyConnect(char *userid) {
+    CATapjoy *obj;
+    obj = [CATapjoy new];
+    NSString *nsuserid = [NSString stringWithUTF8String:userid];
+    [obj enableTapjoy:nsuserid];
+    return (void *)obj;
+}
+
+void CATapjoyShow() {
+    RootViewController *view = (RootViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    [view showOfferwallAction];
+}
+

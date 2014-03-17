@@ -36,6 +36,9 @@ extern CADelegate * sharedDelegate();
 extern void ShouldGotoStart();
 extern bool GotoStartSceneIfError();
 
+extern bool EnablePanty;
+extern bool EnableTapjoy;
+
 #define PLAY_BTNSOUND \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_button_touched.caf");
 #define PLAY_WIN \

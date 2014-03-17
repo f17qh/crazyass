@@ -1,6 +1,7 @@
 #import "RootViewController.h"
 #import "UMFeedback.h"
 #import "UMFeedbackViewController.h"
+#import <Tapjoy/Tapjoy.h>
 
 @implementation RootViewController
 
@@ -39,6 +40,10 @@
     navigationController.navigationBar.barStyle = UIBarStyleBlack;
     navigationController.navigationBar.translucent = NO;
     [self presentModalViewController:navigationController animated:YES];
+}
+
+- (IBAction)showOfferwallAction {
+    [Tapjoy showOffersWithViewController:self];
 }
  
 // Override to allow orientations other than the default portrait orientation.

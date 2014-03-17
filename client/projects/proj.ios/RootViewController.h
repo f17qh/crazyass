@@ -6,5 +6,6 @@
 }
 
 - (void)showNativeFeedbackWithAppkey;
+- (IBAction)showOfferwallAction;
 
 @end

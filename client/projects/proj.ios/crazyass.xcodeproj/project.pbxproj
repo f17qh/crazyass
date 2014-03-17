@@ -229,6 +229,23 @@
 		379BB9D417F03F3700829B88 /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* CCSSceneReader.cpp */; };
 		6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A063D5B18D1F26800645C9A /* StoreKit.framework */; };
 		6A063D6818D1F79400645C9A /* static_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A063D6618D1F79400645C9A /* static_config.cpp */; };
+		6A3F515E18D6E48B00D79523 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A3F515C18D6E48B00D79523 /* TapjoyResources.bundle */; };
+		6A3F515F18D6E48B00D79523 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F515D18D6E48B00D79523 /* Tapjoy.framework */; };
+		6A3F516218D6E8E000D79523 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516118D6E8E000D79523 /* AdSupport.framework */; };
+		6A3F516418D6E8EB00D79523 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516318D6E8EB00D79523 /* CFNetwork.framework */; };
+		6A3F516618D6E8FC00D79523 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516518D6E8FC00D79523 /* CoreLocation.framework */; };
+		6A3F516818D6E90500D79523 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516718D6E90500D79523 /* CoreMotion.framework */; };
+		6A3F516A18D6E90E00D79523 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516918D6E90E00D79523 /* CoreTelephony.framework */; };
+		6A3F516C18D6E91C00D79523 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516B18D6E91C00D79523 /* EventKitUI.framework */; };
+		6A3F516E18D6E92400D79523 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516D18D6E92400D79523 /* EventKit.framework */; };
+		6A3F517018D6E93300D79523 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516F18D6E93300D79523 /* libsqlite3.0.dylib */; };
+		6A3F517218D6E93F00D79523 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517118D6E93F00D79523 /* MapKit.framework */; };
+		6A3F517418D6E94600D79523 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517318D6E94600D79523 /* MediaPlayer.framework */; };
+		6A3F517618D6E94D00D79523 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517518D6E94D00D79523 /* MessageUI.framework */; };
+		6A3F517818D6E95300D79523 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517718D6E95300D79523 /* MobileCoreServices.framework */; };
+		6A3F517A18D6E96500D79523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517918D6E96500D79523 /* SystemConfiguration.framework */; };
+		6A3F517C18D6E96C00D79523 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517B18D6E96C00D79523 /* Twitter.framework */; };
+		6A3F517E18D6E99500D79523 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F517D18D6E99500D79523 /* Social.framework */; };
 		6A5853A918CEF1F800817A56 /* Action in Resources */ = {isa = PBXBuildFile; fileRef = 6A5853A818CEF1F800817A56 /* Action */; };
 		6A5A76F818C3AAE900E914D8 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABDC71118C3A7750099D079 /* libcocos2dx.a */; };
 		6A5A76FB18C3AB3D00E914D8 /* app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */; };
@@ -765,6 +782,23 @@
 		6A063D5B18D1F26800645C9A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6A063D6618D1F79400645C9A /* static_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = static_config.cpp; path = ../../src/static_config.cpp; sourceTree = "<group>"; };
 		6A063D6718D1F79400645C9A /* static_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_config.h; path = ../../src/static_config.h; sourceTree = "<group>"; };
+		6A3F515C18D6E48B00D79523 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		6A3F515D18D6E48B00D79523 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		6A3F516118D6E8E000D79523 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6A3F516318D6E8EB00D79523 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6A3F516518D6E8FC00D79523 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6A3F516718D6E90500D79523 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		6A3F516918D6E90E00D79523 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6A3F516B18D6E91C00D79523 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		6A3F516D18D6E92400D79523 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		6A3F516F18D6E93300D79523 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		6A3F517118D6E93F00D79523 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6A3F517318D6E94600D79523 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		6A3F517518D6E94D00D79523 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6A3F517718D6E95300D79523 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6A3F517918D6E96500D79523 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6A3F517B18D6E96C00D79523 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		6A3F517D18D6E99500D79523 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6A5853A818CEF1F800817A56 /* Action */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Action; path = ../../Resources/Action; sourceTree = "<group>"; };
 		6A5A76F918C3AB3D00E914D8 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = app_delegate.cpp; path = ../../src/app_delegate.cpp; sourceTree = "<group>"; };
 		6A5A76FA18C3AB3D00E914D8 /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = ../../src/app_delegate.h; sourceTree = "<group>"; };
@@ -856,17 +890,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3F517E18D6E99500D79523 /* Social.framework in Frameworks */,
+				6A3F517C18D6E96C00D79523 /* Twitter.framework in Frameworks */,
+				6A3F517A18D6E96500D79523 /* SystemConfiguration.framework in Frameworks */,
+				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
+				6A3F517818D6E95300D79523 /* MobileCoreServices.framework in Frameworks */,
+				6A3F517618D6E94D00D79523 /* MessageUI.framework in Frameworks */,
+				6A3F517418D6E94600D79523 /* MediaPlayer.framework in Frameworks */,
+				6A3F517218D6E93F00D79523 /* MapKit.framework in Frameworks */,
+				6A3F517018D6E93300D79523 /* libsqlite3.0.dylib in Frameworks */,
+				6A3F516E18D6E92400D79523 /* EventKit.framework in Frameworks */,
+				6A3F516C18D6E91C00D79523 /* EventKitUI.framework in Frameworks */,
+				6A3F516A18D6E90E00D79523 /* CoreTelephony.framework in Frameworks */,
+				6A3F516818D6E90500D79523 /* CoreMotion.framework in Frameworks */,
+				6A3F516618D6E8FC00D79523 /* CoreLocation.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				6A3F516418D6E8EB00D79523 /* CFNetwork.framework in Frameworks */,
+				6A3F516218D6E8E000D79523 /* AdSupport.framework in Frameworks */,
 				6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */,
 				6A5A76F818C3AAE900E914D8 /* libcocos2dx.a in Frameworks */,
 				1ACB3244164770DE00914215 /* libcurl.a in Frameworks */,
+				6A3F515F18D6E48B00D79523 /* Tapjoy.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				6AC46F4518D5B56900B77148 /* libUMFeedback.a in Frameworks */,
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				BF1712461292920000B8313A /* libxml2.dylib in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
-				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
 				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
 				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
@@ -1516,6 +1566,22 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A3F517D18D6E99500D79523 /* Social.framework */,
+				6A3F517B18D6E96C00D79523 /* Twitter.framework */,
+				6A3F517918D6E96500D79523 /* SystemConfiguration.framework */,
+				6A3F517718D6E95300D79523 /* MobileCoreServices.framework */,
+				6A3F517518D6E94D00D79523 /* MessageUI.framework */,
+				6A3F517318D6E94600D79523 /* MediaPlayer.framework */,
+				6A3F517118D6E93F00D79523 /* MapKit.framework */,
+				6A3F516F18D6E93300D79523 /* libsqlite3.0.dylib */,
+				6A3F516D18D6E92400D79523 /* EventKit.framework */,
+				6A3F516B18D6E91C00D79523 /* EventKitUI.framework */,
+				6A3F516918D6E90E00D79523 /* CoreTelephony.framework */,
+				6A3F516718D6E90500D79523 /* CoreMotion.framework */,
+				6A3F516518D6E8FC00D79523 /* CoreLocation.framework */,
+				6A3F516318D6E8EB00D79523 /* CFNetwork.framework */,
+				6A3F516118D6E8E000D79523 /* AdSupport.framework */,
+				6A3F515A18D6E48B00D79523 /* Tapjoy.embeddedframework */,
 				6AC46F4418D5B56900B77148 /* libUMFeedback.a */,
 				6A063D5B18D1F26800645C9A /* StoreKit.framework */,
 				1ACB3243164770DE00914215 /* libcurl.a */,
@@ -1832,6 +1898,23 @@
 			path = CocoStudio;
 			sourceTree = "<group>";
 		};
+		6A3F515A18D6E48B00D79523 /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F515B18D6E48B00D79523 /* Resources */,
+				6A3F515D18D6E48B00D79523 /* Tapjoy.framework */,
+			);
+			path = Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		6A3F515B18D6E48B00D79523 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F515C18D6E48B00D79523 /* TapjoyResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6ABDC70D18C3A7750099D079 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2020,6 +2103,7 @@
 				6AC46F9618D5D86000B77148 /* static_data.json in Resources */,
 				6AC46F8018D5BEDA00B77148 /* messages_toolbar_background.png in Resources */,
 				6AC46F8818D5BEDA00B77148 /* send_selected@2x.png in Resources */,
+				6A3F515E18D6E48B00D79523 /* TapjoyResources.bundle in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
 				6AC46F7618D5BEDA00B77148 /* icon_rightArrow@2x.png in Resources */,
 				6A960E1A18C60A1E00C4B857 /* MainScene in Resources */,
@@ -2290,6 +2374,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/lijie/projects/crazyass/client/projects/proj.ios/Tapjoy.embeddedframework,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2344,6 +2432,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/lijie/projects/crazyass/client/projects/proj.ios/Tapjoy.embeddedframework,
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

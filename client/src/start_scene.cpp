@@ -9,6 +9,9 @@
 
 USING_NS_CC_EXT;
 
+bool EnablePanty = false;
+bool EnableTapjoy = true;
+
 class MyDelegate : public WebSocket::Delegate, public CADelegate {
 public:
   void Init(WebSocket *ws, CATarget *target) {
@@ -238,6 +241,8 @@ void StartScene::CARecv(const CSJson::Value& result) {
     u->set_heart(body.get("Heart", 0).asInt());
     u->set_stageid(body.get("Stageid", 1).asInt());
     //u->set_stageid(6);
+    EnablePanty = body.get("Panty", false).asBool();
+    EnableTapjoy = body.get("Tapjoy", false).asBool();
 
     // save new userid
     if (User::CurrentUser()->userid() == "") {
@@ -253,7 +258,6 @@ void StartScene::CARecv(const CSJson::Value& result) {
 }
 
 void StartScene::CARecvDone() {
-  TextBox::Instance().Show(ui_layer_, false);
   if (GotoStartSceneIfError())
     return;
 
@@ -276,6 +280,7 @@ void StartScene::CARecvDone() {
       EnableBtnPlay();
       unschedule(schedule_selector(StartScene::update));
       CCLOG("Login...ok");
+      TextBox::Instance().Show(ui_layer_, false);
       break;
 
     default:

@@ -69,6 +69,10 @@ static void TestNetwork(void) {
 
 extern "C" void tcpc_test();
 
+void CATapPointUse(int p) {
+  CCLOG("Use tap point %d", p);
+}
+
 bool GameScene::init() {
   //////////////////////////////
   // 1. super init first
@@ -76,6 +80,11 @@ bool GameScene::init() {
     return false;
   return true;
 }
+
+void * CATapjoyConnect(char *);
+void CATapjoyShow();
+
+static void *tapjoy_ = NULL;
 
 void GameScene::onEnter() {
   //////////////////////////////
@@ -140,6 +149,14 @@ void GameScene::onEnter() {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnFeedBack");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFeedback));
 
+  btn = (UIButton *)ui_layer_->getWidgetByName("BtnFree");
+  if (EnableTapjoy) {
+    btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFree));
+  } else {
+    btn->setVisible(false);
+    btn->setTouchEnabled(false);
+  }
+
   int nextstage = User::CurrentUser()->stageid();
 
 #if 0
@@ -181,6 +198,10 @@ void GameScene::onEnter() {
     snprintf(b, 8, "%d", User::CurrentUser()->heart());
     l->setText(b);
   }
+
+  if (!tapjoy_) {
+    tapjoy_ = CATapjoyConnect((char *)User::CurrentUser()->userid().c_str());
+  }
 }
 
 void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
@@ -213,12 +234,21 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
 }
 
 void ShowFeedback();
+void CATapjoyShow();
 void GameScene::onBtnFeedback(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
   PLAY_BTNSOUND;
   ShowFeedback();
+}
+
+void GameScene::onBtnFree(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+
+  PLAY_BTNSOUND;
+  CATapjoyShow();
 }
 
 void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
