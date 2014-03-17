@@ -180,7 +180,6 @@ void EventScene::onBtnStarField(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnMoveStar(CCObject *target) {
-  CCLOG("%s\n", __FUNCTION__);
   UIButton* btn_star_field = (UIButton *)ui_layer_->getWidgetByName("BtnStarField");
   UIImageView* img = (UIImageView *)ui_layer_->getWidgetByName("ImgStar");
   if (!img ||!btn_star_field) {
@@ -192,7 +191,7 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     img->setPosition(move_pos);
     
     if(distence_ > 10000) {
-      distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_,stageid_)*10*4;
+      distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_,stageid_)*10;
     } else {
       int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_,stageid_);
       distence_ += add;
@@ -264,6 +263,7 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   loading_bar->setVisible(false);
   ((CCSprite*)img_girl->getVirtualRenderer())->stopAllActions();
   distence_ = 0;
+    girl_action_runing_ = -1;
   loading_bar->setPercent(0);
 
   if(event_state_ >= 0) {
@@ -310,10 +310,10 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
 
 static const char *soundfiles[]= {
   "sound/sfx_girl_event_start.caf",
-  "sound/sfx_girl_event_climax1.wav",
-  "sound/sfx_girl_event_climax2.wav",
-  "sound/sfx_girl_event_climax3.wav",
-  "sound/sfx_girl_event_climax4.wav",
+  "sound/sfx_girl_event_climax1.caf",
+  "sound/sfx_girl_event_climax2.caf",
+  "sound/sfx_girl_event_climax3.caf",
+  "sound/sfx_girl_event_climax4.caf",
 };
 
 void EventScene::Update(float delta) {
@@ -329,8 +329,11 @@ void EventScene::Update(float delta) {
 }
 void EventScene::ShowLoadingBar() {
   bool show = false;
-  if(distence_ > 0)
+  if(distence_ > 0) {
     show = true;
+  } else {
+    girl_action_runing_ = -1;
+  }
 
   UIImageView* img_bg = (UIImageView *)ui_layer_->getWidgetByName("ImageBarGround");
   UIImageView* img_bar = (UIImageView *)ui_layer_->getWidgetByName("ImageBar");
@@ -364,7 +367,7 @@ void EventScene::ShowLoadingBar() {
     float time = ConfigInfo::Instence().GetEventST(GetEventStep());
     girl_action_runing_ = GetEventStep();
     if(girl_action_runing_ != 2){
-      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[event_state_ + 1]);
+      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[0]);
     } else {
       CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_]);
     }
