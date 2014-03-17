@@ -1868,6 +1868,78 @@
               "textColorG": 255,
               "textColorR": 255
             }
+          },
+          {
+            "classname": "Button",
+            "name": null,
+            "children": [],
+            "options": {
+              "__type": "ComGUIButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
+              "classname": "Button",
+              "name": "BtnFree",
+              "ZOrder": 3,
+              "actiontag": 1989,
+              "anchorPointX": 0.5,
+              "anchorPointY": 0.5,
+              "classType": null,
+              "colorB": 255,
+              "colorG": 255,
+              "colorR": 255,
+              "flipX": false,
+              "flipY": false,
+              "height": 47,
+              "ignoreSize": true,
+              "layoutParameter": null,
+              "opacity": 255,
+              "positionPercentX": 0.4,
+              "positionPercentY": 1.56,
+              "positionType": 0,
+              "rotation": 0,
+              "scaleX": 1,
+              "scaleY": 1,
+              "sizePercentX": 0.515,
+              "sizePercentY": 0.2,
+              "sizeType": 0,
+              "tag": 294,
+              "touchAble": true,
+              "useMergedTexture": false,
+              "visible": true,
+              "width": 123,
+              "x": 80,
+              "y": 312,
+              "capInsetsHeight": 0,
+              "capInsetsWidth": 0,
+              "capInsetsX": 0,
+              "capInsetsY": 0,
+              "disabled": null,
+              "disabledData": {
+                "path": null,
+                "plistFile": null,
+                "resourceType": 0
+              },
+              "fontName": "微软雅黑",
+              "fontSize": 14,
+              "fontType": 0,
+              "normal": null,
+              "normalData": {
+                "path": "Resources/images/free.png",
+                "plistFile": null,
+                "resourceType": 0
+              },
+              "pressed": null,
+              "pressedData": {
+                "path": null,
+                "plistFile": null,
+                "resourceType": 0
+              },
+              "scale9Enable": false,
+              "scale9Height": 47,
+              "scale9Width": 123,
+              "text": "",
+              "textColorB": 255,
+              "textColorG": 255,
+              "textColorR": 255
+            }
           }
         ],
         "options": {
