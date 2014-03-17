@@ -9,6 +9,8 @@ const (
 	kCmdStartPlay = 2
 	kCmdEndPlay = 3
 	kCmdIAPAddHeart = 4
+	kCmdEventLock = 5
+	kCmdUseItem = 6
 )
 
 // error
@@ -32,4 +34,21 @@ const (
 )
 
 var StageHeartConfig = []uint32{2,3,4,5,6,7}
+var EventHeartConfig = []uint32{12,12,12,12}
 
+const (
+	EventHeartAll = 24
+)
+
+// itemid
+const (
+	ItemPlayAgain1 = 1
+	ItemPlayAgain2 = 2
+	ItemPlayAgain3 = 3
+	ItemPlayAgain4 = 4
+	ItemPlayAgain5 = 5
+	ItemPlayAgain6 = 6
+	ItemGodFinger  = 7
+)
+
+var ItemHeartConfig = []uint32{0,3,4,5,6,7,8,4}
