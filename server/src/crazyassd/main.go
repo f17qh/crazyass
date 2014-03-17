@@ -3,6 +3,7 @@ package main
 import "log"
 import "code.google.com/p/go.net/websocket"
 import "net/http"
+import "fmt"
 import "crazyass"
 
 func echo(ws *websocket.Conn) {
@@ -28,9 +29,15 @@ func clientProc(ws *websocket.Conn) {
 	client.Proc()
 }
 
+func HandleTP(w http.ResponseWriter, req *http.Request) {
+	fmt.Println(req.FormValue)
+	w.Write([]byte(""))
+}
+
 func main() {
 	log.Printf("Starting crazyassd...");
 	crazyass.ConnectMongo("127.0.0.1");
+	http.HandleFunc("/tj", HandleTP)
 	http.Handle("/echo", websocket.Handler(echo));
 	myproto := websocket.Server{
 		Handshake: nil,
