@@ -190,8 +190,16 @@ void EventScene::onBtnMoveStar(CCObject *target) {
   const CCPoint& move_pos = btn_star_field->getTouchMovePos();
   if(btn_star_field->getRect().containsPoint(move_pos)) {
     img->setPosition(move_pos);
-    int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_);
-    distence_ += add;
+    
+    if(distence_ > 10000) {
+      distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_)*10*4;
+    } else {
+      int add = ConfigInfo::Instence().GetEventPI(GetEventStep(),event_state_);
+      distence_ += add;
+      if(distence_ > 10000) {
+        distence_ = 11000;
+      }
+    }
     //CCLOG("%s distence:%d, add:%d\n", __FUNCTION__, distence_, add);
   } else {
     img->setVisible(false);
@@ -246,6 +254,18 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     btn->setVisible(false);
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_2");
     btn->setVisible(false);
+    UIImageView* img_bg = (UIImageView *)ui_layer_->getWidgetByName("ImageBarGround");
+    img_bg->setVisible(false);
+    UIImageView* img_bar = (UIImageView *)ui_layer_->getWidgetByName("ImageBar");
+    img_bar->setVisible(false);
+    UIImageView* img_girl = (UIImageView *)ui_layer_->getWidgetByName("ImgGirlFace");
+    img_girl->setVisible(false);
+    UILoadingBar* loading_bar = (UILoadingBar *)ui_layer_->getWidgetByName("LoadingBar");
+    loading_bar->setVisible(false);
+    ((CCSprite*)img_girl->getVirtualRenderer())->stopAllActions();
+    distence_ = 0;
+    loading_bar->setPercent(0);
+
     unschedule(schedule_selector(EventScene::Update));
   }
 
@@ -259,17 +279,18 @@ static const char *soundfiles[]= {
   "sound/sfx_girl_event_climax1.wav",
   "sound/sfx_girl_event_climax2.wav",
   "sound/sfx_girl_event_climax3.wav",
+  "sound/sfx_girl_event_climax4.wav",
 };
 
 void EventScene::Update(float delta) {
   if(distence_ >= 0) {
+    ShowLoadingBar();
     int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_);
     distence_ -= sub;
     //CCLOG("%s distence:%d, sub:%d\n", __FUNCTION__, distence_, sub);
     if(distence_ < 0) {
       distence_ = 0;
     }
-    ShowLoadingBar();
   }
 }
 void EventScene::ShowLoadingBar() {
@@ -299,17 +320,21 @@ void EventScene::ShowLoadingBar() {
     loading_bar->setVisible(true);
   }
 
-  loading_bar->setPercent(distence_/100);
+  if(distence_ > 10000) {
+    loading_bar->setPercent(100);
+  } else {
+    loading_bar->setPercent(distence_/100);
+  }
 
   if(show && GetEventStep() != girl_action_runing_) {
     float time = ConfigInfo::Instence().GetEventST(GetEventStep());
-    RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
     girl_action_runing_ = GetEventStep();
     if(girl_action_runing_ != 2){
       CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[event_state_ + 1]);
     } else {
       CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_]);
     }
+    RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
   }
 }
 
@@ -317,6 +342,9 @@ void EventScene::RunGirlAction(CCSprite* sprite, float time) {
   CCScaleTo * scale1 = CCScaleTo::create(time, 1.2f);
   CCScaleTo * scale2 = CCScaleTo::create(time, 1.0f);
   CCSequence* tmp = CCSequence::create(scale1, scale2, NULL);
+  char name[32] = {};
+  sprintf(name,"girl%d_face_000%d.png", stageid_, girl_action_runing_+1);
+  sprite->initWithSpriteFrameName(name);
   sprite->runAction(CCRepeatForever::create(tmp));
 }
 
@@ -327,7 +355,7 @@ int EventScene::GetEventStep() {
       event_step = 0;
     } else if(distence_ < 8000) {
       event_step = 1;
-    } else if(distence_ < 10000) {
+    } else {
       event_step = 2;
     }
   }
