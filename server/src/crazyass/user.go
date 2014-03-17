@@ -14,6 +14,8 @@ func init() {
 	ClientProcRegister(kCmdStartPlay, ProcStartPlay)
 	ClientProcRegister(kCmdEndPlay, ProcEndPlay)
 	ClientProcRegister(kCmdIAPAddHeart, ProcIAPAddHeart)
+	ClientProcRegister(kCmdEventLock, ProcEventLock)
+	ClientProcRegister(kCmdUseItem, ProcUseItem)
 }
 
 // user in memory
@@ -36,6 +38,7 @@ type UserDb struct {
 	NextStage uint32
 	RegTime uint32
 	DeviceInfo string
+	EventLock []int
 }
 
 func userRegister(u *UserDb, id string) {
@@ -160,6 +163,16 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	reply.Userid = msg.Userid
 	reply.Body["Heart"] = c.udb.Heart
 	reply.Body["Stageid"] = c.udb.NextStage
+	reply.Body["Panty"] = true
+	reply.Body["Tapjoy"] = true
+
+	for i := 0; i < len(c.udb.EventLock); i++ {
+		if c.udb.EventLock[i] == 0 {
+			c.udb.EventLock[i] = 1;
+		}
+	}
+
+	reply.Body["EventLock"] = c.udb.EventLock
 	return CLI_PROC_RET_SUCC
 }
 
@@ -232,5 +245,56 @@ func ProcEndPlay(c *Client, msg *Msg) int {
 	reply := c.GetReplyMsg()
 	reply.Body["Heart"] = c.udb.Heart
 	reply.Body["Stageid"] = c.udb.NextStage
+	return CLI_PROC_RET_SUCC
+}
+
+func ProcEventLock(c *Client, msg *Msg) int {
+	stageid, ok := msg.Body["stageid"]
+	if !ok {
+		c.SetErrCode(kErrInvalidProto)
+		return CLI_PROC_RET_ERR
+	}
+
+	eventid, ok := msg.Body["eventid"]
+	if !ok {
+		c.SetErrCode(kErrInvalidProto)
+		return CLI_PROC_RET_ERR
+	}
+
+	// unlock
+	sid := int(stageid.(float64))
+	eid := int(eventid.(float64))
+	c.udb.EventLock[sid - 1] = eid
+
+	// use heart
+	if sid > 0 && sid <= len(EventHeartConfig) {
+		c.UseHeart(int(EventHeartConfig[sid - 1]))
+	}
+
+	c.dirty = true
+
+	// reply
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.udb.Heart
+	return CLI_PROC_RET_SUCC
+}
+
+func ProcUseItem(c *Client, msg *Msg) int {
+	itemid, ok := msg.Body["itemid"]
+	if !ok {
+		c.SetErrCode(kErrInvalidProto)
+		return CLI_PROC_RET_ERR
+	}
+
+	iid := int(itemid.(float64))
+	// use heart
+	if iid > 0 && iid <= len(ItemHeartConfig) {
+		c.UseHeart(int(ItemHeartConfig[iid]))
+	}
+	c.dirty = true
+
+	// reply
+	reply := c.GetReplyMsg()
+	reply.Body["Heart"] = c.udb.Heart
 	return CLI_PROC_RET_SUCC
 }
