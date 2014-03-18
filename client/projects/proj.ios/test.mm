@@ -158,7 +158,7 @@ void ShowFeedback() {
     [Tapjoy getTapPointsWithCompletion:^(NSDictionary *parameters, NSError *error) {
 	    if (!error) {
 		NSLog(@"gettappoint %@: %d", parameters[@"currencyName"], [parameters[@"amount"] intValue]);
-		CATapPointUse((int)[parameters[@"amount"] intValue]);
+		// CATapPointUse((int)[parameters[@"amount"] intValue]);
 	    } else {
 		NSLog(@"gettappoint error");
 	    }

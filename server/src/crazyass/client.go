@@ -101,8 +101,7 @@ var CAOnline Online
 
 func init() {
 	CALog = make(log4go.Logger)
-	// log.AddFilter("stdout", log4go.DEBUG, log4go.NewConsoleLogWriter())
-	CALog.AddFilter("log", log4go.DEBUG, log4go.NewFileLogWriter("example.log", false).SetRotateDaily(true))
+	CALog.AddFilter("log", log4go.DEBUG, log4go.NewFileLogWriter("../log/crazyass.log", true).SetRotateDaily(true))
 	CALog.Info("The time is now: %s", time.Now().Format("15:04:05 MST 2006/01/02"))
 
 	for i := 0; i < 128; i++ {
@@ -170,7 +169,7 @@ func (c *Client) Proc() {
 			}
 		case imsg := <-c.ichan:
 			c.procIMsg(imsg)
-		case <-time.After(1000 * time.Second):
+		case <-time.After(300 * time.Second):
 			c.procTimeout()
 		}
 	}
@@ -180,7 +179,6 @@ func (c *Client) Proc() {
 }
 
 func (c *Client) procIMsg(value int) {
-	CALog.Debug("proc ichan %d", value)
 	c.AddHeart(value)
 }
 

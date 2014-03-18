@@ -310,12 +310,12 @@ func AddHeartAsyncOnline(c *Client, count int) {
 func AddHeartAsync(userid string, count int) {
 	c := CAOnline.Find(userid)
 	if c != nil {
-		CALog.Error("%s async add %d", userid, count)
+		CALog.Debug("%s async add %d", userid, count)
 		AddHeartAsyncOnline(c, count)
 		return
 	}
 
-	CALog.Error("%s db add %d", userid, count)
+	CALog.Debug("%s db add %d", userid, count)
 	var user User
 	user.Init(nil)
 
