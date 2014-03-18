@@ -265,6 +265,7 @@ func NewClient(conn *websocket.Conn) *Client {
 		conn: conn,
 		enable: true,
 	}
+	c.ichan = make(chan interface{}, 4)
 	c.Init(c)
 	return c
 }
