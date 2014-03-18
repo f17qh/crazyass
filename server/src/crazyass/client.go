@@ -63,6 +63,7 @@ func (on *Online) Insert(userid string, c *Client) error {
 	}
 
 	on.usermap[userid] = c
+	CALog.Info("%s login", userid)
 	return nil
 }
 
@@ -71,6 +72,7 @@ func (on *Online) Delete(userid string) {
 	defer on.mutex.Unlock()
 
 	delete(on.usermap, userid)
+	CALog.Info("%s logout", userid)
 }
 
 func (on *Online) Find(userid string) *Client {
@@ -173,11 +175,13 @@ func (c *Client) Proc() {
 		}
 	}
 
+	CAOnline.Delete(c.udb.UserId)
 	// end here
 }
 
 func (c *Client) procIMsg(msg interface{}) {
 	value := msg.(int)
+	CALog.Debug("proc ichan %d", value)
 	c.AddHeart(value)
 }
 

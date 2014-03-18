@@ -8,6 +8,16 @@ import "crazyass"
 import "crypto/md5"
 import "encoding/hex"
 import "strconv"
+import "code.google.com/p/log4go"
+import "time"
+
+var mainlog log4go.Logger
+func init() {
+	mainlog = make(log4go.Logger)
+	// log.AddFilter("stdout", log4go.DEBUG, log4go.NewConsoleLogWriter())
+	mainlog.AddFilter("log", log4go.DEBUG, log4go.NewFileLogWriter("../log/main.log", true).SetRotateDaily(true))
+	mainlog.Info("The time is now: %s", time.Now().Format("15:04:05 MST 2006/01/02"))
+}
 
 func echo(ws *websocket.Conn) {
 	var err error
@@ -36,6 +46,7 @@ func HandleTP(w http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 	// fmt.Println(req.FormValue)
 	fmt.Println(req.Form)
+	mainlog.Info("%v", req.Form)
 
 	snuid := req.Form["snuid"][0]
 	id := req.Form["id"][0]
