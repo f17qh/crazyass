@@ -45,7 +45,7 @@ type Client struct {
 	errcode int
 
 	// internal msg chan
-	ichan chan interface{}
+	ichan chan int
 }
 
 type Online struct {
@@ -167,9 +167,7 @@ func (c *Client) Proc() {
 				c.procMsg(msg)
 			}
 		case imsg := <-c.ichan:
-			if imsg != nil {
-				c.procIMsg(imsg)
-			}
+			c.procIMsg(imsg)
 		case <-time.After(1000 * time.Second):
 			c.procTimeout()
 		}
@@ -179,8 +177,7 @@ func (c *Client) Proc() {
 	// end here
 }
 
-func (c *Client) procIMsg(msg interface{}) {
-	value := msg.(int)
+func (c *Client) procIMsg(value int) {
 	CALog.Debug("proc ichan %d", value)
 	c.AddHeart(value)
 }
@@ -265,7 +262,7 @@ func NewClient(conn *websocket.Conn) *Client {
 		conn: conn,
 		enable: true,
 	}
-	c.ichan = make(chan interface{}, 4)
+	c.ichan = make(chan int, 4)
 	c.Init(c)
 	return c
 }
