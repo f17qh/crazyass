@@ -154,6 +154,8 @@ func (c *Client) Proc() {
 	defer c.Close()
 	req_chan := make(chan *Msg, 1)
 
+	go c.readMsg(req_chan)
+
 	// read request from client
 	// process req and send rsp
 	for c.enable {
@@ -162,7 +164,7 @@ func (c *Client) Proc() {
 		c.SetErrCode(0)
 
 		select {
-		case msg := <-c.readMsg(req_chan):
+		case msg := <- req_chan:
 			if msg != nil {
 				c.procMsg(msg)
 			}
@@ -183,15 +185,17 @@ func (c *Client) procIMsg(value int) {
 }
 
 // read packet from websocket conn
-func (c *Client) readMsg(req_chan chan *Msg) chan *Msg {
-	if msg, err := c.readPacket(c.conn); err != nil {
-		// if readPacket err, close client
-		c.enable = false
-		req_chan <- nil
-	} else {
-		req_chan <- msg
+func (c *Client) readMsg(req_chan chan *Msg) {
+	for {
+		if msg, err := c.readPacket(c.conn); err != nil {
+			// if readPacket err, close client
+			c.enable = false
+			req_chan <- nil
+			return
+		} else {
+			req_chan <- msg
+		}
 	}
-	return req_chan
 }
 
 // proc request by cmd
