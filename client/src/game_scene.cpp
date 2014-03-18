@@ -265,6 +265,8 @@ void GameScene::CARecvTimeout() {
 }
 
 void GameScene::CARecvDone() {
+  if (GotoStartSceneIfError())
+    return;
   PlayScene *sc = PlayScene::create();
   sc->set_stageid(select_stage_);
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
@@ -280,6 +282,7 @@ void GameScene::CARecv(const CSJson::Value& result) {
     u->set_stageid(body.get("Stageid", 1).asInt());
   } else {
     // TODO: logout to start screen
+    ShouldGotoStart();
     return;
   }
 }

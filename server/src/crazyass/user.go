@@ -200,7 +200,7 @@ func ProcStartPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if uint32(stageid.(float64)) != c.udb.NextStage {
+	if uint32(stageid.(float64)) > c.udb.NextStage {
 		c.SetErrCode(kErrInvalidParamters)
 		return CLI_PROC_RET_ERR
 	}
