@@ -7,6 +7,7 @@ import "fmt"
 import "crazyass"
 import "crypto/md5"
 import "encoding/hex"
+import "strconv"
 
 func echo(ws *websocket.Conn) {
 	var err error
@@ -42,8 +43,14 @@ func HandleTP(w http.ResponseWriter, req *http.Request) {
 	verifier := req.Form["verifier"][0]
 
 	md5byte := md5.Sum([]byte(id + ":" + snuid + ":" + currency + ":" + "OyOPgaTvwJg3jO6NtnqS"))
-	fmt.Printf("md5sum:%s\n", hex.EncodeToString(md5byte[0:]))
-	fmt.Printf("verifier:%s\n", verifier)
+	// fmt.Printf("md5sum:%s\n", hex.EncodeToString(md5byte[0:]))
+	// fmt.Printf("verifier:%s\n", verifier)
+	if hex.EncodeToString(md5byte[0:]) == verifier {
+		c, err := strconv.Atoi(currency)
+		if err == nil {
+			crazyass.AddHeartAsync(snuid, c)
+		}
+	}
 	w.Write([]byte(""))
 }
 

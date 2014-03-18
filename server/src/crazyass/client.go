@@ -6,6 +6,8 @@ import "errors"
 import "code.google.com/p/go.net/websocket"
 import "code.google.com/p/log4go"
 import _ "encoding/json"
+import "sync/"
+import "sync/atomic"
 
 type Msg struct {
 	Cmd float64
@@ -43,6 +45,41 @@ type Client struct {
 	errcode int
 }
 
+type Online struct {
+	usermap map[string]*Client
+	mutex sync.Mutex
+}
+
+func (on *Online) Insert(userid string, c *Client) error {
+	on.mutex.Lock()
+	defer on.mutex.Unlock()
+
+	_, ok := on.usermap[userid]
+	if ok {
+		return errors.New("User already inserted")
+	}
+
+	on.usermap[userid] = c
+}
+
+func (on *Online) Delete(userid string) {
+	on.mutex.Lock()
+	defer on.mutex.Unlock()
+
+	delete(on.usermap, string)
+}
+
+func (on *Online) Find(userid string) *Client {
+	on.mutex.Lock()
+	defer on.mutex.Unlock()
+
+	c, ok := on.usermap[userid]
+	if ok {
+		return c
+	}
+	return nil
+}
+
 const (
 	CLI_PROC_RET_SUCC = iota
 	CLI_PROC_RET_ERR  = iota
@@ -54,6 +91,7 @@ type ClientProc func(*Client, *Msg) int
 // cmd proc func array
 var procFuncArray [128]ClientProc
 var CALog log4go.Logger
+var CAOnline Online
 
 func init() {
 	CALog = make(log4go.Logger)
@@ -71,6 +109,7 @@ func init() {
 	}
 
 	ClientProcRegister(0, t)
+	CAOnline.usermap = make(map[string]*Client)
 }
 
 // Register your client cmd proc function
@@ -99,11 +138,16 @@ func (c *Client) SetErrCode(errno int) {
 	c.replyMsg.ErrCode = float64(errno)
 }
 
+func (c *Client) InsertOnline(userid string) error {
+	return CAOnline.Insert(userid, c)
+}
+
 // main process function for each client
 func (c *Client) Proc() {
 	// clear Client tmp data
 	defer c.Close()
 	req_chan := make(chan *Msg, 1)
+
 	// read request from client
 	// process req and send rsp
 	for c.enable {

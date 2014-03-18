@@ -157,6 +157,8 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_KICK
 	}
 
+	c.InsertOnline(msg.Userid)
+
 	// send reply
 	reply := c.GetReplyMsg()
 	// may changed
@@ -297,4 +299,22 @@ func ProcUseItem(c *Client, msg *Msg) int {
 	reply := c.GetReplyMsg()
 	reply.Body["Heart"] = c.udb.Heart
 	return CLI_PROC_RET_SUCC
+}
+
+func AddHeartAsync(userid string, count int) {
+	var user User
+	user.Init(nil)
+
+	err := user.Load(userid)
+	if err != nil {
+		CALog.Error("load %s error %v", userid, err)
+		return
+	}
+
+	user.AddHeart(count)
+	user.dirty = true;
+	err = user.Store()
+	if err != nil {
+		CALog.Error("store %s error %v", userid, err)
+	}
 }
