@@ -301,7 +301,19 @@ func ProcUseItem(c *Client, msg *Msg) int {
 	return CLI_PROC_RET_SUCC
 }
 
+func AddHeartAsyncOnline(c *Client, count int) {
+	c.ichan <- count
+}
+
 func AddHeartAsync(userid string, count int) {
+	c := CAOnline.Find(userid)
+	if c != nil {
+		CALog.Error("%s async add %d", userid, count)
+		AddHeartAsyncOnline(c, count)
+		return
+	}
+
+	CALog.Error("%s db add %d", userid, count)
 	var user User
 	user.Init(nil)
 

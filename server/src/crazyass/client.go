@@ -6,8 +6,8 @@ import "errors"
 import "code.google.com/p/go.net/websocket"
 import "code.google.com/p/log4go"
 import _ "encoding/json"
-import "sync/"
-import "sync/atomic"
+import "sync"
+import _ "sync/atomic"
 
 type Msg struct {
 	Cmd float64
@@ -43,6 +43,9 @@ type Client struct {
 
 	// error code for client
 	errcode int
+
+	// internal msg chan
+	ichan chan interface{}
 }
 
 type Online struct {
@@ -60,13 +63,14 @@ func (on *Online) Insert(userid string, c *Client) error {
 	}
 
 	on.usermap[userid] = c
+	return nil
 }
 
 func (on *Online) Delete(userid string) {
 	on.mutex.Lock()
 	defer on.mutex.Unlock()
 
-	delete(on.usermap, string)
+	delete(on.usermap, userid)
 }
 
 func (on *Online) Find(userid string) *Client {
@@ -160,12 +164,21 @@ func (c *Client) Proc() {
 			if msg != nil {
 				c.procMsg(msg)
 			}
+		case imsg := <-c.ichan:
+			if imsg != nil {
+				c.procIMsg(imsg)
+			}
 		case <-time.After(1000 * time.Second):
 			c.procTimeout()
 		}
 	}
 
 	// end here
+}
+
+func (c *Client) procIMsg(msg interface{}) {
+	value := msg.(int)
+	c.AddHeart(value)
 }
 
 // read packet from websocket conn
