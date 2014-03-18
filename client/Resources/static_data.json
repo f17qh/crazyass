@@ -176,50 +176,50 @@
         {
             "progress_lessen":20, //没0.1秒减少XX
             "progress_increase":10, //每次移动增加XX
-            "btn_star1_x":324,
-            "btn_star1_y":209,
-            "btn_star2_x":371,
-            "btn_star2_y":50,
-            "btn_star_field_x":345,
-            "btn_star_field_y":125,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":367,
+            "btn_star1_y":169,
+            "btn_star2_x":344,
+            "btn_star2_y":63,
+            "btn_star_field_x":357,
+            "btn_star_field_y":133,
+            "btn_star_field_w":80,
+            "btn_star_field_h":190
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
             "progress_increase":15, //每次移动增加XX
-            "btn_star1_x":491,
-            "btn_star1_y":215,
-            "btn_star2_x":525,
-            "btn_star2_y":53,
-            "btn_star_field_x":510,
-            "btn_star_field_y":135,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":478,
+            "btn_star1_y":195,
+            "btn_star2_x":574,
+            "btn_star2_y":77,
+            "btn_star_field_x":525,
+            "btn_star_field_y":134,
+            "btn_star_field_w":150,
+            "btn_star_field_h":190
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
             "progress_increase":20, //每次移动增加XX
-            "btn_star1_x":473,
-            "btn_star1_y":382,
-            "btn_star2_x":350,
-            "btn_star2_y":353,
-            "btn_star_field_x":410,
-            "btn_star_field_y":365,
-            "btn_star_field_w":190,
+            "btn_star1_x":419,
+            "btn_star1_y":406,
+            "btn_star2_x":272,
+            "btn_star2_y":347,
+            "btn_star_field_x":342,
+            "btn_star_field_y":379,
+            "btn_star_field_w":230,
             "btn_star_field_h":120
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
             "progress_increase":25, //每次移动增加XX
-            "btn_star1_x":388,
-            "btn_star1_y":310,
-            "btn_star2_x":407,
-            "btn_star2_y":177,
-            "btn_star_field_x":394,
-            "btn_star_field_y":246,
-            "btn_star_field_w":90,
-            "btn_star_field_h":200
+            "btn_star1_x":287,
+            "btn_star1_y":254,
+            "btn_star2_x":429,
+            "btn_star2_y":298,
+            "btn_star_field_x":361,
+            "btn_star_field_y":276,
+            "btn_star_field_w":230,
+            "btn_star_field_h":120
         }
     ],
 
@@ -227,50 +227,50 @@
         {
             "progress_lessen":20, //没0.1秒减少XX
             "progress_increase":10, //每次移动增加XX
-            "btn_star1_x":324,
-            "btn_star1_y":209,
-            "btn_star2_x":371,
-            "btn_star2_y":50,
-            "btn_star_field_x":345,
-            "btn_star_field_y":125,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":327,
+            "btn_star1_y":143,
+            "btn_star2_x":433,
+            "btn_star2_y":32,
+            "btn_star_field_x":376,
+            "btn_star_field_y":91,
+            "btn_star_field_w":150,
+            "btn_star_field_h":180
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
             "progress_increase":15, //每次移动增加XX
-            "btn_star1_x":491,
-            "btn_star1_y":215,
-            "btn_star2_x":525,
-            "btn_star2_y":53,
-            "btn_star_field_x":510,
-            "btn_star_field_y":135,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":527,
+            "btn_star1_y":205,
+            "btn_star2_x":566,
+            "btn_star2_y":75,
+            "btn_star_field_x":550,
+            "btn_star_field_y":144,
+            "btn_star_field_w":130,
+            "btn_star_field_h":200
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
             "progress_increase":20, //每次移动增加XX
-            "btn_star1_x":473,
-            "btn_star1_y":382,
-            "btn_star2_x":350,
-            "btn_star2_y":353,
-            "btn_star_field_x":410,
-            "btn_star_field_y":365,
-            "btn_star_field_w":190,
-            "btn_star_field_h":120
+            "btn_star1_x":410,
+            "btn_star1_y":385,
+            "btn_star2_x":254,
+            "btn_star2_y":275,
+            "btn_star_field_x":342,
+            "btn_star_field_y":334,
+            "btn_star_field_w":250,
+            "btn_star_field_h":170
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
             "progress_increase":25, //每次移动增加XX
-            "btn_star1_x":388,
-            "btn_star1_y":310,
-            "btn_star2_x":407,
-            "btn_star2_y":177,
+            "btn_star1_x":483,
+            "btn_star1_y":304,
+            "btn_star2_x":302,
+            "btn_star2_y":180,
             "btn_star_field_x":394,
             "btn_star_field_y":246,
-            "btn_star_field_w":90,
-            "btn_star_field_h":200
+            "btn_star_field_w":250,
+            "btn_star_field_h":190
         }
     ],
 
@@ -278,50 +278,50 @@
         {
             "progress_lessen":20, //没0.1秒减少XX
             "progress_increase":10, //每次移动增加XX
-            "btn_star1_x":324,
-            "btn_star1_y":209,
-            "btn_star2_x":371,
-            "btn_star2_y":50,
-            "btn_star_field_x":345,
-            "btn_star_field_y":125,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":202,
+            "btn_star1_y":134,
+            "btn_star2_x":397,
+            "btn_star2_y":98,
+            "btn_star_field_x":294,
+            "btn_star_field_y":119,
+            "btn_star_field_w":270,
+            "btn_star_field_h":100
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
             "progress_increase":15, //每次移动增加XX
-            "btn_star1_x":491,
-            "btn_star1_y":215,
-            "btn_star2_x":525,
-            "btn_star2_y":53,
-            "btn_star_field_x":510,
-            "btn_star_field_y":135,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":239,
+            "btn_star1_y":203,
+            "btn_star2_x":403,
+            "btn_star2_y":197,
+            "btn_star_field_x":324,
+            "btn_star_field_y":200,
+            "btn_star_field_w":230,
+            "btn_star_field_h":100
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
             "progress_increase":20, //每次移动增加XX
-            "btn_star1_x":473,
-            "btn_star1_y":382,
-            "btn_star2_x":350,
-            "btn_star2_y":353,
-            "btn_star_field_x":410,
-            "btn_star_field_y":365,
-            "btn_star_field_w":190,
-            "btn_star_field_h":120
+            "btn_star1_x":386,
+            "btn_star1_y":448,
+            "btn_star2_x":448,
+            "btn_star2_y":328,
+            "btn_star_field_x":408,
+            "btn_star_field_y":379,
+            "btn_star_field_w":140,
+            "btn_star_field_h":190
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
             "progress_increase":25, //每次移动增加XX
-            "btn_star1_x":388,
-            "btn_star1_y":310,
-            "btn_star2_x":407,
-            "btn_star2_y":177,
-            "btn_star_field_x":394,
-            "btn_star_field_y":246,
-            "btn_star_field_w":90,
-            "btn_star_field_h":200
+            "btn_star1_x":471,
+            "btn_star1_y":208,
+            "btn_star2_x":579,
+            "btn_star2_y":251,
+            "btn_star_field_x":526,
+            "btn_star_field_y":235,
+            "btn_star_field_w":170,
+            "btn_star_field_h":110
         }
     ],
 
@@ -329,50 +329,50 @@
         {
             "progress_lessen":20, //没0.1秒减少XX
             "progress_increase":10, //每次移动增加XX
-            "btn_star1_x":324,
-            "btn_star1_y":209,
-            "btn_star2_x":371,
-            "btn_star2_y":50,
-            "btn_star_field_x":345,
-            "btn_star_field_y":125,
+            "btn_star1_x":313,
+            "btn_star1_y":266,
+            "btn_star2_x":358,
+            "btn_star2_y":366,
+            "btn_star_field_x":335,
+            "btn_star_field_y":320,
             "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star_field_h":180
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
             "progress_increase":15, //每次移动增加XX
-            "btn_star1_x":491,
-            "btn_star1_y":215,
-            "btn_star2_x":525,
-            "btn_star2_y":53,
-            "btn_star_field_x":510,
-            "btn_star_field_y":135,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":484,
+            "btn_star1_y":257,
+            "btn_star2_x":285,
+            "btn_star2_y":240,
+            "btn_star_field_x":382,
+            "btn_star_field_y":253,
+            "btn_star_field_w":270,
+            "btn_star_field_h":100
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
             "progress_increase":20, //每次移动增加XX
-            "btn_star1_x":473,
-            "btn_star1_y":382,
-            "btn_star2_x":350,
-            "btn_star2_y":353,
-            "btn_star_field_x":410,
-            "btn_star_field_y":365,
-            "btn_star_field_w":190,
-            "btn_star_field_h":120
+            "btn_star1_x":521,
+            "btn_star1_y":403,
+            "btn_star2_x":484,
+            "btn_star2_y":257,
+            "btn_star_field_x":501,
+            "btn_star_field_y":332,
+            "btn_star_field_w":100,
+            "btn_star_field_h":230
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
             "progress_increase":25, //每次移动增加XX
-            "btn_star1_x":388,
-            "btn_star1_y":310,
-            "btn_star2_x":407,
-            "btn_star2_y":177,
-            "btn_star_field_x":394,
-            "btn_star_field_y":246,
-            "btn_star_field_w":90,
-            "btn_star_field_h":200
+            "btn_star1_x":274,
+            "btn_star1_y":127,
+            "btn_star2_x":494,
+            "btn_star2_y":121,
+            "btn_star_field_x":385,
+            "btn_star_field_y":129,
+            "btn_star_field_w":290,
+            "btn_star_field_h":110
         }
     ],
 
@@ -380,50 +380,50 @@
         {
             "progress_lessen":20, //没0.1秒减少XX
             "progress_increase":10, //每次移动增加XX
-            "btn_star1_x":324,
+            "btn_star1_x":345,
             "btn_star1_y":209,
-            "btn_star2_x":371,
-            "btn_star2_y":50,
-            "btn_star_field_x":345,
-            "btn_star_field_y":125,
+            "btn_star2_x":283,
+            "btn_star2_y":78,
+            "btn_star_field_x":313,
+            "btn_star_field_y":139,
             "btn_star_field_w":135,
             "btn_star_field_h":230
         },
         {
             "progress_lessen":15, //没0.1秒减少XX
             "progress_increase":15, //每次移动增加XX
-            "btn_star1_x":491,
-            "btn_star1_y":215,
-            "btn_star2_x":525,
-            "btn_star2_y":53,
-            "btn_star_field_x":510,
-            "btn_star_field_y":135,
-            "btn_star_field_w":135,
-            "btn_star_field_h":230
+            "btn_star1_x":492,
+            "btn_star1_y":194,
+            "btn_star2_x":501,
+            "btn_star2_y":57,
+            "btn_star_field_x":493,
+            "btn_star_field_y":125,
+            "btn_star_field_w":100,
+            "btn_star_field_h":210
         },
         {
             "progress_lessen":10, //没0.1秒减少XX
             "progress_increase":20, //每次移动增加XX
-            "btn_star1_x":473,
-            "btn_star1_y":382,
-            "btn_star2_x":350,
-            "btn_star2_y":353,
-            "btn_star_field_x":410,
-            "btn_star_field_y":365,
+            "btn_star1_x":333,
+            "btn_star1_y":443,
+            "btn_star2_x":445,
+            "btn_star2_y":356,
+            "btn_star_field_x":390,
+            "btn_star_field_y":394,
             "btn_star_field_w":190,
-            "btn_star_field_h":120
+            "btn_star_field_h":170
         },
         {
             "progress_lessen":5, //没0.1秒减少XX
             "progress_increase":25, //每次移动增加XX
-            "btn_star1_x":388,
-            "btn_star1_y":310,
-            "btn_star2_x":407,
-            "btn_star2_y":177,
-            "btn_star_field_x":394,
-            "btn_star_field_y":246,
-            "btn_star_field_w":90,
-            "btn_star_field_h":200
+            "btn_star1_x":334,
+            "btn_star1_y":244,
+            "btn_star2_x":504,
+            "btn_star2_y":290,
+            "btn_star_field_x":422,
+            "btn_star_field_y":273,
+            "btn_star_field_w":240,
+            "btn_star_field_h":120
         }
     ]
 }

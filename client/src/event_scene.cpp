@@ -219,8 +219,10 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
-  if (i > User::CurrentUser()->EventLock(stageid_))
+  if (i > User::CurrentUser()->EventLock(stageid_)) {
     User::CurrentUser()->set_eventlock(stageid_, i);
+    //TODO: show
+  }
     //return;
 
   char name[RES_MAX_NAME];

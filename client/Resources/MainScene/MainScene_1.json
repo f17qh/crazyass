@@ -1556,7 +1556,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 24,
+              "width": 30,
               "x": 85,
               "y": 22,
               "fileNameData": {
@@ -1564,7 +1564,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X1"
+              "text": "X2"
             }
           },
           {
@@ -1602,7 +1602,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 30,
+              "width": 29,
               "x": 220,
               "y": 22,
               "fileNameData": {
@@ -1610,7 +1610,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X2"
+              "text": "X3"
             }
           },
           {
@@ -1648,7 +1648,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 29,
+              "width": 28,
               "x": 345,
               "y": 22,
               "fileNameData": {
@@ -1656,7 +1656,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X3"
+              "text": "X4"
             }
           },
           {
@@ -1694,7 +1694,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 28,
+              "width": 30,
               "x": 467,
               "y": 22,
               "fileNameData": {
@@ -1702,7 +1702,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X4"
+              "text": "X5"
             }
           },
           {
@@ -1748,7 +1748,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X5"
+              "text": "X6"
             }
           },
           {
@@ -1786,7 +1786,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 30,
+              "width": 29,
               "x": 727,
               "y": 22,
               "fileNameData": {
@@ -1794,7 +1794,7 @@
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "X6"
+              "text": "X7"
             }
           },
           {
@@ -1820,7 +1820,7 @@
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0.4,
-              "positionPercentY": 1.86,
+              "positionPercentY": 1.82,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
@@ -1834,7 +1834,7 @@
               "visible": true,
               "width": 123,
               "x": 80,
-              "y": 372,
+              "y": 364,
               "capInsetsHeight": 0,
               "capInsetsWidth": 0,
               "capInsetsX": 0,
@@ -1892,7 +1892,7 @@
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0.4,
-              "positionPercentY": 1.56,
+              "positionPercentY": 1.355,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
@@ -1906,7 +1906,7 @@
               "visible": true,
               "width": 123,
               "x": 80,
-              "y": 312,
+              "y": 271,
               "capInsetsHeight": 0,
               "capInsetsWidth": 0,
               "capInsetsX": 0,
@@ -1928,7 +1928,7 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": null,
+                "path": "Resources/images/free.png",
                 "plistFile": null,
                 "resourceType": 0
               },

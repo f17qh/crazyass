@@ -331,7 +331,13 @@ void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
   PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
   EventScene *sc = EventScene::create();
-  sc->set_stageid(select_stage_);
+  int girl_id = select_stage_;
+  if(girl_id == 3) {
+    girl_id = 6;
+  } else if (girl_id == 6) {
+    girl_id = 3;
+  }
+  sc->set_stageid(girl_id);
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   // CCDirector::sharedDirector()->pushScene(sc);
 }

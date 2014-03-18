@@ -16,9 +16,9 @@ USING_NS_CC;
 
 EventFingerInfo& ConfigInfo::GetEventFingerInfo(int finger_idx, int stageid) {
   if(finger_idx < 0 || finger_idx > 3) {
-    return event_finger_map_[stageid+1][0];
+    return event_finger_map_[stageid][0];
   }
-  return event_finger_map_[stageid+1][finger_idx];
+  return event_finger_map_[stageid][finger_idx];
   CCLOG("%s error", __FUNCTION__);
 }
 
@@ -41,7 +41,7 @@ int ConfigInfo::GetEventPL(int step_idx, int finger_idx, int stageid) {
     return 0;
     CCLOG("%s error", __FUNCTION__);
   }
-  return event_finger_map_[stageid+1][finger_idx].progress_lessen_ + 
+  return event_finger_map_[stageid][finger_idx].progress_lessen_ + 
     event_step_vec_[step_idx].progress_lessen_;
 }
 
@@ -50,7 +50,7 @@ int ConfigInfo::GetEventPI(int step_idx, int finger_idx, int stageid) {
     return 0;
     CCLOG("%s error", __FUNCTION__);
   }
-  return event_finger_map_[stageid+1][finger_idx].progress_increase_ + 
+  return event_finger_map_[stageid][finger_idx].progress_increase_ + 
     event_step_vec_[step_idx].progress_increase_;
 }
 
