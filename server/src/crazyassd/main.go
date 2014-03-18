@@ -5,6 +5,7 @@ import "code.google.com/p/go.net/websocket"
 import "net/http"
 import "fmt"
 import "crazyass"
+import "crypto/md5"
 
 func echo(ws *websocket.Conn) {
 	var err error
@@ -30,7 +31,18 @@ func clientProc(ws *websocket.Conn) {
 }
 
 func HandleTP(w http.ResponseWriter, req *http.Request) {
-	fmt.Println(req.FormValue)
+	req.ParseForm()
+	// fmt.Println(req.FormValue)
+	fmt.Println(req.Form)
+
+	snuid := req.Form["snuid"][0]
+	id := req.Form["id"][0]
+	currency := req.Form["currency"][0]
+	verifier := req.Form["verifier"][0]
+
+	md5byte := md5.Sum([]byte(id + ":" + snuid + ":" + currency + ":" + "OyOPgaTvwJg3jO6NtnqS"))
+	fmt.Printf("md5sum:%s\n", string(md5byte[0:]))
+	fmt.Printf("verifier:%s\n", verifier)
 	w.Write([]byte(""))
 }
 
