@@ -200,17 +200,18 @@ func ProcStartPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if uint32(stageid.(float64)) > c.udb.NextStage {
+	sid := uint32(stageid.(float64))
+	if sid > c.udb.NextStage || sid == 0 {
 		c.SetErrCode(kErrInvalidParamters)
 		return CLI_PROC_RET_ERR
 	}
 
-	if c.udb.Heart < StageHeartConfig[c.udb.NextStage - 1] {
+	if c.udb.Heart < StageHeartConfig[sid - 1] {
 		c.SetErrCode(kErrHeartNotEnough)
 		return CLI_PROC_RET_ERR
 	}
 
-	c.UseHeart(int(StageHeartConfig[c.udb.NextStage - 1]))
+	c.UseHeart(int(StageHeartConfig[sid - 1]))
 	c.dirty = true
 
 	// reply
@@ -227,20 +228,21 @@ func ProcEndPlay(c *Client, msg *Msg) int {
 		return CLI_PROC_RET_ERR
 	}
 
-	if uint32(stageid.(float64)) != c.udb.NextStage {
+	sid := uint32(stageid.(float64))
+	if sid > c.udb.NextStage {
 		c.SetErrCode(kErrInvalidParamters)
 		return CLI_PROC_RET_ERR
-	}
-
-	pass, ok := msg.Body["pass"]
-	if !ok {
-		c.SetErrCode(kErrInvalidProto)
-		return CLI_PROC_RET_ERR
-	}
-	
-	if pass.(bool) {
-		c.udb.NextStage++
-		c.dirty = true
+	} else if sid == c.udb.NextStage {
+		pass, ok := msg.Body["pass"]
+		if !ok {
+			c.SetErrCode(kErrInvalidProto)
+			return CLI_PROC_RET_ERR
+		}
+		
+		if pass.(bool) {
+			c.udb.NextStage++
+			c.dirty = true
+		}
 	}
 
 	// reply
