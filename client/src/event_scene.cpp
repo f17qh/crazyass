@@ -205,7 +205,9 @@ void EventScene::onBtnYes(CCObject *target, TouchEventType e) {
 
     sharedDelegate()->SendServer(value, this);
     schedule(schedule_selector(EventScene::UpdateNet), 1, SCHEDULE_TIMEOUT, 1);
+    CCLOG("%s SendServer", __FUNCTION__);
   } else {
+    CCLOG("%s to shop", __FUNCTION__);
     ShopScene *sc = ShopScene::create();
     CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
   }
@@ -263,7 +265,12 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     return;
   PLAY_BTNSOUND;
   if (i > User::CurrentUser()->EventLock(stageid_)) {
-    User::CurrentUser()->set_eventlock(stageid_, i);
+    //User::CurrentUser()->set_eventlock(stageid_, i);
+    UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
+    if(panel == NULL) {
+      return;
+    }
+    panel->setVisible(true);
     //TODO: show
     return;
   }
@@ -455,6 +462,7 @@ void EventScene::CARecvTimeout() {
 }
 
 void EventScene::CARecvDone() {
+  CCLOG("%s recv done", __FUNCTION__);
   if (GotoStartSceneIfError())
     return;
   int lock = User::CurrentUser()->EventLock(stageid_);
@@ -470,6 +478,7 @@ void EventScene::CARecvDone() {
 }
 
 void EventScene::CARecv(const CSJson::Value& result) {
+  CCLOG("%s recv", __FUNCTION__);
   if (result.get("ErrCode", -1).asInt() == 0) {
     User *u = User::CurrentUser();
     CSJson::Value body = result["Body"];
