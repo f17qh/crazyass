@@ -4,6 +4,8 @@
 #include "user.h"
 #include "SimpleAudioEngine.h"
 #include "static_config.h"
+#include "shop_scene.h"
+
 bool EventScene::init() {
   //////////////////////////////
   // 1. super init first
@@ -49,6 +51,8 @@ void EventScene::onEnter() {
       {"BtnPanty", toucheventselector(EventScene::onBtnPanty)},
       {"BtnStock1", toucheventselector(EventScene::onBtnStock1)},
       {"BtnStock2", toucheventselector(EventScene::onBtnStock2)},
+      {"Btn1Yes", toucheventselector(EventScene::onBtnYes)},
+      {"Btn1No", toucheventselector(EventScene::onBtnNo)},
   };
 
   for (size_t i = 0; i < sizeof(bl) / sizeof(bl[0]); i++) {
@@ -68,12 +72,19 @@ void EventScene::onEnter() {
       img->setVisible(false);
     }
   }
+
+  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
+  if(panel == NULL) {
+    return;
+  }
+  panel->setVisible(false);
+
 }
 
 void EventScene::onBtnBack(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
   // CCDirector::sharedDirector()->popScene();
 
@@ -84,7 +95,7 @@ void EventScene::onBtnBack(CCObject *target, TouchEventType e) {
 void EventScene::onBtnShirt(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
   const char *res1 = "gallery_button_shirt_01.png";
   const char *res2 = "gallery_button_shirt_02.png";
@@ -106,7 +117,7 @@ void EventScene::onBtnShirt(CCObject *target, TouchEventType e) {
 void EventScene::onBtnPanty(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   const char *res1 = "gallery_button_panty_01.png";
   const char *res2 = "gallery_button_panty_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgPanty");
@@ -127,7 +138,7 @@ void EventScene::onBtnPanty(CCObject *target, TouchEventType e) {
 void EventScene::onBtnStock1(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   const char *res1 = "gallery_button_stocking_01_01.png";
   const char *res2 = "gallery_button_stocking_01_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgStock1");
@@ -148,7 +159,7 @@ void EventScene::onBtnStock1(CCObject *target, TouchEventType e) {
 void EventScene::onBtnStock2(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   const char *res1 = "gallery_button_stocking_02_01.png";
   const char *res2 = "gallery_button_stocking_02_02.png";
   UIImageView *img = (UIImageView *)ui_layer_->getWidgetByName("ImgStock2");
@@ -177,6 +188,38 @@ void EventScene::onBtnStarField(CCObject *target, TouchEventType e) {
   } else if (e == TOUCH_EVENT_ENDED) {
     img->setVisible(false);
   }
+}
+
+void EventScene::onBtnYes(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+  PLAY_BTNSOUND;
+  if(User::CurrentUser()->heart() >= 12) {
+    CSJson::Value value;
+    value["userid"] = User::CurrentUser()->userid();
+    value["cmd"] = 5;
+    CSJson::Value body;
+    body["stageid"] = stageid_;
+    body["eventid"] = User::CurrentUser()->EventLock(stageid_) + 1;
+    value["Body"] = body;
+
+    sharedDelegate()->SendServer(value, this);
+    schedule(schedule_selector(EventScene::UpdateNet), 1, SCHEDULE_TIMEOUT, 1);
+  } else {
+    ShopScene *sc = ShopScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
+  }
+}
+
+void EventScene::onBtnNo(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+  PLAY_BTNSOUND;
+  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
+  if(panel == NULL) {
+    return;
+  }
+  panel->setVisible(false);
 }
 
 void EventScene::onBtnMoveStar(CCObject *target) {
@@ -218,12 +261,12 @@ BUILD_BTNEVENT(4)
 void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
-
+  PLAY_BTNSOUND;
   if (i > User::CurrentUser()->EventLock(stageid_)) {
     User::CurrentUser()->set_eventlock(stageid_, i);
     //TODO: show
+    return;
   }
-    //return;
 
   char name[RES_MAX_NAME];
   const char *resfmt = "gallery_button_gallery_0%d_0%d.png";
@@ -293,7 +336,7 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     btn->setVisible(true);
     btn->setPosition(ccp(x,y));
 
-    schedule(schedule_selector(EventScene::Update), 0.1f, -1, 0.1f);
+    schedule(schedule_selector(EventScene::UpdateUI), 0.1f, -1, 0.1f);
   } else {
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStarField");
     btn->setVisible(false);
@@ -302,7 +345,7 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     btn = (UIButton *)ui_layer_->getWidgetByName("BtnStar1_2");
     btn->setVisible(false);
 
-    unschedule(schedule_selector(EventScene::Update));
+    unschedule(schedule_selector(EventScene::UpdateUI));
   }
 
   //// play
@@ -318,7 +361,7 @@ static const char *soundfiles[]= {
   "sound/sfx_girl_event_climax4.caf",
 };
 
-void EventScene::Update(float delta) {
+void EventScene::UpdateUI(float delta) {
   if(distence_ >= 0) {
     ShowLoadingBar();
     int sub = ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_, stageid_);
@@ -400,3 +443,42 @@ int EventScene::GetEventStep() {
   }
   return event_step;
 }
+
+void EventScene::UpdateNet(float delta) {
+  if (sharedDelegate()->CheckRecv()) {
+    unschedule(schedule_selector(EventScene::UpdateNet));
+  }
+}
+
+void EventScene::CARecvTimeout() {
+  unschedule(schedule_selector(EventScene::UpdateNet));
+}
+
+void EventScene::CARecvDone() {
+  if (GotoStartSceneIfError())
+    return;
+  int lock = User::CurrentUser()->EventLock(stageid_);
+  char name[RES_MAX_NAME];
+  UIImageView *img;
+  for (int i = 2; i <= lock; i++) {
+    snprintf(name, RES_MAX_NAME, "ImgLock%d", i);
+    img = (UIImageView *)ui_layer_->getWidgetByName(name);
+    if (img) {
+      img->setVisible(false);
+    }
+  }
+}
+
+void EventScene::CARecv(const CSJson::Value& result) {
+  if (result.get("ErrCode", -1).asInt() == 0) {
+    User *u = User::CurrentUser();
+    CSJson::Value body = result["Body"];
+    u->set_heart(body.get("Heart", 0).asInt());
+    u->set_eventlock(body.get("Stageid", 1).asInt(), body.get("Eventid", 1).asInt());
+  } else {
+    // TODO: logout to start screen
+    ShouldGotoStart();
+    return;
+  }
+}
+

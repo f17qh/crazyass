@@ -1,12 +1,13 @@
 #pragma once
 #include <cocos2d.h>
 #include <cocos-ext.h>
+#include "common.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
 class EventScene :
-  public CCScene
+  public CCScene, CATarget
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -14,7 +15,7 @@ public:
 
   virtual void onEnter();
 
-  void Update(float delta);
+  void UpdateUI(float delta);
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   // static cocos2d::CCScene* scene();
 
@@ -42,11 +43,18 @@ protected:
   void onBtnEvent4(CCObject *target, TouchEventType e);
   void onBtnEvent(CCObject *target, TouchEventType e, int i);
   void onBtnStarField(CCObject *target, TouchEventType e);
+  void onBtnYes(CCObject *target, TouchEventType e);
+  void onBtnNo(CCObject *target, TouchEventType e);
   void onBtnMoveStar(CCObject *target);
   void RunGirlAction(CCSprite* sprite, float time);
   void CreateStarSprite();
   void ShowLoadingBar();
   int GetEventStep();
+
+  void CARecv(const CSJson::Value& result);
+  void CARecvDone();
+  void CARecvTimeout();
+  void UpdateNet(float delta);
 protected:
   int distence_;
   CCSprite* star_sprite_;

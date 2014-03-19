@@ -38,5 +38,6 @@ void CAReadFile(char *file, char *content, size_t len) {
 
 void * ProductList(){return NULL;};
 bool ProductBuy(void *iap, char *, void *){return false;};
-
 void ShowFeedback(void){};
+void* CATapjoyConnect(char *){return NULL;};
+void CATapjoyShow(void){return;};
