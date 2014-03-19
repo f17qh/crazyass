@@ -168,9 +168,10 @@ func ProcUserLogin(c *Client, msg *Msg) int {
 	reply.Body["Panty"] = true
 	reply.Body["Tapjoy"] = true
 
-	for i := 0; i < len(c.udb.EventLock); i++ {
-		if c.udb.EventLock[i] == 0 {
-			c.udb.EventLock[i] = 1;
+	if len(c.udb.EventLock) == 0 {
+		c.udb.EventLock = make([]int, 6, 6)
+		for i := 0; i < 6; i++ {
+			c.udb.EventLock[i] = 1
 		}
 	}
 
@@ -280,6 +281,8 @@ func ProcEventLock(c *Client, msg *Msg) int {
 	// reply
 	reply := c.GetReplyMsg()
 	reply.Body["Heart"] = c.udb.Heart
+	reply.Body["Stageid"] = sid
+	reply.Body["EventLock"] = c.udb.EventLock
 	return CLI_PROC_RET_SUCC
 }
 
