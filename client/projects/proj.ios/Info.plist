@@ -41,6 +41,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
