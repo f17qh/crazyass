@@ -282,7 +282,7 @@ func ProcEventLock(c *Client, msg *Msg) int {
 	reply := c.GetReplyMsg()
 	reply.Body["Heart"] = c.udb.Heart
 	reply.Body["Stageid"] = sid
-	reply.Body["EventLock"] = c.udb.EventLock
+	reply.Body["Eventid"] = eid
 	return CLI_PROC_RET_SUCC
 }
 
