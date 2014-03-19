@@ -140,8 +140,13 @@ void GameScene::onEnter() {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnEvent));
   btn->setPressedActionEnabled(true);
-  btn->setVisible(false);
-  btn->setTouchEnabled(false);
+  if (User::CurrentUser()->stageid() > 1) {
+    btn->setVisible(true);
+    btn->setTouchEnabled(true);
+  } else {
+    btn->setVisible(false);
+    btn->setTouchEnabled(false);
+  }
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnShop");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnShop));
