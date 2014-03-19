@@ -240,6 +240,11 @@ void StartScene::CARecv(const CSJson::Value& result) {
     CSJson::Value body = result["Body"];
     u->set_heart(body.get("Heart", 0).asInt());
     u->set_stageid(body.get("Stageid", 1).asInt());
+    CSJson::Value arry = body["EventLock"];
+    unsigned int size = (unsigned int)arry.size();
+    for(int i = 0; i < size; i++ ) {
+      u->set_eventlock(i+1, arry[i].asInt());
+    }
     //u->set_stageid(6);
     EnablePanty = body.get("Panty", false).asBool();
     EnableTapjoy = body.get("Tapjoy", false).asBool();

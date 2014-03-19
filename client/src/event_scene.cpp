@@ -475,6 +475,11 @@ void EventScene::CARecvDone() {
       img->setVisible(false);
     }
   }
+  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
+  if(panel == NULL) {
+    return;
+  }
+  panel->setVisible(false);
 }
 
 void EventScene::CARecv(const CSJson::Value& result) {
