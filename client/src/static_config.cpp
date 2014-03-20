@@ -156,19 +156,19 @@ void ConfigInfo::SetEventFingerInfo( CSJson::Value& val, int stageid) {
 }
 
 void ConfigInfo::SetLoadingTipsInfo(CSJson::Value& val, int idx){
-  std::string info;
+  char info[128];
   memset(&info, 0, sizeof(info));
-  info = val["0"].asString();
+  memcpy(info, val["0"].asString().c_str(), sizeof(info));
   std::vector<std::string>& vec = tips_info_.loading_tips_map_[idx];
   vec.push_back(info);
   memset(&info, 0, sizeof(info));
-  info = val["1"].asString();
+  memcpy(info, val["1"].asString().c_str(), sizeof(info));
   vec.push_back(info);
   memset(&info, 0, sizeof(info));
-  info = val["2"].asString();
+  memcpy(info, val["2"].asString().c_str(), sizeof(info));
   vec.push_back(info);
   memset(&info, 0, sizeof(info));
-  info = val["3"].asString();
+  memcpy(info, val["3"].asString().c_str(), sizeof(info));
   vec.push_back(info);
 
 }
