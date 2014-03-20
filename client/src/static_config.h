@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include <map>
 struct StageInfo {
   StageInfo() {
     memset(this, 0 ,sizeof(StageInfo));
@@ -17,7 +17,9 @@ struct StageInfo {
 
 struct TipsInfo {
   TipsInfo() {
-    memset(this, 0 ,sizeof(TipsInfo));
+    memset(sub_stage_begin_, 0 ,sizeof(sub_stage_begin_));
+    memset(sub_stage_end_, 0 ,sizeof(sub_stage_end_));
+    loading_tips_map_.clear();
   }
   char sub_stage_begin_[32];
   char sub_stage_end_[32];

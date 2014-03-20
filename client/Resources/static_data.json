@@ -94,33 +94,35 @@
 
     "tips":{
         "sub_stage_begin": "please find this card",
-        "sub_stage_end": "touch any where",
-
-        "loading_tips_0":[
-            "You can touch her", 
-            "hip at the event",
-            "room when you",
-            "defeat her"
-         ],
-        "loading_tips_1":[
-            "Please select the",
-            "correct answer card",
-            "in the card mixed",
-            "with fast speed"
-        ],
-        "loading_tips_2":[
-            "3 card play from",
-            "1 to 3 stage,",
-            "4card play from",
-            " 4 to 6 stage"
-        ],
-        "loading_tips_3":[
-            "Whenever you try"
-            "the next stage,",
-            "you need peaches",
-            "more&more."
-        ]
+        "sub_stage_end": "touch any where"
     },
+
+    "loading_tips":[
+        {
+            "0": "You can touch her",
+            "1": "hip at the event",
+            "2": "room when you",
+            "3": "defeat her"
+        },
+        {
+            "0": "Please select the",
+            "1": "correct answer card",
+            "2": "in the card mixed",
+            "3": "with fast speed"
+        },
+        {
+            "0": "3 card play from",
+            "1": "1 to 3 stage,",
+            "2": "4card play from",
+            "3": " 4 to 6 stage"
+        },
+        {
+            "0": "Whenever you try",
+            "1": "the next stage,",
+            "2": "you need peaches",
+            "3": "more&more."
+        }
+    ],
 
     "event_step":[
         {
