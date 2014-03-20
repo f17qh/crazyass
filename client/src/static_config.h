@@ -21,6 +21,7 @@ struct TipsInfo {
   }
   char sub_stage_begin_[32];
   char sub_stage_end_[32];
+  std::map<int, std::vector<std::string> > loading_tips_map_;
 };
 
 struct EventStepInfo {
@@ -66,6 +67,7 @@ public:
   virtual int Load(const char *path) = 0;
 protected:
   void SetEventFingerInfo( CSJson::Value& val, int stageid);
+  void SetLoadingTipsInfo( CSJson::Value& val, int idx);
 protected:
   std::vector<StageInfo> stage_vec_;
   std::vector<EventStepInfo> event_step_vec_;

@@ -147,7 +147,7 @@ void PlayScene::onBtnClothes(CCObject *target, TouchEventType e) {
           btn->setEnabled(false);
           User::CurrentUser()->set_stageid(stageid_ + 1);
           User::CurrentUser()->Flush();
-          PopWin::Instence().ShowPopScene(this, true, toucheventselector(PlayScene::onPopBack));
+          PopWin::Instance().ShowPopScene(this, true, toucheventselector(PlayScene::onPopBack));
         }
       }
     }
@@ -326,13 +326,9 @@ void PlayScene::onPanelSecond(CCObject *target, TouchEventType e) {
   if(sub_win_) {
     TakeOff();
   } else {
-    this->be_back_ = true;
-    PopLose::Instence().ShowPopScene(this, true, 
-      toucheventselector(PlayScene::onPopBack), 
-      toucheventselector(PlayScene::onPopShop));
     //失败
-    /*CCScene *sc = GameScene::create();
-    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));*/
+    CCScene *sc = GameScene::create();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
   }
 }
 

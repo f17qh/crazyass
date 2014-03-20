@@ -20,6 +20,7 @@ bool EventScene::init() {
   distence_ = 0.0f;
   event_state_ = -1;
   girl_action_runing_ = -1;
+  finger_idx_ = 0;
   return true;
 }
 
@@ -274,7 +275,7 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     //TODO: show
     return;
   }
-
+  finger_idx_ = i;
   char name[RES_MAX_NAME];
   const char *resfmt = "gallery_button_gallery_0%d_0%d.png";
   CCLOG("%s\n", __FUNCTION__);
@@ -421,7 +422,7 @@ void EventScene::ShowLoadingBar() {
     if(girl_action_runing_ != 2){
       CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[0]);
     } else {
-      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[girl_action_runing_]);
+      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[finger_idx_]);
     }
     RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
   }

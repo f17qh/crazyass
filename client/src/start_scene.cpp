@@ -242,7 +242,7 @@ void StartScene::CARecv(const CSJson::Value& result) {
     u->set_stageid(body.get("Stageid", 1).asInt());
     CSJson::Value arry = body["EventLock"];
     unsigned int size = (unsigned int)arry.size();
-    for(int i = 0; i < size; i++ ) {
+    for(unsigned int i = 0; i < size; i++ ) {
       u->set_eventlock(i+1, arry[i].asInt());
     }
     //u->set_stageid(6);

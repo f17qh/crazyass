@@ -40,6 +40,8 @@ protected:
   void AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector);
   void onBtnFeedback(CCObject *target, TouchEventType e);
   void onBtnFree(CCObject *target, TouchEventType e);
+  void RechargeBack(CCObject *target, TouchEventType e);
+  void RechargeShop(CCObject *target, TouchEventType e);
   int select_stage_;
   int play_;
   UILayer *ui_layer_;

@@ -32,6 +32,7 @@ protected:
   int stock1_state_;
   int stock2_state_;
   int event_state_;
+  int finger_idx_;
   void onBtnBack(CCObject *target, TouchEventType e);
   void onBtnShirt(CCObject *target, TouchEventType e);
   void onBtnPanty(CCObject *target, TouchEventType e);

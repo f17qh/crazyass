@@ -97,6 +97,11 @@ int LocalConfigInfo::Load(const char *path) {
   CSJson::Value tips = root_["tips"];
   memcpy(tips_info_.sub_stage_begin_, tips["sub_stage_begin"].asString().c_str(), sizeof(tips_info_.sub_stage_begin_));
   memcpy(tips_info_.sub_stage_end_, tips["sub_stage_end"].asString().c_str(), sizeof(tips_info_.sub_stage_end_));
+  SetLoadingTipsInfo(tips["loading_tips_0"], 0);
+  SetLoadingTipsInfo(tips["loading_tips_1"], 1);
+  SetLoadingTipsInfo(tips["loading_tips_2"], 2);
+  SetLoadingTipsInfo(tips["loading_tips_3"], 3);
+
 
   EventStepInfo event_step_info;
   CSJson::Value val_arry_es = root_["event_step"];
@@ -147,6 +152,17 @@ void ConfigInfo::SetEventFingerInfo( CSJson::Value& val, int stageid) {
     info.btn_star_field_h_ = val[i]["btn_star_field_h"].asInt();
     event_finger_map_[stageid].push_back(info);
   }
+}
+
+void ConfigInfo::SetLoadingTipsInfo(CSJson::Value& val, int idx){
+  std::string info;
+  memset(&info, 0, sizeof(info));
+  unsigned int val_size_ = (unsigned int)val.size();
+  for(unsigned int i = 0; i < val_size_; i++) {
+    info = val[i].asString();
+    tips_info_.loading_tips_map_[idx].push_back(info);
+  }
+  
 }
 
 static ConfigInfo* config = NULL;

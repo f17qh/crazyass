@@ -12,24 +12,26 @@ public:
   void ShowLoadScene(CCNode* parent, bool visible);
 protected:
   UILayer *load_layer_;
+  int index_;
 };
 
 class PopWin {
 public:
-  static PopWin& Instence();
+  static PopWin& Instance();
   void Init();
   void ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector_back);
 protected:
   UILayer *pop_layer_;
 };
 
-class PopLose {
+class PopRecharge {
 public:
-  static PopLose& Instence();
+  static PopRecharge& Instance();
   void Init();
-  void ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector_back, SEL_TouchEvent selector_shop);
+  void Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_back, SEL_TouchEvent selector_shop);
+  void Disappear(UILayer *layer);
 protected:
-  UILayer *pop_layer_;
+  Layout* layout_;
 };
 
 class TextBox {

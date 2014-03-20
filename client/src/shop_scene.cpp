@@ -50,7 +50,7 @@ void ShopScene::onEnter() {
   for (size_t i = 0; i < sizeof(bl) / sizeof(bl[0]); i++) {
       btn = (UIButton *)ui_layer_->getWidgetByName(bl[i].name);
       if (btn) {
-	  btn->addTouchEventListener(this, bl[i].selector);
+    btn->addTouchEventListener(this, bl[i].selector);
       }
   }
 

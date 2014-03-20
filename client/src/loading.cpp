@@ -1,5 +1,5 @@
 #include "loading.h"
-
+#include "static_config.h"
 static Loading* loading = NULL;
 Loading& Loading::Instence() {
   if (loading == NULL) {
@@ -14,6 +14,7 @@ void Loading::Init() {
   load_layer_ = UILayer::create();
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/LoadScene.json"));
   load_layer_->addWidget(layout);
+  index_ = (int)(time(NULL)%4);
 }
 
 void Loading::ShowLoadScene(CCNode* parent, bool visible) {
@@ -21,12 +22,26 @@ void Loading::ShowLoadScene(CCNode* parent, bool visible) {
     if(parent->getChildByTag(99) == NULL)
       load_layer_->retain();
       parent->addChild(load_layer_, 21, 99);
+      index_++;
+      index_ = (index_)%4;
+      std::map<int, std::vector<std::string> >& tips_map = 
+        ConfigInfo::Instence().tips_info().loading_tips_map_;
+
+      UILabelBMFont *ui_text = (UILabelBMFont *)load_layer_->getWidgetByName("LabelBMFont_1");
+      ui_text->setText(tips_map[index_][0].c_str());
+      ui_text = (UILabelBMFont *)load_layer_->getWidgetByName("LabelBMFont_2");
+      ui_text->setText(tips_map[index_][1].c_str());
+      ui_text = (UILabelBMFont *)load_layer_->getWidgetByName("LabelBMFont_3");
+      ui_text->setText(tips_map[index_][2].c_str());
+      ui_text = (UILabelBMFont *)load_layer_->getWidgetByName("LabelBMFont_4");
+      ui_text->setText(tips_map[index_][3].c_str());
+
   }
   load_layer_->setVisible(visible);
 }
 
 static PopWin* pop_win = NULL;
-PopWin& PopWin::Instence() {
+PopWin& PopWin::Instance() {
   if (pop_win == NULL) {
     pop_win = new PopWin();
     pop_win->Init();
@@ -58,42 +73,50 @@ void PopWin::ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector_
 }
 
 
-static PopLose* pop_lose = NULL;
-PopLose& PopLose::Instence() {
-  if (pop_lose == NULL) {
-    pop_lose = new PopLose();
-    pop_lose->Init();
+static PopRecharge* pop_recharge = NULL;
+PopRecharge& PopRecharge::Instance() {
+  if (pop_recharge == NULL) {
+    pop_recharge = new PopRecharge();
+    pop_recharge->Init();
   }
-  return *pop_lose;
+  return *pop_recharge;
 }
 
-void PopLose::Init() {
+void PopRecharge::Init() {
   CCLOG("%s", __FUNCTION__);
-  pop_layer_ = UILayer::create();
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/PopLose.json"));
-  pop_layer_->addWidget(layout);
+  layout_->retain();
 }
 
-void PopLose::ShowPopScene(CCNode* parent, bool visible, SEL_TouchEvent selector_back, SEL_TouchEvent selector_shop) {
-  pop_layer_->setVisible(visible);
-  pop_layer_->setTouchEnabled(visible);
-  if(visible) {
-    if(parent->getChildByTag(97) == NULL) {
-      pop_layer_->retain();
-      parent->addChild(pop_layer_, 20, 97);
-      UIButton* btn = (UIButton *)pop_layer_->getWidgetByName("ButtonBack");
-      if(btn != NULL) {
-        btn->addTouchEventListener(parent, selector_back);
-      }
-
-      UIButton* btn_shop = (UIButton *)pop_layer_->getWidgetByName("ButtonShop");
-      if(btn_shop != NULL) {
-        btn_shop->addTouchEventListener(parent, selector_shop);
-      }
-    }
+void PopRecharge::Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_back, SEL_TouchEvent selector_shop) {
+  layout_->retain();
+  layer->addWidget(layout_);
+  UIButton* btn = (UIButton *)layer->getWidgetByName("ButtonBack");
+  if(btn != NULL) {
+    btn->addTouchEventListener(parent, selector_back);
   }
+
+  UIButton* btn_shop = (UIButton *)layer->getWidgetByName("ButtonShop");
+  if(btn_shop != NULL) {
+    btn_shop->addTouchEventListener(parent, selector_shop);
+  }
+
+  //UILabelBMFont *desc = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontLoseDesc1");
+  //desc->setVisible(true);
+  //desc = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontLoseDesc2");
+  //desc->setVisible(true);
+  //desc = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontLoseDesc3");
+  //desc->setVisible(true);
+
+  //UIImageView *imgs = (UIImageView *)layer->getWidgetByName("ImagePop");
+  //imgs->setVisible(true);
+  //imgs = (UIImageView *)layer->getWidgetByName("ImageViewBackGround");
+  //imgs->setVisible(true);
 }
 
+void PopRecharge::Disappear(UILayer *layer) {
+  layer->removeWidget(layout_);
+}
 static TextBox* textbox = NULL;
 TextBox& TextBox::Instance() {
   if (textbox == NULL) {
