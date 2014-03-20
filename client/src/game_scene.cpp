@@ -110,7 +110,7 @@ void GameScene::onEnter() {
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnPlay));
   btn->setPressedActionEnabled(true);
   if (User::CurrentUser()->heart() < 2) {
-    btn->disable();
+    //btn->disable();
   } else {
     btn->setBright(true);
     btn->setTouchEnabled(true);
