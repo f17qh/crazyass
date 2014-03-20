@@ -136,6 +136,12 @@ void GameScene::onEnter() {
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnPlay));
   btn->setPressedActionEnabled(true);
+  if (User::CurrentUser()->heart() < 2) {
+    btn->disable();
+  } else {
+    btn->setBright(true);
+    btn->setTouchEnabled(true);
+  }
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnEvent");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnEvent));
@@ -379,7 +385,7 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   if (btn) {
     if (i > User::CurrentUser()->stageid() ||
-        i > User::CurrentUser()->heart()) {
+        i + 1 > User::CurrentUser()->heart()) {
       btn->disable();
     } else {
       btn->setBright(true);

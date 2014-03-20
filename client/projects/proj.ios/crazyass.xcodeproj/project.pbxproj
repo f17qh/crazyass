@@ -229,6 +229,7 @@
 		379BB9D417F03F3700829B88 /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* CCSSceneReader.cpp */; };
 		6A063D5C18D1F26800645C9A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A063D5B18D1F26800645C9A /* StoreKit.framework */; };
 		6A063D6818D1F79400645C9A /* static_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A063D6618D1F79400645C9A /* static_config.cpp */; };
+		6A17971218DAD5B200E5DDBC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A17971118DAD5B200E5DDBC /* Default.png */; };
 		6A3F515E18D6E48B00D79523 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A3F515C18D6E48B00D79523 /* TapjoyResources.bundle */; };
 		6A3F515F18D6E48B00D79523 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F515D18D6E48B00D79523 /* Tapjoy.framework */; };
 		6A3F516218D6E8E000D79523 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F516118D6E8E000D79523 /* AdSupport.framework */; };
@@ -263,7 +264,6 @@
 		6AA611B218D304C100C62390 /* test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AA611B118D304C100C62390 /* test.mm */; };
 		6AA611B618D33F0B00C62390 /* loading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AA611B418D33F0B00C62390 /* loading.cpp */; };
 		6AB1BBC018D9CD130093410A /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AB1BBBF18D9CD130093410A /* Default-Landscape.png */; };
-		6AB1BBC418D9D61E0093410A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AB1BBC218D9D61E0093410A /* Default@2x.png */; };
 		6AB1BBC818D9DDFB0093410A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AB1BBC718D9DDFB0093410A /* Default-568h@2x.png */; };
 		6AC46F4518D5B56900B77148 /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC46F4418D5B56900B77148 /* libUMFeedback.a */; };
 		6AC46F7218D5BEDA00B77148 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC46F4F18D5BEDA00B77148 /* UMEGORefreshTableHeaderView.m */; };
@@ -784,6 +784,7 @@
 		6A063D5B18D1F26800645C9A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6A063D6618D1F79400645C9A /* static_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = static_config.cpp; path = ../../src/static_config.cpp; sourceTree = "<group>"; };
 		6A063D6718D1F79400645C9A /* static_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_config.h; path = ../../src/static_config.h; sourceTree = "<group>"; };
+		6A17971118DAD5B200E5DDBC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../Resources/Default.png; sourceTree = "<group>"; };
 		6A3F515C18D6E48B00D79523 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
 		6A3F515D18D6E48B00D79523 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		6A3F516118D6E8E000D79523 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -829,7 +830,6 @@
 		6AA611B418D33F0B00C62390 /* loading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = loading.cpp; path = ../../src/loading.cpp; sourceTree = "<group>"; };
 		6AA611B518D33F0B00C62390 /* loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loading.h; path = ../../src/loading.h; sourceTree = "<group>"; };
 		6AB1BBBF18D9CD130093410A /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "../../Resources/Default-Landscape.png"; sourceTree = "<group>"; };
-		6AB1BBC218D9D61E0093410A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../Resources/Default@2x.png"; sourceTree = "<group>"; };
 		6AB1BBC718D9DDFB0093410A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
 		6AC46F4218D5B55E00B77148 /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = SOURCE_ROOT; };
 		6AC46F4418D5B56900B77148 /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
@@ -1988,8 +1988,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A17971118DAD5B200E5DDBC /* Default.png */,
 				6AB1BBC718D9DDFB0093410A /* Default-568h@2x.png */,
-				6AB1BBC218D9D61E0093410A /* Default@2x.png */,
 				6AB1BBBF18D9CD130093410A /* Default-Landscape.png */,
 				6AC46F9D18D5DEBF00B77148 /* Icon-32.png */,
 				6AC46F9E18D5DEBF00B77148 /* Icon-48.png */,
@@ -2083,10 +2083,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AB1BBC418D9D61E0093410A /* Default@2x.png in Resources */,
 				6AC46FAD18D5DEBF00B77148 /* Icon-Small-50.png in Resources */,
 				6AC46F8518D5BEDA00B77148 /* nav_btn_bg@2x.png in Resources */,
 				6AC46F7E18D5BEDA00B77148 /* messages_tableview_background.png in Resources */,
+				6A17971218DAD5B200E5DDBC /* Default.png in Resources */,
 				6AC46F7B18D5BEDA00B77148 /* item_ok_selected@2x.png in Resources */,
 				6AC46F8118D5BEDA00B77148 /* messages_toolbar_background@2x.png in Resources */,
 				6AC46F7A18D5BEDA00B77148 /* item_ok@2x.png in Resources */,
@@ -2424,7 +2424,7 @@
 				);
 				OTHER_CFLAGS = "-O2";
 				PRODUCT_NAME = crazyass;
-				PROVISIONING_PROFILE = "76DCDB57-EA8C-44FB-A969-6603D4AA48A9";
+				PROVISIONING_PROFILE = "F3BC2797-220C-449D-BECD-FCC24368337D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2479,7 +2479,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = crazyass;
-				PROVISIONING_PROFILE = "76DCDB57-EA8C-44FB-A969-6603D4AA48A9";
+				PROVISIONING_PROFILE = "F3BC2797-220C-449D-BECD-FCC24368337D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
