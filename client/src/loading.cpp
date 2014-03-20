@@ -84,7 +84,7 @@ PopRecharge& PopRecharge::Instance() {
 
 void PopRecharge::Init() {
   CCLOG("%s", __FUNCTION__);
-  Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/PopLose.json"));
+  layout_ = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/PopRecharge.json"));
   layout_->retain();
 }
 

@@ -343,16 +343,16 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
       btn->setTouchEnabled(true);
     }
   }
-  btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
-  if (btn) {
-    if (i > User::CurrentUser()->stageid() ||
-        i + 1 > User::CurrentUser()->heart()) {
-      btn->disable();
-    } else {
-      btn->setBright(true);
-      btn->setTouchEnabled(true);
-    }
-  }
+  //btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
+  //if (btn) {
+  //  if (i > User::CurrentUser()->stageid() ||
+  //      i + 1 > User::CurrentUser()->heart()) {
+  //    btn->disable();
+  //  } else {
+  //    btn->setBright(true);
+  //    btn->setTouchEnabled(true);
+  //  }
+  //}
 }
 
 #define BUILD_BTNGIRLFUNC(i) \

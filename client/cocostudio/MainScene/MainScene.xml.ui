@@ -44,7 +44,7 @@
     <string>Resources/images/loading_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LoadScene.json</CurrentUIJson>
+  <CurrentUIJson>PopRecharge.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>
