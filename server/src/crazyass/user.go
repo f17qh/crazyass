@@ -115,6 +115,11 @@ func (u *User) Login(userid string) error {
 	CALog.Debug("user %s last login %v\n",
 		userid, time.Unix(int64(u.udb.LastLogin), 0))
 
+	// for test
+	if u.udb.Heart < 30 {
+		u.udb.Heart = 99
+	}
+
 	u.udb.LastLogin = uint32(time.Now().Unix())
 	u.ready = true
 	return nil
