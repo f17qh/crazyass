@@ -41,6 +41,9 @@ public:
   void CARecvDone();
   void CARecvTimeout();
   void update(float delta);
+  void ShowProperty(bool visiable);
+  //void ShowFinger(bool visiable);
+  //void ShowReplay(bool visiable);
   CREATE_FUNC(PlayScene);
 protected:
   void TakeOff();
@@ -58,9 +61,12 @@ protected:
   void SetResultPanelState(int state);
   void SetIamgeView(const char* name, bool b, const char* imgs_file=NULL);
   void ShowTips(bool visible, int type = 0);
+  void onUseFinger(CCObject *target, TouchEventType e);
+  void onUseReplay(CCObject *target, TouchEventType e);
 protected:
   CardMgr card_mgr_;
   UILayer *ui_layer_;
+  UILayer *ui_layer_text_;
   CCScene *back_scene_;
   int stageid_;
   CCPoint btn_start_pos_;
@@ -68,5 +74,7 @@ protected:
   bool sub_win_;
   bool all_finish_;
   bool be_back_;
+  int property_state_;
+  int cmd_;
 };
 

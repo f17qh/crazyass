@@ -42,3 +42,23 @@ public:
 protected:
   Layout* layout_;
 };
+
+class Finger {
+public:
+  static Finger& Instance();
+  void Init();
+  void Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_use);
+  void Disappear(UILayer *layer);
+protected:
+  Layout* layout_;
+};
+
+class Replay {
+public:
+  static Replay& Instance();
+  void Init();
+  void Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_use, char* show_num);
+  void Disappear(UILayer *layer);
+protected:
+  Layout* layout_;
+};

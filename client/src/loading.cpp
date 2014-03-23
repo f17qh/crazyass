@@ -159,3 +159,63 @@ void TextBox::Show(UILayer *layer, bool visible, const char *text, int z_order) 
     layer->removeWidget(layout_);
   }
 }
+
+static Finger* finger = NULL;
+Finger& Finger::Instance() {
+  if (finger == NULL) {
+    finger = new Finger();
+    finger->Init();
+  }
+  return *finger;
+}
+
+void Finger::Init() {
+  CCLOG("%s", __FUNCTION__);
+  layout_ = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/Finger.json"));
+  layout_->retain();
+}
+
+void Finger::Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_use) {
+  layout_->retain();
+  layer->addWidget(layout_);
+  UIButton* btn_finger = (UIButton *)layer->getWidgetByName("BtnFinger");
+  UIPanel* panel_finger = (UIPanel*)layer->getWidgetByName("PanelFinger");
+  panel_finger->setVisible(true);
+  btn_finger->addTouchEventListener(parent, selector_use);
+  btn_finger->setPressedActionEnabled(true);
+}
+
+void Finger::Disappear(UILayer *layer) {
+  layer->removeWidget(layout_);
+}
+
+static Replay* replay = NULL;
+Replay& Replay::Instance() {
+  if (replay == NULL) {
+    replay = new Replay();
+    replay->Init();
+  }
+  return *replay;
+}
+
+void Replay::Init() {
+  CCLOG("%s", __FUNCTION__);
+  layout_ = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/Replay.json"));
+  layout_->retain();
+}
+
+void Replay::Show(UILayer *layer, CCNode* parent, SEL_TouchEvent selector_use, char* show_num) {
+  layout_->retain();
+  layer->addWidget(layout_);
+  UIButton* btn_replay = (UIButton *)layer->getWidgetByName("BtnReplay");
+  UIPanel* panel_replay = (UIPanel*)layer->getWidgetByName("PanelReplay");
+  panel_replay->setVisible(true);
+  btn_replay->addTouchEventListener(parent, selector_use);
+  btn_replay->setPressedActionEnabled(true);
+  UILabelBMFont *ui_num = (UILabelBMFont *)layer->getWidgetByName("LabelBMFontReplayNum");
+  ui_num->setText(show_num);
+}
+
+void Replay::Disappear(UILayer *layer) {
+  layer->removeWidget(layout_);
+}

@@ -129,6 +129,11 @@ void GameScene::onEnter() {
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnShop");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnShop));
+  CCRotateTo* rotate1 = CCRotateTo::create( 1.0f, -15.0f);
+  CCRotateTo* rotate2 = CCRotateTo::create( 1.0f, 15.0f);
+  CCSequence* rotate = CCSequence::createWithTwoActions(rotate1, rotate2);
+  btn->getVirtualRenderer()->runAction(CCRepeatForever::create(rotate));
+
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnFeedBack");
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFeedback));
@@ -183,6 +188,7 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
       lock->setVisible(false);
     }
   }
+  //LabelBMFont_1
 }
 
 void ShowFeedback();
@@ -342,6 +348,20 @@ void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
       btn->setVisible(true);
       btn->setTouchEnabled(true);
     }
+  }
+
+  UILabelBMFont *font = (UILabelBMFont *)ui_layer_->getWidgetByName("FontWindowHeart");
+  if (font) {
+    char b[8];
+    snprintf(b, 8, "X%d", i+1);
+    font->setText(b);
+  }
+
+  font = (UILabelBMFont *)ui_layer_->getWidgetByName("FontDescHeat");
+  if (font) {
+    char b[8];
+    snprintf(b, 8, "%d", i+1);
+    font->setText(b);
   }
   //btn = (UIButton *)ui_layer_->getWidgetByName("BtnPlay");
   //if (btn) {

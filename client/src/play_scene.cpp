@@ -22,6 +22,7 @@ void PlayScene::onEnter() {
   CCLOG("%s", __FUNCTION__);
   // load ui
   ui_layer_ = UILayer::create();
+  ui_layer_text_ = UILayer::create();
   char path[1024];
   snprintf(path, 1024, "MainScene/GirlScene%d.json",
            stageid_);
@@ -32,6 +33,8 @@ void PlayScene::onEnter() {
   card_mgr_.CreateLayer(this);
   this->addChild(ui_layer_, 0, 100);
   this->addChild(card_mgr_.card_layer(), 1, 101);
+  this->addChild(ui_layer_text_, 2, 100);
+
   card_mgr_.Init(stageid_);
 
   UIButton *btn = (UIButton *)ui_layer_->getWidgetByName("BtnBack");
@@ -50,7 +53,10 @@ void PlayScene::onEnter() {
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnStartPlay");
   if (btn) {
     btn->addTouchEventListener(this, toucheventselector(PlayScene::onBtnStartPlay));
-    btn->setPressedActionEnabled(true);
+    CCScaleTo* scale1 = CCScaleTo::create( 1.0f, 1.2f);
+    CCScaleTo* scale2 = CCScaleTo::create( 1.0f, 0.8f);
+    CCSequence* scale = CCSequence::createWithTwoActions(scale1, scale2);
+    btn->getVirtualRenderer()->runAction(CCRepeatForever::create(scale));
   }
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnShirt");
   if (btn) {
@@ -59,6 +65,7 @@ void PlayScene::onEnter() {
   card_mgr_.SetEnable(false);
 
   be_back_ = false;
+  property_state_ = -1;
 }
 
 static const char* btn_name [] = {
@@ -69,26 +76,49 @@ static const char* btn_name [] = {
   };
 
 void PlayScene::CARecvDone() {
-  // CCDirector::sharedDirector()->popScene();
-  //Loading::Instence().ShowLoadScene(this, false);
-  /*CCScene *sc = GameScene::create();
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));*/
-  be_back_ = true;
+  if(cmd_ == 3) {
+    be_back_ = true;
+  } else if(cmd_ == 6) {
+    TextBox::Instance().Show(ui_layer_text_, false);
+    if(property_state_ == 7) {
+      card_mgr_.ShowWrongCard();
+    } else {
+      ShowProperty(false);
+      card_mgr_.ReStartSubStage();
+      card_mgr_.StartSubStage();
+    }
+    property_state_ = -1;
+  }
 }
 
 void PlayScene::CARecv(const CSJson::Value& result) {
-  if (result.get("ErrCode", -1).asInt() == 0) {
-    User *u = User::CurrentUser();
-    CSJson::Value body = result["Body"];
-    u->set_heart(body.get("Heart", 0).asInt());
-    u->set_stageid(body.get("Stageid", 1).asInt());
-  } else {
-    // TODO: logout to start screen
+  if (result.get("ErrCode", -1).asInt() != 0) {
     return;
+  }
+  cmd_ = result["Cmd"].asInt();
+  switch(cmd_) {
+  case 3: {
+      User *u = User::CurrentUser();
+      CSJson::Value body = result["Body"];
+      u->set_heart(body.get("Heart", 0).asInt());
+      u->set_stageid(body.get("Stageid", 1).asInt());
+      
+    }
+    break;
+  case 6: {
+      User *u = User::CurrentUser();
+      CSJson::Value body = result["Body"];
+      u->set_heart(body.get("Heart", 0).asInt());
+    }
+    break;
+  default:
+    CCLOG("invalid cmd%d", cmd_);
+    break;
   }
 }
 
 void PlayScene::CARecvTimeout() {
+  TextBox::Instance().Show(ui_layer_text_, false);
   unschedule(schedule_selector(PlayScene::update));
 }
 
@@ -349,4 +379,54 @@ void PlayScene::SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id) {
   }
   if(all_finish_ && sub_win_)
     SendEndPlay(true);
+}
+void PlayScene::ShowProperty(bool visiable) {
+  if(visiable) {
+    char b[8] = {};
+    sprintf(b, "%d", stageid_+2);
+    Finger::Instance().Show(ui_layer_, this, toucheventselector(PlayScene::onUseFinger));
+    Replay::Instance().Show(ui_layer_, this, toucheventselector(PlayScene::onUseReplay), b);
+  } else {
+    Finger::Instance().Disappear(ui_layer_);
+    Replay::Instance().Disappear(ui_layer_);
+  }
+}
+
+void PlayScene::onUseFinger(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+  PLAY_BTNSOUND;
+  if(property_state_ > 0 ) {
+    CCLOG("%s property is used", __FUNCTION__);
+  }
+
+  CSJson::Value value;
+  value["userid"] = User::CurrentUser()->userid();
+  value["cmd"] = 6;
+  CSJson::Value body;
+  body["itemid"] = 7;
+  value["Body"] = body;
+  property_state_ = 7;
+  sharedDelegate()->SendServer(value, this);
+  schedule(schedule_selector(PlayScene::update), 1, SCHEDULE_TIMEOUT, 1);
+  TextBox::Instance().Show(ui_layer_text_, true, "Please waiting...", 200);
+}
+
+void PlayScene::onUseReplay(CCObject *target, TouchEventType e) {
+  if (e == TOUCH_EVENT_BEGAN)
+    return;
+  PLAY_BTNSOUND;
+  if(property_state_ > 0 ) {
+    CCLOG("%s property is used", __FUNCTION__);
+  }
+  CSJson::Value value;
+  value["userid"] = User::CurrentUser()->userid();
+  value["cmd"] = 6;
+  CSJson::Value body;
+  body["itemid"] = stageid_;
+  value["Body"] = body;
+  property_state_ = stageid_;
+  sharedDelegate()->SendServer(value, this);
+  schedule(schedule_selector(PlayScene::update), 1, SCHEDULE_TIMEOUT, 1);
+  TextBox::Instance().Show(ui_layer_text_, true, "Please waiting...", 200);
 }

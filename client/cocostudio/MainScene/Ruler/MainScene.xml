@@ -89,4 +89,12 @@
     <Project>TextBox</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Finger</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Replay</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

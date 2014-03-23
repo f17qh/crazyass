@@ -215,12 +215,12 @@ void StartScene::onEnter() {
   // connect server
   TextBox::Instance().Show(ui_layer_, true, "Connecting server...");
   CCLOG("Connecting server...");
-#ifndef WIN32
+
   CAWS::Instance()->Init("ws://106.187.47.129:12345/ca", this);
-#else
+
   //下面是测试的
-  CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
-#endif
+  //CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
+
   schedule(schedule_selector(StartScene::update), 1, SCHEDULE_TIMEOUT, 1);
 }
 

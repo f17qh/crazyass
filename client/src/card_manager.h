@@ -34,6 +34,8 @@ public:
   void OnTouch(int child_tag);
   void SetEnable(bool b);
   void SetTouchable(bool b);
+  void ReStartSubStage();
+  void ShowWrongCard();
 protected:
   void FinishSubStage();
   bool TryFinishStage();
@@ -48,6 +50,7 @@ protected:
   void MoveWithLine(CCSprite* src, CCPoint end_point, float time);
   void MoveEnd(CCNode* sender);
   void MakeLinesData(int play_count);
+  void BlinkEnd(CCNode* sender);
 protected:
   PlayScene* play_scene_;
   CCLayer *card_layer_;
@@ -56,6 +59,8 @@ protected:
   int play_count_;
   int moved_card_nums_;
   int stage_id_;
+  int wrong_idx_;
+  int show_wrong_times_;
   std::vector<int> all_card_index_;
   std::vector<std::vector<int> > card_lines_;
 };

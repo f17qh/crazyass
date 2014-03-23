@@ -81,6 +81,7 @@ void CardMgr::Init(int stage_id) {
   play_count_ = 0;
   moved_card_nums_ = 0;
   sub_stage_ = 0;
+  show_wrong_times_ = 0;
 }
 
 void CardMgr::SetCardSprite() {
@@ -123,6 +124,12 @@ void CardMgr::FinishSubStage() {
   play_count_ = 0;
 }
 
+void CardMgr::ReStartSubStage() {
+  SetTouchable(false);
+  sub_stage_--;
+  play_count_ = 0;
+}
+
 bool CardMgr::TryFinishStage() {
   StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
   if(sub_stage_ >= (int)sizeof(config.play_count_))
@@ -135,6 +142,7 @@ void CardMgr::RunActionByPlayCount() {
   //判断该substage是否已经结束
   if(play_count_ >= int(config.play_count_[sub_stage_] - 1)) {
     FinishSubStage();
+    play_scene_->ShowProperty(true);
     return;
   }
   //如果没有结束要继续执行动画
@@ -158,6 +166,7 @@ void CardMgr::OnTouch(int child_tag) {
   if(sub_stage_ >= sizeof(config.play_count_)/sizeof(config.play_count_[0]))
     all_finish = true;
   SetEnable(false);
+  play_scene_->ShowProperty(false);
   if(child_tag == bingo_index_) {
     //猜对了
     //这个时候已经finishsubstage，所以sub_stage_要减1
@@ -255,6 +264,33 @@ void CardMgr::ChangeCardToSpriteFront(CCNode* sender) {
   src->initWithSpriteFrameName(name);
 }
 
+void CardMgr::ShowWrongCard() {
+  wrong_idx_ = ((int)time(NULL)+1)%((int)all_card_index_.size());
+  int i = 2;
+  while(true) {
+    i++;
+    CCSprite* src = (CCSprite*)card_layer_->getChildByTag(wrong_idx_);
+    if(!src->isVisible() || wrong_idx_ == bingo_index_) {
+      wrong_idx_ = (bingo_index_+i)%((int)all_card_index_.size());
+      continue;
+    }
+    CCBlink* blink = CCBlink::create(1.5f,3);
+    CCCallFuncN* end = CCCallFuncN::create(this, callfuncN_selector(CardMgr::BlinkEnd));
+    CCSequence* tmp = CCSequence::createWithTwoActions(blink,end);
+    src->runAction(tmp);
+    show_wrong_times_++;
+    break;
+  }
+}
+
+void CardMgr::BlinkEnd(CCNode* sender) {
+  CCSprite* src = (CCSprite*)card_layer_->getChildByTag(wrong_idx_);
+  src->setVisible(false);
+  if(show_wrong_times_ + 1 >= (int)all_card_index_.size()) {
+    play_scene_->ShowProperty(false);
+  }
+}
+
 void CardMgr::ChangeCardToSpriteBack(CCNode* sender) {
   CCSprite* src = (CCSprite*)card_layer_->getChildByTag(bingo_index_);
   char name[32] = {};
@@ -272,7 +308,9 @@ void CardMgr::MoveEnd(CCNode* sender) {
   //移动的card的动画次数--
   moved_card_nums_--;
   //移动的card的动画次数如果等于0，表示本次移动结束
-  if(moved_card_nums_ == 0)
+  if(moved_card_nums_ == 0) {
+    show_wrong_times_ = 0;
     RunActionByPlayCount();
+  }
 }
 

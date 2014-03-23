@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <filePath>D:\工作\crazyass\crazyass\client\cocostudio\MainScene\MainScene.xml.ui</filePath>
+  <filePath>E:\工作\crazyass\crazyass\client\cocostudio\MainScene\MainScene.xml.ui</filePath>
   <Version>1.2.0.1</Version>
   <Name>MainScene</Name>
-  <ProjectDir>D:\工作\crazyass\crazyass\client\cocostudio\MainScene</ProjectDir>
+  <ProjectDir>E:\工作\crazyass\crazyass\client\cocostudio\MainScene</ProjectDir>
   <JsonFileName>MainScene.json</JsonFileName>
-  <Resources>D:\工作\crazyass\crazyass\client\cocostudio\MainScene\Resources</Resources>
-  <JsonFolder>D:\工作\crazyass\crazyass\client\cocostudio\MainScene\Json</JsonFolder>
+  <Resources>E:\工作\crazyass\crazyass\client\cocostudio\MainScene\Resources</Resources>
+  <JsonFolder>E:\工作\crazyass\crazyass\client\cocostudio\MainScene\Json</JsonFolder>
   <JsonList>
     <string>MainScene_1.json</string>
     <string>PlayScene.json</string>
@@ -28,6 +28,8 @@
     <string>PopWin.json</string>
     <string>PopRecharge.json</string>
     <string>TextBox.json</string>
+    <string>Finger.json</string>
+    <string>Replay.json</string>
   </JsonList>
   <imageFileList>
     <string>Resources/images/stage_select_images.plist</string>
@@ -44,7 +46,7 @@
     <string>Resources/images/loading_images.plist</string>
   </imageFileList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PopRecharge.json</CurrentUIJson>
+  <CurrentUIJson>Replay.json</CurrentUIJson>
   <CanvasSize>
     <Width>800</Width>
     <Height>480</Height>
