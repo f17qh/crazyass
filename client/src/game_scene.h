@@ -8,7 +8,7 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 
 class GameScene :
-  public CCScene, CATarget
+  public CCScene
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -20,10 +20,6 @@ public:
 
   void menuCloseCallback(CCObject* pSender);
 
-  void CARecv(const CSJson::Value& result);
-  void CARecvDone();
-  void CARecvTimeout();
-  void update(float delta);
   CREATE_FUNC(GameScene);
 
 protected:

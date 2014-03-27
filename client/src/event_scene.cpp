@@ -59,6 +59,10 @@ void EventScene::onEnter() {
   for (size_t i = 0; i < sizeof(bl) / sizeof(bl[0]); i++) {
       btn = (UIButton *)ui_layer_->getWidgetByName(bl[i].name);
       if (btn) {
+        if(!EnablePanty && i == 5) {
+          btn->setVisible(false);
+          continue;
+        }
         btn->addTouchEventListener(this, bl[i].selector);
       }
   }
@@ -196,17 +200,24 @@ void EventScene::onBtnYes(CCObject *target, TouchEventType e) {
     return;
   PLAY_BTNSOUND;
   if(User::CurrentUser()->heart() >= 12) {
-    CSJson::Value value;
-    value["userid"] = User::CurrentUser()->userid();
-    value["cmd"] = 5;
-    CSJson::Value body;
-    body["stageid"] = stageid_;
-    body["eventid"] = User::CurrentUser()->EventLock(stageid_) + 1;
-    value["Body"] = body;
+    User::CurrentUser()->UseHeart(12);
+    User::CurrentUser()->set_eventlock(stageid_,User::CurrentUser()->EventLock(stageid_) + 1);
 
-    sharedDelegate()->SendServer(value, this);
-    schedule(schedule_selector(EventScene::UpdateNet), 1, SCHEDULE_TIMEOUT, 1);
-    CCLOG("%s SendServer", __FUNCTION__);
+    int lock = User::CurrentUser()->EventLock(stageid_);
+    char name[RES_MAX_NAME];
+    UIImageView *img;
+    for (int i = 2; i <= lock; i++) {
+      snprintf(name, RES_MAX_NAME, "ImgLock%d", i);
+      img = (UIImageView *)ui_layer_->getWidgetByName(name);
+      if (img) {
+        img->setVisible(false);
+      }
+    }
+    UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
+    if(panel == NULL) {
+      return;
+    }
+    panel->setVisible(false);
   } else {
     CCLOG("%s to shop", __FUNCTION__);
     ShopScene *sc = ShopScene::create();
@@ -451,49 +462,3 @@ int EventScene::GetEventStep() {
   }
   return event_step;
 }
-
-void EventScene::UpdateNet(float delta) {
-  if (sharedDelegate()->CheckRecv()) {
-    unschedule(schedule_selector(EventScene::UpdateNet));
-  }
-}
-
-void EventScene::CARecvTimeout() {
-  unschedule(schedule_selector(EventScene::UpdateNet));
-}
-
-void EventScene::CARecvDone() {
-  CCLOG("%s recv done", __FUNCTION__);
-  if (GotoStartSceneIfError())
-    return;
-  int lock = User::CurrentUser()->EventLock(stageid_);
-  char name[RES_MAX_NAME];
-  UIImageView *img;
-  for (int i = 2; i <= lock; i++) {
-    snprintf(name, RES_MAX_NAME, "ImgLock%d", i);
-    img = (UIImageView *)ui_layer_->getWidgetByName(name);
-    if (img) {
-      img->setVisible(false);
-    }
-  }
-  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
-  if(panel == NULL) {
-    return;
-  }
-  panel->setVisible(false);
-}
-
-void EventScene::CARecv(const CSJson::Value& result) {
-  CCLOG("%s recv", __FUNCTION__);
-  if (result.get("ErrCode", -1).asInt() == 0) {
-    User *u = User::CurrentUser();
-    CSJson::Value body = result["Body"];
-    u->set_heart(body.get("Heart", 0).asInt());
-    u->set_eventlock(body.get("Stageid", 1).asInt(), body.get("Eventid", 1).asInt());
-  } else {
-    // TODO: logout to start screen
-    ShouldGotoStart();
-    return;
-  }
-}
-

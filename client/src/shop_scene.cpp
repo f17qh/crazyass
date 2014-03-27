@@ -137,17 +137,6 @@ void CAProductByNotify(char *name, void *target) {
     }
   }
 
-  // TODO: notify server
-  CSJson::Value value;
-  value["userid"] = User::CurrentUser()->userid();
-  value["cmd"] = 4;
-  CSJson::Value body;
-  body["addheart"] = addheart;
-  body["token"] = "";
-  value["Body"] = body;
-
-  sharedDelegate()->SendServer(value, NULL);
-
   CCScene *sc = GameScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInB::create(0.5, sc));
 }

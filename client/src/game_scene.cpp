@@ -7,6 +7,7 @@
 #include "user.h"
 #include "common.h"
 #include "loading.h"
+#include "net_web_socket.h"
 using namespace std;
 
 #ifdef LINUX
@@ -34,38 +35,6 @@ static void AddSearchPath() {
   // CCFileUtils::sharedFileUtils()->addSearchPath("cocostudio/MainScene/Export/MainScene_1/Resources");
 #endif
 }
-
-#if 0
-#include <cocos-ext.h>
-USING_NS_CC_EXT;
-class TestObject : public CCObject {
-public:
-    bool init() {
-  return true;
-    }
-
-    void Resp(CCHttpClient *client, CCHttpResponse *resp) {
-  CCLOG("network response\n");
-  CCLOG("resp %s\n", &((*resp->getResponseData())[0]));
-  delete this;
-    }
-};
-
-static void TestNetwork(void) {
-    TestObject *to = new(TestObject);
-    to->init();
-
-    //CCHttpResponse rsp;
-    CCHttpRequest *req = new CCHttpRequest;
-    req->setRequestType(CCHttpRequest::kHttpGet);
-    req->setUrl("http://127.0.0.1:8081/foo");
-    req->setUserData((void *)"HelloWorld");
-    req->setResponseCallback(to, httpresponse_selector(TestObject::Resp));
-
-    CCHttpClient *cli = CCHttpClient::getInstance();
-    cli->send(req);
-}
-#endif
 
 extern "C" void tcpc_test();
 
@@ -218,51 +187,14 @@ void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
 }
 
-void GameScene::CARecvTimeout() {
-  unschedule(schedule_selector(GameScene::update));
-}
-
-void GameScene::CARecvDone() {
-  if (GotoStartSceneIfError())
-    return;
-  PlayScene *sc = PlayScene::create();
-  sc->set_stageid(select_stage_);
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
-  Loading::Instence().ShowLoadScene(this, false);
-  // CCDirector::sharedDirector()->pushScene(sc);
-}
-
-void GameScene::CARecv(const CSJson::Value& result) {
-  if (result.get("ErrCode", -1).asInt() == 0) {
-    User *u = User::CurrentUser();
-    CSJson::Value body = result["Body"];
-    u->set_heart(body.get("Heart", 0).asInt());
-    u->set_stageid(body.get("Stageid", 1).asInt());
-  } else {
-    // TODO: logout to start screen
-    ShouldGotoStart();
-    return;
-  }
-}
-
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN)
     return;
 
   PLAY_BTNSOUND;
-  if (GotoStartSceneIfError())
-    return;
 
   CCLOG("%s\n", __FUNCTION__);
-#if 0
-  if (User::CurrentUser()->UseHeart(select_stage_))
-    return;
-  User::CurrentUser()->Flush();
-  PlayScene *sc = PlayScene::create();
-  sc->set_stageid(select_stage_);
-  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
-  // CCDirector::sharedDirector()->pushScene(sc);
-#endif
+
   int need_arry[] = {2,3,4,5,6,7};
   if(User::CurrentUser()->heart() < need_arry[select_stage_-1]) {
     PopRecharge::Instance().Show(ui_layer_, this, 
@@ -270,16 +202,12 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
   }
   play_ = 0;
-  CSJson::Value value;
-  value["userid"] = User::CurrentUser()->userid();
-  value["cmd"] = 2;
-  CSJson::Value body;
-  body["stageid"] = select_stage_;
-  value["Body"] = body;
-
-  sharedDelegate()->SendServer(value, this);
-  schedule(schedule_selector(GameScene::update), 1, SCHEDULE_TIMEOUT, 1);
-  Loading::Instence().ShowLoadScene(this, true);
+  if (User::CurrentUser()->UseHeart(select_stage_))
+    return;
+  User::CurrentUser()->Flush();
+  PlayScene *sc = PlayScene::create();
+  sc->set_stageid(select_stage_);
+  CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
 }
 
 void GameScene::RechargeBack(CCObject *target, TouchEventType e) {
@@ -294,11 +222,6 @@ void GameScene::RechargeShop(CCObject *target, TouchEventType e) {
   PLAY_BTNSOUND;
   ShopScene *sc = ShopScene::create();
   CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInT::create(0.5, sc));
-}
-void GameScene::update(float delta) {
-  if (sharedDelegate()->CheckRecv()) {
-    unschedule(schedule_selector(GameScene::update));
-  }
 }
 
 void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {

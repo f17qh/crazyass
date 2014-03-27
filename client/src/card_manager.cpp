@@ -163,8 +163,14 @@ CCLayer* CardMgr::card_layer() {
 void CardMgr::OnTouch(int child_tag) {
   bool all_finish = false;
   StageInfo& config = ConfigInfo::Instence().GetStageInfo(stage_id_);
-  if(sub_stage_ >= sizeof(config.play_count_)/sizeof(config.play_count_[0]))
-    all_finish = true;
+  if(!EnablePanty) {
+    if(sub_stage_ >= sizeof(config.play_count_)/sizeof(config.play_count_[0]) -1)
+      all_finish = true;
+  } else {
+    if(sub_stage_ >= sizeof(config.play_count_)/sizeof(config.play_count_[0]))
+      all_finish = true;
+  }
+
   SetEnable(false);
   play_scene_->ShowProperty(false);
   if(child_tag == bingo_index_) {
@@ -174,7 +180,6 @@ void CardMgr::OnTouch(int child_tag) {
   } else {
     play_scene_->SubStageEnd(all_finish, false, sub_stage_-1);
   }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

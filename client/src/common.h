@@ -33,19 +33,21 @@ public:
 };
 
 extern CADelegate * sharedDelegate();
-extern void ShouldGotoStart();
-extern bool GotoStartSceneIfError();
 
 extern bool EnablePanty;
 extern bool EnableTapjoy;
+extern bool EnableSound;
 
 #define PLAY_BTNSOUND \
+  if(EnableSound) \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_button_touched.caf");
 #define PLAY_WIN \
+  if(EnableSound) \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_girl_defeat.caf");
 #define PLAY_LOSE \
+  if(EnableSound) \
     CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_player_lose.caf");
 
-#define	NETWORK_TIMEOUT	10
-#define	SCHEDULE_TIMEOUT 15
+#define NETWORK_TIMEOUT	10
+#define SCHEDULE_TIMEOUT 15
 #endif

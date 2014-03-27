@@ -7,7 +7,7 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 
 class EventScene :
-  public CCScene, CATarget
+  public CCScene
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -51,11 +51,6 @@ protected:
   void CreateStarSprite();
   void ShowLoadingBar();
   int GetEventStep();
-
-  void CARecv(const CSJson::Value& result);
-  void CARecvDone();
-  void CARecvTimeout();
-  void UpdateNet(float delta);
 protected:
   int distence_;
   CCSprite* star_sprite_;

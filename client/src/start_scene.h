@@ -8,7 +8,7 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 
 class StartScene :
-  public CCScene, public CATarget
+  public CCScene
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -21,19 +21,10 @@ public:
 
   void menuCloseCallback(CCObject* pSender);
 
-  void SetLoginState(int s);
-  void update(float delta);
-
-  virtual void CARecv(const CSJson::Value& value);
-  virtual void CARecvDone();
-  virtual void CARecvTimeout();
-  virtual void CAOpen();
-
   CREATE_FUNC(StartScene);
 
 protected:
   void onBtnPlay(CCObject *target, TouchEventType e);
   UILayer *ui_layer_;
-  int login_state_;
 };
 

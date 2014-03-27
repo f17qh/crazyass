@@ -17,9 +17,12 @@ USING_NS_CC;
 class LocalUser : public User {
 public:
   LocalUser();
-  int Load(const char *path);
+  int Load();
   void Flush();
   int EventLock(int stageid);
+  void set_eventlock(int stageid, int lock);
+  virtual void set_stageid(int id);
+  virtual void set_heart(int heart);
 protected:
   std::string path_;
   CSJson::Value root_;
@@ -45,22 +48,36 @@ int LocalUser::AddUser() {
   root_["heart"] = heart_;
   root_["stage"] = stageid_;
   root_["eventlock"] = eventlock_;
+  Flush();
   return 0;
 }
+void LocalUser::set_stageid(int id) {
+  if(stageid_ < id) {
+    stageid_ = id;
+    Flush();
+  }
+}
 
-int LocalUser::Load(const char *path) {
+void LocalUser::set_heart(int heart) { 
+  heart_ = heart;
+  Flush();
+}
+void LocalUser::set_eventlock(int stageid, int lock) {
+  if(eventlock_[stageid - 1] < lock) {
+    eventlock_[stageid - 1] = lock;
+    Flush();
+  }
+}
+int LocalUser::Load() {
   CSJson::Reader reader;
-  path_ = path;
 
-  if (!CCFileUtils::sharedFileUtils()->isFileExist(std::string(path))) {
+  std::string buf = CCUserDefault::sharedUserDefault()->getStringForKey("user_data");
+  CCLOG("load:%s\n", buf.c_str());
+  if(buf.size() == 0) {
     return AddUser();
   }
-
-  unsigned long size = 4096;
-  unsigned char *buf = CCFileUtils::sharedFileUtils()->getFileData(path, "rb", &size);
-
-  if (!reader.parse(std::string((char *)buf), root_, false)) {
-    CCLOG("parse %s error", path);
+  if (!reader.parse(buf, root_, false)) {
+    CCLOG("parse error");
     return -1;
   }
 
@@ -68,30 +85,18 @@ int LocalUser::Load(const char *path) {
   heart_ = root_.get("heart", 0).asInt();
   eventlock_ = root_["eventlock"];
   CCLOG("Tset %d %d", stageid_, heart_);
-  delete buf;
+
   return 0;
 }
 
 void LocalUser::Flush() {
   CSJson::StyledWriter writer;
-
   root_["heart"] = heart_;
   root_["stage"] = stageid_;
-  std::string content = writer.write(root_);
-  CCLOG("Flush %s to %s\n", content.c_str(), path_.c_str());
-#ifdef WIN32
-  int fd = _open(path_.c_str(), _O_RDWR | _O_CREAT, _S_IREAD | _S_IWRITE);
-#else
-  int fd = open(path_.c_str(), O_RDWR | O_CREAT);
-#endif
-
-#ifdef WIN32
-  _write(fd, content.c_str(), content.size());
-  _close(fd);
-#else
-    write(fd, content.c_str(), content.size());
-    close(fd);
-#endif
+  root_["eventlock"] = eventlock_;
+  std::string buf = writer.write(root_);
+  CCLOG("Flush %s to %s\n", buf.c_str(), path_.c_str());
+  CCUserDefault::sharedUserDefault()->setStringForKey("user_data", buf);
 }
 
 class RemoteUser : public User {
@@ -152,8 +157,8 @@ int RemoteUser::Load(const char *path) {
 static User * current_user_ = NULL;
 User * User::CurrentUser() {
   if (current_user_ == NULL) {
-    current_user_ = new RemoteUser();
-    current_user_->Load("user.json");
+    current_user_ = new LocalUser();
+    current_user_->Load();
   }
   return current_user_;
 }

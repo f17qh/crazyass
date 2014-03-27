@@ -20,7 +20,7 @@ enum {
 };
 
 class PlayScene :
-  public CCScene, public CATarget
+  public CCScene
 {
 public:
   // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -37,10 +37,7 @@ public:
   void set_stageid(int id) { stageid_ = id; }
   void SubStageEnd(bool all_finish, bool sub_win, int sub_stage_id);
   void ShowStartTips(bool visible);
-  void CARecv(const CSJson::Value&);
-  void CARecvDone();
-  void CARecvTimeout();
-  void update(float delta);
+
   void ShowProperty(bool visiable);
   //void ShowFinger(bool visiable);
   //void ShowReplay(bool visiable);
@@ -56,7 +53,7 @@ protected:
   void onPopBack(CCObject *target, TouchEventType e);
   void onPopShop(CCObject *target, TouchEventType e);
   void ArmatureCallBack(CCArmature * armature, MovementEventType e, const char * name);
-  void SendEndPlay(bool);
+  void EndPlay(bool);
   void onPanelSecond(CCObject *target, TouchEventType e);
   void SetResultPanelState(int state);
   void SetIamgeView(const char* name, bool b, const char* imgs_file=NULL);
