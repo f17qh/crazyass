@@ -367,9 +367,6 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
     unschedule(schedule_selector(EventScene::UpdateUI));
   }
 
-  //// play
-  //if (event_state_[i - 1])
-  //  CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[i - 1]);
 }
 
 static const char *soundfiles[]= {
@@ -431,9 +428,11 @@ void EventScene::ShowLoadingBar() {
     float time = ConfigInfo::Instence().GetEventST(GetEventStep());
     girl_action_runing_ = GetEventStep();
     if(girl_action_runing_ != 2){
-      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[0]);
+      if(EnableSound)
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[0]);
     } else {
-      CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[finger_idx_]);
+      if(EnableSound)
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(soundfiles[finger_idx_]);
     }
     RunGirlAction((CCSprite*)img_girl->getVirtualRenderer(), time);
   }

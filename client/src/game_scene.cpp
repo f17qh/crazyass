@@ -202,7 +202,7 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
     return;
   }
   play_ = 0;
-  if (User::CurrentUser()->UseHeart(select_stage_))
+  if (User::CurrentUser()->UseHeart(need_arry[select_stage_-1]))
     return;
   User::CurrentUser()->Flush();
   PlayScene *sc = PlayScene::create();
