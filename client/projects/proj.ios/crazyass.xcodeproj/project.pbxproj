@@ -314,6 +314,7 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		DF30301518E48C8000C17A2D /* net_web_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF30301318E48C8000C17A2D /* net_web_socket.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -887,6 +888,8 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D4F9F37B12E54555005CA6D2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		DF30301318E48C8000C17A2D /* net_web_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = net_web_socket.cpp; path = ../../src/net_web_socket.cpp; sourceTree = "<group>"; };
+		DF30301418E48C8000C17A2D /* net_web_socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = net_web_socket.h; path = ../../src/net_web_socket.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1422,6 +1425,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DF30301318E48C8000C17A2D /* net_web_socket.cpp */,
+				DF30301418E48C8000C17A2D /* net_web_socket.h */,
 				6AA611B418D33F0B00C62390 /* loading.cpp */,
 				6AA611B518D33F0B00C62390 /* loading.h */,
 				6A063D6618D1F79400645C9A /* static_config.cpp */,
@@ -2178,6 +2183,7 @@
 				15A3D91F1682F7D5002FB0C5 /* b2PolygonContact.cpp in Sources */,
 				15A3D9201682F7D5002FB0C5 /* b2DistanceJoint.cpp in Sources */,
 				15A3D9211682F7D5002FB0C5 /* b2FrictionJoint.cpp in Sources */,
+				DF30301518E48C8000C17A2D /* net_web_socket.cpp in Sources */,
 				15A3D9221682F7D5002FB0C5 /* b2GearJoint.cpp in Sources */,
 				15A3D9231682F7D5002FB0C5 /* b2Joint.cpp in Sources */,
 				15A3D9241682F7D5002FB0C5 /* b2MouseJoint.cpp in Sources */,
@@ -2424,7 +2430,7 @@
 				);
 				OTHER_CFLAGS = "-O2";
 				PRODUCT_NAME = crazyass;
-				PROVISIONING_PROFILE = "F3BC2797-220C-449D-BECD-FCC24368337D";
+				PROVISIONING_PROFILE = "6AA9AD2A-159D-4433-AEEA-4FD182267833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2479,7 +2485,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = crazyass;
-				PROVISIONING_PROFILE = "F3BC2797-220C-449D-BECD-FCC24368337D";
+				PROVISIONING_PROFILE = "6AA9AD2A-159D-4433-AEEA-4FD182267833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
