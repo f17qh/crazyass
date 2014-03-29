@@ -15,6 +15,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../../cocos2d-x-2.2/extensions/CocoStudio/Json
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/..
 
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static

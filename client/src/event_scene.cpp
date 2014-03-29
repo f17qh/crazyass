@@ -5,6 +5,7 @@
 #include "SimpleAudioEngine.h"
 #include "static_config.h"
 #include "shop_scene.h"
+#include "ca_platform.h"
 
 bool EventScene::init() {
   //////////////////////////////
@@ -362,11 +363,19 @@ void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
 }
 
 static const char *soundfiles[]= {
+#ifdef CA_ANDROID
+  "sound/sfx_girl_event_start.ogg",
+  "sound/sfx_girl_event_climax1.ogg",
+  "sound/sfx_girl_event_climax2.ogg",
+  "sound/sfx_girl_event_climax3.ogg",
+  "sound/sfx_girl_event_climax4.ogg",
+#else
   "sound/sfx_girl_event_start.caf",
   "sound/sfx_girl_event_climax1.caf",
   "sound/sfx_girl_event_climax2.caf",
   "sound/sfx_girl_event_climax3.caf",
   "sound/sfx_girl_event_climax4.caf",
+#endif
 };
 
 void EventScene::UpdateUI(float delta) {
