@@ -67,6 +67,7 @@ public:
   int GetEventPI(int step_idx, int finger_idx, int stageid);
   EventFingerInfo& GetEventFingerInfo(int finger_idx, int stageid);
   virtual int Load(const char *path) = 0;
+  bool is_local();
 protected:
   void SetEventFingerInfo( CSJson::Value& val, int stageid);
   void SetLoadingTipsInfo( CSJson::Value& val, int idx);
@@ -75,5 +76,6 @@ protected:
   std::vector<EventStepInfo> event_step_vec_;
   std::map<int, std::vector<EventFingerInfo> > event_finger_map_;
   TipsInfo tips_info_;
+  bool is_local_;
 };
 

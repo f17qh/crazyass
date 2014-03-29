@@ -23,6 +23,7 @@ public:
   void set_eventlock(int stageid, int lock);
   virtual void set_stageid(int id);
   virtual void set_heart(int heart);
+  virtual int UseHeart(int count);
 protected:
   std::string path_;
   CSJson::Value root_;
@@ -30,6 +31,14 @@ protected:
 
   int AddUser();
 };
+
+int LocalUser::UseHeart(int count) {
+  if (heart_ < count)
+    return -1;
+  heart_ -= count;
+  Flush();
+  return 0;
+}
 
 LocalUser::LocalUser() {
   heart_ = 10;
@@ -97,6 +106,7 @@ void LocalUser::Flush() {
   std::string buf = writer.write(root_);
   CCLOG("Flush %s to %s\n", buf.c_str(), path_.c_str());
   CCUserDefault::sharedUserDefault()->setStringForKey("user_data", buf);
+  CCUserDefault::sharedUserDefault()->flush();
 }
 
 class RemoteUser : public User {

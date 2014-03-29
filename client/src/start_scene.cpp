@@ -6,6 +6,7 @@
 #include "common.h"
 #include "loading.h"
 #include "net_web_socket.h"
+#include "static_config.h"
 USING_NS_CC_EXT;
 
 bool StartScene::init() {
@@ -22,6 +23,10 @@ void StartScene::EnableBtnPlay() {
   if (btn) {
     btn->addTouchEventListener(this, toucheventselector(StartScene::onBtnPlay));
     btn->setPressedActionEnabled(true);
+    CCScaleTo* scale1 = CCScaleTo::create( 1.0f, 1.2f);
+    CCScaleTo* scale2 = CCScaleTo::create( 1.0f, 0.8f);
+    CCSequence* scale = CCSequence::createWithTwoActions(scale1, scale2);
+    btn->getVirtualRenderer()->runAction(CCRepeatForever::create(scale));
   }
 }
 
@@ -39,8 +44,13 @@ void StartScene::onEnter() {
   // connect server
   //TextBox::Instance().Show(ui_layer_, true, "Connecting server...");
   //CCLOG("Connecting server...");
-
-  CAWS::Instance()->Init("ws://106.187.47.129:12345/ca");
+  if(!ConfigInfo::Instence().is_local()){
+    CAWS::Instance()->Init("ws://106.187.47.129:12345/ca");
+  } else {
+    EnablePanty = true;
+    EnableTapjoy = true;
+    EnableSound = true;
+  }
 
   //下面是测试的
   //CAWS::Instance()->Init("ws://10.32.91.155:12346/ca", this);
