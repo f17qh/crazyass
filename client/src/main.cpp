@@ -4,6 +4,7 @@
 
 USING_NS_CC;
 
+#if 0
 static int AppRun() {
   // create the application instance
   AppDelegate app;
@@ -30,4 +31,5 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 int main(int argc, char **argv) {
   return AppRun();
 }
+#endif
 #endif

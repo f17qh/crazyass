@@ -6,11 +6,15 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
+CA_FILES := $(addprefix ../, $(wildcard ../../src/*.cpp))
+
 LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp
+		$(CA_FILES) \
+		../nulldef.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../../cocos2d-x-2.2/extensions/CocoStudio/Json
 
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
@@ -20,6 +24,8 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static
 
 include $(BUILD_SHARED_LIBRARY)
 
+$(call import-add-path, /Users/lijie/projects/cocos2d-x-2.2)
+$(call import-add-path, /Users/lijie/projects/cocos2d-x-2.2/cocos2dx/platform/third_party/android/prebuilt)
 $(call import-module,cocos2dx)
 $(call import-module,cocos2dx/platform/third_party/android/prebuilt/libcurl)
 $(call import-module,CocosDenshion/android)
