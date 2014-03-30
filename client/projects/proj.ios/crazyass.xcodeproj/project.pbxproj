@@ -315,6 +315,7 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		DF30301518E48C8000C17A2D /* net_web_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF30301318E48C8000C17A2D /* net_web_socket.cpp */; };
+		DF96703C18E837BB00F3C0C9 /* particles in Resources */ = {isa = PBXBuildFile; fileRef = DF96703B18E837BB00F3C0C9 /* particles */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -890,6 +891,7 @@
 		D4F9F37B12E54555005CA6D2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		DF30301318E48C8000C17A2D /* net_web_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = net_web_socket.cpp; path = ../../src/net_web_socket.cpp; sourceTree = "<group>"; };
 		DF30301418E48C8000C17A2D /* net_web_socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = net_web_socket.h; path = ../../src/net_web_socket.h; sourceTree = "<group>"; };
+		DF96703B18E837BB00F3C0C9 /* particles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = particles; path = ../../Resources/particles; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1993,6 +1995,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DF96703B18E837BB00F3C0C9 /* particles */,
 				6A17971118DAD5B200E5DDBC /* Default.png */,
 				6AB1BBC718D9DDFB0093410A /* Default-568h@2x.png */,
 				6AB1BBBF18D9CD130093410A /* Default-Landscape.png */,
@@ -2113,6 +2116,7 @@
 				6AC46FA818D5DEBF00B77148 /* Icon-32.png in Resources */,
 				6AC46F9618D5D86000B77148 /* static_data.json in Resources */,
 				6AC46F8018D5BEDA00B77148 /* messages_toolbar_background.png in Resources */,
+				DF96703C18E837BB00F3C0C9 /* particles in Resources */,
 				6AB1BBC818D9DDFB0093410A /* Default-568h@2x.png in Resources */,
 				6AC46F8818D5BEDA00B77148 /* send_selected@2x.png in Resources */,
 				6A3F515E18D6E48B00D79523 /* TapjoyResources.bundle in Resources */,
