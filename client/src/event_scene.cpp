@@ -256,6 +256,12 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     if(emitter_ != NULL) {
       emitter_->setPosition(move_pos);
     }
+    if(!emitter_->isVisible()) {
+      emitter_->setVisible(true);
+    }
+    if(!img->isVisible()) {
+      img->setVisible(true);
+    }
     if(distence_ > 10000) {
       distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_,stageid_)*10;
     } else {
@@ -268,7 +274,7 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     //CCLOG("%s distence:%d, add:%d\n", __FUNCTION__, distence_, add);
   } else {
     img->setVisible(false);
-    ui_layer_->removeChildByTag(1001);
+    emitter_->setVisible(false);
   }
 }
 
