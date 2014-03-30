@@ -51,9 +51,11 @@ protected:
   void CreateStarSprite();
   void ShowLoadingBar();
   int GetEventStep();
+  CCParticleSystemQuad* GetEmitter();
 protected:
   int distence_;
   CCSprite* star_sprite_;
   int girl_action_runing_;
+  CCParticleSystemQuad* emitter_;
 };
 

@@ -64,6 +64,7 @@ protected:
   CardMgr card_mgr_;
   UILayer *ui_layer_;
   UILayer *ui_layer_text_;
+  UILayer *ui_layer_win_;
   CCScene *back_scene_;
   int stageid_;
   CCPoint btn_start_pos_;

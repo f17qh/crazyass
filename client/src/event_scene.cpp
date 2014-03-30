@@ -21,12 +21,13 @@ bool EventScene::init() {
   event_state_ = -1;
   girl_action_runing_ = -1;
   finger_idx_ = 0;
+  emitter_ = NULL;
   return true;
 }
 
 void EventScene::onEnter() {
   CCScene::onEnter();
-
+  
   CCLOG("%s", __FUNCTION__);
   // load ui
   ui_layer_ = UILayer::create();
@@ -64,6 +65,9 @@ void EventScene::onEnter() {
           continue;
         }
         btn->addTouchEventListener(this, bl[i].selector);
+        if(i == 8 || i == 9) {
+          btn->setPressedActionEnabled(true);
+        }
       }
   }
 
@@ -188,10 +192,13 @@ void EventScene::onBtnStarField(CCObject *target, TouchEventType e) {
   if (e == TOUCH_EVENT_BEGAN) {
     img->setVisible(true);
     img->setPosition(btn_star_field->getTouchStartPos());
-
+    emitter_ = CCParticleSystemQuad::create("particles/star_particle.plist");
+    emitter_->setPosition(btn_star_field->getPosition());
+    ui_layer_->addChild(emitter_, 1, 1001);
     return;
   } else if (e == TOUCH_EVENT_ENDED) {
     img->setVisible(false);
+    ui_layer_->removeChildByTag(1001);
   }
 }
 
@@ -246,7 +253,9 @@ void EventScene::onBtnMoveStar(CCObject *target) {
   const CCPoint& move_pos = btn_star_field->getTouchMovePos();
   if(btn_star_field->getRect().containsPoint(move_pos)) {
     img->setPosition(move_pos);
-    
+    if(emitter_ != NULL) {
+      emitter_->setPosition(move_pos);
+    }
     if(distence_ > 10000) {
       distence_ = 100*100 + ConfigInfo::Instence().GetEventPL(GetEventStep(),event_state_,stageid_)*10;
     } else {
