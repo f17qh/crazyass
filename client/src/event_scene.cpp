@@ -268,6 +268,7 @@ void EventScene::onBtnMoveStar(CCObject *target) {
     //CCLOG("%s distence:%d, add:%d\n", __FUNCTION__, distence_, add);
   } else {
     img->setVisible(false);
+    ui_layer_->removeChildByTag(1001);
   }
 }
 
