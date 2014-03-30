@@ -5,6 +5,7 @@
 #include <cocos-ext.h>
 #include "SimpleAudioEngine.h"
 #include "lib_json/json_lib.h"
+#include "ca_platform.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -38,15 +39,28 @@ extern bool EnablePanty;
 extern bool EnableTapjoy;
 extern bool EnableSound;
 
+#ifdef	CA_ANDROID
+#define	BTNSOUND_FILE "sound/sfx_button_touched.ogg"
+#define	WINSOUND_FILE "sound/sfx_girl_defeat.ogg"
+#define	LOSTSOUND_FILE "sound/sfx_player_lose.ogg"
+#else
+#define	BTNSOUND_FILE "sound/sfx_button_touched.caf"
+#define	WINSOUND_FILE "sound/sfx_girl_defeat.caf"
+#define	LOSTSOUND_FILE "sound/sfx_player_lose.caf"
+#endif
+
 #define PLAY_BTNSOUND \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_button_touched.caf");
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(BTNSOUND_FILE); \
+  }
 #define PLAY_WIN \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_girl_defeat.caf");
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(WINSOUND_FILE); \
+  }
 #define PLAY_LOSE \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/sfx_player_lose.caf");
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(LOSTSOUND_FILE); \
+  }
 
 #define NETWORK_TIMEOUT	10
 #define SCHEDULE_TIMEOUT 15
