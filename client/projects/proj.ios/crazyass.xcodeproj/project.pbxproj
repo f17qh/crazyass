@@ -2414,6 +2414,7 @@
 					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/extensions/CocoStudio/Json\"",
 					"\"$(SRCROOT)/chat\"",
 					"\"$(SRCROOT)/chat/EGO_Refresh\"",
+					"\"$(SRCROOT)\"",
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -2470,6 +2471,7 @@
 					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/extensions/CocoStudio/Json\"",
 					"\"$(SRCROOT)/chat\"",
 					"\"$(SRCROOT)/chat/EGO_Refresh\"",
+					"\"$(SRCROOT)\"",
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
