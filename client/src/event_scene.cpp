@@ -5,7 +5,7 @@
 #include "SimpleAudioEngine.h"
 #include "static_config.h"
 #include "shop_scene.h"
-#include "ca_platform.h"
+//#include "ca_platform.h"
 
 bool EventScene::init() {
   //////////////////////////////

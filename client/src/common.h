@@ -5,7 +5,7 @@
 #include <cocos-ext.h>
 #include "SimpleAudioEngine.h"
 #include "lib_json/json_lib.h"
-#include "ca_platform.h"
+//#include "ca_platform.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
