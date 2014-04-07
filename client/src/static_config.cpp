@@ -53,7 +53,9 @@ int ConfigInfo::GetEventPI(int step_idx, int finger_idx, int stageid) {
   return event_finger_map_[stageid][finger_idx].progress_increase_ + 
     event_step_vec_[step_idx].progress_increase_;
 }
-
+bool ConfigInfo::is_local(){
+  return is_local_;
+}
 class LocalConfigInfo : public ConfigInfo {
 public:
   int Load(const char *path);
@@ -73,7 +75,7 @@ int LocalConfigInfo::Load(const char *path) {
     CCLOG("parse %s error", path);
     return -1;
   }
-
+  is_local_ = root_.get("control", false).asBool();
   StageInfo stageinfo;
   CSJson::Value val_arry = root_["stage_arry"];
   unsigned int val_size = (unsigned int)val_arry.size();

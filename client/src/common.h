@@ -38,6 +38,7 @@ extern CADelegate * sharedDelegate();
 extern bool EnablePanty;
 extern bool EnableTapjoy;
 extern bool EnableSound;
+
 #ifdef	CA_ANDROID
 #define	BTNSOUND_FILE "sound/sfx_button_touched.ogg"
 #define	WINSOUND_FILE "sound/sfx_girl_defeat.ogg"
@@ -49,15 +50,18 @@ extern bool EnableSound;
 #endif
 
 #define PLAY_BTNSOUND \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(BTNSOUND_FILE);
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(BTNSOUND_FILE); \
+  }
 #define PLAY_WIN \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(WINSOUND_FILE);
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(WINSOUND_FILE); \
+  }
 #define PLAY_LOSE \
-  if(EnableSound) \
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(LOSTSOUND_FILE);
+  if (EnableSound) { \
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(LOSTSOUND_FILE); \
+  }
 
-#define	NETWORK_TIMEOUT	10
-#define	SCHEDULE_TIMEOUT 15
+#define NETWORK_TIMEOUT	10
+#define SCHEDULE_TIMEOUT 15
 #endif

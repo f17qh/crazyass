@@ -23,6 +23,7 @@ void PlayScene::onEnter() {
   // load ui
   ui_layer_ = UILayer::create();
   ui_layer_text_ = UILayer::create();
+  ui_layer_win_ = UILayer::create();
   char path[1024];
   snprintf(path, 1024, "MainScene/GirlScene%d.json",
            stageid_);
@@ -30,10 +31,14 @@ void PlayScene::onEnter() {
   Layout *layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile(path));
   ui_layer_->addWidget(layout);
 
+  layout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("MainScene/WinOrLose.json"));
+  ui_layer_win_->addWidget(layout);
+
   card_mgr_.CreateLayer(this);
   this->addChild(ui_layer_, 0, 100);
   this->addChild(card_mgr_.card_layer(), 1, 101);
-  this->addChild(ui_layer_text_, 2, 100);
+  this->addChild(ui_layer_win_, 2, 100);
+  this->addChild(ui_layer_text_, 3, 103);
 
   card_mgr_.Init(stageid_);
 
@@ -43,7 +48,7 @@ void PlayScene::onEnter() {
     btn->setPressedActionEnabled(true);
   }
 
-  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelSecond");
+  UIPanel *panel = (UIPanel *)ui_layer_win_->getWidgetByName("PanelSecond");
   if(panel == NULL) {
     return;
   }
@@ -201,7 +206,7 @@ void PlayScene::ArmatureCallBack(CCArmature * armature, MovementEventType e, con
 }
 
 void PlayScene::SetResultPanelState(int state) {
-  UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelSecond");
+  UIPanel *panel = (UIPanel *)ui_layer_win_->getWidgetByName("PanelSecond");
   if(panel == NULL) {
     return;
   }
@@ -220,6 +225,10 @@ void PlayScene::SetResultPanelState(int state) {
       sprintf(name,"girl%d_face_0004.png",stageid_);
       SetIamgeView("WinOrLoseGirl", true, name);
       ShowTips(true, TIPS_TYPE_RESULT_END);
+      CCParticleSystemQuad* emitter = CCParticleSystemQuad::create("particles/win_particle.plist");
+      UIImageView *imgs = (UIImageView *)ui_layer_win_->getWidgetByName("WinOrLoseGirl");
+      emitter->setPosition(imgs->getPosition());
+      ui_layer_->addChild(emitter, 1);
       panel->addTouchEventListener(this, toucheventselector(PlayScene::onPanelSecond));
       break;
     }
@@ -249,7 +258,7 @@ void PlayScene::SetResultPanelState(int state) {
 }
 
 void PlayScene::SetIamgeView(const char* name, bool b, const char* imgs_file) {
-  UIImageView *imgs = (UIImageView *)ui_layer_->getWidgetByName(name);
+  UIImageView *imgs = (UIImageView *)ui_layer_win_->getWidgetByName(name);
     if(imgs == NULL)
       return;
     imgs->setVisible(b);
@@ -268,10 +277,10 @@ void PlayScene::ShowStartTips(bool visible) {
 }
 
 void PlayScene::ShowTips(bool visible, int type) {
-  UILabelBMFont *tips = (UILabelBMFont *)ui_layer_->getWidgetByName("Tips");
+  UILabelBMFont *tips = (UILabelBMFont *)ui_layer_win_->getWidgetByName("Tips");
   if(tips == NULL)
     return;
-  UIImageView *imgs = (UIImageView *)ui_layer_->getWidgetByName("ImgTips");
+  UIImageView *imgs = (UIImageView *)ui_layer_win_->getWidgetByName("ImgTips");
   if(imgs == NULL)
     return;
   imgs->setVisible(visible);

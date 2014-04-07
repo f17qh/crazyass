@@ -97,4 +97,8 @@
     <Project>Replay</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>WinOrLose</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
