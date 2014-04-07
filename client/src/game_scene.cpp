@@ -8,6 +8,9 @@
 #include "common.h"
 #include "loading.h"
 #include "net_web_socket.h"
+
+#include "../platform/android/jni/JniHelper.h"
+
 using namespace std;
 
 #ifdef LINUX
@@ -134,6 +137,13 @@ void GameScene::onEnter() {
 
   if (!tapjoy_) {
     tapjoy_ = CATapjoyConnect((char *)User::CurrentUser()->userid().c_str());
+  }
+
+  JniMethodInfo t;
+  if (JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "startFeedBack", "()V")) {
+    CCLOG("find feedback\n");
+  } else {
+    CCLOG("cannot find feedback\n");
   }
 }
 

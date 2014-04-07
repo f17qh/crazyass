@@ -28,8 +28,11 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.os.Bundle;
 
+import com.umeng.fb.FeedbackAgent;
+//import com.umeng.ui.BaseSinglePaneActivity;
+
 public class crazyass extends Cocos2dxActivity{
-	
+    static FeedbackAgent agent;	
     protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);	
 	}
@@ -40,6 +43,12 @@ public class crazyass extends Cocos2dxActivity{
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
     	
     	return glSurfaceView;
+    }
+
+    static public void startFeedBack() {
+	agent = new FeedbackAgent(getContext());
+	//agent = new FeedbackAgent(this.getActivity());
+	agent.startFeedbackActivity();
     }
 
     static {
