@@ -9,8 +9,6 @@
 #include "loading.h"
 #include "net_web_socket.h"
 
-#include "../platform/android/jni/JniHelper.h"
-
 using namespace std;
 
 #ifdef LINUX
@@ -138,13 +136,6 @@ void GameScene::onEnter() {
   if (!tapjoy_) {
     tapjoy_ = CATapjoyConnect((char *)User::CurrentUser()->userid().c_str());
   }
-
-  JniMethodInfo t;
-  if (JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "startFeedBack", "()V")) {
-    CCLOG("find feedback\n");
-  } else {
-    CCLOG("cannot find feedback\n");
-  }
 }
 
 void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
@@ -173,11 +164,11 @@ void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
 void ShowFeedback();
 void CATapjoyShow();
 void GameScene::onBtnFeedback(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
-    return;
-
-  PLAY_BTNSOUND;
-  ShowFeedback();
+  if (e == TOUCH_EVENT_ENDED) {
+    CCLOG("%s %d\n", __func__, e);
+    PLAY_BTNSOUND;
+    ShowFeedback();
+  }
 }
 
 void GameScene::onBtnFree(CCObject *target, TouchEventType e) {
