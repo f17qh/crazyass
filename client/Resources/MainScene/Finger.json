@@ -113,7 +113,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 291,
+              "width": 159,
               "x": 229,
               "y": 26,
               "capInsetsHeight": 0,
@@ -128,7 +128,7 @@
               },
               "scale9Enable": false,
               "scale9Height": 17,
-              "scale9Width": 291
+              "scale9Width": 159
             }
           },
           {

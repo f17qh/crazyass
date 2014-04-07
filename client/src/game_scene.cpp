@@ -194,7 +194,9 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
   PLAY_BTNSOUND;
 
   CCLOG("%s\n", __FUNCTION__);
-
+  if(select_stage_ > User::CurrentUser()->stageid()) {
+    return;
+  }
   int need_arry[] = {2,3,4,5,6,7};
   if(User::CurrentUser()->heart() < need_arry[select_stage_-1]) {
     PopRecharge::Instance().Show(ui_layer_, this, 

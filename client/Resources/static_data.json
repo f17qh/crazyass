@@ -95,8 +95,8 @@
     ],
 
     "tips":{
-        "sub_stage_begin": "please find this card",
-        "sub_stage_end": "touch any where"
+        "sub_stage_begin": "請認準并找出這張卡片",
+        "sub_stage_end": "觸碰屏幕任意區域"
     },
 
     "loading_tips":[

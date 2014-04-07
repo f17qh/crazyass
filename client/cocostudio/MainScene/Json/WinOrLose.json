@@ -120,7 +120,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 220,
+              "width": 164,
               "x": 376,
               "y": 408,
               "capInsetsHeight": 0,
@@ -135,7 +135,7 @@
               },
               "scale9Enable": false,
               "scale9Height": 65,
-              "scale9Width": 220
+              "scale9Width": 164
             }
           },
           {
@@ -209,7 +209,7 @@
               "colorR": 255,
               "flipX": false,
               "flipY": false,
-              "height": 40,
+              "height": 43,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -219,22 +219,22 @@
               "rotation": 0,
               "scaleX": 0.5999999,
               "scaleY": 0.5999999,
-              "sizePercentX": 0,
-              "sizePercentY": 0,
+              "sizePercentX": 29.19125,
+              "sizePercentY": 0.08958333,
               "sizeType": 0,
-              "tag": 415,
+              "tag": 386,
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 66,
+              "width": 9,
               "x": 398,
               "y": 58,
               "fileNameData": {
-                "path": "Resources/fonts/font_shop_script.fnt",
+                "path": "Resources/fonts/crazyass.fnt",
                 "plistFile": null,
                 "resourceType": 0
               },
-              "text": "123"
+              "text": ""
             }
           }
         ],
@@ -302,7 +302,7 @@
       "classname": "Panel",
       "name": "Panel",
       "ZOrder": 0,
-      "actiontag": 3648,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": null,
