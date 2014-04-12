@@ -42,6 +42,10 @@ import com.tapjoy.TapjoyNotifier;
 import com.umeng.fb.FeedbackAgent;
 //import com.umeng.ui.BaseSinglePaneActivity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import com.qufan.activity.PayActivity;
+
 public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static FeedbackAgent agent;	
     static boolean TapjoyInit = false;
@@ -127,7 +131,7 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 		@Override
 		public void viewDidClose(int viewType) {
 		    Log.i("crazyass", "viewDidClose");
-		    // Best Practice: We recommend calling getTapPoints as often as possible so the user誷 balance is always up-to-date.
+		    // Best Practice: We recommend calling getTapPoints as often as possible so the user瑾� balance is always up-to-date.
 		    TapjoyConnect.getTapjoyConnectInstance().getTapPoints(crazyass.this);
 		}
 	    });
@@ -177,6 +181,23 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 		}
 	    });
     }
+
+    static public void payTaobao(){
+	Intent intent = new Intent(getContext(),PayActivity.class);
+	Bundle bundle = new Bundle();
+	bundle.putInt("cost", 2);
+	bundle.putInt("sorted_bill_types[i]", 4);
+	bundle.putString("item_id", "324");
+	bundle.putString("dianxin_code", "F68658B3D9950CB8E0430100007F2DCD");
+	bundle.putInt("description",400);
+	bundle.putInt("bill_type", 400);
+	bundle.putString("userid", "f200");
+	bundle.putString("app_e_pay", "XY");
+	intent.putExtras(bundle);
+	getContext().startActivity(intent);
+    }
+    
+    
 
     static {
         System.loadLibrary("cocos2dcpp");

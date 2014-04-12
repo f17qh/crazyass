@@ -83,19 +83,23 @@ const int productHeart[] = {
   5,30,60,200,700,
 };
 
+extern void  PayTaobao();
 void ShopScene::onBtnSale(CCObject *target, TouchEventType e, int i) {
-  if (e == TOUCH_EVENT_BEGAN)
-    return;
+  if (e == TOUCH_EVENT_ENDED) {
+#ifdef CA_ANDROID
+    PayTaobao();
+#else
+    if (!iap_)
+      return;
 
-  if (!iap_)
-    return;
+    if (in_iap_)
+      return;
 
-  if (in_iap_)
-    return;
-
-  in_iap_ = ProductBuy(iap_, (char *)productId[i - 1], (void *)this);
-  if (in_iap_) {
-    TextBox::Instance().Show(ui_layer_, true, "Please waiting...");
+    in_iap_ = ProductBuy(iap_, (char *)productId[i - 1], (void *)this);
+    if (in_iap_) {
+      TextBox::Instance().Show(ui_layer_, true, "Please waiting...");
+    }
+#endif
   }
 }
 

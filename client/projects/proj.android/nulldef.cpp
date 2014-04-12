@@ -28,3 +28,12 @@ void ShowFeedback() {
   }
 };
 
+void PayTaobao() {
+  cocos2d::JniMethodInfo t;
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "payTaobao", "()V")) {
+    CCLOG("find pay\n");
+    t.env->CallStaticObjectMethod(t.classID, t.methodID);
+  } else {
+    CCLOG("cannot find feedback\n");
+  }
+};

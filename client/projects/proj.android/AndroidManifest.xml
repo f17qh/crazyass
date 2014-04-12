@@ -56,6 +56,76 @@
             android:name="com.tapjoy.mraid.view.Browser"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
+	<activity
+            android:name="com.qufan.activity.PayActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Dialog">
+	</activity>
+
+         <!-- 电信支付 ======================= -->
+        <activity
+            android:name="com.estore.sms.iap.TypaySdkActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 电信支付 ======================= -->
+
+
+        <!-- 支付宝====================== -->
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        
+        
+         <!-- yopay sdk activity porting Begin -->
+        <activity
+            android:name="com.yopay.sdk.activities.PaymentCardActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        <activity
+            android:name="com.yopay.sdk.activities.PayMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        <activity
+            android:name="com.yopay.sdk.activities.UserLoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+
+        <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
+        <activity
+            android:name="com.yopay.sdk.activities.PayByWapActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+
+        <service android:name="com.yopay.sdk.activities.PayService" >
+        </service>
+
+        <!-- 是否隐藏切换用户按钮，默认false -->
+        <meta-data
+            android:name="switch_account_visible"
+            android:value="false" >
+        </meta-data>
+
+        <!-- CNZZ BEGIN -->
+        <meta-data
+            android:name="CNZZ_APP_KEY"
+            android:value="cnzz.a_4vmtjzsbau7uvglzo6i3rutg" >
+        </meta-data>
+        <meta-data
+            android:name="CNZZ_CHANNEL_ID"
+            android:value="TEST" >
+        </meta-data>
+        <!-- CNZZ END -->
+        <!-- yopay sdk activity porting End -->
+  
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -65,6 +135,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <supports-screens
         android:anyDensity="true"
