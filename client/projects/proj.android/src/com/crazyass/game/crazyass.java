@@ -35,10 +35,14 @@ import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyConnectFlag;
 import com.tapjoy.TapjoyConnectNotifier;
 import com.tapjoy.TapjoyOffersNotifier;
+import com.tapjoy.TapjoyEarnedPointsNotifier;
+import com.tapjoy.TapjoyViewNotifier;
+import com.tapjoy.TapjoyViewType;
+import com.tapjoy.TapjoyNotifier;
 import com.umeng.fb.FeedbackAgent;
 //import com.umeng.ui.BaseSinglePaneActivity;
 
-public class crazyass extends Cocos2dxActivity{
+public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static FeedbackAgent agent;	
     static boolean TapjoyInit = false;
     protected void onCreate(Bundle savedInstanceState){
@@ -58,9 +62,9 @@ public class crazyass extends Cocos2dxActivity{
 		
 	// Connect with the Tapjoy server.  Call this when the application first starts.
 	// REPLACE THE APP ID WITH YOUR TAPJOY APP ID.
-	String tapjoyAppID = "bba49f11-b87f-4c0f-9632-21aa810dd6f1";
+	String tapjoyAppID = "74934c9e-e596-42b4-aa0a-9d76cdc9a861";
 	// REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
-	String tapjoySecretKey = "yiQIURFEeKm0zbOggubu";
+	String tapjoySecretKey = "Z3k2pGIRTJiVxJizCjN1";
 		
 	// NOTE: This is the only step required if you're an advertiser.
 	TapjoyConnect.requestTapjoyConnect(getApplicationContext(), tapjoyAppID, tapjoySecretKey, connectFlags, new TapjoyConnectNotifier()
@@ -85,15 +89,68 @@ public class crazyass extends Cocos2dxActivity{
     	return glSurfaceView;
     }
 
+    public void onEarnedPoints(int amount) {
+	Log.i("crazyass",String.format( "Tapjoy earned %d peaches", amount));
+    }
+
     public void onConnectSuccess() {
 	// Toast.makeText(getContext(), "tapjoy Success", Toast.LENGTH_LONG).show();
 	Log.i("crazyass", "Tapjoy Success");
 	TapjoyInit = true;
+
+	// Get notifications whenever Tapjoy currency is earned.
+	TapjoyConnect.getTapjoyConnectInstance().setEarnedPointsNotifier(new TapjoyEarnedPointsNotifier() {
+		@Override
+		public void earnedTapPoints(int amount) {
+		    Log.i("crazyass", "XXXX");
+		    onEarnedPoints(amount);
+		}
+	    });
+
+	// Get notifications when Tapjoy views open or close.
+	TapjoyConnect.getTapjoyConnectInstance().setTapjoyViewNotifier(new TapjoyViewNotifier() {
+		@Override
+		public void viewWillOpen(int viewType) {
+		    Log.i("crazyass", "viewWillOepn");
+		}
+			
+		@Override
+		public void viewWillClose(int viewType) {
+		    Log.i("crazyass", "viewWillClose");
+		}
+			
+		@Override
+		public void viewDidOpen(int viewType) {
+		    Log.i("crazyass", "viewDidOpen");
+		}
+	       	
+		@Override
+		public void viewDidClose(int viewType) {
+		    Log.i("crazyass", "viewDidClose");
+		    // Best Practice: We recommend calling getTapPoints as often as possible so the user誷 balance is always up-to-date.
+		    TapjoyConnect.getTapjoyConnectInstance().getTapPoints(crazyass.this);
+		}
+	    });
     }
 
     public void onConnectFail() {
 	// Toast.makeText(this, "tapjoy Fail", Toast.LENGTH_LONG).show();
 	Log.i("crazyass", "Tapjoy Fail");
+    }
+
+    //================================================================================
+    // TapjoyNotifier Methods
+    //================================================================================	
+    @Override
+    public void getUpdatePointsFailed(String error) {
+	Log.i("crazyass", "getUpdatePointsFailed");
+    }
+	
+    @Override
+    public void getUpdatePoints(String currencyName, int pointTotal)
+    {
+	Log.i("crazyass", "currencyName: " + currencyName);
+	Log.i("crazyass", "pointTotal: " + pointTotal);
     }
 
     static public void startFeedBack() {
