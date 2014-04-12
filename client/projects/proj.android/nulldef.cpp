@@ -7,7 +7,16 @@ void CAWriteFile(char *file, char *content) {}
 void * ProductList() {return NULL;};
 bool ProductBuy(void *iap, char *a, void *b) {return false;};
 void * CATapjoyConnect(char *a) {return NULL;};
-void CATapjoyShow() {};
+
+void CATapjoyShow() {
+  cocos2d::JniMethodInfo t;
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "startTAPOffers", "()V")) {
+    CCLOG("find feedback\n");
+    t.env->CallStaticObjectMethod(t.classID, t.methodID);
+  } else {
+    CCLOG("cannot find feedback\n");
+  }
+}
 
 void ShowFeedback() {
   cocos2d::JniMethodInfo t;
