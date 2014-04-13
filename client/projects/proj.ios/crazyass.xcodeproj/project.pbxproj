@@ -648,7 +648,7 @@
 		1AFCDA8016D4A25900906EA6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = SOURCE_ROOT; };
 		1AFCDA8116D4A25900906EA6 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = SOURCE_ROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* crazyass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = crazyass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* hip mamia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hip mamia.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		379BB8FC17F03F3700829B88 /* CCActionFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionFrame.cpp; sourceTree = "<group>"; };
@@ -1458,7 +1458,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* crazyass.app */,
+				1D6058910D05DD3D006BFB54 /* hip mamia.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2035,7 +2035,7 @@
 			);
 			name = crazyass;
 			productName = iphone;
-			productReference = 1D6058910D05DD3D006BFB54 /* crazyass.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* hip mamia.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2434,11 +2434,11 @@
 					"\"$(SRCROOT)\"",
 				);
 				OTHER_CFLAGS = "-O2";
-				PRODUCT_NAME = crazyass;
+				PRODUCT_NAME = "hip mamia";
 				PROVISIONING_PROFILE = "6AA9AD2A-159D-4433-AEEA-4FD182267833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv6 armv7 i386";
 			};
@@ -2490,11 +2490,11 @@
 					"\"$(SRCROOT)/../../../../cocos2d-x-2.2/external/libwebsockets/ios/lib\"",
 					"\"$(SRCROOT)\"",
 				);
-				PRODUCT_NAME = crazyass;
+				PRODUCT_NAME = "hip mamia";
 				PROVISIONING_PROFILE = "6AA9AD2A-159D-4433-AEEA-4FD182267833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
