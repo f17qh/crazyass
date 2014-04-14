@@ -38,6 +38,7 @@ protected:
   void onBtnFree(CCObject *target, TouchEventType e);
   void RechargeBack(CCObject *target, TouchEventType e);
   void RechargeShop(CCObject *target, TouchEventType e);
+  void CheckTapjoyPoint(float dt);
   int select_stage_;
   int play_;
   UILayer *ui_layer_;

@@ -39,6 +39,7 @@ import com.tapjoy.TapjoyEarnedPointsNotifier;
 import com.tapjoy.TapjoyViewNotifier;
 import com.tapjoy.TapjoyViewType;
 import com.tapjoy.TapjoyNotifier;
+import com.tapjoy.TapjoySpendPointsNotifier;
 import com.umeng.fb.FeedbackAgent;
 //import com.umeng.ui.BaseSinglePaneActivity;
 
@@ -49,6 +50,9 @@ import com.qufan.activity.PayActivity;
 public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static FeedbackAgent agent;	
     static boolean TapjoyInit = false;
+
+    static int TapjoyPoint = 0;
+
     protected void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
 
@@ -151,10 +155,21 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     }
 	
     @Override
-    public void getUpdatePoints(String currencyName, int pointTotal)
-    {
+    public void getUpdatePoints(String currencyName, int pointTotal) {
 	Log.i("crazyass", "currencyName: " + currencyName);
 	Log.i("crazyass", "pointTotal: " + pointTotal);
+
+	// start spend
+	TapjoyConnect.getTapjoyConnectInstance().spendTapPoints(pointTotal, new TapjoySpendPointsNotifier() {
+		@Override
+		public void getSpendPointsResponseFailed(String error) {
+		    Log.i("crazyass", "Spendpoint faild");
+		}
+		@Override
+		public void getSpendPointsResponse(String currencyName, int pointTotal) {
+		    	TapjoyPoint = pointTotal;
+		}
+	    });
     }
 
     static public void startFeedBack() {
@@ -180,6 +195,14 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 		    Log.i("crazyass", "Tapjoy offer Success");
 		}
 	    });
+    }
+
+    static public int GetTapjoyPoint() {
+	return TapjoyPoint;
+    }
+
+    static public void SetTapjoyPoint(int amount) {
+	TapjoyPoint = amount;
     }
 
     static public void payTaobao(){
