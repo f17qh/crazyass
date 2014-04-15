@@ -137,8 +137,10 @@ void GameScene::onEnter() {
     tapjoy_ = CATapjoyConnect((char *)User::CurrentUser()->userid().c_str());
   }
 
+  scheduleUpdate();
+
 #ifdef CA_ANDROID
-  schedule(schedule_selector(GameScene::CheckTapjoyPoint), 5);
+  // schedule(schedule_selector(GameScene::CheckTapjoyPoint), 5);
 #endif
 }
 
@@ -188,7 +190,7 @@ void GameScene::onBtnFeedback(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::onBtnFree(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   PLAY_BTNSOUND;
@@ -196,7 +198,7 @@ void GameScene::onBtnFree(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   PLAY_BTNSOUND;
@@ -205,7 +207,7 @@ void GameScene::onBtnShop(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   PLAY_BTNSOUND;
@@ -242,7 +244,7 @@ void GameScene::RechargeShop(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   PLAY_BTNSOUND;
@@ -260,7 +262,7 @@ void GameScene::onBtnEvent(CCObject *target, TouchEventType e) {
 }
 
 void GameScene::OnBtnGirl(CCObject *target, TouchEventType e, int i) {
-  if (e != TOUCH_EVENT_BEGAN) 
+  if (e != TOUCH_EVENT_ENDED) 
     return; 
   int girl_id = i;
   if(girl_id == 3) {
@@ -336,4 +338,9 @@ void GameScene::menuCloseCallback(CCObject* pSender) {
   exit(0);
 #endif
 #endif
+}
+
+extern "C" void CASetUserHeart(int amount) {
+  User::CurrentUser()->set_heart(
+    User::CurrentUser()->heart() + amount);
 }

@@ -92,7 +92,7 @@ void EventScene::onEnter() {
 }
 
 void EventScene::onBtnBack(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
@@ -103,7 +103,7 @@ void EventScene::onBtnBack(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnShirt(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
@@ -125,7 +125,7 @@ void EventScene::onBtnShirt(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnPanty(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   const char *res1 = "gallery_button_panty_01.png";
@@ -146,7 +146,7 @@ void EventScene::onBtnPanty(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnStock1(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   const char *res1 = "gallery_button_stocking_01_01.png";
@@ -167,7 +167,7 @@ void EventScene::onBtnStock1(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnStock2(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   const char *res1 = "gallery_button_stocking_02_01.png";
@@ -204,7 +204,7 @@ void EventScene::onBtnStarField(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnYes(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   if(User::CurrentUser()->heart() >= 12) {
@@ -234,7 +234,7 @@ void EventScene::onBtnYes(CCObject *target, TouchEventType e) {
 }
 
 void EventScene::onBtnNo(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   UIPanel *panel = (UIPanel *)ui_layer_->getWidgetByName("PanelShop");
@@ -290,7 +290,7 @@ BUILD_BTNEVENT(3)
 BUILD_BTNEVENT(4)
 
 void EventScene::onBtnEvent(CCObject *target, TouchEventType e, int i) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   if (i > User::CurrentUser()->EventLock(stageid_)) {

@@ -35,6 +35,7 @@ int CAGetTapjoyPoint() {
   if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "GetTapjoyPoint", "()I")) {
     jint ret = (jint)t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
+    CCLOG("%s %d", __func__, ret);
     return ret;
   } else {
     CCLOG("cannot find feedback\n");
@@ -63,3 +64,10 @@ void PayTaobao() {
     CCLOG("cannot find feedback\n");
   }
 };
+
+#include <jni.h>
+extern "C" void CASetUserHeart(int);
+extern "C" void Java_com_crazyass_game_crazyass_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
+  CCLOG("%s %d\n", __func__, amount);
+  CASetUserHeart(amount);
+}

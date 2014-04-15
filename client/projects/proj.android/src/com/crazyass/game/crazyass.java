@@ -159,6 +159,9 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 	Log.i("crazyass", "currencyName: " + currencyName);
 	Log.i("crazyass", "pointTotal: " + pointTotal);
 
+	TapjoyPoint = pointTotal;
+	CAAddTapjoyPoint(TapjoyPoint);
+
 	// start spend
 	TapjoyConnect.getTapjoyConnectInstance().spendTapPoints(pointTotal, new TapjoySpendPointsNotifier() {
 		@Override
@@ -167,7 +170,6 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 		}
 		@Override
 		public void getSpendPointsResponse(String currencyName, int pointTotal) {
-		    	TapjoyPoint = pointTotal;
 		}
 	    });
     }
@@ -197,8 +199,12 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 	    });
     }
 
+    public native void CAAddTapjoyPoint(int amount);
+
     static public int GetTapjoyPoint() {
-	return TapjoyPoint;
+	Log.i("crazyass", String.format("GetTapjoyPoint %d", TapjoyPoint));
+	// return TapjoyPoint;
+	return 5;
     }
 
     static public void SetTapjoyPoint(int amount) {

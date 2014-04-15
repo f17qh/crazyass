@@ -58,7 +58,7 @@ void StartScene::onEnter() {
   //schedule(schedule_selector(StartScene::update), 1, SCHEDULE_TIMEOUT, 1);
 }
 void StartScene::onBtnPlay(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   PLAY_BTNSOUND;

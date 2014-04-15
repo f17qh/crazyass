@@ -104,7 +104,7 @@ void ShopScene::onBtnSale(CCObject *target, TouchEventType e, int i) {
 }
 
 void ShopScene::onBtnBack(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   if (in_iap_)

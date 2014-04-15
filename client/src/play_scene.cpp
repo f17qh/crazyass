@@ -191,7 +191,7 @@ void PlayScene::EndPlay(bool pass) {
 }
 
 void PlayScene::onBtnBack(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
   PLAY_BTNSOUND;
   CCLOG("%s\n", __FUNCTION__);
