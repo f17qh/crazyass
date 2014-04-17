@@ -139,22 +139,7 @@ void GameScene::onEnter() {
 
   scheduleUpdate();
 
-#ifdef CA_ANDROID
-  // schedule(schedule_selector(GameScene::CheckTapjoyPoint), 5);
-#endif
 }
-
-#ifdef CA_ANDROID
-int CAGetTapjoyPoint();
-void CASetTapjoyPoint(int);
-void GameScene::CheckTapjoyPoint(float dt) {
-  int amount = CAGetTapjoyPoint();
-  if (amount > 0) {
-    User::CurrentUser()->set_heart(User::CurrentUser()->heart() + amount);
-    CASetTapjoyPoint(0);
-  }
-}
-#endif
 
 void GameScene::AddGirlBtn(int idx, int nextstage, SEL_TouchEvent selector) {
   char name[RES_MAX_NAME];

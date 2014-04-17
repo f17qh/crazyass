@@ -43,18 +43,27 @@ import com.tapjoy.TapjoySpendPointsNotifier;
 import com.umeng.fb.FeedbackAgent;
 //import com.umeng.ui.BaseSinglePaneActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.qufan.activity.PayActivity;
+import android.telephony.TelephonyManager;
+import com.qufan.activity.APayLoad;
+import com.qufan.paysdk.payutils.Common;
 
 public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static FeedbackAgent agent;	
     static boolean TapjoyInit = false;
 
     static int TapjoyPoint = 0;
+    static Activity SaveThis;
+    static String DeviceID;
 
     protected void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
+	SaveThis = this;
+
+	TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+	DeviceID = tm.getDeviceId();
 
 	// OPTIONAL: For custom startup flags.
 	Hashtable<String, Object> connectFlags = new Hashtable<String, Object>();
@@ -211,22 +220,54 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
 	TapjoyPoint = amount;
     }
 
-    static public void payTaobao(){
-	Intent intent = new Intent(getContext(),PayActivity.class);
-	Bundle bundle = new Bundle();
-	bundle.putInt("cost", 2);
-	bundle.putInt("sorted_bill_types[i]", 4);
-	bundle.putString("item_id", "324");
-	bundle.putString("dianxin_code", "F68658B3D9950CB8E0430100007F2DCD");
-	bundle.putInt("description",400);
-	bundle.putInt("bill_type", 400);
-	bundle.putString("userid", "f200");
-	bundle.putString("app_e_pay", "XY");
-	intent.putExtras(bundle);
-	getContext().startActivity(intent);
+    static public Activity getJavaActivity() {
+	return SaveThis;
     }
-    
-    
+
+    static public String getDeviceID() {
+	Log.i("crazyass", String.format("DeviceID %s", DeviceID));
+	return DeviceID;
+    }
+
+    static public void payGooglePlay(String userid, String itemid, float cost){
+	Log.i("crazyass", String.format("payGoogle %s %s %f", userid, itemid, cost));
+	Intent intent = new Intent(SaveThis, APayLoad.class);
+	Bundle bundle = new Bundle();
+	bundle.putFloat("cost", cost);
+	bundle.putString("item_id", itemid);
+	bundle.putInt("bill_type", 0);
+	bundle.putString("userid", userid);
+	bundle.putString("app_key", "fdddddfdfdfdfdfdfdf");
+	bundle.putString("source", "ass");
+	bundle.putString("pass_info", "passinfo");
+	intent.putExtras(bundle);
+	SaveThis.startActivityForResult(intent, Common.RESULT_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	if (Common.RESULT_CODE == requestCode){
+	    boolean isPaySuccess = data.getBooleanExtra("is_success", false);
+	    String resultMsg = data.getStringExtra("pay_meaage");
+	    String itemId = data.getStringExtra("item_id");
+	    String billID = data.getStringExtra("bill_id");
+	    Log.i("crazyass", String.format("pay res %s %s %d", itemId, resultMsg, resultCode));
+
+	    if (isPaySuccess) {
+		if (itemId == "com.qfkj.crazyass.peach5")
+		    CAAddTapjoyPoint(5);
+		else if (itemId == "com.qfkj.crazyass.peach30")
+		    CAAddTapjoyPoint(30);
+		else if (itemId == "com.qfkj.crazyass.peach60")
+		    CAAddTapjoyPoint(60);
+		else if (itemId == "com.qfkj.crazyass.peach200")
+		    CAAddTapjoyPoint(200);
+		else if (itemId == "com.qfkj.crazyass.peach700")
+		    CAAddTapjoyPoint(700);
+	    }
+	}
+	super.onActivityResult(requestCode, resultCode, data);
+    }
 
     static {
         System.loadLibrary("cocos2dcpp");
