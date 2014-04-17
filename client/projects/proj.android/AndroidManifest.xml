@@ -1,30 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.crazyass.game"
-      android:versionCode="1"
-      android:versionName="1.0">
+    package="com.crazyass.game"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8"/>
+    <uses-sdk android:minSdkVersion="8"
+    android:targetSdkVersion="18" />
+
     <uses-feature android:glEsVersion="0x00020000" />
 
-    <application android:label="@string/app_name"
-        android:icon="@drawable/icon">
-
-        <activity android:name=".crazyass"
-                  android:label="@string/app_name"
-                  android:screenOrientation="landscape"
-                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-                  android:configChanges="orientation">
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".crazyass"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.umeng.fb.ConversationActivity" />
+        <activity android:name="com.umeng.fb.ContactActivity" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5325b88456240bbfee166236" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Channel ID" />
+
+        <activity
+            android:name="com.tapjoy.TJCOffersWebView"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.tapjoy.TapjoyFullScreenAdWebView"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.tapjoy.TapjoyVideoView"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.tapjoy.TJAdUnitView"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.tapjoy.mraid.view.ActionHandler"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.tapjoy.mraid.view.Browser"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+	<activity
+            android:name="com.qufan.activity.PayActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Dialog">
+	</activity>
+
+         <!-- 电信支付 ======================= -->
+        <activity
+            android:name="com.estore.sms.iap.TypaySdkActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 电信支付 ======================= -->
+
+
+        <!-- 支付宝====================== -->
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        
+        
+         <!-- yopay sdk activity porting Begin -->
+        <activity
+            android:name="com.yopay.sdk.activities.PaymentCardActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        <activity
+            android:name="com.yopay.sdk.activities.PayMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        <activity
+            android:name="com.yopay.sdk.activities.UserLoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+
+        <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
+        <activity
+            android:name="com.yopay.sdk.activities.PayByWapActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullHeightDialog" >
+        </activity>
+        
+        <activity android:name="com.qufan.activity.APayLoad"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+
+        <service android:name="com.yopay.sdk.activities.PayService" >
+        </service>
+
+        <!-- 是否隐藏切换用户按钮，默认false -->
+        <meta-data
+            android:name="switch_account_visible"
+            android:value="false" >
+        </meta-data>
+
+        <!-- CNZZ BEGIN -->
+        <meta-data
+            android:name="CNZZ_APP_KEY"
+            android:value="cnzz.a_4vmtjzsbau7uvglzo6i3rutg" >
+        </meta-data>
+        <meta-data
+            android:name="CNZZ_CHANNEL_ID"
+            android:value="TEST" >
+        </meta-data>
+        <!-- CNZZ END -->
+        <!-- yopay sdk activity porting End -->
+  
     </application>
-    <supports-screens android:largeScreens="true"
-                      android:smallScreens="true"
-                      android:anyDensity="true"
-                      android:normalScreens="true"/>
-                         
-    <uses-permission android:name="android.permission.INTERNET"/>
-</manifest> 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+</manifest>

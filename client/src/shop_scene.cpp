@@ -83,24 +83,35 @@ const int productHeart[] = {
   5,30,60,200,700,
 };
 
+#ifdef CA_ANDROID
+static const float productCost[] = {
+  0.99f, 5.99f, 9.99f, 30.0f, 99.0f,
+};
+#endif
+
+extern void PayGooglePlay(const char*, const char*, float);
+extern std::string CAGetDeviceID();
 void ShopScene::onBtnSale(CCObject *target, TouchEventType e, int i) {
-  if (e == TOUCH_EVENT_BEGAN)
-    return;
+  if (e == TOUCH_EVENT_ENDED) {
+#ifdef CA_ANDROID
+    PayGooglePlay(CAGetDeviceID().c_str(), productId[i - 1], productCost[i - 1]);
+#else
+    if (!iap_)
+      return;
 
-  if (!iap_)
-    return;
+    if (in_iap_)
+      return;
 
-  if (in_iap_)
-    return;
-
-  in_iap_ = ProductBuy(iap_, (char *)productId[i - 1], (void *)this);
-  if (in_iap_) {
-    TextBox::Instance().Show(ui_layer_, true, "Please waiting...");
+    in_iap_ = ProductBuy(iap_, (char *)productId[i - 1], (void *)this);
+    if (in_iap_) {
+      TextBox::Instance().Show(ui_layer_, true, "Please waiting...");
+    }
+#endif
   }
 }
 
 void ShopScene::onBtnBack(CCObject *target, TouchEventType e) {
-  if (e == TOUCH_EVENT_BEGAN)
+  if (e != TOUCH_EVENT_ENDED)
     return;
 
   if (in_iap_)

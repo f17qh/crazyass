@@ -163,7 +163,7 @@ class CAWS {
     if (!t) {
       CCLOG("connect server faild");
     }
-    delegate_->SendServer(target_);
+    // delegate_->SendServer(target_);
   }
 
   MyDelegate *delegate() {

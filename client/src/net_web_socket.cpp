@@ -1,8 +1,8 @@
 #include "net_web_socket.h"
 
 bool EnablePanty = false;
-bool EnableTapjoy = false;
-bool EnableSound = false;
+bool EnableTapjoy = true;
+bool EnableSound = true;
 CAWS * CAWS::caws_ = NULL;
 CAWS * CAWS::Instance() {
   if (caws_)
