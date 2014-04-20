@@ -25,6 +25,8 @@ public:
 
 protected:
   void onBtnPlay(CCObject *target, TouchEventType e);
+  void SendRequest(CCObject * sender);
+  void onReceive(CCHttpClient *sender, CCHttpResponse *response);
   UILayer *ui_layer_;
 };
 

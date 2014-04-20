@@ -109,13 +109,8 @@ void GameScene::onEnter() {
   btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFeedback));
 
   btn = (UIButton *)ui_layer_->getWidgetByName("BtnFree");
-  if (EnableTapjoy) {
-    btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFree));
-  } else {
-    btn->setVisible(false);
-    btn->setTouchEnabled(false);
-  }
-
+  btn->addTouchEventListener(this, toucheventselector(GameScene::onBtnFree));
+  
   int nextstage = User::CurrentUser()->stageid();
 
   AddGirlBtn(1, nextstage, toucheventselector(GameScene::onBtnGirl1));

@@ -13,6 +13,8 @@
 #include "lib_json/json_lib.h"
 
 USING_NS_CC;
+bool EnablePanty = false;
+bool EnableSound = false;
 
 EventFingerInfo& ConfigInfo::GetEventFingerInfo(int finger_idx, int stageid) {
   if(finger_idx < 0 || finger_idx > 3) {
