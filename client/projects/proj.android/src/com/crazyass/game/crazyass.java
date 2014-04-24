@@ -58,6 +58,8 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static Activity SaveThis;
     static String DeviceID;
 
+    static String googlePayKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnVSGzND0Nim5mlufzgC3zg0E8MqyIITKPbk0Aulus82XWRKIJFsczZbmrFDSdD8ugh06ZkJs9gDsnXarkxOZaSqpjo4Hsu4ubpuO+iEp5bkozKvQ6SLKroDzBLQPNgPRS2o2cr3lyce9n4LP1NysfYdzrQhm/LJYT29Z0LfvEe/TgiU1fOQozViGQKcf4B78mBFWxRuwfxpkVow+0EEwPALy/Ld0LDkNL7WNY/nLrb/teweSVg38fs6b4gyl9Vyu1zRMRVLXB59ZeeNdXasj/m1RI3XWzhp96tbqSnLtd8xoyXa0ngsaif5wxkt0alEvvj2LHZjpkvQoA0qagoZ4rwIDAQAB";
+
     protected void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
 	SaveThis = this;
@@ -230,14 +232,18 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     }
 
     static public void payGooglePlay(String userid, String itemid, float cost){
-	Log.i("crazyass", String.format("payGoogle %s %s %f", userid, itemid, cost));
+	// Log.i("crazyass", String.format("payGoogle %s %s %f", userid, itemid, cost));
+	// Log.i("crazyass",
+	//       String.format("cost %f item_id %s app_key %s",
+	// 		    cost, itemid, googlePayKey));
 	Intent intent = new Intent(SaveThis, APayLoad.class);
 	Bundle bundle = new Bundle();
 	bundle.putFloat("cost", cost);
 	bundle.putString("item_id", itemid);
 	bundle.putInt("bill_type", 0);
 	bundle.putString("userid", userid);
-	bundle.putString("app_key", "fdddddfdfdfdfdfdfdf");
+	bundle.putString("google_app_key", googlePayKey);
+	bundle.putString("app_key", "d9839%&nkfpy9&jxzs-*4&t2lj*_0j7@");
 	bundle.putString("source", "ass");
 	bundle.putString("pass_info", "passinfo");
 	intent.putExtras(bundle);

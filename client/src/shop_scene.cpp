@@ -71,6 +71,15 @@ BUILD_BTNBUY(3)
 BUILD_BTNBUY(4)
 BUILD_BTNBUY(5)
 
+#ifdef CA_ANDROID
+const char *productId[]= {
+  "peach_5",
+  "peach_30",
+  "peach_60",
+  "peach_200",
+  "peach_700",
+};
+#else
 const char *productId[]= {
   "com.qfkj.crazyass.peach5",
   "com.qfkj.crazyass.peach30",
@@ -78,6 +87,7 @@ const char *productId[]= {
   "com.qfkj.crazyass.peach200",
   "com.qfkj.crazyass.peach700",
 };
+#endif
 
 const int productHeart[] = {
   5,30,60,200,700,

@@ -25,8 +25,8 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static
 
 include $(BUILD_SHARED_LIBRARY)
 
-$(call import-add-path, /Users/lijie/projects/cocos2d-x-2.2)
-$(call import-add-path, /Users/lijie/projects/cocos2d-x-2.2/cocos2dx/platform/third_party/android/prebuilt)
+$(call import-add-path, ../../../../cocos2d-x-2.2)
+$(call import-add-path, ../../../../cocos2d-x-2.2/cocos2dx/platform/third_party/android/prebuilt)
 $(call import-module,cocos2dx)
 $(call import-module,cocos2dx/platform/third_party/android/prebuilt/libcurl)
 $(call import-module,CocosDenshion/android)

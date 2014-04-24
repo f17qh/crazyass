@@ -36,7 +36,6 @@ public:
 extern CADelegate * sharedDelegate();
 
 extern bool EnablePanty;
-extern bool EnableTapjoy;
 extern bool EnableSound;
 
 #ifdef	CA_ANDROID
