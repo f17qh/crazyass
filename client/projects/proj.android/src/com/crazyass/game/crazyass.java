@@ -232,10 +232,10 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     }
 
     static public void payGooglePlay(String userid, String itemid, float cost){
-	Log.i("crazyass", String.format("payGoogle %s %s %f", userid, itemid, cost));
-	Log.i("crazyass",
-	      String.format("cost %f item_id %s app_key %s",
-			    cost, itemid, googlePayKey));
+	// Log.i("crazyass", String.format("payGoogle %s %s %f", userid, itemid, cost));
+	// Log.i("crazyass",
+	//       String.format("cost %f item_id %s app_key %s",
+	// 		    cost, itemid, googlePayKey));
 	Intent intent = new Intent(SaveThis, APayLoad.class);
 	Bundle bundle = new Bundle();
 	bundle.putFloat("cost", cost);
