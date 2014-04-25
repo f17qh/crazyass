@@ -58,7 +58,7 @@ public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static Activity SaveThis;
     static String DeviceID;
 
-    static String googlePayKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnVSGzND0Nim5mlufzgC3zg0E8MqyIITKPbk0Aulus82XWRKIJFsczZbmrFDSdD8ugh06ZkJs9gDsnXarkxOZaSqpjo4Hsu4ubpuO+iEp5bkozKvQ6SLKroDzBLQPNgPRS2o2cr3lyce9n4LP1NysfYdzrQhm/LJYT29Z0LfvEe/TgiU1fOQozViGQKcf4B78mBFWxRuwfxpkVow+0EEwPALy/Ld0LDkNL7WNY/nLrb/teweSVg38fs6b4gyl9Vyu1zRMRVLXB59ZeeNdXasj/m1RI3XWzhp96tbqSnLtd8xoyXa0ngsaif5wxkt0alEvvj2LHZjpkvQoA0qagoZ4rwIDAQAB";
+    static String googlePayKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgLOST32YvYFmFro6+6T3vbWyNa2Rjl5QaotHnS2CJRkChv0LhRVUk4zYsRcE3n+i44T6VOX06tvRy4F26/WLXXrBfcMrX+WseBQq5K68CR456F6a68IHlWMvNlQu4T9oMyo20k3/n0h+CAztoC6+IJC9e1iv9fgsVQ8a7mrlE84BGXe9JRKNMYFNJee6COhFDpvD9jokcnKaHcOm/Y7Gp827ZGpuJbV1BStTR0UYp2KfNMKogzRqNY+FRYdS7dM2CvrmXc/2my//4rc+6ywULUywW/yncx+/uwZGuehkCMg5U+xUmkRtE7Cp4yOkyatgsv4xQ1aXm4gnWRrABrnrNQIDAQAB";
 
     protected void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
