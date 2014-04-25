@@ -202,6 +202,8 @@ void GameScene::onBtnPlay(CCObject *target, TouchEventType e) {
       toucheventselector(GameScene::RechargeBack), toucheventselector(GameScene::RechargeShop));
     return;
   }
+  if (User::CurrentUser()->stageid() < select_stage_)
+    return;
   play_ = 0;
   if (User::CurrentUser()->UseHeart(need_arry[select_stage_-1]))
     return;
