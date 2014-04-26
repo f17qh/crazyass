@@ -18,3 +18,21 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepattributes
+Exceptions,InnerClasses,Signature,SourceFile,LineNumberTable
+-keepattributes *Annotation*
+-keep class com.cnzz.mobile.android.sdk.** {*;}
+-keep class com.umpay.huafubao.** {*;}
+-keep class com.google.gson.** {*;}
+-keep class com.tenpay.android.service.** {*;}
+-keep class com.alipay.android.app.** {*;}
+-keep class com.yopay.sdk.** {*;}
+
+
+-keep class **.R$* {*;}
+-keep class com.alipay.android.app.IAliPay{*;} 
+-keep class com.alipay.android.app.IAlixPay{*;} 
+-keep class com.tapjoy.**{*;}
+-keep class org.cocos2dx.**{*;}
+

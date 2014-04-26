@@ -59,7 +59,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
 	<activity
-            android:name="com.qufan.activity.PayActivity"
+            android:name="com.qufan.allpaysdk.PayActivity"
             android:label="@string/app_name" 
             android:theme="@android:style/Theme.Dialog">
 	</activity>
@@ -107,7 +107,7 @@
             android:theme="@style/FullHeightDialog" >
         </activity>
         
-        <activity android:name="com.qufan.activity.APayLoad"
+        <activity android:name="com.qufan.allpaysdk.APayLoad"
             android:label="@string/app_name" 
             android:theme="@android:style/Theme.Dialog"
             android:configChanges="keyboardHidden|orientation" >
