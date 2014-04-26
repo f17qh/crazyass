@@ -35,4 +35,5 @@ Exceptions,InnerClasses,Signature,SourceFile,LineNumberTable
 -keep class com.alipay.android.app.IAlixPay{*;} 
 -keep class com.tapjoy.**{*;}
 -keep class org.cocos2dx.**{*;}
+-keep class com.qfighting.hipmania_en.crazyass{*;}
 
