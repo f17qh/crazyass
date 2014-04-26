@@ -3,8 +3,8 @@
 #include <string>
 #include "../platform/android/jni/JniHelper.h"
 
-#define CA_ZH
-#undef CA_EN
+#undef CA_ZH
+#define CA_EN
 
 void CAReadFile(char *file, char *content, size_t) {}
 void CAWriteFile(char *file, char *content) {}
