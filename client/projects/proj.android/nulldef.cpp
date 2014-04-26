@@ -3,15 +3,28 @@
 #include <string>
 #include "../platform/android/jni/JniHelper.h"
 
+#define CA_ZH
+#undef CA_EN
+
 void CAReadFile(char *file, char *content, size_t) {}
 void CAWriteFile(char *file, char *content) {}
 void * ProductList() {return NULL;};
 bool ProductBuy(void *iap, char *a, void *b) {return false;};
 void * CATapjoyConnect(char *a) {return NULL;};
 
+// zh ver
+#ifdef CA_ZH
+#define JAVA_CLASS_NAME "com/crazyass/game/crazyass"
+#endif
+
+#ifdef CA_EN
+// en ver
+#define JAVA_CLASS_NAME "com/qfighting/hipmania_en/crazyass"
+#endif
+
 void CATapjoyShow() {
   cocos2d::JniMethodInfo t;
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "startTAPOffers", "()V")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "startTAPOffers", "()V")) {
     CCLOG("find feedback\n");
     t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
@@ -22,7 +35,7 @@ void CATapjoyShow() {
 
 void ShowFeedback() {
   cocos2d::JniMethodInfo t;
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "startFeedBack", "()V")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "startFeedBack", "()V")) {
     CCLOG("find feedback\n");
     t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
@@ -33,7 +46,7 @@ void ShowFeedback() {
 
 int CAGetTapjoyPoint() {
   cocos2d::JniMethodInfo t;
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "GetTapjoyPoint", "()I")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "GetTapjoyPoint", "()I")) {
     jint ret = (jint)t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
     CCLOG("%s %d", __func__, ret);
@@ -46,7 +59,7 @@ int CAGetTapjoyPoint() {
 
 std::string CAGetDeviceID() {
   cocos2d::JniMethodInfo t;
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "getDeviceID", "()Ljava/lang/String;")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "getDeviceID", "()Ljava/lang/String;")) {
     jstring str = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
     cocos2d::CCString *ret = new cocos2d::CCString(cocos2d::JniHelper::jstring2string(str).c_str());
@@ -62,7 +75,7 @@ void PayGooglePlay(const char *user, const char *item, float cost) {
   cocos2d::JniMethodInfo t;
 #if 0
   jobject activity;
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "getJavaActivity", "()Ljava/lang/Object;")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "getJavaActivity", "()Ljava/lang/Object;")) {
     activity = t.env->CallStaticObjectMethod(t.classID, t.methodID);
     t.env->DeleteLocalRef(t.classID);
   } else {
@@ -70,7 +83,7 @@ void PayGooglePlay(const char *user, const char *item, float cost) {
     return;
   }
 #endif
-  if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/crazyass/game/crazyass", "payGooglePlay", "(Ljava/lang/String;Ljava/lang/String;F)V")) {
+  if (cocos2d::JniHelper::getStaticMethodInfo(t, JAVA_CLASS_NAME, "payGooglePlay", "(Ljava/lang/String;Ljava/lang/String;F)V")) {
     CCLOG("find pay\n");
     jstring userid = t.env->NewStringUTF(user);
     jstring itemid = t.env->NewStringUTF(item);
@@ -82,7 +95,19 @@ void PayGooglePlay(const char *user, const char *item, float cost) {
 
 #include <jni.h>
 extern "C" void CASetUserHeart(int);
-extern "C" void Java_com_crazyass_game_crazyass_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
+
+// zh ver
+#if 0
+extern "C" void Java_com_crazyass_game_ca_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
   CCLOG("%s %d\n", __func__, amount);
   CASetUserHeart(amount);
 }
+#endif
+
+// en ver
+#if 1
+extern "C" void Java_com_qfighting_hipmania_ca_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
+  CCLOG("%s %d\n", __func__, amount);
+  CASetUserHeart(amount);
+}
+#endif
