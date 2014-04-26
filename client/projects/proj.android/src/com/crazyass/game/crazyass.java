@@ -28,27 +28,24 @@ import java.util.Hashtable;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import com.tapjoy.TapjoyConnect;
-import com.tapjoy.TapjoyConnectFlag;
-import com.tapjoy.TapjoyConnectNotifier;
-import com.tapjoy.TapjoyOffersNotifier;
-import com.tapjoy.TapjoyEarnedPointsNotifier;
-import com.tapjoy.TapjoyViewNotifier;
-import com.tapjoy.TapjoyViewType;
-import com.tapjoy.TapjoyNotifier;
-import com.tapjoy.TapjoySpendPointsNotifier;
-import com.umeng.fb.FeedbackAgent;
-//import com.umeng.ui.BaseSinglePaneActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import com.qufan.activity.APayLoad;
-import com.qufan.paysdk.payutils.Common;
+import android.util.Log;
+
+import com.qufan.allpaysdk.APayLoad;
+import com.qufan.allpaysdk.payutils.Common;
+import com.tapjoy.TapjoyConnect;
+import com.tapjoy.TapjoyConnectFlag;
+import com.tapjoy.TapjoyConnectNotifier;
+import com.tapjoy.TapjoyEarnedPointsNotifier;
+import com.tapjoy.TapjoyNotifier;
+import com.tapjoy.TapjoyOffersNotifier;
+import com.tapjoy.TapjoySpendPointsNotifier;
+import com.tapjoy.TapjoyViewNotifier;
+import com.umeng.fb.FeedbackAgent;
+//import com.umeng.ui.BaseSinglePaneActivity;
 
 public class crazyass extends Cocos2dxActivity implements TapjoyNotifier{
     static FeedbackAgent agent;	
