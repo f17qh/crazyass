@@ -3,6 +3,9 @@
 #include <string>
 #include "../platform/android/jni/JniHelper.h"
 
+#define CA_ZH
+#undef CA_EN
+
 void CAReadFile(char *file, char *content, size_t) {}
 void CAWriteFile(char *file, char *content) {}
 void * ProductList() {return NULL;};
@@ -10,11 +13,14 @@ bool ProductBuy(void *iap, char *a, void *b) {return false;};
 void * CATapjoyConnect(char *a) {return NULL;};
 
 // zh ver
-// #define JAVA_CLASS_NAME "com/crazyass/game/crazyass"
+#ifdef CA_ZH
+#define JAVA_CLASS_NAME "com/crazyass/game/crazyass"
+#endif
 
+#ifdef CA_EN
 // en ver
 #define JAVA_CLASS_NAME "com/qfighting/hipmania_en/crazyass"
-
+#endif
 
 void CATapjoyShow() {
   cocos2d::JniMethodInfo t;
@@ -100,7 +106,7 @@ extern "C" void Java_com_crazyass_game_ca_CAAddTapjoyPoint(JNIEnv *env, jobject 
 
 // en ver
 #if 1
-extern "C" void Java_com_qfighting_hipmania_1en_ca_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
+extern "C" void Java_com_qfighting_hipmania_ca_CAAddTapjoyPoint(JNIEnv *env, jobject thiz, jint amount) {
   CCLOG("%s %d\n", __func__, amount);
   CASetUserHeart(amount);
 }

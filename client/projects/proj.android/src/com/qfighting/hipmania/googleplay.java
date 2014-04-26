@@ -1,4 +1,4 @@
-package com.qfighting.hipmania_en;
+package com.qfighting.hipmania;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.util.Log;
 import com.qufan.allpaysdk.APayLoad;
 import com.qufan.allpaysdk.payutils.Common;
 
-import com.qfighting.hipmania_en.ca;
+import com.qfighting.hipmania.ca;
 
 public class googleplay {
     Activity currentAct;

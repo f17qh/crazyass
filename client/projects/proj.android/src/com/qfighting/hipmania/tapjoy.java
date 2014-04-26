@@ -1,4 +1,4 @@
-package com.qfighting.hipmania_en;
+package com.qfighting.hipmania;
 
 import android.app.Activity;
 import android.util.Log;
@@ -14,7 +14,7 @@ import com.tapjoy.TapjoyOffersNotifier;
 import com.tapjoy.TapjoySpendPointsNotifier;
 import com.tapjoy.TapjoyViewNotifier;
 
-import com.qfighting.hipmania_en.ca;
+import com.qfighting.hipmania.ca;
 
 public class tapjoy implements TapjoyNotifier {
     static int TapjoyPoint = 0;

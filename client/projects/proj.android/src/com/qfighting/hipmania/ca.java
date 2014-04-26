@@ -1,4 +1,4 @@
-package com.qfighting.hipmania_en;
+package com.qfighting.hipmania;
 
 public class ca {
     public native void CAAddTapjoyPoint(int amount);
